@@ -10,6 +10,7 @@ namespace Infrastructure.Data
         DbSet<Card> Cards { get; set; }
         DbSet<Conversation> Conversations { get; set; }
         DbSet<Contact> Contacts { get; set; }
+        DbSet<Content> Contents { get; set; }
         DbSet<ContactRequest> ContactRequests { get; set; }
         DbSet<Dashboard> Dashboards { get; set; }
         DbSet<DashboardCard> DashboardCards { get; set; }
@@ -29,6 +30,7 @@ namespace Infrastructure.Data
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<ContactRequest> ContactRequests { get; set; }
+        public DbSet<Content> Contents { get; set; }
         public DbSet<Dashboard> Dashboards { get; set; }
         public DbSet<DashboardCard> DashboardCards { get; set; }
         public DbSet<DigitalAsset> DigitalAssets { get; set; }
