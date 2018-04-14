@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Core.Entities;
 using Infrastructure.Services;
 
-namespace IdentityService
+namespace IdentityService.Features.Users
 {
     public class AuthenticateCommand
     {

@@ -1,8 +1,14 @@
+using System.Collections.Generic;
+
 namespace Core.Entities
 {
-    public class Product
+    public class Product: BaseEntity
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public int ProductCategoryId { get; set; }
+        public ICollection<ProductImage> ProductImages { get; set; } = new HashSet<ProductImage>();
+        public ProductCategory ProductCategory { get; set; }
     }
 }

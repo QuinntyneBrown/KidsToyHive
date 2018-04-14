@@ -4,7 +4,7 @@ using System.Threading;
 using Infrastructure.Data;
 using Infrastructure.Services;
 
-namespace IdentityService
+namespace IdentityService.Features.Users
 {
     public class UserChangePasswordCommand
     {

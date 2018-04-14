@@ -3,28 +3,26 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 using Infrastructure.Data;
-using System;
+using Core.Entities;
 
-namespace IdentityService.Features.Users
+namespace DashboardService.Features.Dashboards
 {
-    public class SaveUserCommand
+    public class SaveDashboardCommand
     {
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.Username).NotNull();
-                RuleFor(request => request.UserId).NotNull();
+                RuleFor(request => request.Dashboard.DashboardId).NotNull();
             }
         }
 
         public class Request : IRequest<Response> {
-            public int UserId { get; set; }
-            public string Username { get; set; }
+            public DashboardApiModel Dashboard { get; set; }
         }
 
         public class Response
         {			
-            public int UserId { get; set; }
+            public int DashboardId { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -37,10 +35,15 @@ namespace IdentityService.Features.Users
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.FindAsync(request.UserId);
-                user.Username = request.Username;                    
+                var dashboard = await _context.Dashboards.FindAsync(request.Dashboard.DashboardId);
+
+                if (dashboard == null) _context.Dashboards.Add(dashboard = new Dashboard());
+
+                dashboard.Name = request.Dashboard.Name;
+
                 await _context.SaveChangesAsync(cancellationToken);
-                return new Response() { UserId = user.UserId };
+
+                return new Response() { DashboardId = dashboard.DashboardId };
             }
         }
     }

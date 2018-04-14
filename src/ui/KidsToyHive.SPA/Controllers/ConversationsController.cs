@@ -5,6 +5,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using ChatService.Features.Conversations;
+using Infrastructure.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace KidsToyHive.SPA.Controllers
 {
@@ -14,9 +16,13 @@ namespace KidsToyHive.SPA.Controllers
     public class ConversationsController
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly string _baseUrl = "https://localhost:44395";
+        private readonly string _baseUrl;
 
-        public ConversationsController(IHttpClientFactory httpClientFactory) => _httpClientFactory = httpClientFactory;
+        public ConversationsController(IHttpClientFactory httpClientFactory, IOptions<ClusterSettings> options)
+        {
+            _httpClientFactory = httpClientFactory;
+            _baseUrl = options.Value.ChatServiceBaseUrl;
+        }
 
         [HttpPost]
         public async Task<ActionResult<SaveConversationCommand.Response>> Save(SaveConversationCommand.Request request)

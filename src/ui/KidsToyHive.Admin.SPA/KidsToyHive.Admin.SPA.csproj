@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="codeGeneratorSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\common\Core\Core.csproj" />
     <ProjectReference Include="..\..\common\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\..\services\AccountService\AccountService.csproj" />
@@ -37,6 +41,14 @@
     <ProjectReference Include="..\..\services\ProductService\ProductService.csproj" />
     <ProjectReference Include="..\..\services\ShoppingCartService\ShoppingCartService.csproj" />
     <ProjectReference Include="..\..\services\SubscriptionService\SubscriptionService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="codeGeneratorSettings.json" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

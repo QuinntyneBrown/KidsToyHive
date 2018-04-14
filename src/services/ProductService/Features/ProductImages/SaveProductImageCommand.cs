@@ -3,28 +3,26 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 using Infrastructure.Data;
-using System;
+using Core.Entities;
 
-namespace IdentityService.Features.Users
+namespace ProductService.Features.ProductImages
 {
-    public class SaveUserCommand
+    public class SaveProductImageCommand
     {
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.Username).NotNull();
-                RuleFor(request => request.UserId).NotNull();
+                RuleFor(request => request.ProductImage.ProductImageId).NotNull();
             }
         }
 
         public class Request : IRequest<Response> {
-            public int UserId { get; set; }
-            public string Username { get; set; }
+            public ProductImageApiModel ProductImage { get; set; }
         }
 
         public class Response
         {			
-            public int UserId { get; set; }
+            public int ProductImageId { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -37,10 +35,13 @@ namespace IdentityService.Features.Users
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.FindAsync(request.UserId);
-                user.Username = request.Username;                    
+                var productImage = await _context.ProductImages.FindAsync(request.ProductImage.ProductImageId);
+
+                if (productImage == null) _context.ProductImages.Add(productImage = new ProductImage());
+                
                 await _context.SaveChangesAsync(cancellationToken);
-                return new Response() { UserId = user.UserId };
+
+                return new Response() { ProductImageId = productImage.ProductImageId };
             }
         }
     }

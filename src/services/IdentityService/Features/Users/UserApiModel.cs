@@ -1,7 +1,7 @@
 using Core.Entities;
 using System;
 
-namespace IdentityService
+namespace IdentityService.Features.Users
 {
     public class UserApiModel
     {

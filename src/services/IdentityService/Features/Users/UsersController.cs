@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace IdentityService
+namespace IdentityService.Features.Users
 {
     [ApiController]
     [Route("api/users")]
@@ -19,7 +19,7 @@ namespace IdentityService
             => await _mediator.Send(request);
 
         [HttpPut]
-        public async Task<ActionResult<UpdateUserCommand.Response>> Update(UpdateUserCommand.Request request)
+        public async Task<ActionResult<SaveUserCommand.Response>> Update(SaveUserCommand.Request request)
             => await _mediator.Send(request);
 
         [AllowAnonymous]

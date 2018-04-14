@@ -3,28 +3,26 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 using Infrastructure.Data;
-using System;
+using Core.Entities;
 
-namespace IdentityService.Features.Users
+namespace DashboardService.Features.Cards
 {
-    public class SaveUserCommand
+    public class SaveCardCommand
     {
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.Username).NotNull();
-                RuleFor(request => request.UserId).NotNull();
+                RuleFor(request => request.Card.CardId).NotNull();
             }
         }
 
         public class Request : IRequest<Response> {
-            public int UserId { get; set; }
-            public string Username { get; set; }
+            public CardApiModel Card { get; set; }
         }
 
         public class Response
         {			
-            public int UserId { get; set; }
+            public int CardId { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -37,10 +35,15 @@ namespace IdentityService.Features.Users
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.FindAsync(request.UserId);
-                user.Username = request.Username;                    
+                var card = await _context.Cards.FindAsync(request.Card.CardId);
+
+                if (card == null) _context.Cards.Add(card = new Card());
+
+                card.Name = request.Card.Name;
+
                 await _context.SaveChangesAsync(cancellationToken);
-                return new Response() { UserId = user.UserId };
+
+                return new Response() { CardId = card.CardId };
             }
         }
     }

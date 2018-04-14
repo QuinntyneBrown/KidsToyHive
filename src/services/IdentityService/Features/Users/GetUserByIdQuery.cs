@@ -3,7 +3,7 @@ using MediatR;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace IdentityService
+namespace IdentityService.Features.Users
 {
     public class GetUserByIdQuery
     {

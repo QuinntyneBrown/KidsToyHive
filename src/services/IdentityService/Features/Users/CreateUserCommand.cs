@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System;
 
-namespace IdentityService
+namespace IdentityService.Features.Users
 {
     public class CreateUserCommand
     {

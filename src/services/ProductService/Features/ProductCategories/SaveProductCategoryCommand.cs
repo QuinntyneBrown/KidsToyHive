@@ -3,28 +3,26 @@ using System.Threading.Tasks;
 using System.Threading;
 using FluentValidation;
 using Infrastructure.Data;
-using System;
+using Core.Entities;
 
-namespace IdentityService.Features.Users
+namespace ProductService.Features.ProductCategories
 {
-    public class SaveUserCommand
+    public class SaveProductCategoryCommand
     {
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.Username).NotNull();
-                RuleFor(request => request.UserId).NotNull();
+                RuleFor(request => request.ProductCategory.ProductCategoryId).NotNull();
             }
         }
 
         public class Request : IRequest<Response> {
-            public int UserId { get; set; }
-            public string Username { get; set; }
+            public ProductCategoryApiModel ProductCategory { get; set; }
         }
 
         public class Response
         {			
-            public int UserId { get; set; }
+            public int ProductCategoryId { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -37,10 +35,15 @@ namespace IdentityService.Features.Users
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users.FindAsync(request.UserId);
-                user.Username = request.Username;                    
+                var productCategory = await _context.ProductCategories.FindAsync(request.ProductCategory.ProductCategoryId);
+
+                if (productCategory == null) _context.ProductCategories.Add(productCategory = new ProductCategory());
+
+                productCategory.Name = request.ProductCategory.Name;
+
                 await _context.SaveChangesAsync(cancellationToken);
-                return new Response() { UserId = user.UserId };
+
+                return new Response() { ProductCategoryId = productCategory.ProductCategoryId };
             }
         }
     }

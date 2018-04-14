@@ -9,6 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\ProductCategories\" />
+    <Folder Include="Features\ProductImages\" />
     <Folder Include="Features\Products\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

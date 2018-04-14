@@ -6,28 +6,29 @@ using Infrastructure.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace IdentityService.Features.Users
+namespace ProductService.Features.ProductCategories
 {
-    public class GetUsersQuery
+    public class GetProductCategoriesQuery
     {
         public class Request : IRequest<Response> { }
 
         public class Response
-        {			
-            public IEnumerable<UserApiModel> Users { get; set; }
+        {
+            public IEnumerable<ProductCategoryApiModel> ProductCategories { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            private readonly IAppDbContext _context;
+            public IAppDbContext _context { get; set; }
             public Handler(IAppDbContext context)
             {
                 _context = context;
             }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => new Response() {
-                    Users = await _context.Users.Select(x => UserApiModel.FromUser(x)).ToListAsync()
+                => new Response()
+                {
+                    ProductCategories = await _context.ProductCategories.Select(x => ProductCategoryApiModel.FromProductCategory(x)).ToListAsync()
                 };
         }
     }

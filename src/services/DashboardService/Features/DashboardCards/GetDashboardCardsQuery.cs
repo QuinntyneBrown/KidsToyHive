@@ -6,28 +6,29 @@ using Infrastructure.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 
-namespace IdentityService.Features.Users
+namespace DashboardService.Features.DashboardCards
 {
-    public class GetUsersQuery
+    public class GetDashboardCardsQuery
     {
         public class Request : IRequest<Response> { }
 
         public class Response
-        {			
-            public IEnumerable<UserApiModel> Users { get; set; }
+        {
+            public IEnumerable<DashboardCardApiModel> DashboardCards { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            private readonly IAppDbContext _context;
+            public IAppDbContext _context { get; set; }
             public Handler(IAppDbContext context)
             {
                 _context = context;
             }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => new Response() {
-                    Users = await _context.Users.Select(x => UserApiModel.FromUser(x)).ToListAsync()
+                => new Response()
+                {
+                    DashboardCards = await _context.DashboardCards.Select(x => DashboardCardApiModel.FromDashboardCard(x)).ToListAsync()
                 };
         }
     }
