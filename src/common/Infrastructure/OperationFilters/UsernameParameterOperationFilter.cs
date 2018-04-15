@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Infrastructure.OperationFilters
 {
-    public class TenantHeaderParameterOperationFilter: IOperationFilter
+    public class UsernameHeaderParameterOperationFilter : IOperationFilter
     {
         public void Apply(Operation operation, OperationFilterContext context)
         {
@@ -13,9 +13,9 @@ namespace Infrastructure.OperationFilters
 
             operation.Parameters.Add(new NonBodyParameter
             {
-                Name = "TenantId",
+                Name = "Username",
                 In = "header",
-                Description = "Tenant",
+                Description = "Username",
                 Required = true,
                 Type = "string"
             });

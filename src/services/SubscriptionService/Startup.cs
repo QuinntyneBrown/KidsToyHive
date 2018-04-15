@@ -40,7 +40,7 @@ namespace SubscriptionService
         {
             app.UseHsts();
             app.UseAuthentication();
-            app.UseMiddleware<DbContextMiddleware>();
+            app.UseMiddleware<TenantIdAndUsernameMiddleware>();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
@@ -58,7 +58,7 @@ namespace SubscriptionService
 
         public virtual void ConfigureDataContext(IApplicationBuilder app)
         {
-            app.UseMiddleware<DbContextMiddleware>();
+            app.UseMiddleware<TenantIdAndUsernameMiddleware>();
         }
     }
 }

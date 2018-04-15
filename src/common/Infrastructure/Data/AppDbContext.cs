@@ -27,6 +27,7 @@ namespace Infrastructure.Data
         DbSet<ProductCategory> ProductCategories { get; set; }
         DbSet<ProductImage> ProductImages { get; set; }
         DbSet<Role> Roles { get; set; }
+        DbSet<Tenant> Tenants { get; set; }
         DbSet<User> Users { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
@@ -40,7 +41,7 @@ namespace Infrastructure.Data
         public AppDbContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor)
             : this(options)
         {
-            _httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;             
         }
 
         public DbSet<Card> Cards { get; set; }
@@ -56,11 +57,13 @@ namespace Infrastructure.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public Guid TenantId { get { return new Guid($"{this._httpContextAccessor.HttpContext.Items["TenantId"]}"); } }
-        public string Username { get { return $"{this._httpContextAccessor.HttpContext.Items["Username"]}"; } }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+            => SaveChangesAsync(cancellationToken, new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}"), $"{_httpContextAccessor.HttpContext.Items["Username"]}");
+
+        public Task<int> SaveChangesAsync(CancellationToken cancellationToken, Guid tenantId, string username)
         {
             ChangeTracker.DetectChanges();
 
@@ -70,15 +73,15 @@ namespace Infrastructure.Data
             {
                 var isNew = entity.CreatedOn == default(DateTime);
                 entity.CreatedOn = isNew ? DateTime.UtcNow : entity.CreatedOn;
-                entity.CreatedBy = isNew ? Username : entity.CreatedBy;
+                entity.CreatedBy = isNew ? username : entity.CreatedBy;
                 entity.LastModifiedOn = DateTime.UtcNow;
-                entity.LastModifiedBy = Username;
+                entity.LastModifiedBy = username;
             }
 
             foreach (var item in ChangeTracker.Entries().Where(
                 e => e.State == EntityState.Added && e.Metadata.GetProperties().Any(p => p.Name == "TenantId")))
             {
-                item.CurrentValues["TenantId"] = TenantId;
+                item.CurrentValues["TenantId"] = tenantId;
             }
 
             foreach (var item in ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted))
@@ -86,6 +89,7 @@ namespace Infrastructure.Data
                 item.State = EntityState.Modified;
                 item.CurrentValues["IsDeleted"] = true;
             }
+
             return base.SaveChangesAsync(cancellationToken);
         }
 
@@ -142,11 +146,17 @@ namespace Infrastructure.Data
 
         }
 
+        public Guid TenantId {
+            get {
+                return new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}");
+            }
+        }
+
         public void SetGlobalQuery<T>(ModelBuilder builder) where T : BaseEntity
         {
             builder.Entity<T>()
-                .HasQueryFilter(e => EF.Property<Guid>(e, "TenantId") == TenantId && !e.IsDeleted);
+                .HasQueryFilter(e => EF.Property<Guid>(e, "TenantId") == new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}") && !e.IsDeleted);
         }
-
-    }
+        
+    }    
 }

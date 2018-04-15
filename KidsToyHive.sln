@@ -47,6 +47,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DashboardService", "src\ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountService", "src\services\AccountService\AccountService.csproj", "{22E86310-E88D-4099-B4F6-B9B44FD09C12}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TenantService", "src\services\TenantService\TenantService.csproj", "{6F8588B9-3486-4B65-BE36-CF923784ECFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{22E86310-E88D-4099-B4F6-B9B44FD09C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22E86310-E88D-4099-B4F6-B9B44FD09C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22E86310-E88D-4099-B4F6-B9B44FD09C12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F8588B9-3486-4B65-BE36-CF923784ECFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F8588B9-3486-4B65-BE36-CF923784ECFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F8588B9-3486-4B65-BE36-CF923784ECFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F8588B9-3486-4B65-BE36-CF923784ECFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -148,6 +154,7 @@ Global
 		{2010BC54-185E-4298-936D-89EBFFEE7A24} = {C1F163A7-088C-45E2-AF1C-FDB31B84FC07}
 		{C9CAC8A6-F53F-40AD-88D1-002939C7DFD7} = {47C9C1CF-9DAA-4D9E-BD01-041A939D2A46}
 		{22E86310-E88D-4099-B4F6-B9B44FD09C12} = {47C9C1CF-9DAA-4D9E-BD01-041A939D2A46}
+		{6F8588B9-3486-4B65-BE36-CF923784ECFE} = {47C9C1CF-9DAA-4D9E-BD01-041A939D2A46}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAAAD23E-AFDE-47AE-BBBB-57CC8CB081F0}

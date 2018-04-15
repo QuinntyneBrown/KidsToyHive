@@ -54,7 +54,7 @@ namespace KidsToyHive.SPA.Extensions
             services.ConfigureSwaggerGen(options =>
             {
                 options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
-                options.OperationFilter<TenantHeaderParameterOperationFilter>();
+                options.OperationFilter<TenantIdHeaderParameterOperationFilter>();
             });
 
             return services;

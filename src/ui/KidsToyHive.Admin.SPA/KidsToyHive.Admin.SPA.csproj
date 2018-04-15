@@ -41,6 +41,7 @@
     <ProjectReference Include="..\..\services\ProductService\ProductService.csproj" />
     <ProjectReference Include="..\..\services\ShoppingCartService\ShoppingCartService.csproj" />
     <ProjectReference Include="..\..\services\SubscriptionService\SubscriptionService.csproj" />
+    <ProjectReference Include="..\..\services\TenantService\TenantService.csproj" />
   </ItemGroup>
 
   <ItemGroup>

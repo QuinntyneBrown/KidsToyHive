@@ -8,7 +8,7 @@ namespace Infrastructure.Extensions
         {
             app.UseSwagger();
             app.UseSwaggerUI(options => {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Macaria API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Kids Toy Hive API");
 
             });
             return app;

@@ -1,4 +1,4 @@
-using Infrastructure.Data;
+﻿using Infrastructure.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 
-namespace ContentService
+namespace TenantService
 {
     public class Program
     {

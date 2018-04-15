@@ -69,7 +69,8 @@ namespace Infrastructure.Extensions
             services.ConfigureSwaggerGen(options =>
             {
                 options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
-                options.OperationFilter<TenantHeaderParameterOperationFilter>();
+                options.OperationFilter<TenantIdHeaderParameterOperationFilter>();
+                options.OperationFilter<UsernameHeaderParameterOperationFilter>();
             });
 
             return services;

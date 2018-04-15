@@ -40,7 +40,7 @@ namespace IdentityService
         {
             app.UseHsts();
             app.UseAuthentication();
-            app.UseMiddleware<DbContextMiddleware>();
+            app.UseMiddleware<TenantIdAndUsernameMiddleware>();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
@@ -58,7 +58,7 @@ namespace IdentityService
 
         public virtual void ConfigureDataContext(IApplicationBuilder app)
         {
-            app.UseMiddleware<DbContextMiddleware>();
+            app.UseMiddleware<TenantIdAndUsernameMiddleware>();
         }
     }
 }

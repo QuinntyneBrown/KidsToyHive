@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ChatService
+namespace ContactService
 {
     public class Startup
     {
@@ -40,7 +40,7 @@ namespace ChatService
         {
             app.UseHsts();
             app.UseAuthentication();
-            app.UseMiddleware<DbContextMiddleware>();
+            app.UseMiddleware<TenantIdAndUsernameMiddleware>();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
@@ -58,7 +58,7 @@ namespace ChatService
 
         public virtual void ConfigureDataContext(IApplicationBuilder app)
         {
-            app.UseMiddleware<DbContextMiddleware>();
+            app.UseMiddleware<TenantIdAndUsernameMiddleware>();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using IdentityService;
+using IdentityService.Features.Users;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -27,11 +27,11 @@ namespace KidsToyHive.SPA.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<UpdateUserCommand.Response>> Update(UpdateUserCommand.Request request)
+        public async Task<ActionResult<SaveUserCommand.Response>> Update(SaveUserCommand.Request request)
         {
             var client = _httpClientFactory.CreateClient();
 
-            return await client.PutAsync<UpdateUserCommand.Response>($"{_baseUrl}/api/users", new StringContent(JsonConvert.SerializeObject(request)));
+            return await client.PutAsync<SaveUserCommand.Response>($"{_baseUrl}/api/users", new StringContent(JsonConvert.SerializeObject(request)));
         }
 
         [AllowAnonymous]
