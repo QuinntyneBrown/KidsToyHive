@@ -34,7 +34,11 @@ namespace Infrastructure.Data
     public class AppDbContext: DbContext, IAppDbContext
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        public AppDbContext(IHttpContextAccessor httpContextAccessor)
+        public AppDbContext(DbContextOptions options)
+            : base(options) { }
+
+        public AppDbContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor)
+            : this(options)
         {
             _httpContextAccessor = httpContextAccessor;
         }
