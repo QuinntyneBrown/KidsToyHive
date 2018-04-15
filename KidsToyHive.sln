@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{47C9C1CF-9DAA-4D9E-BD01-041A939D2A46}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{47C9C1CF-9DAA-4D9E-BD01-041A939D2A46}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{3A163A80-6BA3-4B11-8190-34935DC5BBDD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{3A163A80-6BA3-4B11-8190-34935DC5BBDD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{05AE04CB-FC3E-49E5-9AAB-C960D61CFEAA}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{05AE04CB-FC3E-49E5-9AAB-C960D61CFEAA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "test\IntegrationTests\IntegrationTests.csproj", "{444F29EE-557F-4EDD-85C4-62317F9EB376}"
 EndProject
@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "src\common\Core\Cor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\common\Infrastructure\Infrastructure.csproj", "{8B3A45F7-6B2E-40C0-8C7B-789315FB7A05}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{C1F163A7-088C-45E2-AF1C-FDB31B84FC07}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ui", "ui", "{C1F163A7-088C-45E2-AF1C-FDB31B84FC07}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactService", "src\services\ContactService\ContactService.csproj", "{016C81A2-16BF-44F4-9CE6-9E514228B0C7}"
 EndProject

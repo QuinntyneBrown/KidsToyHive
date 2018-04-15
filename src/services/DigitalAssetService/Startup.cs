@@ -1,16 +1,11 @@
-﻿        using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Infrastructure.Extensions;
 using Infrastructure.Middleware;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace DigitalAssetService
 {
@@ -23,28 +18,47 @@ namespace DigitalAssetService
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCustomConfiguration(Configuration);
+            services.AddSecurity(Configuration);
+            services.AddHttpClient();
+            services.AddHttpContextAccessor();
+            ConfigureDataStore(services);
+            services.AddCustomSwagger();
+            services.AddMediatR(typeof(Startup));
+            services.AddCustomCache();
+            services.AddCustomMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public virtual void ConfigureDataStore(IServiceCollection services)
+        {
+            services.AddDataStore(Configuration["Data:DefaultConnection:ConnectionString"]);
+        }
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
+            app.UseHsts();
+            app.UseAuthentication();
             app.UseMiddleware<DbContextMiddleware>();
-
             app.UseHttpsRedirection();
             app.UseMvc();
+        }
+
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        {
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddDebug();
+            app.UseCors("CorsPolicy");
+            app.UseAuthentication();
+            ConfigureDataContext(app);
+            app.UseMvc();
+            app.UseCustomSwagger();
+        }
+
+        public virtual void ConfigureDataContext(IApplicationBuilder app)
+        {
+            app.UseMiddleware<DbContextMiddleware>();
         }
     }
 }
