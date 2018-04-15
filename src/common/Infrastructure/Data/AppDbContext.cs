@@ -59,7 +59,7 @@ namespace Infrastructure.Data
         public DbSet<User> Users { get; set; }
 
         public Guid TenantId { get { return new Guid($"{this._httpContextAccessor.HttpContext.Items["TenantId"]}"); } }
-        public string CurrentUsername { get { return $"{this._httpContextAccessor.HttpContext.Items["CurrentUsername"]}"; } }
+        public string Username { get { return $"{this._httpContextAccessor.HttpContext.Items["Username"]}"; } }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
         {
             ChangeTracker.DetectChanges();
@@ -70,9 +70,9 @@ namespace Infrastructure.Data
             {
                 var isNew = entity.CreatedOn == default(DateTime);
                 entity.CreatedOn = isNew ? DateTime.UtcNow : entity.CreatedOn;
-                entity.CreatedBy = isNew ? CurrentUsername : entity.CreatedBy;
+                entity.CreatedBy = isNew ? Username : entity.CreatedBy;
                 entity.LastModifiedOn = DateTime.UtcNow;
-                entity.LastModifiedBy = CurrentUsername;
+                entity.LastModifiedBy = Username;
             }
 
             foreach (var item in ChangeTracker.Entries().Where(

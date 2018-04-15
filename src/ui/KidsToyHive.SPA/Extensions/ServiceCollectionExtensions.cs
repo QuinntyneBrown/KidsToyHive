@@ -44,9 +44,9 @@ namespace KidsToyHive.SPA.Extensions
                 options.DescribeAllEnumsAsStrings();
                 options.SwaggerDoc("v1", new Info
                 {
-                    Title = "Model Mob",
+                    Title = "Kids Toy Hive",
                     Version = "v1",
-                    Description = "Model Mob REST API",
+                    Description = "Kids Toy Hive REST API",
                 });
                 options.CustomSchemaIds(x => x.FullName);
             });

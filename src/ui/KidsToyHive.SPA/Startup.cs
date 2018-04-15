@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using Infrastructure.Filters;
+using Infrastructure.Configuration;
 
 namespace KidsToyHive.SPA
 {
@@ -21,6 +22,8 @@ namespace KidsToyHive.SPA
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ClusterSettings>(Configuration.GetSection("ClusterSettings"));
+
             services.AddMvc( options => {
                 options.Filters.Add(typeof(HttpGlobalExceptionFilter));
             })

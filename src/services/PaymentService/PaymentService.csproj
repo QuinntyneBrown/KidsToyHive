@@ -5,11 +5,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="codeGeneratorSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="codeGeneratorSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview2-final" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\common\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
