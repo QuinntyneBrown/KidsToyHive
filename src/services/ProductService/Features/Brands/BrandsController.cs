@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace ProductService.Features.Brands
 {
-    [Authorize]
     [ApiController]
     [Route("api/brands")]
     public class BrandsController

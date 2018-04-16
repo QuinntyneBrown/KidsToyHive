@@ -1,6 +1,6 @@
 namespace Core.Entities
 {
-    public class ContactRequest
+    public class ContactRequest: BaseEntity
     {
         public int ContactRequestId { get; set; }           
 		public string Name { get; set; }

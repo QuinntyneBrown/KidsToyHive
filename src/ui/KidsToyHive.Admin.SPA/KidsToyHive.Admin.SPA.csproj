@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\src\app\app-router.module.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\common\Core\Core.csproj" />
     <ProjectReference Include="..\..\common\Infrastructure\Infrastructure.csproj" />
     <ProjectReference Include="..\..\services\AccountService\AccountService.csproj" />
@@ -50,6 +54,10 @@
 
   <ItemGroup>
     <None Include="codeGeneratorSettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\app\app-router.module.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
