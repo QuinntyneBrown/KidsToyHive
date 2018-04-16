@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace ProductService.Features.ProductCategories
 {
-    [Authorize]
     [ApiController]
-    [Route("api/productCategories")]
+    [Route("api/productcategories")]
     public class ProductCategoriesController
     {
         private readonly IMediator _mediator;

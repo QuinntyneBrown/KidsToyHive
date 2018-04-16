@@ -12,6 +12,7 @@
     <Folder Include="Features\Cards\" />
     <Folder Include="Features\Dashboards\" />
     <Folder Include="Features\DashboardCards\" />
+    <Folder Include="Seed\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

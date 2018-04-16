@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace DigitalAssetService.Features.DigitalAssets
 {
-    [Authorize]
     [ApiController]
-    [Route("api/digitalAssets")]
+    [Route("api/digitalassets")]
     public class DigitalAssetsController
     {
         private readonly IMediator _mediator;

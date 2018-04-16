@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace ProductService.Features.Products
 {
-    [Authorize]
     [ApiController]
     [Route("api/products")]
     public class ProductsController

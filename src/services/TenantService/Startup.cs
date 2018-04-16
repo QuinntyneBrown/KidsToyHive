@@ -34,7 +34,6 @@ namespace TenantService
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.UseCors("CorsPolicy");
             ConfigureTenantIdAndUsernameResolution(app);
             app.UseMvc();
             app.UseCustomSwagger();

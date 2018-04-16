@@ -14,6 +14,8 @@ namespace Infrastructure.Data
 {
     public interface IAppDbContext
     {
+        DbSet<Account> Accounts { get; set; }
+        DbSet<Brand> Brands { get; set; }
         DbSet<Card> Cards { get; set; }
         DbSet<Conversation> Conversations { get; set; }
         DbSet<Contact> Contacts { get; set; }
@@ -44,6 +46,8 @@ namespace Infrastructure.Data
             _httpContextAccessor = httpContextAccessor;             
         }
 
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Contact> Contacts { get; set; }
@@ -63,10 +67,7 @@ namespace Infrastructure.Data
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
             => SaveChangesAsync(cancellationToken, new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}"), $"{_httpContextAccessor.HttpContext.Items["Username"]}");
 
-        public Task<int> SaveChangesAsync(CancellationToken cancellationToken, Guid tenantId, string username)
-        {
-            ChangeTracker.DetectChanges();
-
+        public void UpdateLoggableEntities(string username) {
             foreach (var entity in ChangeTracker.Entries()
                 .Where(e => e.Entity is ILoggable && ((e.State == EntityState.Added || (e.State == EntityState.Modified))))
                 .Select(x => x.Entity as ILoggable))
@@ -77,20 +78,53 @@ namespace Infrastructure.Data
                 entity.LastModifiedOn = DateTime.UtcNow;
                 entity.LastModifiedBy = username;
             }
+        }
 
+        public void SetTenantIdOnAddedEntities(Guid tenantId) {
             foreach (var item in ChangeTracker.Entries().Where(
                 e => e.State == EntityState.Added && e.Metadata.GetProperties().Any(p => p.Name == "TenantId")))
             {
                 item.CurrentValues["TenantId"] = tenantId;
             }
+        }
 
+
+        public void SoftDeleteEntities()
+        {
             foreach (var item in ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted))
             {
                 item.State = EntityState.Modified;
                 item.CurrentValues["IsDeleted"] = true;
             }
+        }
+
+        public void PreSaveChangesProcessing(string username, Guid tenantId) {
+
+            UpdateLoggableEntities(username);
+
+            SetTenantIdOnAddedEntities(tenantId);
+
+            SoftDeleteEntities();
+        }
+        public Task<int> SaveChangesAsync(CancellationToken cancellationToken, Guid tenantId, string username)
+        {
+            ChangeTracker.DetectChanges();
+
+            PreSaveChangesProcessing(username, tenantId);
 
             return base.SaveChangesAsync(cancellationToken);
+        }
+
+        public override int SaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+
+            var tenantId = new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}");
+            var username = $"{_httpContextAccessor.HttpContext.Items["Username"]}";
+
+            PreSaveChangesProcessing(username, tenantId);
+
+            return base.SaveChanges();
         }
 
         private static IList<Type> _entityTypeCache = default(IList<Type>);
@@ -146,11 +180,7 @@ namespace Infrastructure.Data
 
         }
 
-        public Guid TenantId {
-            get {
-                return new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}");
-            }
-        }
+
 
         public void SetGlobalQuery<T>(ModelBuilder builder) where T : BaseEntity
         {

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 
 namespace ContentService.Features.Contents
 {
-    [Authorize]
     [ApiController]
     [Route("api/contents")]
     public class ContentsController

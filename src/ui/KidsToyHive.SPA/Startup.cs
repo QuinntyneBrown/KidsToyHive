@@ -8,49 +8,39 @@ using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using Infrastructure.Filters;
 using Infrastructure.Configuration;
+using Infrastructure.Extensions;
+using Infrastructure.Services;
 
 namespace KidsToyHive.SPA
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<ClusterSettings>(Configuration.GetSection("ClusterSettings"));
 
-            services.AddMvc( options => {
-                options.Filters.Add(typeof(HttpGlobalExceptionFilter));
-            })
-            .AddControllersAsServices()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
-
-            services.AddMediatR(typeof(Startup));
+            services.AddCustomConfiguration(Configuration);
+            services.AddHttpContextAccessor();
+            services.AddHttpClient();
+            services.AddTransient<IEncryptionService, EncryptionService>();
+            ConfigureDataStore(services);
+            services.AddCustomSwagger();
+            services.AddCustomCache();
+            services.AddCustomMvc();
             services.AddSignalR();
-
+            services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
         }
+
+        public virtual void ConfigureDataStore(IServiceCollection services)
+            => services.AddDataStore(Configuration["Data:DefaultConnection:ConnectionString"]);
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
+            if (!env.IsDevelopment())
                 app.UseHsts();
-            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

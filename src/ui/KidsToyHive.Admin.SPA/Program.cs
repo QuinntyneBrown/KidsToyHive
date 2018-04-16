@@ -1,8 +1,10 @@
+using Core.Entities;
 using Infrastructure.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
@@ -33,10 +35,18 @@ namespace KidsToyHive.Admin.SPA
                 {
                     var httpContextAccessor = GetHttpContextAccessor(scope);
                     httpContextAccessor.HttpContext = new AppHttpContext();
-                    httpContextAccessor.HttpContext.Items["TenantId"] = "4759a504-e640-e811-9d37-0028f81d438a";
-                    httpContextAccessor.HttpContext.Items["Username"] = "quinntynebrown@gmail.com";
+                    httpContextAccessor.HttpContext.Items["TenantId"] = "00000000-0000-0000-0000-000000000000";
+                    httpContextAccessor.HttpContext.Items["Username"] = "system";
 
-                    SeedContext(GetDbContext(scope));
+                    var appDbContext = GetDbContext(scope);
+
+                    var tenant = appDbContext.Tenants.SingleOrDefault(x => x.Name == "Default");
+
+                    if (tenant == null) { appDbContext.Tenants.Add(tenant = new Tenant() { Name = "Default" }); }
+
+                    httpContextAccessor.HttpContext.Items["TenantId"] = $"{tenant.TenantId}";
+
+                    SeedContext(GetDbContext(scope),GetConfiguration(scope));
                 }
 
                 if (args.Contains("migratedb"))
@@ -62,10 +72,12 @@ namespace KidsToyHive.Admin.SPA
         public static IHttpContextAccessor GetHttpContextAccessor(IServiceScope serviceScope)
             => serviceScope.ServiceProvider.GetRequiredService<IHttpContextAccessor>();
 
-        public static void SeedContext(AppDbContext context)
+        public static IConfiguration GetConfiguration(IServiceScope serviceScope)
+            => serviceScope.ServiceProvider.GetRequiredService<IConfiguration>();
+
+        public static void SeedContext(AppDbContext context, IConfiguration configuration)
         {
-            TenantService.Program.SeedContext(context);
-            IdentityService.Program.SeedContext(context);
+            IdentityService.Program.SeedContext(context, configuration);
             DashboardService.Program.SeedContext(context);
             ProductService.Program.SeedContext(context);
         }
