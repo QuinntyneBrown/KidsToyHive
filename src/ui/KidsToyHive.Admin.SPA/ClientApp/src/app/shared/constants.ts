@@ -1,0 +1,6 @@
+export const constants = {
+  BASE_URL: "BASE URL",
+  ACCESS_TOKEN_KEY: "ACCESS TOKEN KEY",
+  STORAGE_KEY: "STORAGE_KEY",
+  ENTER_KEY_CODE: 13
+};

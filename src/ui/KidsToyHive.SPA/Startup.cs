@@ -10,6 +10,8 @@ using Infrastructure.Filters;
 using Infrastructure.Configuration;
 using Infrastructure.Extensions;
 using Infrastructure.Services;
+using KidsToyHive.SPA.Clients;
+using System;
 
 namespace KidsToyHive.SPA
 {
@@ -25,13 +27,16 @@ namespace KidsToyHive.SPA
             services.AddCustomConfiguration(Configuration);
             services.AddHttpContextAccessor();
             services.AddHttpClient();
+
+            services.AddHttpClient<ProductsClient>(client => client.BaseAddress = new Uri(Configuration["ClusterSettings:ProductsServiceBaseUrl"]));
+
             services.AddTransient<IEncryptionService, EncryptionService>();
             ConfigureDataStore(services);
             services.AddCustomSwagger();
             services.AddCustomCache();
             services.AddCustomMvc();
             services.AddSignalR();
-            services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist");
+            services.AddSpaStaticFiles(configuration => configuration.RootPath = "ClientApp/dist/ClientApp");
         }
 
         public virtual void ConfigureDataStore(IServiceCollection services)
@@ -42,7 +47,7 @@ namespace KidsToyHive.SPA
             if (!env.IsDevelopment())
                 app.UseHsts();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseMvc();
@@ -53,7 +58,8 @@ namespace KidsToyHive.SPA
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+                    //spa.UseAngularCliServer(npmScript: "start");
                 }
             });
         }

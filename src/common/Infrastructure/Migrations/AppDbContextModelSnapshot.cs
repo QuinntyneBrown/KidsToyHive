@@ -19,6 +19,34 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "2.1.0-preview2-30571")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Core.Entities.Account", b =>
+                {
+                    b.Property<int>("AccountId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("TenantId");
+
+                    b.HasKey("AccountId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("Core.Entities.Address", b =>
                 {
                     b.Property<int>("AddressId")
@@ -55,14 +83,62 @@ namespace Infrastructure.Migrations
                     b.ToTable("Address");
                 });
 
+            modelBuilder.Entity("Core.Entities.Brand", b =>
+                {
+                    b.Property<int>("BrandId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("TenantId");
+
+                    b.HasKey("BrandId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Brands");
+                });
+
             modelBuilder.Entity("Core.Entities.Card", b =>
                 {
                     b.Property<int>("CardId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
+
                     b.Property<string>("Name");
 
+                    b.Property<Guid?>("TenantId");
+
                     b.HasKey("CardId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Cards");
                 });
@@ -102,9 +178,21 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ContactRequestId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("BaseEntityId");
+
                     b.Property<int?>("ContactId");
 
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
 
                     b.Property<string>("Message");
 
@@ -114,9 +202,13 @@ namespace Infrastructure.Migrations
 
                     b.Property<string>("Subject");
 
+                    b.Property<Guid?>("TenantId");
+
                     b.HasKey("ContactRequestId");
 
                     b.HasIndex("ContactId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("ContactRequests");
                 });
@@ -126,11 +218,27 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ContentId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
                     b.Property<string>("HtmlBody");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
 
                     b.Property<string>("Name");
 
+                    b.Property<Guid?>("TenantId");
+
                     b.HasKey("ContentId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Contents");
                 });
@@ -166,9 +274,25 @@ namespace Infrastructure.Migrations
                     b.Property<int>("DashboardId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
+
                     b.Property<string>("Name");
 
+                    b.Property<Guid?>("TenantId");
+
                     b.HasKey("DashboardId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Dashboards");
                 });
@@ -178,9 +302,33 @@ namespace Infrastructure.Migrations
                     b.Property<int>("DashboardCardId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<int>("CardId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<int>("DashboardId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
+
                     b.Property<string>("Options");
 
+                    b.Property<Guid?>("TenantId");
+
                     b.HasKey("DashboardCardId");
+
+                    b.HasIndex("CardId");
+
+                    b.HasIndex("DashboardId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("DashboardCards");
                 });
@@ -282,6 +430,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("BaseEntityId");
 
+                    b.Property<int>("BrandId");
+
+                    b.Property<string>("Color");
+
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("CreatedOn");
@@ -302,6 +454,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("ProductId");
 
+                    b.HasIndex("BrandId");
+
                     b.HasIndex("ProductCategoryId");
 
                     b.HasIndex("TenantId");
@@ -319,6 +473,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("CreatedBy");
 
                     b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<bool>("IsDeleted");
 
@@ -342,15 +500,31 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ProductImageId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
                     b.Property<string>("Description");
 
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
+
                     b.Property<int?>("ProductId");
+
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<string>("Url");
 
                     b.HasKey("ProductImageId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("ProductImages");
                 });
@@ -423,6 +597,36 @@ namespace Infrastructure.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("Core.Entities.Service", b =>
+                {
+                    b.Property<int>("ServiceId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("BaseEntityId");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Description");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("LastModifiedBy");
+
+                    b.Property<DateTime>("LastModifiedOn");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("TenantId");
+
+                    b.HasKey("ServiceId");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Service");
+                });
+
             modelBuilder.Entity("Core.Entities.Tenant", b =>
                 {
                     b.Property<Guid>("TenantId")
@@ -484,7 +688,28 @@ namespace Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Core.Entities.Account", b =>
+                {
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
             modelBuilder.Entity("Core.Entities.Address", b =>
+                {
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("Core.Entities.Brand", b =>
+                {
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("Core.Entities.Card", b =>
                 {
                     b.HasOne("Core.Entities.Tenant", "Tenant")
                         .WithMany()
@@ -503,10 +728,45 @@ namespace Infrastructure.Migrations
                     b.HasOne("Core.Entities.Contact")
                         .WithMany("ContactRequests")
                         .HasForeignKey("ContactId");
+
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("Core.Entities.Content", b =>
+                {
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("Core.Entities.Conversation", b =>
                 {
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("Core.Entities.Dashboard", b =>
+                {
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("Core.Entities.DashboardCard", b =>
+                {
+                    b.HasOne("Core.Entities.Card", "Card")
+                        .WithMany()
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Core.Entities.Dashboard", "Dashboard")
+                        .WithMany("DashboardCards")
+                        .HasForeignKey("DashboardId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Core.Entities.Tenant", "Tenant")
                         .WithMany()
                         .HasForeignKey("TenantId");
@@ -532,6 +792,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
+                    b.HasOne("Core.Entities.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("Core.Entities.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
@@ -554,6 +819,10 @@ namespace Infrastructure.Migrations
                     b.HasOne("Core.Entities.Product")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductId");
+
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("Core.Entities.Profile", b =>
@@ -572,6 +841,13 @@ namespace Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("Core.Entities.Role", b =>
+                {
+                    b.HasOne("Core.Entities.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("Core.Entities.Service", b =>
                 {
                     b.HasOne("Core.Entities.Tenant", "Tenant")
                         .WithMany()

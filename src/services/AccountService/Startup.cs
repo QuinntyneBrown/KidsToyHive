@@ -1,4 +1,5 @@
-﻿using Infrastructure.Extensions;
+﻿using Infrastructure.Behaviours;
+using Infrastructure.Extensions;
 using Infrastructure.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +30,7 @@ namespace AccountService
             services.AddMediatR(typeof(Startup));
             services.AddCustomCache();
             services.AddCustomMvc();
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
 
         public virtual void ConfigureDataStore(IServiceCollection services)

@@ -29,6 +29,12 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\app-router.module.ts" />
+    <None Remove="ClientApp\src\app\shared\auth-guard.ts" />
+    <None Remove="ClientApp\src\app\shared\constants.ts" />
+    <None Remove="ClientApp\src\app\shared\header.interceptor.ts" />
+    <None Remove="ClientApp\src\app\shared\login-redirect.ts" />
+    <None Remove="ClientApp\src\app\shared\services\authentication.service.ts" />
+    <None Remove="ClientApp\src\app\shared\storage.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +55,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\src\app\ag-grid-components\" />
+    <Folder Include="ClientApp\src\app\material\" />
+    <Folder Include="ClientApp\src\app\cards\" />
+    <Folder Include="ClientApp\src\app\dashboard-cards\" />
+    <Folder Include="ClientApp\src\app\digital-assets\" />
+    <Folder Include="ClientApp\src\app\products\" />
+    <Folder Include="ClientApp\src\app\shared\models\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
 
@@ -58,6 +71,12 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\app-router.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\auth-guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\constants.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\header.interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\login-redirect.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\services\authentication.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\storage.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

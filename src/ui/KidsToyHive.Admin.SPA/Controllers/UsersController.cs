@@ -32,6 +32,7 @@ namespace KidsToyHive.Admin.SPA.Controllers
             return await client.PostAsync<SaveUserCommand.Response>($"{_baseUrl}/api/users", new StringContent(JsonConvert.SerializeObject(request)));
         }
 
+        [AllowAnonymous]
         [HttpPost("token")]
         public async Task<ActionResult<AuthenticateCommand.Response>> Token(AuthenticateCommand.Request request)
         {

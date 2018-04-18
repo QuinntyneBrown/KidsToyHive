@@ -26,8 +26,7 @@ namespace Infrastructure.Extensions
 
             return await response.Content.ReadAsAsync<T>();
         }
-
-
+        
         public static async Task<T> DeleteAsync<T>(this HttpClient httpClient, string requestUri)
         {
             var response = await httpClient.DeleteAsync(requestUri);

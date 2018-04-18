@@ -1,33 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
-import { LoginModule } from './login/login.module';
-import { MaterialModule } from './material/material.module';
 import { SharedModule } from './shared/shared.module';
-import { AppRoutingModule } from './app-routing.module';
-import { SplashModule } from './splash/splash.module';
+import { PrivacyModule } from './privacy/privacy.module';
+import { ToysModule } from './toys/toys.module';
+import { AboutModule } from './about/about.module';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+import { PricingModule } from './pricing/pricing.module';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpClientModule,
-    FormsModule,
-
+    BrowserModule,
     AppRoutingModule,
 
+    AboutModule,
     HomeModule,
-    LoginModule,
-    MaterialModule,
+    PricingModule,
+    PrivacyModule,
     SharedModule,
-    SplashModule
+    ShoppingCartModule,
+    ToysModule
   ],
   providers: [],
   bootstrap: [AppComponent]

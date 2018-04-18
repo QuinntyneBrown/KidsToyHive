@@ -33,19 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\app-routing.module.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\login\" />
-    <Folder Include="ClientApp\src\app\home\" />
-    <Folder Include="ClientApp\src\app\material\" />
-    <Folder Include="ClientApp\src\app\landing\" />
-    <Folder Include="ClientApp\src\app\shared\models\" />
-    <Folder Include="ClientApp\src\app\shared\services\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="codeGeneratorSettings.json" />
   </ItemGroup>
 
@@ -65,7 +52,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\app-routing.module.ts" />
+    <Folder Include="ClientApp\src\app\home\" />
+    <Folder Include="ClientApp\src\app\about\" />
+    <Folder Include="ClientApp\src\app\pricing\" />
+    <Folder Include="ClientApp\src\app\toys\" />
+    <Folder Include="ClientApp\src\app\shopping-cart\" />
+    <Folder Include="ClientApp\src\app\privacy\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

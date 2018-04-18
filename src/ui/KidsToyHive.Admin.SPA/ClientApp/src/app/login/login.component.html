@@ -1,0 +1,24 @@
+<mat-card-title>Login</mat-card-title>
+
+<mat-card-content>
+  <form novalidate [formGroup]="form" autocomplete="off" spellcheck="false">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Username" id="username" formControlName="username" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" id="password" formControlName="password" />
+    </mat-form-field>
+    <section>
+      <a>Current Customer Key: {{ customerKey }}</a>
+      <a class="change-customer-key" (click)="tryToChangeCustomerKey.emit()">Change Customer Key</a>
+    </section>
+    <section class="button-container">
+      <button mat-raised-button color="primary" (click)="tryToLogin.emit({ value: this.form.value })" id="login">
+        Login
+      </button>
+    </section>
+    <p class="error-message">
+      {{ errorMessage }}
+    </p>
+  </form>
+</mat-card-content>
