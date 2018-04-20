@@ -1,28 +1,23 @@
-using Infrastructure.Extensions;
-using ProductService.Features.ProductCategories;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace KidsToyHive.SPA.Clients
 {
-    public class ProductCategoriesClient
-    {
-        private HttpClient _client;
-        private ILogger<ProductCategoriesClient> _logger;
-
+    public class ProductCategoriesClient: BaseClient<ProductCategoriesClient>
+    {        
         public ProductCategoriesClient(HttpClient client, ILogger<ProductCategoriesClient> logger)
-        {
-            _client = client;
-            _logger = logger;
-        }
+            :base(client,logger)
+        { }
 
-        public async Task<GetProductCategoriesQuery.Response> Get()
+        public async Task<dynamic> Get()
         {
             try
             {
-                return await _client.GetAsync<GetProductCategoriesQuery.Response>("api/productcategories");                
+                return await _client.GetAsync<dynamic>("api/productcategories");                
             }
             catch (HttpRequestException ex)
             {
@@ -32,11 +27,11 @@ namespace KidsToyHive.SPA.Clients
             }
         }
 
-        public async Task<GetProductCategoryByIdQuery.Response> GetById(GetProductCategoryByIdQuery.Request request)
+        public async Task<dynamic> GetById(int productCategoryId)
         {
             try
             {
-                return await _client.GetAsync<GetProductCategoryByIdQuery.Response>($"api/productcategories/{request.ProductCategoryId}");
+                return await _client.GetAsync<dynamic>($"api/productcategories/{productCategoryId}");
             }
             catch (HttpRequestException ex)
             {
@@ -46,13 +41,15 @@ namespace KidsToyHive.SPA.Clients
             }
         }
 
-        public async Task<SaveProductCategoryCommand.Response> Save(SaveProductCategoryCommand.Request request)
+        public async Task<dynamic> Save(dynamic productCategory)
         {
             try
             {
-                var content = new StringContent(JsonConvert.SerializeObject(request));
+                var content = new StringContent(JsonConvert.SerializeObject(new {
+                    ProductCategory = productCategory
+                }));
 
-                return await _client.PostAsync<SaveProductCategoryCommand.Response>("api/productcategories",content);
+                return await _client.PostAsync<dynamic>("api/productcategories",content);
             }
             catch (HttpRequestException ex)
             {
@@ -62,11 +59,11 @@ namespace KidsToyHive.SPA.Clients
             }
         }
 
-        public async Task<GetProductCategoriesQuery.Response> Remove(RemoveProductCategoryCommand.Request request)
+        public async Task<dynamic> Remove(int productCategoryId)
         {
             try
             {
-                return await _client.DeleteAsync<GetProductCategoriesQuery.Response>($"api/productcategories/{request.ProductCategory.ProductCategoryId}");
+                return await _client.DeleteAsync<dynamic>($"api/productcategories/{productCategoryId}");
             }
             catch (HttpRequestException ex)
             {

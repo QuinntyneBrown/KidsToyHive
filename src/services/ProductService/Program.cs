@@ -1,3 +1,4 @@
+using Core.Entities;
 using Infrastructure.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -14,11 +15,11 @@ namespace ProductService
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();        
 
-        public static void SeedContext(AppDbContext context)
+        public static void SeedContext(AppDbContext context, Tenant tenant)
         {
-            BrandConfiguration.Seed(context);
-            ProductCategoryConfiguration.Seed(context);
-            ProductConfiguration.Seed(context);            
+            BrandConfiguration.Seed(context, tenant);
+            ProductCategoryConfiguration.Seed(context, tenant);
+            ProductConfiguration.Seed(context, tenant);            
         }
     }
 }

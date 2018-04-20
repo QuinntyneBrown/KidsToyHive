@@ -1,42 +1,46 @@
 using Core.Entities;
 using Infrastructure.Data;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProductService.Seed
 {
     public class ProductConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(AppDbContext context, Tenant tenant)
         {
-            var threeStageActivityCenter = context.Products.FirstOrDefault(x => x.Name == "Three-Stage Activity Center");
+            var threeStageActivityCenter = context.Products.IgnoreQueryFilters().FirstOrDefault(x => x.Name == "Three-Stage Activity Center");
 
             if (threeStageActivityCenter == null)
             {
                 threeStageActivityCenter = new Product
                 {
-                    Brand = context.Brands.First(x => x.Name == "Skip Hop"),
+                    Name = "Three-Stage Activity Center",
+                    Brand = context.Brands.IgnoreQueryFilters().First(x => x.Name == "Skip Hop"),
                     Color = "Multi",
-                    ProductCategory = context.ProductCategories.First( x=> x.Name == "Infant - 1 Year")
+                    ProductCategory = context.ProductCategories.IgnoreQueryFilters().First( x=> x.Name == "Infant - 1 Year"),
+                    Tenant = tenant
                 };
 
                 context.Products.Add(threeStageActivityCenter);
             }
 
-            var playCube = context.Products.FirstOrDefault(x => x.Name == "Country Critters Play Cube");
+            var playCube = context.Products.IgnoreQueryFilters().FirstOrDefault(x => x.Name == "Country Critters Play Cube");
 
-            if(playCube == null)
+            if (playCube == null)
             {
                 playCube = new Product()
                 {
                     Name = "Country Critters Play Cube",
-                    Brand = context.Brands.First(x => x.Name == "Hape Toys"),
-                    ProductCategory = context.ProductCategories.First(x => x.Name == "1 Year - 2 Years")
+                    Brand = context.Brands.IgnoreQueryFilters().First(x => x.Name == "Hape Toys"),
+                    ProductCategory = context.ProductCategories.IgnoreQueryFilters().First(x => x.Name == "1 Year - 2 Years"),
+                    Tenant = tenant
                 };
 
                 context.Products.Add(playCube);
             }
 
-            var workbench = context.Products.FirstOrDefault(x => x.Name == "Master Workbench");
+            var workbench = context.Products.IgnoreQueryFilters().FirstOrDefault(x => x.Name == "Master Workbench");
 
             if (workbench == null)
             {
@@ -44,8 +48,9 @@ namespace ProductService.Seed
                 {
                     Name = "Master Workbench",
                     Color = "Multi",
-                    Brand = context.Brands.First(x => x.Name == "Hape Toys"),
-                    ProductCategory = context.ProductCategories.First(x => x.Name == "2 Years Plus")
+                    Brand = context.Brands.IgnoreQueryFilters().First(x => x.Name == "Hape Toys"),
+                    ProductCategory = context.ProductCategories.IgnoreQueryFilters().First(x => x.Name == "2 Years Plus"),
+                    Tenant = tenant
                 };
 
                 context.Products.Add(workbench);

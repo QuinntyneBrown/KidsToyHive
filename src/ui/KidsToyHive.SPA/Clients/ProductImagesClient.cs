@@ -1,28 +1,23 @@
-using Infrastructure.Extensions;
-using ProductService.Features.ProductImages;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace KidsToyHive.SPA.Clients
 {
-    public class ProductImagesClient
-    {
-        private HttpClient _client;
-        private ILogger<ProductImagesClient> _logger;
-
+    public class ProductImagesClient: BaseClient<ProductImagesClient>
+    {        
         public ProductImagesClient(HttpClient client, ILogger<ProductImagesClient> logger)
-        {
-            _client = client;
-            _logger = logger;
-        }
+            :base(client,logger)
+        { }
 
-        public async Task<GetProductImagesQuery.Response> Get()
+        public async Task<dynamic> Get()
         {
             try
             {
-                return await _client.GetAsync<GetProductImagesQuery.Response>("api/productimages");                
+                return await _client.GetAsync<dynamic>("api/productimages");                
             }
             catch (HttpRequestException ex)
             {
@@ -32,11 +27,11 @@ namespace KidsToyHive.SPA.Clients
             }
         }
 
-        public async Task<GetProductImageByIdQuery.Response> GetById(GetProductImageByIdQuery.Request request)
+        public async Task<dynamic> GetById(int productImageId)
         {
             try
             {
-                return await _client.GetAsync<GetProductImageByIdQuery.Response>($"api/productimages/{request.ProductImageId}");
+                return await _client.GetAsync<dynamic>($"api/productimages/{productImageId}");
             }
             catch (HttpRequestException ex)
             {
@@ -46,13 +41,15 @@ namespace KidsToyHive.SPA.Clients
             }
         }
 
-        public async Task<SaveProductImageCommand.Response> Save(SaveProductImageCommand.Request request)
+        public async Task<dynamic> Save(dynamic productImage)
         {
             try
             {
-                var content = new StringContent(JsonConvert.SerializeObject(request));
+                var content = new StringContent(JsonConvert.SerializeObject(new {
+                    ProductImage = productImage
+                }));
 
-                return await _client.PostAsync<SaveProductImageCommand.Response>("api/productimages",content);
+                return await _client.PostAsync<dynamic>("api/productimages",content);
             }
             catch (HttpRequestException ex)
             {
@@ -62,11 +59,11 @@ namespace KidsToyHive.SPA.Clients
             }
         }
 
-        public async Task<GetProductImagesQuery.Response> Remove(RemoveProductImageCommand.Request request)
+        public async Task<dynamic> Remove(int productImageId)
         {
             try
             {
-                return await _client.DeleteAsync<GetProductImagesQuery.Response>($"api/productimages/{request.ProductImage.ProductImageId}");
+                return await _client.DeleteAsync<dynamic>($"api/productimages/{productImageId}");
             }
             catch (HttpRequestException ex)
             {

@@ -13,51 +13,52 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="7.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0-preview2-final" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0-preview2-final" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.0-preview2-final" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0" />
     <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\ag-grid-components\**" />
+    <Compile Remove="ClientApp\src\app\material\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\ag-grid-components\**" />
+    <Content Remove="ClientApp\src\app\material\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="codeGeneratorSettings.json" />
+    <EmbeddedResource Remove="ClientApp\src\app\ag-grid-components\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\material\**" />
+    <None Remove="ClientApp\src\app\ag-grid-components\**" />
+    <None Remove="ClientApp\src\app\material\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="codeGeneratorSettings.json" />
+    <None Remove="ClientApp\src\app\app-routing.module.ts" />
+    <None Remove="ClientApp\src\app\shared\models\olympic-winner.model.ts" />
+    <None Remove="ClientApp\src\app\shared\services\olympic-winners.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\common\Core\Core.csproj" />
+    <Folder Include="ClientApp\dist\out-tsc\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\common\Infrastructure\Infrastructure.csproj" />
-    <ProjectReference Include="..\..\services\AccountService\AccountService.csproj" />
-    <ProjectReference Include="..\..\services\ChatService\ChatService.csproj" />
-    <ProjectReference Include="..\..\services\ContactService\ContactService.csproj" />
-    <ProjectReference Include="..\..\services\DashboardService\DashboardService.csproj" />
-    <ProjectReference Include="..\..\services\DigitalAssetService\DigitalAssetService.csproj" />
-    <ProjectReference Include="..\..\services\IdentityService\IdentityService.csproj" />
-    <ProjectReference Include="..\..\services\PaymentService\PaymentService.csproj" />
-    <ProjectReference Include="..\..\services\ProductService\ProductService.csproj" />
-    <ProjectReference Include="..\..\services\ShoppingCartService\ShoppingCartService.csproj" />
-    <ProjectReference Include="..\..\services\SubscriptionService\SubscriptionService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\app\home\" />
-    <Folder Include="ClientApp\src\app\about\" />
-    <Folder Include="ClientApp\src\app\pricing\" />
-    <Folder Include="ClientApp\src\app\toys\" />
-    <Folder Include="ClientApp\src\app\shopping-cart\" />
-    <Folder Include="ClientApp\src\app\privacy\" />
+    <TypeScriptCompile Include="ClientApp\src\app\app-routing.module.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\models\olympic-winner.model.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\shared\services\olympic-winners.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

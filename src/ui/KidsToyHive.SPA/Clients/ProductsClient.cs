@@ -1,76 +1,72 @@
-﻿using Infrastructure.Extensions;
-using ProductService.Features.Products;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Infrastructure.Extensions;
 
 namespace KidsToyHive.SPA.Clients
 {
-    public class ProductsClient
-    {
-        private HttpClient _client;
-        private ILogger<ProductsClient> _logger;
-
+    public class ProductsClient: BaseClient<ProductsClient>
+    {        
         public ProductsClient(HttpClient client, ILogger<ProductsClient> logger)
-        {
-            _client = client;
-            _logger = logger;
-        }
+            :base(client,logger)
+        { }
 
-        public async Task<GetProductsQuery.Response> Get()
+        public async Task<dynamic> Get()
         {
             try
             {
-                return await _client.GetAsync<GetProductsQuery.Response>("api/products");                
+                return await _client.GetAsync<dynamic>("api/products");                
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError($"An error occured connecting to products API {ex.ToString()}");
+                _logger.LogError($"An error occured connecting to Products API {ex.ToString()}");
 
                 throw ex;
             }
         }
 
-        public async Task<GetProductByIdQuery.Response> GetById(GetProductByIdQuery.Request request)
+        public async Task<dynamic> GetById(int productId)
         {
             try
             {
-                return await _client.GetAsync<GetProductByIdQuery.Response>($"api/products/{request.ProductId}");
+                return await _client.GetAsync<dynamic>($"api/products/{productId}");
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError($"An error occured connecting to products API {ex.ToString()}");
+                _logger.LogError($"An error occured connecting to Products API {ex.ToString()}");
 
                 throw ex;
             }
         }
 
-        public async Task<SaveProductCommand.Response> Save(SaveProductCommand.Request request)
+        public async Task<dynamic> Save(dynamic product)
         {
             try
             {
-                var content = new StringContent(JsonConvert.SerializeObject(request));
+                var content = new StringContent(JsonConvert.SerializeObject(new {
+                    Product = product
+                }));
 
-                return await _client.PostAsync<SaveProductCommand.Response>("api/products",content);
+                return await _client.PostAsync<dynamic>("api/products",content);
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError($"An error occured connecting to products API {ex.ToString()}");
+                _logger.LogError($"An error occured connecting to Products API {ex.ToString()}");
 
                 throw ex;
             }
         }
 
-        public async Task<GetProductsQuery.Response> Remove(RemoveProductCommand.Request request)
+        public async Task<dynamic> Remove(int productId)
         {
             try
             {
-                return await _client.DeleteAsync<GetProductsQuery.Response>($"api/products/{request.Product.ProductId}");
+                return await _client.DeleteAsync<dynamic>($"api/products/{productId}");
             }
             catch (HttpRequestException ex)
             {
-                _logger.LogError($"An error occured connecting to products API {ex.ToString()}");
+                _logger.LogError($"An error occured connecting to Products API {ex.ToString()}");
 
                 throw ex;
             }

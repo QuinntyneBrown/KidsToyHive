@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using ProductService.Features.ProductImages;
 using KidsToyHive.SPA.Clients;
 
 namespace KidsToyHive.SPA.Controllers
@@ -16,19 +15,21 @@ namespace KidsToyHive.SPA.Controllers
         public ProductImageController(ProductImagesClient client) => _client = client;
 
         [HttpPost]
-        public async Task<ActionResult<SaveProductImageCommand.Response>> Save(SaveProductImageCommand.Request request)
-            => await _client.Save(request);
+        public async Task<ActionResult<dynamic>> Save(dynamic productImage)
+            => await _client.Save(productImage);
 
-        [HttpDelete("{ProductImage.ProductImageId}")]
-        public async Task Remove(RemoveProductImageCommand.Request request)
-            => await _client.Remove(request);
+        [HttpDelete("{productImageId}")]
+        public async Task Remove(int productImageId)
+            => await _client.Remove(productImageId);
 
-        [HttpGet("{ProductImageId}")]
-        public async Task<ActionResult<GetProductImageByIdQuery.Response>> GetById([FromRoute]GetProductImageByIdQuery.Request request)
-            => await _client.GetById(request);
+        [AllowAnonymous]
+        [HttpGet("{productImageId}")]
+        public async Task<ActionResult<dynamic>> GetById([FromRoute]int productImageId)
+            => await _client.GetById(productImageId);
 
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<GetProductImagesQuery.Response>> Get()
+        public async Task<ActionResult<dynamic>> Get()
             => await _client.Get();
     }
 }

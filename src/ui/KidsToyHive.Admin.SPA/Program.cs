@@ -33,19 +33,12 @@ namespace KidsToyHive.Admin.SPA
             {                
                 if (args.Contains("seeddb"))
                 {
-                    var httpContextAccessor = GetHttpContextAccessor(scope);
-                    httpContextAccessor.HttpContext = new AppHttpContext();
-                    httpContextAccessor.HttpContext.Items["TenantId"] = "00000000-0000-0000-0000-000000000000";
-                    httpContextAccessor.HttpContext.Items["Username"] = "system";
-
                     var appDbContext = GetDbContext(scope);
 
                     var tenant = appDbContext.Tenants.SingleOrDefault(x => x.Name == "Default");
 
                     if (tenant == null) { appDbContext.Tenants.Add(tenant = new Tenant() { Name = "Default" }); }
-
-                    httpContextAccessor.HttpContext.Items["TenantId"] = $"{tenant.TenantId}";
-
+                    
                     SeedContext(GetDbContext(scope),GetConfiguration(scope));
                 }
 
@@ -79,7 +72,7 @@ namespace KidsToyHive.Admin.SPA
         {
             IdentityService.Program.SeedContext(context, configuration);
             DashboardService.Program.SeedContext(context);
-            ProductService.Program.SeedContext(context);
+            ProductService.Program.SeedContext(context,null);
         }
     }
 }

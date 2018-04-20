@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using ProductService.Features.ProductCategories;
 using KidsToyHive.SPA.Clients;
 
 namespace KidsToyHive.SPA.Controllers
@@ -16,19 +15,21 @@ namespace KidsToyHive.SPA.Controllers
         public ProductCategoryController(ProductCategoriesClient client) => _client = client;
 
         [HttpPost]
-        public async Task<ActionResult<SaveProductCategoryCommand.Response>> Save(SaveProductCategoryCommand.Request request)
-            => await _client.Save(request);
+        public async Task<ActionResult<dynamic>> Save(dynamic productCategory)
+            => await _client.Save(productCategory);
 
-        [HttpDelete("{ProductCategory.ProductCategoryId}")]
-        public async Task Remove(RemoveProductCategoryCommand.Request request)
-            => await _client.Remove(request);
+        [HttpDelete("{productCategoryId}")]
+        public async Task Remove(int productCategoryId)
+            => await _client.Remove(productCategoryId);
 
-        [HttpGet("{ProductCategoryId}")]
-        public async Task<ActionResult<GetProductCategoryByIdQuery.Response>> GetById([FromRoute]GetProductCategoryByIdQuery.Request request)
-            => await _client.GetById(request);
+        [AllowAnonymous]
+        [HttpGet("{productCategoryId}")]
+        public async Task<ActionResult<dynamic>> GetById([FromRoute]int productCategoryId)
+            => await _client.GetById(productCategoryId);
 
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<GetProductCategoriesQuery.Response>> Get()
+        public async Task<ActionResult<dynamic>> Get()
             => await _client.Get();
     }
 }

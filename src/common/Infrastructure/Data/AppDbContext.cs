@@ -64,67 +64,35 @@ namespace Infrastructure.Data
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public Guid TenantId { get { return new Guid($"{this._httpContextAccessor.HttpContext.Items["TenantId"]}"); } }
+        public string Username { get { return $"{this._httpContextAccessor.HttpContext.Items["Username"]}"; } }
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-            => SaveChangesAsync(cancellationToken, new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}"), $"{_httpContextAccessor.HttpContext.Items["Username"]}");
+        {
+            ChangeTracker.DetectChanges();
 
-        public void UpdateLoggableEntities(string username) {
             foreach (var entity in ChangeTracker.Entries()
                 .Where(e => e.Entity is ILoggable && ((e.State == EntityState.Added || (e.State == EntityState.Modified))))
                 .Select(x => x.Entity as ILoggable))
             {
                 var isNew = entity.CreatedOn == default(DateTime);
                 entity.CreatedOn = isNew ? DateTime.UtcNow : entity.CreatedOn;
-                entity.CreatedBy = isNew ? username : entity.CreatedBy;
+                entity.CreatedBy = isNew ? Username : entity.CreatedBy;
                 entity.LastModifiedOn = DateTime.UtcNow;
-                entity.LastModifiedBy = username;
+                entity.LastModifiedBy = Username;
             }
-        }
 
-        public void SetTenantIdOnAddedEntities(Guid tenantId) {
             foreach (var item in ChangeTracker.Entries().Where(
                 e => e.State == EntityState.Added && e.Metadata.GetProperties().Any(p => p.Name == "TenantId")))
             {
-                item.CurrentValues["TenantId"] = tenantId;
+                item.CurrentValues["TenantId"] = TenantId;
             }
-        }
 
-
-        public void SoftDeleteEntities()
-        {
             foreach (var item in ChangeTracker.Entries().Where(e => e.State == EntityState.Deleted))
             {
                 item.State = EntityState.Modified;
                 item.CurrentValues["IsDeleted"] = true;
             }
-        }
-
-        public void PreSaveChangesProcessing(string username, Guid tenantId) {
-
-            UpdateLoggableEntities(username);
-
-            SetTenantIdOnAddedEntities(tenantId);
-
-            SoftDeleteEntities();
-        }
-        public Task<int> SaveChangesAsync(CancellationToken cancellationToken, Guid tenantId, string username)
-        {
-            ChangeTracker.DetectChanges();
-
-            PreSaveChangesProcessing(username, tenantId);
-
             return base.SaveChangesAsync(cancellationToken);
-        }
-
-        public override int SaveChanges()
-        {
-            ChangeTracker.DetectChanges();
-
-            var tenantId = new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}");
-            var username = $"{_httpContextAccessor.HttpContext.Items["Username"]}";
-
-            PreSaveChangesProcessing(username, tenantId);
-
-            return base.SaveChanges();
         }
 
         private static IList<Type> _entityTypeCache = default(IList<Type>);
@@ -180,13 +148,11 @@ namespace Infrastructure.Data
 
         }
 
-
-
         public void SetGlobalQuery<T>(ModelBuilder builder) where T : BaseEntity
         {
             builder.Entity<T>()
-                .HasQueryFilter(e => EF.Property<Guid>(e, "TenantId") == new Guid($"{_httpContextAccessor.HttpContext.Items["TenantId"]}") && !e.IsDeleted);
+                .HasQueryFilter(e => EF.Property<Guid>(e, "TenantId") == TenantId && !e.IsDeleted);
         }
-        
-    }    
+
+    }
 }

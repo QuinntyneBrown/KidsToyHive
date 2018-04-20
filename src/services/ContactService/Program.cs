@@ -30,12 +30,7 @@ namespace ContactService
             using (var scope = services.CreateScope())
             {                
                 if (args.Contains("seeddb"))
-                {
-                    var httpContextAccessor = GetHttpContextAccessor(scope);
-                    httpContextAccessor.HttpContext = new AppHttpContext();
-                    httpContextAccessor.HttpContext.Items["TenantId"] = "4759a504-e640-e811-9d37-0028f81d438a";
-                    httpContextAccessor.HttpContext.Items["Username"] = "";
-
+                {                    
                     SeedContext(GetDbContext(scope));
                 }
 
