@@ -25,7 +25,7 @@ namespace KidsToyHive.Core.Models
             {
                 case BrandCreated brandCreated:
                     Name = brandCreated.Name;
-                	BrandId = brandCreated.BrandId;
+                    BrandId = brandCreated.BrandId;
                     break;
 
                 case BrandNameChanged brandNameChanged:

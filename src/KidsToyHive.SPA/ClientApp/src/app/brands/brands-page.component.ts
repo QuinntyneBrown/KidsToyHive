@@ -24,7 +24,7 @@ export class BrandsPageComponent {
   public onDestroy: Subject<void> = new Subject<void>();
 
   ngOnDestroy() {
-    this.onDestroy.next();	
+    this.onDestroy.next();    
   }
 
   public brands$: BehaviorSubject<Brand[]> = new BehaviorSubject([]);

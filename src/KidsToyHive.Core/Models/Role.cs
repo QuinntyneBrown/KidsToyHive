@@ -24,7 +24,7 @@ namespace KidsToyHive.Core.Models
             {
                 case RoleCreated roleCreated:
                     Name = roleCreated.Name;
-                	RoleId = roleCreated.RoleId;
+                    RoleId = roleCreated.RoleId;
                     break;
 
                 case RoleNameChanged roleNameChanged:

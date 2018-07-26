@@ -35,7 +35,7 @@ const providers = [
 
     CoreModule,
     DigitalAssetsModule,
-    SharedModule	
+    SharedModule    
   ],
   providers,
 })

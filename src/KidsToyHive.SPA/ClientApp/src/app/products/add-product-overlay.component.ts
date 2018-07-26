@@ -33,7 +33,7 @@ export class AddProductOverlayComponent {
   public onDestroy: Subject<void> = new Subject<void>();
 
   ngOnDestroy() {
-    this.onDestroy.next();	
+    this.onDestroy.next();    
   }
 
   public product$: BehaviorSubject<Product> = new BehaviorSubject(<Product>{});

@@ -24,7 +24,7 @@ namespace KidsToyHive.Core.Models
             {
                 case ProductCategoryCreated productCategoryCreated:
                     Name = productCategoryCreated.Name;
-                	ProductCategoryId = productCategoryCreated.ProductCategoryId;
+                    ProductCategoryId = productCategoryCreated.ProductCategoryId;
                     break;
 
                 case ProductCategoryNameChanged productCategoryNameChanged:
