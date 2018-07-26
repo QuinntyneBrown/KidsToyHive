@@ -1,0 +1,17 @@
+:host {
+  background-color: #fff;
+  min-width: 500px;
+  padding: 20px;
+}
+
+mat-form-field {
+  display: block;
+}
+
+button {
+  margin-right: 10px;
+}
+
+mat-error {
+  margin: 20px 0px;
+}

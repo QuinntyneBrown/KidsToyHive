@@ -1,0 +1,29 @@
+<h2>Add Product</h2>
+
+<form novalidate autocomplete="off" spellcheck="false" [formGroup]="form">
+  <mat-form-field>
+    <input matInput placeholder="Name"
+           id="name"
+           formControlName="name"
+           required>
+  </mat-form-field>
+
+  <app-digital-asset-input-url [placeholder]="'Image Url'"
+                               id="imageUrl"
+                               formControlName="imageUrl">
+  </app-digital-asset-input-url>
+
+  <button mat-raised-button color="primary" (click)="handleSaveClick()">
+    Save
+  </button>
+
+  <button mat-raised-button (click)="handleCancelClick()">
+    Cancel
+  </button>
+
+</form>
+
+
+<mat-error *ngIf="errorMessage">
+  {{ errorMessage }}
+</mat-error>
