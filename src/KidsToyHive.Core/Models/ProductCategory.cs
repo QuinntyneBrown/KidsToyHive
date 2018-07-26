@@ -10,8 +10,8 @@ namespace KidsToyHive.Core.Models
             => Apply(new ProductCategoryCreated(name,ProductCategoryId));
 
         public Guid ProductCategoryId { get; set; } = Guid.NewGuid();          
-		public string Name { get; set; }        
-		public bool IsDeleted { get; set; }
+        public string Name { get; set; }        
+        public bool IsDeleted { get; set; }
 
         protected override void EnsureValidState()
         {
@@ -24,7 +24,7 @@ namespace KidsToyHive.Core.Models
             {
                 case ProductCategoryCreated productCategoryCreated:
                     Name = productCategoryCreated.Name;
-					ProductCategoryId = productCategoryCreated.ProductCategoryId;
+                	ProductCategoryId = productCategoryCreated.ProductCategoryId;
                     break;
 
                 case ProductCategoryNameChanged productCategoryNameChanged:

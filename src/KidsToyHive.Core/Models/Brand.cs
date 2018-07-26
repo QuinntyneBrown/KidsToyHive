@@ -10,7 +10,7 @@ namespace KidsToyHive.Core.Models
             => Apply(new BrandCreated(name, BrandId, imageUrl));
 
         public Guid BrandId { get; set; } = Guid.NewGuid();          
-		public string Name { get; set; }
+        public string Name { get; set; }
         public string ImageUrl { get; set; }
         public bool IsDeleted { get; set; }
 
@@ -25,7 +25,7 @@ namespace KidsToyHive.Core.Models
             {
                 case BrandCreated brandCreated:
                     Name = brandCreated.Name;
-					BrandId = brandCreated.BrandId;
+                	BrandId = brandCreated.BrandId;
                     break;
 
                 case BrandNameChanged brandNameChanged:

@@ -29,7 +29,7 @@ namespace KidsToyHive.Core.Models
                 case ProductCreated productCreated:
                     BrandId = productCreated.BrandId;
                     Name = productCreated.Name;
-					ProductId = productCreated.ProductId;
+                	ProductId = productCreated.ProductId;
                     Description = productCreated.Description;
                     ImageUrl = productCreated.ImageUrl;
                     break;
