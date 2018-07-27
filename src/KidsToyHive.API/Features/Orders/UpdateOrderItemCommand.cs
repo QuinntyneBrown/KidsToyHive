@@ -1,0 +1,47 @@
+using KidsToyHive.Core.Interfaces;
+using KidsToyHive.Core.Models;
+using FluentValidation;
+using MediatR;
+using System.Threading.Tasks;
+using System.Threading;
+using System;
+
+namespace KidsToyHive.API.Features.Orders
+{
+    public class UpdateOrderItemCommand
+    {
+        public class Validator: AbstractValidator<Request> {
+            public Validator()
+            {
+                RuleFor(request => request.OrderItem.OrderItemId).NotNull();
+            }
+        }
+
+        public class Request : IRequest<Response> {
+            public OrderItemDto OrderItem { get; set; }
+        }
+
+        public class Response
+        {			
+            public Guid OrderItemId { get; set; }
+        }
+
+        public class Handler : IRequestHandler<Request, Response>
+        {
+            private readonly IEventStore _eventStore;
+            
+			public Handler(IEventStore eventStore) => _eventStore = eventStore;
+
+            public Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            {
+                var orderItem = _eventStore.Query<OrderItem>(request.OrderItem.OrderItemId);
+
+                orderItem.ChangeName(request.OrderItem.Name);
+
+                _eventStore.Save(orderItem);
+
+                return Task.FromResult(new Response() { OrderItemId = request.OrderItem.OrderItemId }); 
+            }
+        }
+    }
+}
