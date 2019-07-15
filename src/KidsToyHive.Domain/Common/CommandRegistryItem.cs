@@ -1,0 +1,99 @@
+﻿using KidsToyHive.Core.Common;
+using KidsToyHive.Core.Enums;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
+using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reactive.Subjects;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace KidsToyHive.Domain
+{
+    public class CommandRegistryItem
+    {
+        
+        public string CorrelationId { get; set; } = IdGenerator.GetNextId();
+        public string Request { get; set; }
+        public string RequestName { get; set; }
+        public string RequestDotNetType { get; set; }           
+        public string PartitionKey { get; set; }
+        public string Key { get; set; }
+        public string SideEffects { get; set; }
+
+        private CommandRegistryItemState _state = CommandRegistryItemState.Sleeping;
+        public CommandRegistryItemState State {
+            get
+            { return _state; }
+            set
+            {                
+                _state = value;
+                StateChanges.OnNext(value);
+            }
+        }
+
+        public BehaviorSubject<CommandRegistryItemState> StateChanges { get; private set; } = new BehaviorSubject<CommandRegistryItemState>(CommandRegistryItemState.Sleeping);
+
+        public string ConflictingIds { get; set; }
+        public string Result { get; set; }
+        public int Index { get; set; }
+
+        public void SetConflictingIds(string conflictingIds)
+        {            
+            ConflictingIds = conflictingIds;
+        }
+        public void Cancel()
+        {
+            State = CommandRegistryItemState.Cancelled;
+        }
+
+        public void Complete()
+        {
+            State = CommandRegistryItemState.Completed;
+        }
+
+        public void Error()
+        {
+            State = CommandRegistryItemState.Failed;
+        }
+
+        public void Run()
+        {
+            State = CommandRegistryItemState.Activated;
+        }
+
+        public bool ConflictsWith(CommandRegistryItem request)
+            => request.SideEffects.Split(',')
+                .Intersect(SideEffects.Split(',')).Any()
+                && !string.IsNullOrEmpty(SideEffects);
+
+        public async static Task<CommandRegistryItem> ParseAsync(HttpRequest httpRequest, CancellationToken token = default)
+        {
+            var body = await new StreamReader(httpRequest.Body).ReadToEndAsync();
+            httpRequest.Headers.TryGetValue("CustomerKey", out StringValues customerKey);
+            httpRequest.Headers.TryGetValue("RequestName", out StringValues requestName);            
+            dynamic request = JsonConvert.DeserializeObject(body, Type.GetType(DotNetTypeMapper.Map(requestName)));
+            return Parse(request, requestName, customerKey, token);
+        }
+
+        public CancellationToken CancellationToken { get; set; }
+        public static CommandRegistryItem Parse(dynamic request, string requestName, string customerKey, CancellationToken token = default)
+        {
+            var item = new CommandRegistryItem
+            {
+                RequestName = $"{requestName}",
+                PartitionKey = customerKey,
+                Request = JsonConvert.SerializeObject(request),
+                Key = request.Key,
+                SideEffects = string.Join(",", request.SideEffects),
+                RequestDotNetType = request.GetType().AssemblyQualifiedName,
+                CancellationToken = token
+            };
+            return item;
+        }
+        public bool HasNoConflicts()
+            => string.IsNullOrEmpty(ConflictingIds);
+    }
+}
