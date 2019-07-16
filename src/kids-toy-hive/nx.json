@@ -1,0 +1,18 @@
+{
+  "npmScope": "kids-toy-hive",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "kids-toy-hive-e2e": {
+      "tags": []
+    },
+    "kids-toy-hive": {
+      "tags": []
+    }
+  }
+}
