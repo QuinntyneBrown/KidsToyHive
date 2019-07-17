@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Cards\" />
+    <Folder Include="Features\Customers\" />
     <Folder Include="Features\Users\" />
     <Folder Include="Models\" />
   </ItemGroup>

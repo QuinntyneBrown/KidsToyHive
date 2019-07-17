@@ -13,6 +13,21 @@
     },
     "kids-toy-hive": {
       "tags": []
+    },
+    "kids-toy-hive-admin-e2e": {
+      "tags": []
+    },
+    "kids-toy-hive-admin": {
+      "tags": []
+    },
+    "core": {
+      "tags": []
+    },
+    "domain": {
+      "tags": []
+    },
+    "shared": {
+      "tags": []
     }
   }
 }

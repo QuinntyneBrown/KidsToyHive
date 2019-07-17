@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Brands
 {
-    public class GetBrandsQuery
+    public class GetBrands
     {
         public class Request : IRequest<Response> { }
 
