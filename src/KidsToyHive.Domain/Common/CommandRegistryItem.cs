@@ -1,11 +1,13 @@
 ﻿using KidsToyHive.Core.Common;
 using KidsToyHive.Core.Enums;
+using KidsToyHive.Domain.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
@@ -93,7 +95,11 @@ namespace KidsToyHive.Domain
             };
             return item;
         }
-        public bool HasNoConflicts()
-            => string.IsNullOrEmpty(ConflictingIds);
+        public bool HasConflicts()
+            => !string.IsNullOrEmpty(ConflictingIds);
+
+        public IObservable<CommandRegistryItemState> Completed => StateChanges
+         .Where(x => x >= CommandRegistryItemState.Completed)
+         .Take(1);
     }
 }

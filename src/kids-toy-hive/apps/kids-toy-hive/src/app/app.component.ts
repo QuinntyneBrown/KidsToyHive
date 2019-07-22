@@ -10,11 +10,3 @@ export class AppComponent {
 
   }
 }
-
-export default function wrap(component) {
-  return class extends HTMLElement {
-    
-  }
-}
-
-customElements.define("ce-something",wrap(null));

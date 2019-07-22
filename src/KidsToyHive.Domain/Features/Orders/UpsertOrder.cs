@@ -41,7 +41,6 @@ namespace KidsToyHive.Domain.Features.Orders
                     _context.Orders.Add(order);
                 }
 
-                order.Name = request.Order.Name;
 
                 await _context.SaveChangesAsync(cancellationToken);
 
