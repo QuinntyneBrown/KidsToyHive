@@ -1,0 +1,35 @@
+:host {
+    background-color: rgb(102, 200, 205);
+    min-height: 60px;
+    display: grid;
+    margin: 0;
+    padding: 0;
+    color: rgb(255,255,255);
+    grid-template-columns: 1fr min-content;
+}
+
+h1 {
+    margin:0 0 0 20px;
+    padding: 0;
+    line-height: 60px;
+}
+
+ul,li {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: inline;
+}
+
+ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    min-height: 60px;
+    line-height: 60px;
+    margin: 0px 20px 0px 0px;
+}
+
+a {
+    cursor: pointer;
+    margin: 0px 10px;
+}

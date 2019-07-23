@@ -1,5 +1,6 @@
 using KidsToyHive.Domain.Features.Users;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
@@ -24,6 +25,13 @@ namespace KidsToyHive.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetUserById.Response), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetUserById.Response>> GetById([FromRoute]GetUserById.Request request)
+            => await _meditator.Send(request);
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(Authenticate.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Authenticate.Response>> Post([FromRoute]Authenticate.Request request)
             => await _meditator.Send(request);
     }
 }

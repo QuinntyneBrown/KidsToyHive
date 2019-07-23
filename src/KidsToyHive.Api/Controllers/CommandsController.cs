@@ -60,7 +60,6 @@ namespace KidsToyHive.Api.Controllers
                 item.Error();
             }
 
-
             return new JsonResult(result);
         }
 

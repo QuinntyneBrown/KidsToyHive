@@ -6,6 +6,7 @@ namespace KidsToyHive.Domain.Models
     {
         public Guid DigitalAssetId { get; set; }
         public string Name { get; set; }
-        public int Version { get; set; }
+        public byte[] Bytes { get; set; }
+        public string ContentType { get; set; }
     }
 }

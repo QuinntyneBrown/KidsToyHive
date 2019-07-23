@@ -74,10 +74,10 @@ namespace KidsToyHive.Domain
         public async static Task<CommandRegistryItem> ParseAsync(HttpRequest httpRequest, CancellationToken token = default)
         {
             var body = await new StreamReader(httpRequest.Body).ReadToEndAsync();
-            httpRequest.Headers.TryGetValue("CustomerKey", out StringValues customerKey);
-            httpRequest.Headers.TryGetValue("RequestName", out StringValues requestName);            
-            dynamic request = JsonConvert.DeserializeObject(body, Type.GetType(DotNetTypeMapper.Map(requestName)));
-            return Parse(request, requestName, customerKey, token);
+            httpRequest.Headers.TryGetValue("PartitionKey", out StringValues partitionKey);
+            httpRequest.Headers.TryGetValue("OperationId", out StringValues operationId);            
+            dynamic request = JsonConvert.DeserializeObject(body, Type.GetType(DotNetTypeMapper.Map(operationId)));
+            return Parse(request, operationId, partitionKey, token);
         }
 
         public CancellationToken CancellationToken { get; set; }

@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 
 namespace KidsToyHive.Domain.Models
@@ -17,6 +19,8 @@ namespace KidsToyHive.Domain.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public byte[] Salt { get; private set; }
+        public ICollection<Profile> Profiles { get; set; }
+        = new HashSet<Profile>();
         public int Version { get; set; }
     }
 }

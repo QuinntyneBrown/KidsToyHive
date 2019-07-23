@@ -8,11 +8,13 @@ import { DomainModule } from '@kids-toy-hive/domain';
 import { SharedModule } from '@kids-toy-hive/shared';
 import { environment } from '../environments/environment';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
+import { CatalogPageComponent } from './pages/catalog-page';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutPageComponent,
+    CatalogPageComponent,
     ConfirmationPageComponent,
     HomePageComponent,
     OrderPageComponent,

@@ -7,7 +7,7 @@
   <ItemGroup>
     <Folder Include="Features\Cards\" />
     <Folder Include="Features\Customers\" />
-    <Folder Include="Models\" />
+    <Folder Include="Features\HtmlContents\" />
   </ItemGroup>
 
   <ItemGroup>

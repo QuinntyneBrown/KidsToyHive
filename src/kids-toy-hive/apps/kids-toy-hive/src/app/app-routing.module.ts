@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent, ConfirmationPageComponent } from './pages';
+import { CatalogPageComponent } from './pages/catalog-page';
 
 const canActivate = [];
 
@@ -15,6 +16,11 @@ const routes: Routes = [
     component: HomePageComponent,
     canActivate
   },
+  {
+    path: 'catalog',
+    component: CatalogPageComponent,
+    canActivate
+  },  
   {
     path: 'confirmation/:orderId',
     component: ConfirmationPageComponent,

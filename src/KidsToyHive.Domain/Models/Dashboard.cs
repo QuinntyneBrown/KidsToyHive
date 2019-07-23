@@ -7,7 +7,10 @@ namespace KidsToyHive.Domain.Models
     {
         public Guid DashboardId { get; set; }
         public string Name { get; set; }
-        public ICollection<DashboardCard> Cards { get; set; } = new HashSet<DashboardCard>();
+        public Guid ProfileId { get; set; }
+        public Profile Profile { get; set; }
+        public ICollection<DashboardCard> Cards { get; set; } 
+            = new HashSet<DashboardCard>();
         public int Version { get; set; }
     }
 }

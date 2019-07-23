@@ -25,17 +25,5 @@ namespace KidsToyHive.Api.Controllers
         [ProducesResponseType(typeof(GetCardById.Response), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetCardById.Response>> GetById([FromRoute]GetCardById.Request request)
             => await _meditator.Send(request);
-
-        [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(UpsertCard.Response), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<UpsertCard.Response>> Upsert(UpsertCard.Request request)
-            => await _meditator.Send(request);
-
-        [HttpDelete("{bookId}")]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(Unit), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Unit>> Remove([FromRoute]RemoveCard.Request request)
-            => await _meditator.Send(request);
     }
 }
