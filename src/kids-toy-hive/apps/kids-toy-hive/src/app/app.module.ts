@@ -7,6 +7,7 @@ import { CoreModule, baseUrl } from '@kids-toy-hive/core';
 import { DomainModule } from '@kids-toy-hive/domain';
 import { SharedModule } from '@kids-toy-hive/shared';
 import { environment } from '../environments/environment';
+import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { environment } from '../environments/environment';
     ConfirmationPageComponent,
     HomePageComponent,
     OrderPageComponent,
+    TermsAndConditionsPageComponent
   ],
   imports: [
     AppRoutingModule,
