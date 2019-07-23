@@ -7,10 +7,12 @@ import { InventoryItemsModule } from './inventory-items';
 import { LoginModule } from './login/login.module';
 import { OrdersModule } from './orders';
 import { UsersModule } from './users';
+import { DashboardsModule } from './dashboards/dashboards.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    DashboardsModule,
     InventoryItemsModule,
     LoginModule,
     OrdersModule,

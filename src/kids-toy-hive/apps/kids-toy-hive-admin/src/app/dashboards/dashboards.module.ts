@@ -2,18 +2,20 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DashboardPageComponent } from './dashboard-page.component';
 import { CoreModule } from '@kids-toy-hive/core';
-import { DomainModule } from '@kids-toy-hive/domain';
 import { SharedModule } from '@kids-toy-hive/shared';
-import { LoginPageComponent } from './login-page.component';
-import { LoginComponent } from './login.component';
+import { DomainModule } from '@kids-toy-hive/domain';
 
 const declarations = [
-  LoginPageComponent,
-  LoginComponent
+  DashboardPageComponent
 ];
 
 const entryComponents = [
+
+];
+
+const providers = [
 
 ];
 
@@ -29,6 +31,7 @@ const entryComponents = [
     CoreModule,
     DomainModule,
     SharedModule	
-  ]
+  ],
+  providers,
 })
-export class LoginModule { }
+export class DashboardsModule { }
