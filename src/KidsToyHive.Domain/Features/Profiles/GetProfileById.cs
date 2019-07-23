@@ -5,7 +5,7 @@ using KidsToyHive.Core.Interfaces;
 using FluentValidation;
 using KidsToyHive.Domain.DataAccess;
 
-namespace KidsToyHive.Api.Features.Profiles
+namespace KidsToyHive.Domain.Features.Profiles
 {
     public class GetProfileById
     {

@@ -6,7 +6,7 @@ using KidsToyHive.Domain.Models;
 using KidsToyHive.Core.Interfaces;
 using KidsToyHive.Domain.DataAccess;
 
-namespace KidsToyHive.Api.Features.Profiles
+namespace KidsToyHive.Domain.Features.Profiles
 {
     public class RemoveProfile
     {

@@ -6,7 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Api.Features.Profiles
+namespace KidsToyHive.Domain.Features.Profiles
 {
     public class UpsertProfile
     {

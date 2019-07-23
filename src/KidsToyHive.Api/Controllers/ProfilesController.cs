@@ -1,4 +1,4 @@
-using KidsToyHive.Api.Features.Profiles;
+using KidsToyHive.Domain.Features.Profiles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

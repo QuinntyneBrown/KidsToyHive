@@ -1,7 +1,7 @@
 using KidsToyHive.Domain.Models;
 using System;
 
-namespace KidsToyHive.Api.Features.Profiles
+namespace KidsToyHive.Domain.Features.Profiles
 {
     public class ProfileDto
     {        

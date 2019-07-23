@@ -1,5 +1,6 @@
 ﻿using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Features.DashboardCards;
 using KidsToyHive.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -69,21 +70,21 @@ namespace KidsToyHive.Api
 
             public static void Seed(AppDbContext context)
             {
-                var dashboard = context.Dashboards.Include(x => x.DashboardCards).First(x => x.ProfileId == 1);
+                var dashboard = context.Dashboards.Include(x => x.DashboardCards).First(x => x.ProfileId == new Guid(""));
 
-                if (dashboard.DashboardCards.SingleOrDefault(x => x.CardId == 1) == null)
+                if (dashboard.DashboardCards.SingleOrDefault(x => x.CardId == new Guid("")) == null)
                 {
                     dashboard.DashboardCards.Add(new DashboardCard()
                     {
-                        CardId = 1,
-                        Options = JsonConvert.SerializeObject(new DashboardCardApiModel.OptionsApiModel()
-                        {
-                            Top = 1,
-                            Left = 1,
-                            Width = 1,
-                            Height = 1
+                        //CardId = 1,
+                        //Options = JsonConvert.SerializeObject(new DashboardCardDto.()
+                        //{
+                        //    Top = 1,
+                        //    Left = 1,
+                        //    Width = 1,
+                        //    Height = 1
 
-                        })
+                        //})
                     });
                 }
                 

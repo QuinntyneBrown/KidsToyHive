@@ -5,7 +5,7 @@ using KidsToyHive.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using KidsToyHive.Domain.DataAccess;
 
-namespace KidsToyHive.Api.Features.Profiles
+namespace KidsToyHive.Domain.Features.Profiles
 {
     public class GetProfileByUsername
     {
