@@ -9,6 +9,7 @@ namespace KidsToyHive.Domain.DataAccess
     {
         DbSet<Brand> Brands { get; }
         DbSet<Card> Cards { get; }
+        DbSet<CardLayout> CardLayouts { get; }
         DbSet<Customer> Customers { get; }
         DbSet<Dashboard> Dashboards { get; }
         DbSet<DashboardCard> DashboardCards { get; }

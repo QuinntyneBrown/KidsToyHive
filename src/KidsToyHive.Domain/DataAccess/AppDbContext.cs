@@ -18,6 +18,7 @@ namespace KidsToyHive.Domain.DataAccess
 
         public DbSet<Brand> Brands { get; private set; }
         public DbSet<Card> Cards { get; private set; }
+        public DbSet<CardLayout> CardLayouts { get; private set; }
         public DbSet<Customer> Customers { get; private set; }
         public DbSet<Dashboard> Dashboards { get; private set; }
         public DbSet<DashboardCard> DashboardCards { get; private set; }

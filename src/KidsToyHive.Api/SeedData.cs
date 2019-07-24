@@ -5,6 +5,7 @@ using KidsToyHive.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace KidsToyHive.Api
@@ -23,18 +24,18 @@ namespace KidsToyHive.Api
             //DashboardConfiguration.Seed(context);
             //DashboardCardConfiguration.Seed(context);
         }
-       
 
-        //internal class CardLayoutConfiguration
-        //{
-        //    public static void Seed(AppDbContext context)
-        //    {
-        //        if (context.CardLayouts.FirstOrDefault(x => x.Name == "Poster") == null)
-        //            context.CardLayouts.Add(new CardLayout() { Name = "Poster" });
 
-        //        context.SaveChanges();
-        //    }
-        //}
+        internal class CardLayoutConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.CardLayouts.FirstOrDefault(x => x.Name == "Poster") == null)
+                    context.CardLayouts.Add(new CardLayout() { Name = "Poster" });
+
+                context.SaveChanges();
+            }
+        }
 
         internal class CardConfiguration
         {
@@ -42,6 +43,12 @@ namespace KidsToyHive.Api
             {
                 if (context.Cards.FirstOrDefault(x => x.Name == "Products") == null)
                     context.Cards.Add(new Card() { Name = "Products" });
+
+                if (context.Cards.FirstOrDefault(x => x.Name == "Orders") == null)
+                    context.Cards.Add(new Card() { Name = "Orders" });
+
+                if (context.Cards.FirstOrDefault(x => x.Name == "Inventory") == null)
+                    context.Cards.Add(new Card() { Name = "Inventory" });
 
                 context.SaveChanges();
             }
@@ -51,72 +58,92 @@ namespace KidsToyHive.Api
 
             public static void Seed(AppDbContext context)
             {
-                var profileId = new Guid("");
-                if (context.Dashboards.FirstOrDefault(x=> x.Name == "Default" && x.ProfileId == profileId) == null)
+                var profileIds = new List<Guid>()
                 {
-                    context.Dashboards.Add(new Dashboard()
+                    new Guid("3ef4e425-f501-4034-a0fe-b87a770fda18"),
+                    new Guid("bca1636a-1e32-4e64-b798-9dbb474284bf")
+                };
+
+                foreach(var profileId in profileIds)
+                {
+                    if (context.Dashboards.FirstOrDefault(x => x.Name == "Default" && x.ProfileId == profileId) == null)
                     {
-                        Name = "Default",
-                        ProfileId = profileId
-                    });
+                        context.Dashboards.Add(new Dashboard()
+                        {
+                            Name = "Default",
+                            ProfileId = profileId
+                        });
+                    }
                 }
 
                 context.SaveChanges();
             }
         }
 
-        internal class DashboardCardConfiguration
-        {
-
-            public static void Seed(AppDbContext context)
-            {
-                var dashboard = context.Dashboards.Include(x => x.DashboardCards).First(x => x.ProfileId == new Guid(""));
-
-                if (dashboard.DashboardCards.SingleOrDefault(x => x.CardId == new Guid("")) == null)
-                {
-                    dashboard.DashboardCards.Add(new DashboardCard()
-                    {
-                        //CardId = 1,
-                        //Options = JsonConvert.SerializeObject(new DashboardCardDto.()
-                        //{
-                        //    Top = 1,
-                        //    Left = 1,
-                        //    Width = 1,
-                        //    Height = 1
-
-                        //})
-                    });
-                }
-                
-                context.SaveChanges();
-            }
-        }
         internal class UserConfiguration
         {
-            public static void Seed(AppDbContext context)
-            {
-                User user = default;
+            public static void Seed(AppDbContext context) {
 
-                if (context.Users.IgnoreQueryFilters().FirstOrDefault(x => x.Username == "quinntynebrown@gmail.com") == null)
+                var passwords = new List<string>()
                 {
-                    user = new User()
+                    "quinntynebrown@gmail.com",
+                    "vanessamitchell88@gmail.com"
+                };
+
+                var emails = new List<string>()
+                {
+                    "quinntynebrown@gmail.com",
+                    "vanessamitchell88@gmail.com"
+                };
+
+                var userIds = new List<Guid>()
+                {
+                    new Guid("3096b802-b9bf-4d7d-8c10-0611fd9e9ab6"),
+                    new Guid("851b8982-ff49-4b64-a799-215957388900")
+                };
+
+                var profileNames = new List<string>()
+                {
+                    "Quinntyne",
+                    "Vanessa"
+                };
+
+                var profileIds = new List<Guid>()
+                {
+                    new Guid("3ef4e425-f501-4034-a0fe-b87a770fda18"),
+                    new Guid("bca1636a-1e32-4e64-b798-9dbb474284bf")
+                };
+
+                var index = 0;
+
+                foreach(var email in emails)
+                {
+                    
+                    User user = default;
+
+                    if (context.Users.IgnoreQueryFilters().FirstOrDefault(x => x.Username == email) == null)
                     {
-                        Username = "quinntynebrown@gmail.com"
-                    };
+                        user = new User()
+                        {
+                            Username = email
+                        };
 
-                    user.Password = new PasswordHasher().HashPassword(user.Salt, "P@ssw0rd");
+                        user.Password = new PasswordHasher().HashPassword(user.Salt, passwords[index]);
 
-                    context.Users.Add(user);
+                        context.Users.Add(user);
+                    }
 
+                    context.Profiles.Add(new Profile()
+                    {
+                        Name = profileNames[index],
+                        ProfileId = profileIds[index],
+                        User = user
+                    });
+
+                    context.SaveChanges();
                 }
-                
-                context.Profiles.Add(new Profile()
-                {
-                    Name = "Quinntyne",
-                    User = user
-                });
-                
-                context.SaveChanges();
+
+                index++;
             }
         }
 
