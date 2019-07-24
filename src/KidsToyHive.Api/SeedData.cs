@@ -1,28 +1,20 @@
 ﻿using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
-using KidsToyHive.Domain.Features.DashboardCards;
 using KidsToyHive.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 using System.Linq;
 
 namespace KidsToyHive.Api
 {
     public class SeedData
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(AppDbContext context, IConfiguration configuration)
         {
-
             CardConfiguration.Seed(context);
-            //CardLayoutConfiguration.Seed(context);
-
-            //UserConfiguration.Seed(context);
-            //TagConfiguration.Seed(context);
-
-            //DashboardConfiguration.Seed(context);
-            //DashboardCardConfiguration.Seed(context);
+            CardLayoutConfiguration.Seed(context);
+            UserConfiguration.Seed(context, configuration);            
+            DashboardConfiguration.Seed(context);
         }
 
 
@@ -57,14 +49,8 @@ namespace KidsToyHive.Api
         internal class DashboardConfiguration {
 
             public static void Seed(AppDbContext context)
-            {
-                var profileIds = new List<Guid>()
-                {
-                    new Guid("3ef4e425-f501-4034-a0fe-b87a770fda18"),
-                    new Guid("bca1636a-1e32-4e64-b798-9dbb474284bf")
-                };
-
-                foreach(var profileId in profileIds)
+            {                
+                foreach(var profileId in context.Profiles.Select(x => x.ProfileId))
                 {
                     if (context.Dashboards.FirstOrDefault(x => x.Name == "Default" && x.ProfileId == profileId) == null)
                     {
@@ -82,65 +68,34 @@ namespace KidsToyHive.Api
 
         internal class UserConfiguration
         {
-            public static void Seed(AppDbContext context) {
-
-                var passwords = new List<string>()
-                {
-                    "quinntynebrown@gmail.com",
-                    "vanessamitchell88@gmail.com"
-                };
-
-                var emails = new List<string>()
-                {
-                    "quinntynebrown@gmail.com",
-                    "vanessamitchell88@gmail.com"
-                };
-
-                var userIds = new List<Guid>()
-                {
-                    new Guid("3096b802-b9bf-4d7d-8c10-0611fd9e9ab6"),
-                    new Guid("851b8982-ff49-4b64-a799-215957388900")
-                };
-
-                var profileNames = new List<string>()
-                {
-                    "Quinntyne",
-                    "Vanessa"
-                };
-
-                var profileIds = new List<Guid>()
-                {
-                    new Guid("3ef4e425-f501-4034-a0fe-b87a770fda18"),
-                    new Guid("bca1636a-1e32-4e64-b798-9dbb474284bf")
-                };
+            public static void Seed(AppDbContext context, IConfiguration configuration) {
 
                 var index = 0;
 
-                foreach(var email in emails)
+                foreach (var username in configuration["Seed:DefaultUser:Username"].Split(','))
                 {
-                    
                     User user = default;
 
-                    if (context.Users.IgnoreQueryFilters().FirstOrDefault(x => x.Username == email) == null)
+                    if (context.Users.IgnoreQueryFilters().FirstOrDefault(x => x.Username == username) == null)
                     {
                         user = new User()
                         {
-                            Username = email
+                            Username = username
                         };
 
-                        user.Password = new PasswordHasher().HashPassword(user.Salt, passwords[index]);
+                        user.Password = new PasswordHasher().HashPassword(user.Salt, configuration["Seed:DefaultUser:Password"].Split(',')[index]);
 
                         context.Users.Add(user);
                     }
 
                     context.Profiles.Add(new Profile()
                     {
-                        Name = profileNames[index],
-                        ProfileId = profileIds[index],
+                        Name = configuration["Seed:DefaultProfile:Name"].Split(',')[index],
                         User = user
                     });
 
                     context.SaveChanges();
+                    index++;
                 }
 
                 index++;
