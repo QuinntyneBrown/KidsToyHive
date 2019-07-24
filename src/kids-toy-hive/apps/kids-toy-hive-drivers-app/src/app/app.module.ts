@@ -7,9 +7,15 @@ import { SharedModule } from '@kids-toy-hive/shared';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { Domain } from 'domain';
+import { ConfirmationPageComponent } from './pages/confirmation-page';
+import { OrdersPageComponent } from './pages/orders-page';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [
+    AppComponent,
+    ConfirmationPageComponent,
+    OrdersPageComponent
+  ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([], { initialNavigation: 'enabled' }),
