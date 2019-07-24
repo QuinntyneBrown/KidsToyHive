@@ -28,6 +28,12 @@
     },
     "shared": {
       "tags": []
+    },
+    "kids-toy-hive-drivers-app-e2e": {
+      "tags": []
+    },
+    "kids-toy-hive-drivers-app": {
+      "tags": []
     }
   }
 }

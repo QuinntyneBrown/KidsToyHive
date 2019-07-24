@@ -4,15 +4,15 @@ using System;
 
 namespace KidsToyHive.Domain.Features.Dashboards
 {
-    public class DashboardSettingsDtoValidator: AbstractValidator<DashboardSettingsDto>
+    public class DashboardOptionsDtoValidator : AbstractValidator<DashboardOptionsDto>
     {
-        public DashboardSettingsDtoValidator()
+        public DashboardOptionsDtoValidator ()
         {
 
         }
     }
 
-    public class DashboardSettingsDto
+    public class DashboardOptionsDto
     {        
 
     }

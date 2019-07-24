@@ -6,6 +6,7 @@ namespace KidsToyHive.Domain.Models
     {
         public Guid DashboardCardId { get; set; }
         public Guid DashboardId { get; set; }
+        public string Options { get; set; }
         public Guid CardId { get; set; }
         public string Name { get; set; }
         public int Version { get; set; }
