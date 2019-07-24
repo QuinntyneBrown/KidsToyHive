@@ -27,14 +27,26 @@ export class OrderService {
   }
 
   public remove(options: { order: Order }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/orders/${options.order.orderId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.order.orderId}`, {
+      headers: {
+        "OperationId":"RemoveOrder"
+      }
+    });
   }
 
   public create(options: { order: Order }): Observable<{ orderId: string }> {
-    return this._client.post<{ orderId: string }>(`${this._baseUrl}api/orders`, { order: options.order });
+    return this._client.post<{ orderId: string }>(`${this._baseUrl}api/commands`, { order: options.order }, {
+      headers: {
+        "OperationId":"UpsertOrder"
+      }
+    });
   }
 
   public update(options: { order: Order }): Observable<{ orderId: string }> {
-    return this._client.put<{ orderId: string }>(`${this._baseUrl}api/orders`, { order: options.order });
+    return this._client.post<{ orderId: string }>(`${this._baseUrl}api/commands`, { order: options.order }, {
+      headers: {
+        "OperationId":"UpsertOrder"
+      }
+    });
   }
 }

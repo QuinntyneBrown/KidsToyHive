@@ -27,14 +27,26 @@ export class DashboardCardService {
   }
 
   public remove(options: { dashboardCard: DashboardCard }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/dashboardCards/${options.dashboardCard.dashboardCardId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.dashboardCard.dashboardCardId}`, {
+      headers: {
+        "OperationId":"RemoveDashboardCard"
+      }
+    });
   }
 
   public create(options: { dashboardCard: DashboardCard }): Observable<{ dashboardCardId: string }> {
-    return this._client.post<{ dashboardCardId: string }>(`${this._baseUrl}api/dashboardCards`, { dashboardCard: options.dashboardCard });
+    return this._client.post<{ dashboardCardId: string }>(`${this._baseUrl}api/commands`, { dashboardCard: options.dashboardCard }, {
+      headers: {
+        "OperationId":"UpsertDashboardCard"
+      }
+    });
   }
 
   public update(options: { dashboardCard: DashboardCard }): Observable<{ dashboardCardId: string }> {
-    return this._client.put<{ dashboardCardId: string }>(`${this._baseUrl}api/dashboardCards`, { dashboardCard: options.dashboardCard });
+    return this._client.post<{ dashboardCardId: string }>(`${this._baseUrl}api/commands`, { dashboardCard: options.dashboardCard }, {
+      headers: {
+        "OperationId":"UpsertDashboardCard"
+      }
+    });
   }
 }

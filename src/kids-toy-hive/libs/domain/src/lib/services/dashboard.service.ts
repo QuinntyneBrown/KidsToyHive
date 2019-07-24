@@ -27,14 +27,26 @@ export class DashboardService {
   }
 
   public remove(options: { dashboard: Dashboard }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/dashboards/${options.dashboard.dashboardId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.dashboard.dashboardId}`, {
+      headers: {
+        "OperationId":"RemoveDashboard"
+      }
+    });
   }
 
   public create(options: { dashboard: Dashboard }): Observable<{ dashboardId: string }> {
-    return this._client.post<{ dashboardId: string }>(`${this._baseUrl}api/dashboards`, { dashboard: options.dashboard });
+    return this._client.post<{ dashboardId: string }>(`${this._baseUrl}api/commands`, { dashboard: options.dashboard }, {
+      headers: {
+        "OperationId":"UpsertDashboard"
+      }
+    });
   }
 
   public update(options: { dashboard: Dashboard }): Observable<{ dashboardId: string }> {
-    return this._client.put<{ dashboardId: string }>(`${this._baseUrl}api/dashboards`, { dashboard: options.dashboard });
+    return this._client.post<{ dashboardId: string }>(`${this._baseUrl}api/commands`, { dashboard: options.dashboard }, {
+      headers: {
+        "OperationId":"UpsertDashboard"
+      }
+    });
   }
 }

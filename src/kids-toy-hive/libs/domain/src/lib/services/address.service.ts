@@ -2,13 +2,13 @@ import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
+import { baseUrl } from '@kids-toy-hive/core';
 import { Address } from '../models';
-
 
 @Injectable()
 export class AddressService {
   constructor(
-    @Inject('baseUrl') private _baseUrl:string,
+    @Inject(baseUrl) private _baseUrl:string,
     private _client: HttpClient
   ) { }
 
@@ -27,14 +27,26 @@ export class AddressService {
   }
 
   public remove(options: { address: Address }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/addresses/${options.address.addressId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.address.addressId}`, {
+      headers: {
+        "OperationId":"RemoveAddress"
+      }
+    });
   }
 
   public create(options: { address: Address }): Observable<{ addressId: string }> {
-    return this._client.post<{ addressId: string }>(`${this._baseUrl}api/addresses`, { address: options.address });
+    return this._client.post<{ addressId: string }>(`${this._baseUrl}api/commands`, { address: options.address }, {
+      headers: {
+        "OperationId":"UpsertAddress"
+      }
+    });
   }
 
   public update(options: { address: Address }): Observable<{ addressId: string }> {
-    return this._client.put<{ addressId: string }>(`${this._baseUrl}api/addresses`, { address: options.address });
+    return this._client.post<{ addressId: string }>(`${this._baseUrl}api/commands`, { address: options.address }, {
+      headers: {
+        "OperationId":"UpsertAddress"
+      }
+    });
   }
 }

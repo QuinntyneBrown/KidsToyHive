@@ -27,14 +27,26 @@ export class ProductCategoryService {
   }
 
   public remove(options: { productCategory: ProductCategory }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/productCategories/${options.productCategory.productCategoryId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.productCategory.productCategoryId}`, {
+      headers: {
+        "OperationId":"RemoveProductCategory"
+      }
+    });
   }
 
   public create(options: { productCategory: ProductCategory }): Observable<{ productCategoryId: string }> {
-    return this._client.post<{ productCategoryId: string }>(`${this._baseUrl}api/productCategories`, { productCategory: options.productCategory });
+    return this._client.post<{ productCategoryId: string }>(`${this._baseUrl}api/commands`, { productCategory: options.productCategory }, {
+      headers: {
+        "OperationId":"UpsertProductCategory"
+      }
+    });
   }
 
   public update(options: { productCategory: ProductCategory }): Observable<{ productCategoryId: string }> {
-    return this._client.put<{ productCategoryId: string }>(`${this._baseUrl}api/productCategories`, { productCategory: options.productCategory });
+    return this._client.post<{ productCategoryId: string }>(`${this._baseUrl}api/commands`, { productCategory: options.productCategory }, {
+      headers: {
+        "OperationId":"UpsertProductCategory"
+      }
+    });
   }
 }

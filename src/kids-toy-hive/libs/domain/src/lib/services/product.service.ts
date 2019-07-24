@@ -27,14 +27,26 @@ export class ProductService {
   }
 
   public remove(options: { product: Product }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/products/${options.product.productId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.product.productId}`, {
+      headers: {
+        "OperationId":"RemoveProduct"
+      }
+    });
   }
 
   public create(options: { product: Product }): Observable<{ productId: string }> {
-    return this._client.post<{ productId: string }>(`${this._baseUrl}api/products`, { product: options.product });
+    return this._client.post<{ productId: string }>(`${this._baseUrl}api/commands`, { product: options.product }, {
+      headers: {
+        "OperationId":"UpsertProduct"
+      }
+    });
   }
 
   public update(options: { product: Product }): Observable<{ productId: string }> {
-    return this._client.put<{ productId: string }>(`${this._baseUrl}api/products`, { product: options.product });
+    return this._client.post<{ productId: string }>(`${this._baseUrl}api/commands`, { product: options.product }, {
+      headers: {
+        "OperationId":"UpsertProduct"
+      }
+    });
   }
 }

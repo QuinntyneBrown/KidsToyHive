@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'kids-toy-hive-root',
+  selector: 'kth-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

@@ -26,15 +26,27 @@ export class CardService {
       );
   }
 
-  public remove(options: { card: Card }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/cards/${options.card.cardId}`);
+  public remove(options: { card: Card }): Observable<void> {    
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.card.cardId}`,{
+      headers: {
+        "OperationId":"RemoveCard"
+      }
+    });
   }
 
   public create(options: { card: Card }): Observable<{ cardId: string }> {
-    return this._client.post<{ cardId: string }>(`${this._baseUrl}api/cards`, { card: options.card });
+    return this._client.post<{ cardId: string }>(`${this._baseUrl}api/commands`, { card: options.card }, {
+      headers: {
+        "OperationId":"UpsertCard"
+      }
+    });
   }
 
   public update(options: { card: Card }): Observable<{ cardId: string }> {
-    return this._client.put<{ cardId: string }>(`${this._baseUrl}api/cards`, { card: options.card });
+    return this._client.post<{ cardId: string }>(`${this._baseUrl}api/commands`, { card: options.card }, {
+      headers: {
+        "OperationId":"UpsertCard"
+      }
+    });
   }
 }

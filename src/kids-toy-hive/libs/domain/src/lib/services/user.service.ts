@@ -27,14 +27,26 @@ export class UserService {
   }
 
   public remove(options: { user: User }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/users/${options.user.userId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.user.userId}`, {
+      headers: {
+        "OperationId":"RemoveUser"
+      }
+    });
   }
 
   public create(options: { user: User }): Observable<{ userId: string }> {
-    return this._client.post<{ userId: string }>(`${this._baseUrl}api/users`, { user: options.user });
+    return this._client.post<{ userId: string }>(`${this._baseUrl}api/commands`, { user: options.user }, {
+      headers: {
+        "OperationId":"UpsertUser"
+      }
+    });
   }
 
   public update(options: { user: User }): Observable<{ userId: string }> {
-    return this._client.put<{ userId: string }>(`${this._baseUrl}api/users`, { user: options.user });
+    return this._client.post<{ userId: string }>(`${this._baseUrl}api/commands`, { user: options.user }, {
+      headers: {
+        "OperationId":"UpsertUser"
+      }
+    });
   }
 }

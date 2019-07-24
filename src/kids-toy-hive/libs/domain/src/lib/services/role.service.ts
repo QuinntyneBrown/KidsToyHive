@@ -27,14 +27,26 @@ export class RoleService {
   }
 
   public remove(options: { role: Role }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/roles/${options.role.roleId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.role.roleId}`, {
+      headers: {
+        "OperationId":"RemoveRole"
+      }
+    });
   }
 
   public create(options: { role: Role }): Observable<{ roleId: string }> {
-    return this._client.post<{ roleId: string }>(`${this._baseUrl}api/roles`, { role: options.role });
+    return this._client.post<{ roleId: string }>(`${this._baseUrl}api/commands`, { role: options.role }, {
+      headers: {
+        "OperationId":"UpsertRole"
+      }
+    });
   }
 
   public update(options: { role: Role }): Observable<{ roleId: string }> {
-    return this._client.put<{ roleId: string }>(`${this._baseUrl}api/roles`, { role: options.role });
+    return this._client.post<{ roleId: string }>(`${this._baseUrl}api/commands`, { role: options.role }, {
+      headers: {
+        "OperationId":"UpsertRole"
+      }
+    });
   }
 }

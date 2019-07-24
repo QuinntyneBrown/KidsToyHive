@@ -27,14 +27,26 @@ export class InventoryItemService {
   }
 
   public remove(options: { inventoryItem: InventoryItem }): Observable<void> {
-    return this._client.delete<void>(`${this._baseUrl}api/inventoryItems/${options.inventoryItem.inventoryItemId}`);
+    return this._client.post<void>(`${this._baseUrl}api/commands/${options.inventoryItem.inventoryItemId}`, {
+      headers: {
+        "OperationId":"RemoveInventoryItem"
+      }
+    });
   }
 
   public create(options: { inventoryItem: InventoryItem }): Observable<{ inventoryItemId: string }> {
-    return this._client.post<{ inventoryItemId: string }>(`${this._baseUrl}api/inventoryItems`, { inventoryItem: options.inventoryItem });
+    return this._client.post<{ inventoryItemId: string }>(`${this._baseUrl}api/commands`, { inventoryItem: options.inventoryItem }, {
+      headers: {
+        "OperationId":"UpsertInventoryItem"
+      }
+    });
   }
 
   public update(options: { inventoryItem: InventoryItem }): Observable<{ inventoryItemId: string }> {
-    return this._client.put<{ inventoryItemId: string }>(`${this._baseUrl}api/inventoryItems`, { inventoryItem: options.inventoryItem });
+    return this._client.post<{ inventoryItemId: string }>(`${this._baseUrl}api/commands`, { inventoryItem: options.inventoryItem }, {
+      headers: {
+        "OperationId":"UpsertInventoryItem"
+      }
+    });
   }
 }
