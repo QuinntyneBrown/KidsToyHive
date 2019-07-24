@@ -7,15 +7,15 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.OrderItems
+namespace KidsToyHive.Domain.Features.SalesOrderDetails
 {
-    public class GetOrderItems
+    public class GetSalesOrderDetails
     {
         public class Request : IRequest<Response> { }
 
         public class Response
         {
-            public IEnumerable<OrderItemDto> OrderItems { get; set; }
+            public IEnumerable<SalesOrderDetailDto> SalesOrderDetails { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -27,7 +27,7 @@ namespace KidsToyHive.Domain.Features.OrderItems
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
                 =>  new Response()
                 {
-                    OrderItems = await _context.OrderItems.Select(x => x.ToDto()).ToArrayAsync()
+                    SalesOrderDetails = await _context.SalesOrderDetails.Select(x => x.ToDto()).ToArrayAsync()
                 };
         }
     }

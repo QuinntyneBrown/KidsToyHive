@@ -22,7 +22,10 @@
               "apps/kids-toy-hive/src/favicon.ico",
               "apps/kids-toy-hive/src/assets"
             ],
-            "styles": ["apps/kids-toy-hive/src/styles.css"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/kids-toy-hive/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -76,7 +79,10 @@
               "apps/kids-toy-hive/tsconfig.app.json",
               "apps/kids-toy-hive/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/kids-toy-hive/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/kids-toy-hive/**"
+            ]
           }
         },
         "test": {
@@ -111,7 +117,10 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/kids-toy-hive-e2e/tsconfig.e2e.json",
-            "exclude": ["**/node_modules/**", "!apps/kids-toy-hive-e2e/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/kids-toy-hive-e2e/**"
+            ]
           }
         }
       }
@@ -135,7 +144,10 @@
               "apps/kids-toy-hive-admin/src/favicon.ico",
               "apps/kids-toy-hive-admin/src/assets"
             ],
-            "styles": ["apps/kids-toy-hive-admin/src/styles.css"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/kids-toy-hive-admin/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -189,7 +201,10 @@
               "apps/kids-toy-hive-admin/tsconfig.app.json",
               "apps/kids-toy-hive-admin/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/kids-toy-hive-admin/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/kids-toy-hive-admin/**"
+            ]
           }
         },
         "test": {
@@ -245,7 +260,10 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/core/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/core/**"
+            ]
           }
         },
         "test": {
@@ -272,7 +290,10 @@
               "libs/domain/tsconfig.lib.json",
               "libs/domain/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/domain/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/domain/**"
+            ]
           }
         },
         "test": {
@@ -299,7 +320,10 @@
               "libs/shared/tsconfig.lib.json",
               "libs/shared/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/shared/**"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/shared/**"
+            ]
           }
         },
         "test": {
@@ -332,7 +356,10 @@
               "apps/kids-toy-hive-drivers-app/src/favicon.ico",
               "apps/kids-toy-hive-drivers-app/src/assets"
             ],
-            "styles": ["apps/kids-toy-hive-drivers-app/src/styles.css"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "apps/kids-toy-hive-drivers-app/src/styles.css"
+            ],
             "scripts": []
           },
           "configurations": {

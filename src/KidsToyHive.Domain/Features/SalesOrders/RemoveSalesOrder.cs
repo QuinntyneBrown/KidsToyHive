@@ -5,21 +5,21 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Orders
+namespace KidsToyHive.Domain.Features.SalesOrders
 {
-    public class RemoveOrder
+    public class RemoveSalesOrder
     {
         public class Validator : AbstractValidator<Request>
         {
             public Validator()
             {
-                RuleFor(request => request.OrderId).NotNull();
+                RuleFor(request => request.SalesOrderId).NotNull();
             }
         }
 
         public class Request: IRequest
         {
-            public Guid OrderId { get; set; }
+            public Guid SalesOrderId { get; set; }
         }
 
         public class Handler : IRequestHandler<Request>
@@ -30,9 +30,9 @@ namespace KidsToyHive.Domain.Features.Orders
 
             public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
             {
-                var order = await _context.Orders.FindAsync(request.OrderId);
+                var salesOrder = await _context.SalesOrders.FindAsync(request.SalesOrderId);
 
-                _context.Orders.Remove(order);
+                _context.SalesOrders.Remove(salesOrder);
 
                 await _context.SaveChangesAsync(cancellationToken);
 

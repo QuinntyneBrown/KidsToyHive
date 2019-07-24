@@ -1,11 +1,7 @@
-using KidsToyHive.Core.Identity;
-using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.DataAccess;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Azure.KeyVault;
-using Microsoft.Azure.Services.AppAuthentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,42 +35,30 @@ namespace KidsToyHive.Api
                     args = new string[4] { "dropdb", "migratedb", "seeddb", "stop" };
 
                 if (args.Contains("dropdb"))
+                {
                     context.Database.EnsureDeleted();
+                }
 
                 if (args.Contains("migratedb"))
                 {
-
+                    context.Database.Migrate();
                 }
 
                 if (args.Contains("seeddb"))
                 {
                     context.Database.EnsureCreated();
 
-                    SeedData.Seed(context,configuration);
+                    SeedData.Seed(context, configuration);
                 }
 
                 if (args.Contains("stop"))
                     Environment.Exit(0);
             }
+
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                var builder = config.Build();
-
-                var keyVaultEndpoint = $"https://thekidstoyhive.vault.azure.net/";
-
-                var azureServiceTokenProvider = new AzureServiceTokenProvider();
-
-                var keyVaultClient = new KeyVaultClient(
-                    new KeyVaultClient.AuthenticationCallback(
-                    azureServiceTokenProvider.KeyVaultTokenCallback)
-                    );
-
-                config.AddAzureKeyVault(keyVaultEndpoint);
-            })
             .UseApplicationInsights()
             .UseSerilog((builderContext, config) =>
             {

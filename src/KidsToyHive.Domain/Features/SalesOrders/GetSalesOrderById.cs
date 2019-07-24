@@ -4,17 +4,17 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.OrderItems
+namespace KidsToyHive.Domain.Features.SalesOrders
 {
-    public class GetOrderItemById
+    public class GetSalesOrderById
     {
         public class Request : IRequest<Response> {
-            public Guid OrderItemId { get; set; }
+            public Guid SalesOrderId { get; set; }
         }
 
         public class Response
         {
-            public OrderItemDto OrderItem { get; set; }
+            public SalesOrderDto SalesOrder { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -25,7 +25,7 @@ namespace KidsToyHive.Domain.Features.OrderItems
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
                 => new Response()
                 {
-                    OrderItem = (await _context.OrderItems.FindAsync(request.OrderItemId)).ToDto()
+                    SalesOrder = (await _context.SalesOrders.FindAsync(request.SalesOrderId)).ToDto()
                 };
         }
     }

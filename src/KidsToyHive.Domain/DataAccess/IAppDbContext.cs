@@ -16,8 +16,8 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<DigitalAsset> DigitalAssets { get; }
         DbSet<HtmlContent> HtmlContents { get; }
         DbSet<InventoryItem> InventoryItems { get; }
-        DbSet<Order> Orders { get; }
-        DbSet<OrderItem> OrderItems { get; }
+        DbSet<SalesOrder> SalesOrders { get; }
+        DbSet<SalesOrderDetail> SalesOrderDetails { get; }
         DbSet<Product> Products { get; }
         DbSet<ProductCategory> ProductCategories { get; }
         DbSet<Profile> Profiles { get; }

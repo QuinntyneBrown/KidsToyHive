@@ -1,6 +1,6 @@
 import { Component, OnDestroy, Query, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
-import { OrderService } from '@kids-toy-hive/domain';
+import { SalesOrderService } from '@kids-toy-hive/domain';
 import SignaturePad  from 'signature_pad';
 
 @Component({
@@ -14,7 +14,7 @@ export class ConfirmationPageComponent implements OnDestroy, OnInit  {
   @ViewChild('signaturePad',{ static: true })
   public signaturePad:ElementRef;
 
-  constructor(private readonly _orderService: OrderService) {
+  constructor(private readonly _salesOrderService: SalesOrderService) {
 
   }
   

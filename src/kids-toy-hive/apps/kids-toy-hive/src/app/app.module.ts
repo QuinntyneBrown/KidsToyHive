@@ -9,6 +9,7 @@ import { SharedModule } from '@kids-toy-hive/shared';
 import { environment } from '../environments/environment';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
 import { CatalogPageComponent } from './pages/catalog-page';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,10 +27,11 @@ import { CatalogPageComponent } from './pages/catalog-page';
     CoreModule,
     DomainModule,
     SharedModule,
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [
-    {provide: baseUrl, useValue: environment.baseUrl }
+    { provide: baseUrl, useValue: environment.baseUrl }
   ],
   bootstrap: [AppComponent]
 })

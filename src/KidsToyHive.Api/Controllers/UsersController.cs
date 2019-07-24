@@ -31,7 +31,7 @@ namespace KidsToyHive.Api.Controllers
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(Authenticate.Response), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Authenticate.Response>> Post([FromRoute]Authenticate.Request request)
+        public async Task<ActionResult<Authenticate.Response>> Post([FromBody]Authenticate.Request request)
             => await _meditator.Send(request);
     }
 }

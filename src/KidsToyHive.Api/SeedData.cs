@@ -14,7 +14,7 @@ namespace KidsToyHive.Api
             CardConfiguration.Seed(context);
             CardLayoutConfiguration.Seed(context);
             UserConfiguration.Seed(context, configuration);            
-            DashboardConfiguration.Seed(context);
+            //DashboardConfiguration.Seed(context);
         }
 
 
@@ -76,14 +76,14 @@ namespace KidsToyHive.Api
                 {
                     User user = default;
 
-                    if (context.Users.IgnoreQueryFilters().FirstOrDefault(x => x.Username == username) == null)
+                    if (context.Users.FirstOrDefault(x => x.Username == username) == null)
                     {
                         user = new User()
                         {
                             Username = username
                         };
 
-                        user.Password = new PasswordHasher().HashPassword(user.Salt, configuration["Seed:DefaultUser:Password"].Split(',')[index]);
+                        user.Password = new PasswordHasher().HashPassword(user.Salt, configuration["Seed:DefaultUser:Password"]);
 
                         context.Users.Add(user);
                     }

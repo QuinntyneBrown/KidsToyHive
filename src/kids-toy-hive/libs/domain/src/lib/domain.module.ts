@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddressService, OrderService, DigitalAssetService, CardService, CustomerService, DashboardCardService, DashboardService, InventoryItemService, OrderItemService, ProductCategoryService, ProductService, RoleService, UserService } from './services';
+import { AddressService, DigitalAssetService, CardService, CustomerService, DashboardCardService, DashboardService, InventoryItemService, ProductCategoryService, ProductService, RoleService, UserService, SalesOrderService, SalesOrderDetailService } from './services';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard, LoginRedirectService, AuthService } from './guards';
+import { ShipmentSalesOrderService } from './services/shipment-sales-order.service';
 
 export * from './guards';
 export * from './services';
@@ -20,8 +21,9 @@ export * from './services';
     DashboardService,
     DigitalAssetService,
     InventoryItemService,
-    OrderItemService,
-    OrderService,
+    SalesOrderDetailService,
+    SalesOrderService,
+    ShipmentSalesOrderService,
     ProductCategoryService,
     ProductService,
     RoleService,

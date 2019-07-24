@@ -1,8 +1,9 @@
-﻿using KidsToyHive.Api.Behaviours;
+﻿using FluentValidation;
 using KidsToyHive.Api.Filters;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Features.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,9 +40,6 @@ namespace KidsToyHive.Api
             services.AddSingleton<ITokenProvider, TokenProvider>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthenticatedRequestBehavior<,>));
 
             services.AddSwaggerGen(options =>
             {
@@ -53,6 +52,24 @@ namespace KidsToyHive.Api
                 });
                 options.CustomSchemaIds(x => x.FullName);
             });
+
+            services.AddMediatR(p =>
+            {
+                p.AsTransient();
+
+            }, typeof(Authenticate).GetTypeInfo().Assembly);
+
+            services.Scan(
+                scan => scan.FromAssemblies(typeof(Authenticate).GetTypeInfo().Assembly)
+                    .AddClasses(x => x.AssignableTo(typeof(IValidator<>)))
+                    .AsImplementedInterfaces()
+                    .WithSingletonLifetime());
+
+            services.Scan(
+                scan => scan.FromAssemblies(typeof(Startup).GetTypeInfo().Assembly)
+                    .AddClasses(x => x.AssignableTo(typeof(IPipelineBehavior<,>)))
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime());
 
             services.ConfigureSwaggerGen(options => {
                 options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
@@ -92,13 +109,14 @@ namespace KidsToyHive.Api
             })
             .AddNewtonsoftJson()
             .SetCompatibilityVersion(CompatibilityVersion.Latest);  
-            services.AddDbContext<AppDbContext>(
-                options => options.UseCosmos(
-                    Environment.GetEnvironmentVariable("CosmosDb:EndpointUrl"),
-                    Environment.GetEnvironmentVariable("CosmosDb:PrivateKey"),
-                    Environment.GetEnvironmentVariable("CosmosDb:DbName")));
 
             services.AddTransient<IAppDbContext, AppDbContext>();
+
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options
+                .UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly("KidsToyHive.Api"));
+            });
         }
                 private static TokenValidationParameters GetTokenValidationParameters(IConfiguration configuration)
         {

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CoreModule } from '@kids-toy-hive/core';
+import { CoreModule, baseUrl } from '@kids-toy-hive/core';
 import { DomainModule, AuthGuard } from '@kids-toy-hive/domain';
 import { SharedModule } from '@kids-toy-hive/shared';
 
@@ -9,6 +9,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ConfirmationPageComponent } from './pages/confirmation-page';
 import { OrdersPageComponent } from './pages/orders-page';
 import { LoginPageComponent } from './pages/login-page';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
 
 const canActivate = [
     AuthGuard
@@ -49,9 +51,12 @@ const routes: Routes = [
     
     CoreModule,
     DomainModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    { provide: baseUrl, useValue: environment.baseUrl }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
