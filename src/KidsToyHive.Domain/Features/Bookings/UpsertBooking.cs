@@ -6,26 +6,26 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Shipments
+namespace KidsToyHive.Domain.Features.Bookings
 {
-    public class UpsertShipment
+    public class UpsertBooking
     {
 
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.Shipment).NotNull();
-                RuleFor(request => request.Shipment).SetValidator(new ShipmentDtoValidator());
+                RuleFor(request => request.Booking).NotNull();
+                RuleFor(request => request.Booking).SetValidator(new BookingDtoValidator());
             }
         }
 
         public class Request : IRequest<Response> {
-            public ShipmentDto Shipment { get; set; }
+            public BookingDto Booking { get; set; }
         }
 
         public class Response
         {
-            public Guid ShipmentId { get;set; }
+            public Guid BookingId { get;set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -34,16 +34,18 @@ namespace KidsToyHive.Domain.Features.Shipments
             public Handler(IAppDbContext context) => _context = context;
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-                var shipment = await _context.Shipments.FindAsync(request.Shipment.ShipmentId);
+                var booking = await _context.Bookings.FindAsync(request.Booking.BookingId);
 
-                if (shipment == null) {
-                    shipment = new Shipment();
-                    _context.Shipments.Add(shipment);
+                if (booking == null) {
+                    booking = new Booking();
+                    _context.Bookings.Add(booking);
                 }
+
+                booking.Name = request.Booking.Name;
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return new Response() { ShipmentId = shipment.ShipmentId };
+                return new Response() { BookingId = booking.BookingId };
             }
         }
     }

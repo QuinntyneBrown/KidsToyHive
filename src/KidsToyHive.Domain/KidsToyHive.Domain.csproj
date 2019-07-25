@@ -9,6 +9,9 @@
     <Folder Include="Features\Customers\" />
     <Folder Include="Features\HtmlContents\" />
     <Folder Include="Features\CardLayouts\" />
+    <Folder Include="Features\Bookings\" />
+    <Folder Include="Features\BookingDetails\" />
+    <Folder Include="Features\ShipmentBookings\" />
     <Folder Include="Features\Shipments\" />
     <Folder Include="Features\ShipmentSalesOrders\" />
     <Folder Include="Features\SalesOrderDetails\" />

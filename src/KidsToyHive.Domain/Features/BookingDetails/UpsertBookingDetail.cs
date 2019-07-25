@@ -6,26 +6,26 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Shipments
+namespace KidsToyHive.Domain.Features.BookingDetails
 {
-    public class UpsertShipment
+    public class UpsertBookingDetail
     {
 
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.Shipment).NotNull();
-                RuleFor(request => request.Shipment).SetValidator(new ShipmentDtoValidator());
+                RuleFor(request => request.BookingDetail).NotNull();
+                RuleFor(request => request.BookingDetail).SetValidator(new BookingDetailDtoValidator());
             }
         }
 
         public class Request : IRequest<Response> {
-            public ShipmentDto Shipment { get; set; }
+            public BookingDetailDto BookingDetail { get; set; }
         }
 
         public class Response
         {
-            public Guid ShipmentId { get;set; }
+            public Guid BookingDetailId { get;set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
@@ -34,16 +34,16 @@ namespace KidsToyHive.Domain.Features.Shipments
             public Handler(IAppDbContext context) => _context = context;
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-                var shipment = await _context.Shipments.FindAsync(request.Shipment.ShipmentId);
+                var bookingDetail = await _context.BookingDetails.FindAsync(request.BookingDetail.BookingDetailId);
 
-                if (shipment == null) {
-                    shipment = new Shipment();
-                    _context.Shipments.Add(shipment);
+                if (bookingDetail == null) {
+                    bookingDetail = new BookingDetail();
+                    _context.BookingDetails.Add(bookingDetail);
                 }
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return new Response() { ShipmentId = shipment.ShipmentId };
+                return new Response() { BookingDetailId = bookingDetail.BookingDetailId };
             }
         }
     }

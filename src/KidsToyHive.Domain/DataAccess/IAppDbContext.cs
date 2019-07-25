@@ -7,6 +7,8 @@ namespace KidsToyHive.Domain.DataAccess
 {
     public interface IAppDbContext
     {
+        DbSet<Booking> Bookings { get; }
+        DbSet<BookingDetail> BookingDetails { get; }
         DbSet<Brand> Brands { get; }
         DbSet<Card> Cards { get; }
         DbSet<CardLayout> CardLayouts { get; }
@@ -23,6 +25,7 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<Profile> Profiles { get; }
         DbSet<Role> Roles { get; }
         DbSet<Shipment> Shipments { get; }
+        DbSet<ShipmentBooking> ShipmentBookings { get; }
         DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; }
         DbSet<Signature> Signatures { get; }
         DbSet<User> Users { get; }

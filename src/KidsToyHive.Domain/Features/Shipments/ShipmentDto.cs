@@ -9,14 +9,12 @@ namespace KidsToyHive.Domain.Features.Shipments
         public ShipmentDtoValidator()
         {
             RuleFor(x => x.ShipmentId).NotNull();
-            RuleFor(x => x.Name).NotNull();
         }
     }
 
     public class ShipmentDto
     {        
         public Guid ShipmentId { get; set; }
-        public string Name { get; set; }
         public int Version { get; set; }
     }
 
@@ -26,7 +24,6 @@ namespace KidsToyHive.Domain.Features.Shipments
             => new ShipmentDto
             {
                 ShipmentId = shipment.ShipmentId,
-                Name = shipment.Name,
                 Version = shipment.Version
             };
     }

@@ -77,7 +77,7 @@ namespace KidsToyHive.Domain.Features.Users
                 
                 return new Response()
                 {
-                    AccessToken = _securityTokenFactory.Get(request.Username, claims),
+                    AccessToken = _securityTokenFactory.Create(request.Username, claims),
                     UserId = user.UserId
                 };
             }

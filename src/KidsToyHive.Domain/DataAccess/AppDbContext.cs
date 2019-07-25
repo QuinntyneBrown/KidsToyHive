@@ -20,6 +20,8 @@ namespace KidsToyHive.Domain.DataAccess
 
         }
 
+        public DbSet<Booking> Bookings { get; private set; }
+        public DbSet<BookingDetail> BookingDetails { get; private set; }
         public DbSet<Brand> Brands { get; private set; }
         public DbSet<Card> Cards { get; private set; }
         public DbSet<CardLayout> CardLayouts { get; private set; }
@@ -37,6 +39,7 @@ namespace KidsToyHive.Domain.DataAccess
         public DbSet<Role> Roles { get; private set; }
         public DbSet<Signature> Signatures { get; set; }
         public DbSet<Shipment> Shipments { get; private set; }
+        public DbSet<ShipmentBooking> ShipmentBookings { get; private set; }
         public DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; private set; }
         public DbSet<User> Users { get; private set; }
     }
