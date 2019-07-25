@@ -28,7 +28,7 @@ namespace KidsToyHive.Api.Controllers
             => await _meditator.Send(request);
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost, Route("token")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(Authenticate.Response), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Authenticate.Response>> Post([FromBody]Authenticate.Request request)

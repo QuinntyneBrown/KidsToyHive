@@ -9,6 +9,8 @@
     <Folder Include="Features\Customers\" />
     <Folder Include="Features\HtmlContents\" />
     <Folder Include="Features\CardLayouts\" />
+    <Folder Include="Features\Shipments\" />
+    <Folder Include="Features\ShipmentSalesOrders\" />
     <Folder Include="Features\SalesOrderDetails\" />
     <Folder Include="Features\SalesOrders\" />
   </ItemGroup>

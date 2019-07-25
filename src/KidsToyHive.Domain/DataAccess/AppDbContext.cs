@@ -35,6 +35,9 @@ namespace KidsToyHive.Domain.DataAccess
         public DbSet<ProductCategory> ProductCategories { get; private set; }
         public DbSet<Profile> Profiles { get; private set; }
         public DbSet<Role> Roles { get; private set; }
+        public DbSet<Signature> Signatures { get; set; }
+        public DbSet<Shipment> Shipments { get; private set; }
+        public DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; private set; }
         public DbSet<User> Users { get; private set; }
     }
 

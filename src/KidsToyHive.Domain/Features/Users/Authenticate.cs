@@ -1,16 +1,15 @@
-using KidsToyHive.Domain.Models;
-using KidsToyHive.Core.Interfaces;
+using FluentValidation;
+using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
+using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using System.Threading;
-using FluentValidation;
-using KidsToyHive.Core.Exceptions;
-using System.Security.Claims;
-using System.Collections.Generic;
-using KidsToyHive.Domain.DataAccess;
 using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Users
 {
@@ -41,12 +40,12 @@ namespace KidsToyHive.Domain.Features.Users
         {
             private readonly IAppDbContext _context;
             private readonly IPasswordHasher _passwordHasher;
-            private readonly ITokenProvider _tokenProvider;
+            private readonly ISecurityTokenFactory _securityTokenFactory;
 
-            public Handler(IAppDbContext context, ITokenProvider tokenProvider, IPasswordHasher passwordHasher)
+            public Handler(IAppDbContext context, ISecurityTokenFactory securityTokenFactory, IPasswordHasher passwordHasher)
             {
                 _context = context;
-                _tokenProvider = tokenProvider;
+                _securityTokenFactory = securityTokenFactory;
                 _passwordHasher = passwordHasher;
             }
 
@@ -61,11 +60,24 @@ namespace KidsToyHive.Domain.Features.Users
                 if (!ValidateUser(user, _passwordHasher.HashPassword(user.Salt, request.Password)))
                     throw new Exception();
 
-                var profile = await _context.Profiles.Include(x => x.User).SingleAsync(x => x.User.Username == request.Username);
+                var profile = await _context.Profiles
+                    .Include(x => x.User)
+                    .SingleAsync(x => x.User.Username == request.Username);
 
+                var claims = new List<Claim>
+                {
+                    new Claim("ProfileId", $"{profile.ProfileId}")
+                };
+
+                if (profile.Type == ProfileType.Customer)
+                    claims.Add(new Claim(ClaimTypes.Role, "Customer"));
+
+                if (profile.Type == ProfileType.Admin)
+                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
+                
                 return new Response()
                 {
-                    AccessToken = _tokenProvider.Get(request.Username, new List<Claim>() { new Claim("ProfileId", $"{profile.ProfileId}") }),
+                    AccessToken = _securityTokenFactory.Get(request.Username, claims),
                     UserId = user.UserId
                 };
             }

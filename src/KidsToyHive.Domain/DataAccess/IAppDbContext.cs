@@ -22,6 +22,9 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<ProductCategory> ProductCategories { get; }
         DbSet<Profile> Profiles { get; }
         DbSet<Role> Roles { get; }
+        DbSet<Shipment> Shipments { get; }
+        DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; }
+        DbSet<Signature> Signatures { get; }
         DbSet<User> Users { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

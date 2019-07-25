@@ -37,7 +37,7 @@ namespace KidsToyHive.Api
 
             services.AddHttpContextAccessor();
             services.AddSingleton<ICommandRegistry, CommandRegistry>();
-            services.AddSingleton<ITokenProvider, TokenProvider>();
+            services.AddSingleton<ISecurityTokenFactory, TokenProvider>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
 

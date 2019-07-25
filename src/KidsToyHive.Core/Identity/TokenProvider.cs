@@ -8,12 +8,12 @@ using System.Text;
 
 namespace KidsToyHive.Core.Identity
 {
-    public interface ITokenProvider
+    public interface ISecurityTokenFactory
     {
         string Get(string username, List<Claim> customClaims = null);
     }
 
-    public class TokenProvider : ITokenProvider
+    public class TokenProvider : ISecurityTokenFactory
     {
         private IConfiguration _configuration;
         public TokenProvider(IConfiguration configuration)
