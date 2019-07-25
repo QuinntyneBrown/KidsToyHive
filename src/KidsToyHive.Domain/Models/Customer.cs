@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace KidsToyHive.Domain.Models
 {
-    public class Customer
+    public class Customer: BaseModel
     {
         public Guid CustomerId { get; set; }
         public Address Address { get; set; }
@@ -12,7 +12,6 @@ namespace KidsToyHive.Domain.Models
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public ICollection<CustomerLocation> CustomerLocations { get; set; }
-            = new HashSet<CustomerLocation>();
-        public int Version { get; set; }
+            = new HashSet<CustomerLocation>();        
     }
 }
