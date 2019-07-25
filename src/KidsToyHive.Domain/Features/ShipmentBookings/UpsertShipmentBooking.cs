@@ -26,11 +26,12 @@ namespace KidsToyHive.Domain.Features.ShipmentBookings
         public class Response
         {
             public Guid ShipmentBookingId { get;set; }
+            public int Version { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            public IAppDbContext _context { get; set; }
+            private readonly IAppDbContext _context;
             public Handler(IAppDbContext context) => _context = context;
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
@@ -41,11 +42,12 @@ namespace KidsToyHive.Domain.Features.ShipmentBookings
                     _context.ShipmentBookings.Add(shipmentBooking);
                 }
 
-                shipmentBooking.Name = request.ShipmentBooking.Name;
-
                 await _context.SaveChangesAsync(cancellationToken);
 
-                return new Response() { ShipmentBookingId = shipmentBooking.ShipmentBookingId };
+                return new Response() {
+                    ShipmentBookingId = shipmentBooking.ShipmentBookingId,
+                    Version = shipmentBooking.Version
+                };
             }
         }
     }

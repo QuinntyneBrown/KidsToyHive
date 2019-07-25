@@ -15,7 +15,8 @@ namespace KidsToyHive.Domain.Features.BookingDetails
     public class BookingDetailDto
     {        
         public Guid BookingDetailId { get; set; }
-        public string Name { get; set; }
+        public Guid ProductId { get; set; }
+        public int Quantity { get; set; }
         public int Version { get; set; }
     }
 

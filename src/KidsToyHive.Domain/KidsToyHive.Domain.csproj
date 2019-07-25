@@ -6,16 +6,13 @@
 
   <ItemGroup>
     <Folder Include="Features\Cards\" />
-    <Folder Include="Features\Customers\" />
     <Folder Include="Features\HtmlContents\" />
     <Folder Include="Features\CardLayouts\" />
-    <Folder Include="Features\Bookings\" />
     <Folder Include="Features\BookingDetails\" />
-    <Folder Include="Features\ShipmentBookings\" />
-    <Folder Include="Features\Shipments\" />
+    <Folder Include="Features\Addresses\" />
+    <Folder Include="Features\Locations\" />
     <Folder Include="Features\ShipmentSalesOrders\" />
     <Folder Include="Features\SalesOrderDetails\" />
-    <Folder Include="Features\SalesOrders\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +22,7 @@
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview7.19362.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview7.19362.6" />
+    <PackageReference Include="Stripe.net" Version="27.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc2" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0-rc2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.6.0-preview7.19362.9" />

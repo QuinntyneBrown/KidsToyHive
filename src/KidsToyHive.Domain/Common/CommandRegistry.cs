@@ -1,4 +1,5 @@
 ﻿using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Exceptions;
 using KidsToyHive.Domain.Features.Users;
 using System;
 using System.Collections.Concurrent;
@@ -30,6 +31,9 @@ namespace KidsToyHive.Domain.Common
 
         public void TryToAdd(CommandRegistryItem item, CancellationToken cancellationToken = default)
         {
+            if (_inner.Where(x => x.Value.Key == item.Key && x.Value.State != CommandRegistryItemState.Cancelled).Any())
+                throw new ConcurrencyException();
+
             item.CancellationToken = cancellationToken;
             item.SetConflictingIds(GetIdsOfConflictingIncompleteRequests(item));
             item.Index = _inner.Count() + 1;

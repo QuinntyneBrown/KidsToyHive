@@ -1,6 +1,9 @@
 using KidsToyHive.Domain.Models;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
+using KidsToyHive.Domain.Features.BookingDetails;
+using KidsToyHive.Core.Enums;
 
 namespace KidsToyHive.Domain.Features.Bookings
 {
@@ -16,7 +19,11 @@ namespace KidsToyHive.Domain.Features.Bookings
     public class BookingDto
     {        
         public Guid BookingId { get; set; }
+        public ICollection<BookingDetailDto> BookingDetails { get; set; }
+        = new HashSet<BookingDetailDto>();
         public string Name { get; set; }
+        public DateTime Date { get; set; }
+        public BookingTimeSlot BookingTimeSlot { get; set; }
         public int Version { get; set; }
     }
 

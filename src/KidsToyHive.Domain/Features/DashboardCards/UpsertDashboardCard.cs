@@ -30,7 +30,7 @@ namespace KidsToyHive.Domain.Features.DashboardCards
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            public IAppDbContext _context { get; set; }
+            private readonly IAppDbContext _context;
             public Handler(IAppDbContext context) => _context = context;
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {

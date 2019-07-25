@@ -4,6 +4,7 @@ using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.Users;
+using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -40,6 +42,7 @@ namespace KidsToyHive.Api
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
+            services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddSwaggerGen(options =>
             {
@@ -52,6 +55,8 @@ namespace KidsToyHive.Api
                 });
                 options.CustomSchemaIds(x => x.FullName);
             });
+
+            StripeConfiguration.ApiKey = configuration["Stripe:SecretKey"];
 
             services.AddMediatR(p =>
             {

@@ -11,7 +11,7 @@ namespace KidsToyHive.Domain.Models
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public ICollection<CustomerLocation> ShipTos { get; set; }
+        public ICollection<CustomerLocation> CustomerLocations { get; set; }
             = new HashSet<CustomerLocation>();
         public int Version { get; set; }
     }

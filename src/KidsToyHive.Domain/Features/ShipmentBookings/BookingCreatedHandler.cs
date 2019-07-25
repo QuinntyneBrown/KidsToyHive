@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace KidsToyHive.Domain.Common
+namespace KidsToyHive.Domain.Features.ShipmentBookings
 {
-    public interface IPaymentProcessor
+    class BookingCreatedHandler
     {
     }
 }

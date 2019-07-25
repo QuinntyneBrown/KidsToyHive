@@ -13,11 +13,13 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<Card> Cards { get; }
         DbSet<CardLayout> CardLayouts { get; }
         DbSet<Customer> Customers { get; }
+        DbSet<CustomerLocation> CustomerLocations { get; }
         DbSet<Dashboard> Dashboards { get; }
         DbSet<DashboardCard> DashboardCards { get; }
         DbSet<DigitalAsset> DigitalAssets { get; }
         DbSet<HtmlContent> HtmlContents { get; }
         DbSet<InventoryItem> InventoryItems { get; }
+        DbSet<Location> Locations { get; }
         DbSet<SalesOrder> SalesOrders { get; }
         DbSet<SalesOrderDetail> SalesOrderDetails { get; }
         DbSet<Product> Products { get; }

@@ -1,4 +1,5 @@
-﻿using KidsToyHive.Core.Common;
+﻿using KidsToyHive.Core;
+using KidsToyHive.Core.Common;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Common;
 using Microsoft.AspNetCore.Http;
@@ -16,10 +17,9 @@ namespace KidsToyHive.Domain
 {
     public class CommandRegistryItem
     {
-        
         public string CorrelationId { get; set; } = IdGenerator.GetNextId();
         public string Request { get; set; }
-        public string RequestName { get; set; }
+        public string OperationId { get; set; }
         public string RequestDotNetType { get; set; }           
         public string PartitionKey { get; set; }
         public string Key { get; set; }
@@ -74,19 +74,19 @@ namespace KidsToyHive.Domain
         public async static Task<CommandRegistryItem> ParseAsync(HttpRequest httpRequest, CancellationToken token = default)
         {
             var body = await new StreamReader(httpRequest.Body).ReadToEndAsync();
-            httpRequest.Headers.TryGetValue("PartitionKey", out StringValues partitionKey);
-            httpRequest.Headers.TryGetValue("OperationId", out StringValues operationId);            
+            httpRequest.Headers.TryGetValue(Strings.PartitionKey, out StringValues partitionKey);
+            httpRequest.Headers.TryGetValue(Strings.OperationId, out StringValues operationId);            
             dynamic request = JsonConvert.DeserializeObject(body, Type.GetType(DotNetTypeMapper.Map(operationId)));
             return Parse(request, operationId, partitionKey, token);
         }
 
         public CancellationToken CancellationToken { get; set; }
-        public static CommandRegistryItem Parse(dynamic request, string requestName, string customerKey, CancellationToken token = default)
+        public static CommandRegistryItem Parse(dynamic request, string operationId, string partitionKey, CancellationToken token = default)
         {
             var item = new CommandRegistryItem
             {
-                RequestName = $"{requestName}",
-                PartitionKey = customerKey,
+                OperationId = $"{operationId}",
+                PartitionKey = partitionKey,
                 Request = JsonConvert.SerializeObject(request),
                 Key = request.Key,
                 SideEffects = string.Join(",", request.SideEffects),

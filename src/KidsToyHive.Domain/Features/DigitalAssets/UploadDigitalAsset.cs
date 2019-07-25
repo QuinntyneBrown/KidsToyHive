@@ -36,7 +36,6 @@ namespace KidsToyHive.Domain.Features.DigitalAssets
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-
                 var httpContext = _httpContextAccessor.HttpContext;
                 var defaultFormOptions = new FormOptions();
                 var digitalAssets = new List<DigitalAsset>();

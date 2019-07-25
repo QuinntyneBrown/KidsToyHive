@@ -26,7 +26,7 @@ namespace KidsToyHive.Domain.Features.Profiles
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            public IAppDbContext _context { get; set; }
+            private readonly IAppDbContext _context;
             public IPasswordHasher _passwordHasher { get; set; }
             public Handler(IAppDbContext context, IPasswordHasher passwordHasher) {
                 _context = context;

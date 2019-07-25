@@ -32,7 +32,7 @@ namespace KidsToyHive.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> Post(CancellationToken cancellationToken = default)
         {
             var item = await CommandRegistryItem.ParseAsync(Request);
