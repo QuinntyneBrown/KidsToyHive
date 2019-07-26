@@ -43,6 +43,7 @@ namespace KidsToyHive.Api
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
             services.AddSingleton<IEmailSender, EmailSender>();
+            services.AddTransient<IInventoryService, InventoryService>();
 
             services.AddSwaggerGen(options =>
             {

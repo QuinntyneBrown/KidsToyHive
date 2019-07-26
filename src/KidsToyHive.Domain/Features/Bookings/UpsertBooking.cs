@@ -2,6 +2,7 @@ using FluentValidation;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
+using KidsToyHive.Domain.Services;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -51,10 +52,12 @@ namespace KidsToyHive.Domain.Features.Bookings
         {
             private readonly IAppDbContext _context;
             private readonly IMediator _mediator;
-            public Handler(IAppDbContext context, IMediator mediator)
+            private readonly IInventoryService _inventoryService;
+            public Handler(IAppDbContext context, IMediator mediator, IInventoryService inventoryService)
             {
                 _context = context;
                 _mediator = mediator;
+                _inventoryService = inventoryService;
             }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
@@ -69,9 +72,12 @@ namespace KidsToyHive.Domain.Features.Bookings
 
                 booking.BookingDetails.Clear();
 
-                if (_context.Bookings.Any(x => x.Date == request.Booking.Date && x.BookingTimeSlot == request.Booking.BookingTimeSlot))
-                    throw new Exception();
-
+                foreach(var bookingDetail in request.Booking.BookingDetails)
+                {
+                    if (!_inventoryService.IsItemAvailable(request.Booking.Date, request.Booking.BookingTimeSlot, bookingDetail.ProductId))
+                        throw new Exception();
+                }
+                    
                 foreach(var bookingDetail in request.Booking.BookingDetails)
                 {
                     booking.BookingDetails.Add(new BookingDetail

@@ -45,7 +45,6 @@ namespace KidsToyHive.Domain.Features.InventoryItems
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-
                 var inventoryItem = await _context.InventoryItems.Where(x => x.ProductId == request.ProductId).SingleAsync();
 
                 if (request.Quantity > inventoryItem.Quantity)

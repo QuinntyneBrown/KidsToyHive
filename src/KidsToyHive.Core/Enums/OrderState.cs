@@ -1,8 +1,10 @@
 ﻿namespace KidsToyHive.Core.Enums
 {
-    public enum OrderState: byte
+    public enum BookingStatus: byte
     {
         New = 0,
-        Received
+        Delivered,
+        PickedUp,
+        Cancelled
     }
 }
