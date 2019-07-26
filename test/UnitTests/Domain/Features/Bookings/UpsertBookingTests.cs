@@ -23,15 +23,17 @@ namespace UnitTests.Domain.Features.Bookings
                 .UseInMemoryDatabase($"{nameof(UpsertBookingTests)}:{nameof(ShouldUpsertBooking)}")
                 .Options;
 
-            using (var context = new AppDbContext(options))
+            var mediator = new Mock<IMediator>().Object;
+
+            using (var context = new AppDbContext(options,mediator))
             {
                 var productId = Guid.NewGuid();
                 var mockInventoryService = new Mock<IInventoryService>();
                 mockInventoryService.Setup(x => x.IsItemAvailable(It.IsAny<DateTime>(), It.IsAny<BookingTimeSlot>(), It.IsAny<Guid>())).Returns(true);
                 var inventoryService = mockInventoryService.Object;
 
-                var mediator = new Mock<IMediator>().Object;
-                var upsertBookingHandler = new UpsertBooking.Handler(context, mediator, inventoryService);
+                var upsertBookingHandler = new UpsertBooking.Handler(context, inventoryService);
+
                 var booking = new BookingDto
                 {
                     BookingDetails = new List<BookingDetailDto>

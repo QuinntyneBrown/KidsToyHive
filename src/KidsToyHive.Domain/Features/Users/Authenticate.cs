@@ -7,6 +7,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -60,21 +61,25 @@ namespace KidsToyHive.Domain.Features.Users
                 if (!ValidateUser(user, _passwordHasher.HashPassword(user.Salt, request.Password)))
                     throw new Exception();
 
-                var profile = await _context.Profiles
+                var profiles = _context.Profiles
                     .Include(x => x.User)
-                    .SingleAsync(x => x.User.Username == request.Username);
+                    .Where(x => x.User.Username == request.Username)
+                    .ToList();
 
-                var claims = new List<Claim>
-                {
-                    new Claim("ProfileId", $"{profile.ProfileId}")
-                };
+                var claims = new List<Claim>();
 
-                if (profile.Type == ProfileType.Customer)
-                    claims.Add(new Claim(ClaimTypes.Role, "Customer"));
+                foreach (var profile in profiles) {
+                    claims.Add(new Claim("ProfileId", $"{profile.ProfileId}"));
+                    if (profile.Type == ProfileType.Customer)
+                        claims.Add(new Claim(ClaimTypes.Role, nameof(ProfileType.Customer)));
 
-                if (profile.Type == ProfileType.Admin)
-                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-                
+                    if (profile.Type == ProfileType.Admin)
+                        claims.Add(new Claim(ClaimTypes.Role, nameof(ProfileType.Admin)));
+
+                    if (profile.Type == ProfileType.Driver)
+                        claims.Add(new Claim(ClaimTypes.Role, nameof(ProfileType.Driver)));
+                }
+
                 return new Response()
                 {
                     AccessToken = _securityTokenFactory.Create(request.Username, claims),

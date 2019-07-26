@@ -1,6 +1,5 @@
 using KidsToyHive.Core.Enums;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,8 +17,9 @@ namespace KidsToyHive.Domain.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }        
         public BookingTimeSlot BookingTimeSlot { get; set; }
-        public ICollection<BookingDetail> BookingDetails { get; set; }
-        = new HashSet<BookingDetail>();
+        public BookingStatus Status { get; set; } = BookingStatus.New;
+        public ICollection<BookingDetail> BookingDetails { get; set; } 
+            = new HashSet<BookingDetail>();
         public float Cost => BookingDetails.Sum(x => x.Cost);
     }
 }

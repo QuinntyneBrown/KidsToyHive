@@ -10,10 +10,11 @@ namespace KidsToyHive.Domain.Models
         public Guid ProductCategoryId { get; set; }
         public string Name { get; set; }
         public ICollection<ProductImage> ProductImages { get; set; }
-        = new HashSet<ProductImage>();
+            = new HashSet<ProductImage>();
         public string Description { get; set; }
         public ProductCategory ProductCategory { get; set; }
         public Brand Brand { get; set; }
+        public float Price { get; set; }
         public float HourlyRate { get; set; } = 31.25f; 
     }
 }

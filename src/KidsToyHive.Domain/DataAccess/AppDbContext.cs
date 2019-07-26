@@ -1,9 +1,12 @@
 ﻿using KidsToyHive.Domain.Models;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,11 +15,20 @@ namespace KidsToyHive.Domain.DataAccess
 {
     public class AppDbContext: DbContext, IAppDbContext
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
+        private readonly IMediator _mediator;
+        public AppDbContext(DbContextOptions<AppDbContext> options, IMediator mediator = default)
             : base(options)
         {
+            _mediator = mediator;
 
         }
+
+        [Obsolete]
+        public static readonly LoggerFactory ConsoleLoggerFactory
+            = new LoggerFactory(new[] {
+                new ConsoleLoggerProvider((category, level)
+                    => category == DbLoggerCategory.Database.Command.Name
+                && level == LogLevel.Information, true) });
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,8 +36,15 @@ namespace KidsToyHive.Domain.DataAccess
             modelBuilder.Entity<Location>().OwnsOne(l => l.Adddress);
         }
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            int result = default;
+
+            var domainEventEntities = ChangeTracker.Entries<BaseModel>()
+                .Select(entityEntry => entityEntry.Entity)
+                .Where(entity => entity.DomainEvents.Any())
+                .ToArray();
+
             foreach (var entity in ChangeTracker.Entries<BaseModel>()
                 .Where(e => (e.State == EntityState.Added || (e.State == EntityState.Modified)))
                 .Select(x => x.Entity))
@@ -33,7 +52,21 @@ namespace KidsToyHive.Domain.DataAccess
                 entity.Version++;
             }
 
-            return base.SaveChangesAsync(cancellationToken);
+            result = await base.SaveChangesAsync(cancellationToken);
+
+            foreach (var entity in domainEventEntities)
+            {
+                var events = entity.DomainEvents.ToArray();
+
+                entity.ClearEvents();
+
+                foreach (var domainEvent in events)
+                {
+                    await _mediator.Publish(domainEvent, cancellationToken);
+                }
+            }
+
+            return result;
         }
 
         public DbSet<Booking> Bookings { get; private set; }

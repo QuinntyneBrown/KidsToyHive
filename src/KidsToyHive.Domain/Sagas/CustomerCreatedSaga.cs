@@ -2,22 +2,18 @@
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
+using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;
 using MediatR;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Customers
+namespace KidsToyHive.Domain.Sagas
 {
-    public class CustomerCreated
+    public class CustomerCreatedSaga
     {
-        public class Notification: INotification
-        {
-            public Guid CustomerId { get; set; }
-        }
-
-        public class Handler : INotificationHandler<Notification>
+        public class Handler : INotificationHandler<CustomerCreated>
         {
             private readonly IAppDbContext _context;
             private readonly IPasswordHasher _passwordHasher;
@@ -30,16 +26,23 @@ namespace KidsToyHive.Domain.Features.Customers
                 _emailSender = emailSender;
             }
 
-            public async Task Handle(Notification notification, CancellationToken cancellationToken)
+            public async Task Handle(CustomerCreated notification, CancellationToken cancellationToken)
             {
-                var customer = await _context.Customers.FindAsync(notification.CustomerId);
+                var customer = notification.Customer;
 
-                var user = new User
+                var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == customer.Email);
+
+                if (user == null)
                 {
-                    Username = customer.Email
-                };
+                    user = new User
+                    {
+                        Username = customer.Email
+                    };
 
-                user.Password = _passwordHasher.HashPassword(user.Salt,"P@ssw0rd");
+                    user.Password = _passwordHasher.HashPassword(user.Salt, "P@ssw0rd");
+
+                    await _context.Users.AddAsync(user);
+                }
 
                 user.Profiles.Add(new Profile
                 {

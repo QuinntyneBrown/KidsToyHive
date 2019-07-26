@@ -8,5 +8,6 @@ namespace KidsToyHive.Domain.Services
     public interface IEmailSender
     {
         void SendNewCustomerEmail(Customer customer, User user);
+        void SendNewDriverEmail(Driver driver, User user);
     }
 }

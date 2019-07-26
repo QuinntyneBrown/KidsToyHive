@@ -11,5 +11,10 @@ namespace KidsToyHive.Domain.Services
         {
 
         }
+
+        public void SendNewDriverEmail(Driver driver, User user)
+        {
+
+        }
     }
 }

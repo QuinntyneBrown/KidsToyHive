@@ -21,4 +21,16 @@
     <ProjectReference Include="..\..\src\KidsToyHive.Domain\KidsToyHive.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Domain\Features\Customers\" />
+    <Folder Include="Domain\Features\Drivers\" />
+    <Folder Include="Domain\Features\InventoryItems\" />
+    <Folder Include="Domain\Features\Dashboards\" />
+    <Folder Include="Domain\Features\Products\" />
+    <Folder Include="Domain\Features\SalesOrders\" />
+    <Folder Include="Domain\Features\Shipments\" />
+    <Folder Include="Domain\Sagas\" />
+    <Folder Include="Domain\Services\" />
+  </ItemGroup>
+
 </Project>

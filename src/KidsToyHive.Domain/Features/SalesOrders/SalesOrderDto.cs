@@ -1,6 +1,7 @@
 using KidsToyHive.Domain.Models;
 using FluentValidation;
 using System;
+using KidsToyHive.Core.Enums;
 
 namespace KidsToyHive.Domain.Features.SalesOrders
 {
@@ -17,6 +18,7 @@ namespace KidsToyHive.Domain.Features.SalesOrders
     {        
         public Guid SalesOrderId { get; set; }
         public string Name { get; set; }
+        public SalesOrderStatus Status { get; set; }
         public int Version { get; set; }
     }
 
@@ -26,7 +28,8 @@ namespace KidsToyHive.Domain.Features.SalesOrders
             => new SalesOrderDto
             {
                 SalesOrderId = salesOrder.SalesOrderId,
-                Version = salesOrder.Version
+                Version = salesOrder.Version,
+                Status = salesOrder.Status
             };
     }
 }

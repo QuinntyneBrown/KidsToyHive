@@ -10,6 +10,7 @@ namespace KidsToyHive.Domain.Features.Products
         {
             RuleFor(x => x.ProductId).NotNull();
             RuleFor(x => x.Name).NotNull();
+            RuleFor(x => x.HourlyRate).NotNull();
         }
     }
 

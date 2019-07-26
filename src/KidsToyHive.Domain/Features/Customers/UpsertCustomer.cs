@@ -5,12 +5,12 @@ using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using KidsToyHive.Domain.Models.DomainEvents;
 
 namespace KidsToyHive.Domain.Features.Customers
 {
     public class UpsertCustomer
     {
-
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
@@ -26,16 +26,15 @@ namespace KidsToyHive.Domain.Features.Customers
         public class Response
         {
             public Guid CustomerId { get;set; }
+            public int Version { get; set; }
         }
 
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly IAppDbContext _context;
-            private readonly IMediator _mediator;
-            public Handler(IAppDbContext context, IMediator mediator)
+            public Handler(IAppDbContext context)
             {
                 _context = context;
-                _mediator = mediator;
             }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
@@ -43,6 +42,7 @@ namespace KidsToyHive.Domain.Features.Customers
 
                 if (customer == null) {
                     customer = new Customer();
+                    customer.RaiseDomainEvent(new CustomerCreated(customer));
                     _context.Customers.Add(customer);
                 }
 
@@ -85,13 +85,10 @@ namespace KidsToyHive.Domain.Features.Customers
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                if (request.Customer.CustomerId == default)
-                    await _mediator.Publish(new CustomerCreated.Notification
-                    {
-                        CustomerId = customer.CustomerId
-                    });
-
-                return new Response() { CustomerId = customer.CustomerId };
+                return new Response() {
+                    CustomerId = customer.CustomerId,
+                    Version = customer.Version
+                };
             }
         }
     }

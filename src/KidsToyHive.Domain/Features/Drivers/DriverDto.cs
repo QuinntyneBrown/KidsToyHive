@@ -26,7 +26,7 @@ namespace KidsToyHive.Domain.Features.Drivers
             => new DriverDto
             {
                 DriverId = driver.DriverId,
-                Name = driver.Name,
+                Name = driver.FirstName,
                 Version = driver.Version
             };
     }

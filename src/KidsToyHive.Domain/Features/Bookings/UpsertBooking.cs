@@ -2,6 +2,7 @@ using FluentValidation;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
+using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -51,13 +52,11 @@ namespace KidsToyHive.Domain.Features.Bookings
 
         public class Handler : IRequestHandler<Request, Response>
         {
-            private readonly IAppDbContext _context;
-            private readonly IMediator _mediator;
+            private readonly IAppDbContext _context;            
             private readonly IInventoryService _inventoryService;
-            public Handler(IAppDbContext context, IMediator mediator, IInventoryService inventoryService)
+            public Handler(IAppDbContext context, IInventoryService inventoryService)
             {
                 _context = context;
-                _mediator = mediator;
                 _inventoryService = inventoryService;
             }
 
@@ -68,6 +67,7 @@ namespace KidsToyHive.Domain.Features.Bookings
 
                 if (booking == null) {
                     booking = new Booking();
+                    booking.RaiseDomainEvent(new BookingCreated(booking));
                     _context.Bookings.Add(booking);
                 }
 
@@ -90,12 +90,6 @@ namespace KidsToyHive.Domain.Features.Bookings
                 }
 
                 await _context.SaveChangesAsync(cancellationToken);
-
-                if(request.Booking.BookingId == default)
-                    await _mediator.Publish(new BookingCreated.Notification
-                    {
-                        BookingId = booking.BookingId
-                    });
 
                 return new Response() {
                     BookingId = booking.BookingId,
