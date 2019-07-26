@@ -7,6 +7,7 @@ namespace KidsToyHive.Domain.Models
         public Guid InventoryItemId { get; set; }
         public Guid ProductId { get; set; }
         public int Quantity { get; set; }
+        public DateTime Modified { get; set; }
         public int Version { get; set; }
     }
 }

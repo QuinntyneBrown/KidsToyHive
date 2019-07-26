@@ -15,6 +15,8 @@ namespace KidsToyHive.Domain.Features.InventoryItems
     public class InventoryItemDto
     {        
         public Guid InventoryItemId { get; set; }
+        public Guid ProductId { get; set; }
+        public int Quantity { get; set; }
         public int Version { get; set; }
     }
 
