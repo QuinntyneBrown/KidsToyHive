@@ -1,6 +1,8 @@
 using KidsToyHive.Domain.Models;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
+using KidsToyHive.Domain.Features.Products;
 
 namespace KidsToyHive.Domain.Features.Brands
 {
@@ -17,6 +19,9 @@ namespace KidsToyHive.Domain.Features.Brands
     {        
         public Guid BrandId { get; set; }
         public string Name { get; set; }
+        public string ImageUrl { get; set; }
+        public ICollection<ProductDto> Products { get; set; }
+        = new HashSet<ProductDto>();
     }
 
     public static class BrandExtensions

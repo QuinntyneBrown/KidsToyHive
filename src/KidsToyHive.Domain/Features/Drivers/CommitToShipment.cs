@@ -9,7 +9,6 @@ namespace KidsToyHive.Domain.Features.Drivers
 {
     public class CommitToShipment
     {
-
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {

@@ -14,6 +14,7 @@ namespace KidsToyHive.Domain.Models
         public Location Location { get; set; }
         public Signature Signature { get; set; }
         public ShipmentType Type { get; set; } = ShipmentType.Delivery;
+        public ShipmentStatus Status { get; set; } = ShipmentStatus.New;
         public ICollection<ShipmentBooking> ShipmentBookings { get; set; } 
             = new HashSet<ShipmentBooking>();
 
