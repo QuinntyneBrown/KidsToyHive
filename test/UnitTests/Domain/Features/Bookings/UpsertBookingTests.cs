@@ -25,7 +25,7 @@ namespace UnitTests.Domain.Features.Bookings
 
             var mediator = new Mock<IMediator>().Object;
 
-            using (var context = new AppDbContext(options,mediator))
+            using (var context = new AppDbContext(options, mediator))
             {
                 var productId = Guid.NewGuid();
                 var mockInventoryService = new Mock<IInventoryService>();
@@ -37,11 +37,11 @@ namespace UnitTests.Domain.Features.Bookings
                 var booking = new BookingDto
                 {
                     BookingDetails = new List<BookingDetailDto>
-                    {
-                        new BookingDetailDto {
-                            Quantity = 1, Product = new ProductDto { ProductId = productId, HourlyRate = 31.25f }
-                        }
+                {
+                    new BookingDetailDto {
+                        Quantity = 1, Product = new ProductDto { ProductId = productId, HourlyRate = 31.25f }
                     }
+                }
                 };
 
                 var request = new UpsertBooking.Request
@@ -55,7 +55,6 @@ namespace UnitTests.Domain.Features.Bookings
                 Assert.Equal(1, response.Version);
                 Assert.NotEqual(default, response.BookingId);
             }
-            
         }
     }
 }
