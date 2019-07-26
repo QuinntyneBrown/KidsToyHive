@@ -17,6 +17,7 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<Dashboard> Dashboards { get; }
         DbSet<DashboardCard> DashboardCards { get; }
         DbSet<DigitalAsset> DigitalAssets { get; }
+        DbSet<Driver> Drivers { get; }
         DbSet<HtmlContent> HtmlContents { get; }
         DbSet<InventoryItem> InventoryItems { get; }
         DbSet<Location> Locations { get; }

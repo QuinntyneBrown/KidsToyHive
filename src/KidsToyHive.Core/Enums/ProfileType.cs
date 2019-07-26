@@ -8,6 +8,7 @@ namespace KidsToyHive.Core.Enums
     {
         Anonymous = 0,
         Customer,
+        Driver,
         Admin
     }
 }
