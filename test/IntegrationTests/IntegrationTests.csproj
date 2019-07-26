@@ -22,10 +22,4 @@
     <ProjectReference Include="..\..\src\KidsToyHive.Domain\KidsToyHive.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Fixtures\" />
-    <Folder Include="Collections\" />
-    <Folder Include="Scenarios\Security\" />
-  </ItemGroup>
-
 </Project>

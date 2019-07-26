@@ -3,26 +3,24 @@ using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.BookingDetails;
 using KidsToyHive.Domain.Features.Bookings;
 using KidsToyHive.Domain.Features.Products;
-using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace IntegrationTests.Scenarios.Bookings
+namespace UnitTests.Domain.Features.Bookings
 {
-    public class BookingScenarios
+    public class UpsertBookingTests
     {
         [Fact]
         public async Task ShouldUpsertBooking()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(BookingScenarios)}:{nameof(ShouldUpsertBooking)}")
+                .UseInMemoryDatabase($"{nameof(UpsertBookingTests)}:{nameof(ShouldUpsertBooking)}")
                 .Options;
 
             using (var context = new AppDbContext(options))
