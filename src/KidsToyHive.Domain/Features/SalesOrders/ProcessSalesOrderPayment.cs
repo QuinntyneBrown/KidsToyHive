@@ -1,14 +1,18 @@
-using FluentValidation;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Models;
+using FluentValidation;
 using MediatR;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using KidsToyHive.Domain.Common;
+using KidsToyHive.Domain.Services;
 
-namespace KidsToyHive.Domain.Features.Drivers
+namespace KidsToyHive.Domain.Features.SalesOrders
 {
-    public class CommitToShipment
+    public class ProcessSalesOrderPayment
     {
+
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
@@ -16,9 +20,8 @@ namespace KidsToyHive.Domain.Features.Drivers
             }
         }
 
-        public class Request : IRequest<Response> {
-            public Guid DriverId { get; set; }
-            public Guid ShipmentId { get; set; }
+        public class Request : Command<Response> {
+            public Guid SalesOrderId { get; set; }
         }
 
         public class Response
@@ -29,15 +32,14 @@ namespace KidsToyHive.Domain.Features.Drivers
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly IAppDbContext _context;
-            public Handler(IAppDbContext context) => _context = context;
+            private readonly IPaymentProcessor _paymentProcessor;
+            public Handler(IAppDbContext context, IPaymentProcessor paymentProcessor)
+            {
+                _context = context;
+                _paymentProcessor = paymentProcessor;
+            }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-
-                var driver = await _context.Drivers.FindAsync(request.DriverId);
-
-                var shipment = await _context.Shipments.FindAsync(request.ShipmentId);
-
-                driver.Shipments.Add(shipment);
 
                 await _context.SaveChangesAsync(cancellationToken);
 

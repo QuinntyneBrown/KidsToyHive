@@ -6,6 +6,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using KidsToyHive.Domain.Services;
+using KidsToyHive.Domain.Common;
 
 namespace KidsToyHive.Domain.Features.Bookings
 {
@@ -19,7 +20,7 @@ namespace KidsToyHive.Domain.Features.Bookings
             }
         }
 
-        public class Request : IRequest<Response> {
+        public class Request : Command<Response> {
 
         }
 
