@@ -1,4 +1,5 @@
-﻿using KidsToyHive.Domain.DataAccess;
+﻿using KidsToyHive.Core.Enums;
+using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.BookingDetails;
 using KidsToyHive.Domain.Features.Bookings;
 using KidsToyHive.Domain.Features.Products;
@@ -27,11 +28,10 @@ namespace IntegrationTests.Scenarios.Bookings
             using (var context = new AppDbContext(options))
             {
                 var productId = Guid.NewGuid();
-                var inventoryItem = new InventoryItem { Quantity = 1, ProductId = productId, Modified = DateTime.Now };
-                context.InventoryItems.Add(inventoryItem);
-                context.SaveChanges();
+                var mockInventoryService = new Mock<IInventoryService>();
+                mockInventoryService.Setup(x => x.IsItemAvailable(It.IsAny<DateTime>(), It.IsAny<BookingTimeSlot>(), It.IsAny<Guid>())).Returns(true);
+                var inventoryService = mockInventoryService.Object;
 
-                var inventoryService = new InventoryService(context);
                 var mediator = new Mock<IMediator>().Object;
                 var upsertBookingHandler = new UpsertBooking.Handler(context, mediator, inventoryService);
                 var booking = new BookingDto
