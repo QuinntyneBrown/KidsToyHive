@@ -4,6 +4,7 @@ using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Services;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,11 +62,11 @@ namespace KidsToyHive.Domain.Features.Bookings
             }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-                var booking = await _context.Bookings.FindAsync(request.Booking.BookingId);
+                var booking = _context.Bookings
+                    .ToList()
+                    .FirstOrDefault(x => x.BookingId == request.Booking.BookingId);
 
-                bool newBooking = booking == null;
-
-                if (newBooking) {
+                if (booking == null) {
                     booking = new Booking();
                     _context.Bookings.Add(booking);
                 }
@@ -83,16 +84,15 @@ namespace KidsToyHive.Domain.Features.Bookings
                     booking.BookingDetails.Add(new BookingDetail
                     {
                         ProductId = bookingDetail.ProductId,
-                        Quantity = bookingDetail.Quantity
+                        Quantity = bookingDetail.Quantity,
+                        Cost = (4 * bookingDetail.Product.HourlyRate) * bookingDetail.Quantity
                     });
                 }
 
-                booking.Cost = 125;
-
                 await _context.SaveChangesAsync(cancellationToken);
 
-                if(newBooking)
-                    await _mediator.Publish(new BookingCreated.Notification()
+                if(request.Booking.BookingId == default)
+                    await _mediator.Publish(new BookingCreated.Notification
                     {
                         BookingId = booking.BookingId
                     });

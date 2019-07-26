@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.DataAccess
 {
@@ -17,7 +20,20 @@ namespace KidsToyHive.Domain.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Customer>().OwnsOne(c => c.Address);
+            modelBuilder.Entity<Location>().OwnsOne(l => l.Adddress);
+        }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            foreach (var entity in ChangeTracker.Entries<BaseModel>()
+                .Where(e => (e.State == EntityState.Added || (e.State == EntityState.Modified)))
+                .Select(x => x.Entity))
+            {
+                entity.Version++;
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
 
         public DbSet<Booking> Bookings { get; private set; }

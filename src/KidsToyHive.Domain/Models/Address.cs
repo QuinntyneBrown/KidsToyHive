@@ -1,9 +1,11 @@
 using KidsToyHive.Core;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
 namespace KidsToyHive.Domain.Models
 {
+    [Owned]
     public class Address : ValueObject
     {
         public string Street { get; private set; }

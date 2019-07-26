@@ -17,6 +17,7 @@ namespace KidsToyHive.Domain.Features.Products
     {        
         public Guid ProductId { get; set; }
         public string Name { get; set; }
+        public float HourlyRate { get; set; }
         public int Version { get; set; }
     }
 
@@ -27,7 +28,8 @@ namespace KidsToyHive.Domain.Features.Products
             {
                 ProductId = product.ProductId,
                 Name = product.Name,
-                Version = product.Version
+                Version = product.Version,
+                HourlyRate = product.HourlyRate
             };
     }
 }

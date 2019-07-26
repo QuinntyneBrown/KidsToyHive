@@ -1,6 +1,7 @@
 using KidsToyHive.Domain.Models;
 using FluentValidation;
 using System;
+using KidsToyHive.Domain.Features.Products;
 
 namespace KidsToyHive.Domain.Features.BookingDetails
 {
@@ -16,6 +17,7 @@ namespace KidsToyHive.Domain.Features.BookingDetails
     {        
         public Guid BookingDetailId { get; set; }
         public Guid ProductId { get; set; }
+        public ProductDto Product { get; set; }
         public int Quantity { get; set; }
         public int Version { get; set; }
     }
@@ -26,7 +28,7 @@ namespace KidsToyHive.Domain.Features.BookingDetails
             => new BookingDetailDto
             {
                 BookingDetailId = bookingDetail.BookingDetailId,
-                Version = bookingDetail.Version
+                Version = bookingDetail.Version,                                
             };
     }
 }

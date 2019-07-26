@@ -13,7 +13,7 @@ namespace KidsToyHive.Domain.Services
         }
         public bool IsItemAvailable(DateTime date, BookingTimeSlot timeSlot, Guid productId)
         {
-            throw new NotImplementedException();
+            return true;
         }
     }
 }
