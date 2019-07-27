@@ -6,6 +6,8 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using KidsToyHive.Domain.Models.DomainEvents;
+using KidsToyHive.Domain.Common;
+using System.Collections.Generic;
 
 namespace KidsToyHive.Domain.Features.Customers
 {
@@ -19,8 +21,9 @@ namespace KidsToyHive.Domain.Features.Customers
             }
         }
 
-        public class Request : IRequest<Response> {
+        public class Request : Command<Response> {
             public CustomerDto Customer { get; set; }
+            public override IEnumerable<string> SideEffects => new string[] { "Customer" };
         }
 
         public class Response
@@ -50,12 +53,14 @@ namespace KidsToyHive.Domain.Features.Customers
                 customer.LastName = request.Customer.LastName;
                 customer.PhoneNumber = request.Customer.PhoneNumber;
                 customer.Email = request.Customer.Email;
-                customer.Address = new Address(
-                    request.Customer.Address.Street,
-                    request.Customer.Address.City,
-                    request.Customer.Address.Province,
-                    request.Customer.Address.Province,
-                    request.Customer.Address.PostalCode);
+
+                if(request.Customer.Address != null)
+                    customer.Address = new Address(
+                        request.Customer.Address.Street,
+                        request.Customer.Address.City,
+                        request.Customer.Address.Province,
+                        request.Customer.Address.Province,
+                        request.Customer.Address.PostalCode);
 
                 customer.CustomerLocations.Clear();
 
@@ -81,6 +86,8 @@ namespace KidsToyHive.Domain.Features.Customers
                         customerLocationDto.Location.Address.Province,
                         customerLocationDto.Location.Address.Province,
                         customerLocationDto.Location.Address.PostalCode);
+
+                    customer.CustomerLocations.Add(customerLocation);
                 }
 
                 await _context.SaveChangesAsync(cancellationToken);

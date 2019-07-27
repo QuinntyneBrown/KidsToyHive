@@ -1,5 +1,6 @@
 using KidsToyHive.Domain.DataAccess;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +26,13 @@ namespace KidsToyHive.Domain.Features.Customers
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
                 => new Response()
                 {
-                    Customer = (await _context.Customers.FindAsync(request.CustomerId)).ToDto()
+                    Customer = (await _context.Customers
+                    .Include(x => x.Address)
+                    .Include(x => x.CustomerLocations)
+                    .ThenInclude(x => x.Location)
+                    .ThenInclude(x => x.Adddress)
+                    .SingleAsync(x => x.CustomerId == request.CustomerId)                    
+                    ).ToDto()
                 };
         }
     }

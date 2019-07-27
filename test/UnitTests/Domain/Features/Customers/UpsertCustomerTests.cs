@@ -1,8 +1,12 @@
+using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Features.Addresses;
 using KidsToyHive.Domain.Features.Customers;
+using KidsToyHive.Domain.Features.Locations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -22,6 +26,46 @@ namespace UnitTests.Domain.Features.Customers
             using (var context = new AppDbContext(options, mediator))
             {
                 var upsertCustomerHandler = new UpsertCustomer.Handler(context);
+
+                var address = new AddressDto
+                {
+                    City = "Toronto",
+                    Province = "Ontario",
+                    PostalCode = "M5V 1A8"
+                };
+
+                var customer = new CustomerDto
+                {
+                    FirstName = "Quinntyne",
+                    LastName = "Brown",
+                    Email = "quinntynebrown@gmail.com",
+                    PhoneNumber = "416 967 1111",
+                    Address = address
+                };
+
+                customer.CustomerLocations.Add(new CustomerLocationDto
+                {
+                    Location = new LocationDto {
+                        Type = LocationType.DeliveryPickUp,
+                        Address = address
+                    }
+                });
+
+                var result = await upsertCustomerHandler.Handle(new UpsertCustomer.Request {
+                    Customer = customer
+                }, default);
+
+
+                var persistedCustomer = context.Customers
+                    .Include(x => x.Address)
+                    .Include(x => x.CustomerLocations)
+                    .ThenInclude(x => x.Location)
+                    .ThenInclude(x => x.Adddress)
+                    .First();
+
+                Assert.Single(persistedCustomer.CustomerLocations);
+                Assert.Equal(1, persistedCustomer.Version);
+
             }
         }
     }
