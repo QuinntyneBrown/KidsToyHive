@@ -1,3 +1,4 @@
+using KidsToyHive.Core.Enums;
 using System;
 
 namespace KidsToyHive.Domain.Models
@@ -6,6 +7,7 @@ namespace KidsToyHive.Domain.Models
     {
         public Guid TaxId { get; set; }
         public int Rate { get; set; }
+        public TaxRateType Type { get; set; } = TaxRateType.HST;
         public DateTime Effective { get; set; }
     }
 }
