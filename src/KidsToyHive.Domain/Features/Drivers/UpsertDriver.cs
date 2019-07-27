@@ -41,7 +41,9 @@ namespace KidsToyHive.Domain.Features.Drivers
                     _context.Drivers.Add(driver);
                 }
 
-                driver.FirstName = request.Driver.Name;
+                driver.FirstName = request.Driver.FirstName;
+                driver.LastName = request.Driver.LastName;
+                driver.Email = request.Driver.Email;
 
                 await _context.SaveChangesAsync(cancellationToken);
 

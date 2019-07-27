@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace KidsToyHive.Domain.Common
 {
-    public abstract class Command<TResponse> : IRequest<TResponse>
+    public abstract class Command<TResponse> : AuthenticatedRequest<TResponse>
     {
         public virtual int Version { get; }
         public virtual string Key { get; }

@@ -70,6 +70,7 @@ namespace KidsToyHive.Domain.Features.Users
 
                 foreach (var profile in profiles) {
                     claims.Add(new Claim("ProfileId", $"{profile.ProfileId}"));
+
                     if (profile.Type == ProfileType.Customer)
                         claims.Add(new Claim(ClaimTypes.Role, nameof(ProfileType.Customer)));
 

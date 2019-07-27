@@ -9,14 +9,16 @@ namespace KidsToyHive.Domain.Features.Drivers
         public DriverDtoValidator()
         {
             RuleFor(x => x.DriverId).NotNull();
-            RuleFor(x => x.Name).NotNull();
+            RuleFor(x => x.FirstName).NotNull();
         }
     }
 
     public class DriverDto
     {        
         public Guid DriverId { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
         public int Version { get; set; }
     }
 
@@ -26,7 +28,7 @@ namespace KidsToyHive.Domain.Features.Drivers
             => new DriverDto
             {
                 DriverId = driver.DriverId,
-                Name = driver.FirstName,
+                FirstName = driver.FirstName,
                 Version = driver.Version
             };
     }

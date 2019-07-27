@@ -14,6 +14,7 @@ namespace KidsToyHive.Api
             CardLayoutConfiguration.Seed(context);
             UserConfiguration.Seed(context, configuration);
             TaxConfiguration.Seed(context);
+            DriverConfiguration.Seed(context, configuration);
             //DashboardConfiguration.Seed(context);
         }
 
@@ -24,6 +25,28 @@ namespace KidsToyHive.Api
             {
                 if (context.CardLayouts.FirstOrDefault(x => x.Name == "Poster") == null)
                     context.CardLayouts.Add(new CardLayout() { Name = "Poster" });
+
+                context.SaveChanges();
+            }
+        }
+
+        internal class DriverConfiguration
+        {
+            public static void Seed(AppDbContext context, IConfiguration configuration)
+            {
+                foreach(var user in context.Users)
+                {
+                    if(configuration["Seed:DefaultUser:Username"].Contains(user.Username))
+                    {
+                        if (context.Drivers.Where(x => x.Email == user.Username).FirstOrDefault() == null)
+                        {
+                            context.Drivers.Add(new Driver
+                            {
+                                Email = user.Username
+                            });
+                        }
+                    }
+                }
 
                 context.SaveChanges();
             }
