@@ -1,4 +1,5 @@
-﻿using KidsToyHive.Core.Enums;
+﻿using KidsToyHive.Api;
+using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.BookingDetails;
 using KidsToyHive.Domain.Features.Bookings;
@@ -27,6 +28,8 @@ namespace UnitTests.Domain.Features.Bookings
 
             using (var context = new AppDbContext(options, mediator))
             {
+                SeedData.Seed(context, ConfigurationHelper.Seed);
+
                 var productId = Guid.NewGuid();
                 var mockInventoryService = new Mock<IInventoryService>();
                 mockInventoryService.Setup(x => x.IsItemAvailable(It.IsAny<DateTime>(), It.IsAny<BookingTimeSlot>(), It.IsAny<Guid>())).Returns(true);
