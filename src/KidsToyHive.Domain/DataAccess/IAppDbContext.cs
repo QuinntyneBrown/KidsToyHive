@@ -7,6 +7,7 @@ namespace KidsToyHive.Domain.DataAccess
 {
     public interface IAppDbContext
     {
+        DbSet<Bin> Bins { get; }
         DbSet<Booking> Bookings { get; }
         DbSet<BookingDetail> BookingDetails { get; }
         DbSet<Brand> Brands { get; }
@@ -33,6 +34,8 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<Signature> Signatures { get; }
         DbSet<Tax> Taxes { get; }
         DbSet<User> Users { get; }
+        DbSet<Warehouse> Warehouses { get; }
+
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

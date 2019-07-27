@@ -69,6 +69,7 @@ namespace KidsToyHive.Domain.DataAccess
             return result;
         }
 
+        public DbSet<Bin> Bins { get; private set; }
         public DbSet<Booking> Bookings { get; private set; }
         public DbSet<BookingDetail> BookingDetails { get; private set; }
         public DbSet<Brand> Brands { get; private set; }
@@ -95,6 +96,7 @@ namespace KidsToyHive.Domain.DataAccess
         public DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; private set; }
         public DbSet<Tax> Taxes { get; private set; }
         public DbSet<User> Users { get; private set; }
+        public DbSet<Warehouse> Warehouses { get; private set; }
     }
 
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>

@@ -49,7 +49,6 @@ namespace KidsToyHive.Domain.Features.Bookings
                     shipment.LocationId = customerLocation.Location.LocationId;
                 }
 
-
                 shipment.ShipmentBookings.Add(shippingBooking);
 
                 await _context.Shipments.AddAsync(shipment);

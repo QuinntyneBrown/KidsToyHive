@@ -15,6 +15,8 @@ namespace KidsToyHive.Api
             UserConfiguration.Seed(context, configuration);
             TaxConfiguration.Seed(context);
             DriverConfiguration.Seed(context, configuration);
+            ProductConfiguration.Seed(context);
+            InventoryItemConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
 
@@ -68,8 +70,26 @@ namespace KidsToyHive.Api
             public static void Seed(AppDbContext context)
             {
                 if (context.Products.FirstOrDefault() == null)
-                    context.Products.Add(new Product {
+                    context.Products.Add(new Product
+                    {
+                        Name = "Jungle Jumparoo"
+                    });
 
+                context.SaveChanges();
+            }
+        }
+
+        internal class InventoryItemConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                var product = context.Products.First();
+
+                if (context.InventoryItems.FirstOrDefault() == null)
+                    context.InventoryItems.Add(new InventoryItem
+                    {
+                        Quantity = 1,
+                        ProductId = product.ProductId
                     });
 
                 context.SaveChanges();

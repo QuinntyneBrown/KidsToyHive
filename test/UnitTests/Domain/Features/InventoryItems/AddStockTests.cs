@@ -22,6 +22,10 @@ namespace UnitTests.Domain.Features.InventoryItems
             using (var context = new AppDbContext(options, mediator))
             {
                 var addStockHandler = new AddStock.Handler(context);
+
+                var result = await addStockHandler.Handle(new AddStock.Request { }, default);
+
+                Assert.NotNull(result);
             }
         }
     }
