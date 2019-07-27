@@ -20,6 +20,12 @@ namespace KidsToyHive.Api.Controllers
         public async Task<ActionResult<GetBookings.Response>> Get()
             => await _meditator.Send(new GetBookings.Request());
 
+        [HttpGet("my")]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(GetBookings.Response), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<GetMyBookings.Response>> GetMy()
+            => await _meditator.Send(new GetMyBookings.Request());
+
         [HttpGet("{bookingId}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetBookingById.Response), (int)HttpStatusCode.OK)]
