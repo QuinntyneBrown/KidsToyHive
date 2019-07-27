@@ -39,6 +39,20 @@ namespace KidsToyHive.Api
                 context.SaveChanges();
             }
         }
+
+        internal class ProductConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.Products.FirstOrDefault() == null)
+                    context.Products.Add(new Product {
+
+                    });
+
+                context.SaveChanges();
+            }
+        }
+
         internal class CardConfiguration
         {
             public static void Seed(AppDbContext context)
