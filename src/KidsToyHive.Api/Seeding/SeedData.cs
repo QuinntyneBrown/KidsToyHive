@@ -1,6 +1,7 @@
 ﻿using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 
@@ -16,6 +17,7 @@ namespace KidsToyHive.Api
             TaxConfiguration.Seed(context);
             DriverConfiguration.Seed(context, configuration);
             ProductConfiguration.Seed(context);
+            WarehouseConfiguration.Seed(context);
             InventoryItemConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
@@ -83,9 +85,9 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                var product = context.Products.First();
+                var product = context.Products.Single(x => x.Name == "Jungle Jumparoo");
 
-                if (context.InventoryItems.FirstOrDefault() == null)
+                if (context.InventoryItems.Include(x => x.Product).FirstOrDefault(x => x.Product.Name == "Jungle Jumparoo") == null)
                     context.InventoryItems.Add(new InventoryItem
                     {
                         Quantity = 1,
@@ -169,5 +171,15 @@ namespace KidsToyHive.Api
             }
         }
 
+        internal class WarehouseConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.Warehouses.FirstOrDefault(x => x.Name == "DefaultWarehouse") == null)
+                    context.Warehouses.Add(new Warehouse() { Name = "DefaultWarehouse" });
+
+                context.SaveChanges();
+            }
+        }
     }
 }

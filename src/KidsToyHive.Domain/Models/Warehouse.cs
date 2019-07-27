@@ -11,5 +11,7 @@ namespace KidsToyHive.Domain.Models
         public Location Location { get; set; }
         public ICollection<Bin> Bins { get; set; }
         = new HashSet<Bin>();
+        public ICollection<InventoryItem> InventoryItems { get; set; }
+        = new HashSet<InventoryItem>();
     }
 }
