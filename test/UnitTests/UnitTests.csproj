@@ -31,6 +31,7 @@
     <Folder Include="Domain\Features\Shipments\" />
     <Folder Include="Domain\Sagas\" />
     <Folder Include="Domain\Services\" />
+    <Folder Include="Api\" />
   </ItemGroup>
 
 </Project>

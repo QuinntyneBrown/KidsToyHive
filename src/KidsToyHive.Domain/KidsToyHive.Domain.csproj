@@ -12,6 +12,7 @@
     <Folder Include="Features\Addresses\" />
     <Folder Include="Features\Locations\" />
     <Folder Include="Features\Drivers\" />
+    <Folder Include="Features\Taxes\" />
     <Folder Include="Features\ShipmentSalesOrders\" />
     <Folder Include="Features\SalesOrderDetails\" />
   </ItemGroup>

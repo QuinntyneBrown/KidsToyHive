@@ -8,6 +8,6 @@ namespace KidsToyHive.Domain.Models
         public int Quantity { get; set; }        
         public Guid ProductId { get; set; }
         public Product Product { get; set; }
-        public float Cost { get; set; }
+        public int Cost { get; set; }
     }
 }

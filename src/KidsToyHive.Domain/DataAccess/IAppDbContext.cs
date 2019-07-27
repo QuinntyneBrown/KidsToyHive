@@ -31,6 +31,7 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<ShipmentBooking> ShipmentBookings { get; }
         DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; }
         DbSet<Signature> Signatures { get; }
+        DbSet<Tax> Taxes { get; }
         DbSet<User> Users { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);

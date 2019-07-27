@@ -20,6 +20,6 @@ namespace KidsToyHive.Domain.Models
         public BookingStatus Status { get; set; } = BookingStatus.New;
         public ICollection<BookingDetail> BookingDetails { get; set; } 
             = new HashSet<BookingDetail>();
-        public float Cost => BookingDetails.Sum(x => x.Cost);
+        public int Cost => BookingDetails.Sum(x => x.Cost);
     }
 }

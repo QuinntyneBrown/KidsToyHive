@@ -14,7 +14,7 @@ namespace KidsToyHive.Domain.Models
         public string Description { get; set; }
         public ProductCategory ProductCategory { get; set; }
         public Brand Brand { get; set; }
-        public float Price { get; set; }
-        public float HourlyRate { get; set; } = 31.25f; 
+        public int Price { get; set; }
+        public int HourlyRate { get; set; } = 3125; 
     }
 }

@@ -1,7 +1,6 @@
 ﻿using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Linq;
 
@@ -13,7 +12,8 @@ namespace KidsToyHive.Api
         {
             CardConfiguration.Seed(context);
             CardLayoutConfiguration.Seed(context);
-            UserConfiguration.Seed(context, configuration);            
+            UserConfiguration.Seed(context, configuration);
+            TaxConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
 
@@ -29,6 +29,16 @@ namespace KidsToyHive.Api
             }
         }
 
+        internal class TaxConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.Taxes.FirstOrDefault() == null)
+                    context.Taxes.Add(new Tax() { Rate = 13 });
+
+                context.SaveChanges();
+            }
+        }
         internal class CardConfiguration
         {
             public static void Seed(AppDbContext context)
