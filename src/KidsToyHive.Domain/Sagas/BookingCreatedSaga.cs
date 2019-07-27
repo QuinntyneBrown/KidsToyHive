@@ -3,7 +3,9 @@ using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,6 +24,12 @@ namespace KidsToyHive.Domain.Features.Bookings
             {
                 var booking = notification.Booking;
 
+                var customer = await _context
+                    .Customers
+                    .Include(x => x.CustomerLocations)
+                    .ThenInclude(x => x.Location)
+                    .SingleAsync(x => x.CustomerId == booking.CustomerId);
+
                 var shippingBooking = new ShipmentBooking()
                 {
                     BookingId = booking.BookingId
@@ -30,8 +38,17 @@ namespace KidsToyHive.Domain.Features.Bookings
                 var shipment = new Shipment()
                 {
                     Type = ShipmentType.Delivery,
-                    LocationId = booking.LocationId
                 };
+
+                var customerLocation = customer.CustomerLocations
+                    .SingleOrDefault(x => x.Location.Type == LocationType.Delivery 
+                    || x.Location.Type == LocationType.DeliveryPickUp);
+
+                if (customerLocation != null)
+                {
+                    shipment.LocationId = customerLocation.Location.LocationId;
+                }
+
 
                 shipment.ShipmentBookings.Add(shippingBooking);
 

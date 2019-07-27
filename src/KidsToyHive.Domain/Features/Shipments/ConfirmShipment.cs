@@ -1,6 +1,7 @@
 using FluentValidation;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Models.DomainEvents;
 using MediatR;
 using System;
 using System.Threading;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Shipments
 {
-    public class ConfirmShipment
+    public class CompleteShipment
     {
 
         public class Validator: AbstractValidator<Request> {
@@ -45,13 +46,11 @@ namespace KidsToyHive.Domain.Features.Shipments
 
                 shipment.SignatureId = request.SignatureId;
 
-                await _context.SaveChangesAsync(cancellationToken);
+                shipment.RaiseDomainEvent(new ShipmentCompleted {
+                    ShipmentId = shipment.ShipmentId
+                });
 
-                if (shipment.Type == ShipmentType.Delivery)
-                    await _mediator.Publish(new ShipmentDelivered.Notification
-                    {
-                        ShipmentId = shipment.ShipmentId
-                    });
+                await _context.SaveChangesAsync(cancellationToken);
 
                 return new Response() {
                     ShipmentId = shipment.ShipmentId,
