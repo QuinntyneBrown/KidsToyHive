@@ -6,6 +6,7 @@ export * from "./dashboard-card.service";
 export * from "./dashboard.service";
 export * from "./digital-asset.service";
 export * from "./inventory-item.service";
+export * from "./location.service";
 export * from "./product-category.service";
 export * from "./product.service";
 export * from "./role.service";

@@ -28,7 +28,7 @@ namespace KidsToyHive.Domain.Features.Bookings
             public int ExpYear { get; set; }
             public string Cvc { get; set; }
             public int Value { get; set; }
-            public string Currency { get; set; }
+            public string Currency { get; set; } = "CAD"
             public Guid BookingId { get; set; }
         }
 

@@ -34,10 +34,24 @@ export class BookingService {
     });
   }
 
-  public create(options: { booking: Booking }): Observable<{ bookingId: string }> {
-    return this._client.post<{ bookingId: string }>(`${this._baseUrl}api/commands`, { booking: options.booking }, {
+  public create(options: { booking: Booking }): Observable<{ bookingId: string, version: number }> {
+    return this._client.post<{ bookingId: string, version: number }>(`${this._baseUrl}api/commands`, { booking: options.booking }, {
       headers: {
         "OperationId":"UpsertBooking"
+      }
+    });
+  }
+
+  public processBookingPayment(options: { 
+    number: number,
+    expMonth: number,
+    expYear: number,
+    cvc: string,
+    bookingId: string 
+  }): Observable<{ bookingId: string, version: number }> {
+    return this._client.post<{ bookingId: string, version: number }>(`${this._baseUrl}api/commands`, options, {
+      headers: {
+        "OperationId":"ProcessBookingPayment"
       }
     });
   }
