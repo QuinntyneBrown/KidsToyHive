@@ -35,3 +35,7 @@ a, a:link, a:visited {
     color: white;
     text-decoration: none;
 }
+
+.active-link {
+    font-weight: 600;
+}

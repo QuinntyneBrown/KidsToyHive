@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent, ConfirmationPageComponent, OrderPageComponent, AboutPageComponent } from './pages';
-import { CatalogPageComponent } from './pages/catalog-page';
 import { ToysPageComponent } from './pages/toys-page';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
 

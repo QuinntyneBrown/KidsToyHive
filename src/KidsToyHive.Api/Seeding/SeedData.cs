@@ -24,6 +24,7 @@ namespace KidsToyHive.Api
             ProductConfiguration.Seed(context);
             WarehouseConfiguration.Seed(context);
             InventoryItemConfiguration.Seed(context);
+            HtmlContentConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
 
@@ -56,6 +57,28 @@ namespace KidsToyHive.Api
                         }
                     }
                 }
+
+                context.SaveChanges();
+            }
+        }
+
+        internal class HtmlContentConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.HtmlContents.FirstOrDefault(x => x.Name == "TermsAndConditions.html") == null)
+                    context.HtmlContents.Add(new HtmlContent
+                    {
+                        Name = "TermsAndConditions.html",
+                        Value = DigitalAssetLocator.GetString("TermsAndConditions.html")
+                    });
+
+                if (context.HtmlContents.FirstOrDefault(x => x.Name == "About.html") == null)
+                    context.HtmlContents.Add(new HtmlContent
+                    {
+                        Name = "About.html",
+                        Value = DigitalAssetLocator.GetString("About.html")
+                    });
 
                 context.SaveChanges();
             }
@@ -226,6 +249,52 @@ namespace KidsToyHive.Api
 
         internal class DigitalAssetLocator
         {
+            public static string GetString(string name)
+            {
+                var lines = new List<string>();
+                var fullName = default(string);
+                var assembly = default(Assembly);
+                var embededResourceNames = new List<string>();
+
+                foreach (var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+                {
+                    foreach (Assembly _assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        try
+                        {
+                            foreach (var item in _assembly.GetManifestResourceNames()) embededResourceNames.Add(item);
+
+                            if (!string.IsNullOrEmpty(_assembly.GetManifestResourceNames().SingleOrDefaultResourceName(name)))
+                            {
+                                fullName = _assembly.GetManifestResourceNames().SingleOrDefaultResourceName(name);
+                                assembly = _assembly;
+                            }
+                        }
+                        catch (System.NotSupportedException notSupportedException)
+                        {
+                            //swallow
+                        }
+                    }
+                }
+
+                if (fullName == default(string) && assembly == default(Assembly))
+                    return null;
+
+                try
+                {
+                    using (var stream = assembly.GetManifestResourceStream(fullName))
+                    {
+                        using (var streamReader = new StreamReader(stream))
+                        {
+                            return streamReader.ReadToEnd();
+                        }
+                    }
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+            }
             public static byte[] Get(string name)
             {
                 var lines = new List<string>();

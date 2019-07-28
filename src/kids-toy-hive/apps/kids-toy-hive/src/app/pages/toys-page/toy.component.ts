@@ -13,8 +13,14 @@ export class ToyComponent implements OnDestroy, OnInit  {
   @Input()
   public toy:Product;
 
+  @Input()
+  public callToActionText:string;
+
+  @Input()
+  public imageUrl:string;
+  
   @Output()
-  public getItNowClick: EventEmitter<any> = new EventEmitter();
+  public callToActionClick: EventEmitter<any> = new EventEmitter();
 
   @Input()
   public baseUrl:string;
