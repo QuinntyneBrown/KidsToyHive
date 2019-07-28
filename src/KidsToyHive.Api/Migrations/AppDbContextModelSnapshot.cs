@@ -376,13 +376,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int>("HourlyRate");
+                    b.Property<bool>("IsRental");
 
                     b.Property<string>("Name");
 
                     b.Property<int>("Price");
 
                     b.Property<Guid?>("ProductCategoryId");
+
+                    b.Property<int>("RentalPrice");
 
                     b.Property<Guid>("TenantKey");
 

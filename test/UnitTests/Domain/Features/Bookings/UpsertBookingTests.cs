@@ -42,7 +42,7 @@ namespace UnitTests.Domain.Features.Bookings
                     BookingDetails = new List<BookingDetailDto>
                 {
                     new BookingDetailDto {
-                        Quantity = 1, Product = new ProductDto { ProductId = productId, HourlyRate = 3125 }
+                        Quantity = 1, Product = new ProductDto { ProductId = productId, RentalPrice = 3125 }
                     }
                 }
                 };

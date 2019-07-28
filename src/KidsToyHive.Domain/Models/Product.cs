@@ -1,3 +1,4 @@
+using KidsToyHive.Core.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -15,6 +16,9 @@ namespace KidsToyHive.Domain.Models
         public ProductCategory ProductCategory { get; set; }
         public Brand Brand { get; set; }
         public int Price { get; set; }
-        public int HourlyRate { get; set; } = 3125; 
+        public int RentalPrice { get; set; } = 3125;
+
+        public RentalPeriod RentalPeriod = RentalPeriod.Hour;
+        public bool IsRental { get; set; } = true;
     }
 }

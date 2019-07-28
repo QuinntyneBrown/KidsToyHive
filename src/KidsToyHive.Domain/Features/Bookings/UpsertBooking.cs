@@ -79,11 +79,13 @@ namespace KidsToyHive.Domain.Features.Bookings
                     
                 foreach(var bookingDetail in request.Booking.BookingDetails)
                 {
+                    var product = await _context.Products.FindAsync(bookingDetail.ProductId);
+
                     booking.BookingDetails.Add(new BookingDetail
                     {
                         ProductId = bookingDetail.ProductId,
                         Quantity = bookingDetail.Quantity,
-                        Cost = (4 * bookingDetail.Product.HourlyRate) * bookingDetail.Quantity
+                        Cost = (4 * product.RentalPrice) * bookingDetail.Quantity
                     });
                 }
 

@@ -349,7 +349,8 @@ namespace KidsToyHive.Api.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
-                    HourlyRate = table.Column<int>(nullable: false)
+                    RentalPrice = table.Column<int>(nullable: false),
+                    IsRental = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

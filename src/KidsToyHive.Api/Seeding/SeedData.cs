@@ -70,14 +70,14 @@ namespace KidsToyHive.Api
                     context.HtmlContents.Add(new HtmlContent
                     {
                         Name = "TermsAndConditions.html",
-                        Value = DigitalAssetLocator.GetString("TermsAndConditions.html")
+                        Value = StaticFileLocator.GetAsString("TermsAndConditions.html")
                     });
 
                 if (context.HtmlContents.FirstOrDefault(x => x.Name == "About.html") == null)
                     context.HtmlContents.Add(new HtmlContent
                     {
                         Name = "About.html",
-                        Value = DigitalAssetLocator.GetString("About.html")
+                        Value = StaticFileLocator.GetAsString("About.html")
                     });
 
                 context.SaveChanges();
@@ -130,7 +130,7 @@ namespace KidsToyHive.Api
                         {
                             Name = fileName,
                             ContentType = contentType,
-                            Bytes = DigitalAssetLocator.Get(fileName)
+                            Bytes = StaticFileLocator.Get(fileName)
                         }
                     });
                 }
@@ -247,9 +247,9 @@ namespace KidsToyHive.Api
             }
         }
 
-        internal class DigitalAssetLocator
+        internal class StaticFileLocator
         {
-            public static string GetString(string name)
+            public static string GetAsString(string name)
             {
                 var lines = new List<string>();
                 var fullName = default(string);
