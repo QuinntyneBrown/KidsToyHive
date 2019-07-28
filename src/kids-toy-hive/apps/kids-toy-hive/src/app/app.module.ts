@@ -8,14 +8,15 @@ import { DomainModule } from '@kids-toy-hive/domain';
 import { SharedModule } from '@kids-toy-hive/shared';
 import { environment } from '../environments/environment';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
-import { CatalogPageComponent } from './pages/catalog-page';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToysPageComponent, ToyComponent } from './pages/toys-page';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutPageComponent,
-    CatalogPageComponent,
+    ToysPageComponent,
+    ToyComponent,
     ConfirmationPageComponent,
     HomePageComponent,
     OrderPageComponent,

@@ -5,7 +5,7 @@
     margin: 0;
     padding: 0;
     color: rgb(255,255,255);
-    grid-template-columns: 1fr min-content;
+    grid-template-columns: 2fr 1fr;
 }
 
 h1 {
@@ -29,7 +29,9 @@ ul {
     margin: 0px 20px 0px 0px;
 }
 
-a {
+a, a:link, a:visited {
     cursor: pointer;
     margin: 0px 10px;
+    color: white;
+    text-decoration: none;
 }

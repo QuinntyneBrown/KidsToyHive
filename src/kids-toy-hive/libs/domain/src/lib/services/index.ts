@@ -1,4 +1,5 @@
 export * from "./address.service";
+export * from "./booking.service";
 export * from "./card.service";
 export * from "./customer.service";
 export * from "./dashboard-card.service";

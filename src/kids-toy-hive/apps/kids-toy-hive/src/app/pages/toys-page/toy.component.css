@@ -1,0 +1,22 @@
+:host {
+    display: grid;
+    border: 0.75px solid #ccc;
+    text-align: center;
+}
+
+img {
+    margin: 0 auto;
+    max-height: 300px;
+}
+
+button {
+    border: none;
+    background-color: pink;
+    height: 50px;
+    border-radius: 5px;
+    color:white;
+    margin: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}

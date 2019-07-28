@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
-import { SalesOrderService } from '@kids-toy-hive/domain';
+import { CustomerService, BookingService } from '@kids-toy-hive/domain';
 
 @Component({
   templateUrl: './order-page.component.html',
@@ -10,7 +10,10 @@ import { SalesOrderService } from '@kids-toy-hive/domain';
 export class OrderPageComponent implements OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
 
-  constructor(private _salesOrderService: SalesOrderService ) {
+  constructor(
+    private readonly _customerService: CustomerService,
+    private readonly _bookingService: BookingService
+  ) {
 
   }
   ngOnDestroy() {

@@ -11,6 +11,7 @@ export * from "./digital-asset.model";
 export * from "./inventory-item.model";
 export * from "./location.model";
 export * from "./product-category.model";
+export * from "./product-image.model";
 export * from "./product.model";
 export * from "./role.model";
 export * from "./sales-order-detail.model";
