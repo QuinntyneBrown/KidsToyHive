@@ -1,3 +1,6 @@
 <ul>
-    <li></li>
+    <li *ngFor="let product of products$ | async">
+        <a>{{ product.name }}</a>
+        <img *ngFor="let productImage of product.productImages" src='{{ baseUrl }}{{ productImage.url }}'/>
+    </li>
 </ul>

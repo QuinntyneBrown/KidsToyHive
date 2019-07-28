@@ -13,8 +13,6 @@ export class ProductService {
   ) { }
 
   public get(): Observable<Array<Product>> {
-    alert(this._baseUrl);
-
     return this._client.get<{ products: Array<Product> }>(`${this._baseUrl}/api/products`)
       .pipe(
         map(x => x.products)

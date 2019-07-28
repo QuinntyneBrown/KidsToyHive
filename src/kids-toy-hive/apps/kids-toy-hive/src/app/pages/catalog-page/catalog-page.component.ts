@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { ProductService } from '@kids-toy-hive/domain';
+import { baseUrl } from '@kids-toy-hive/core';
 import { Product } from 'libs/domain/src/lib/models';
 
 @Component({
@@ -12,7 +13,9 @@ export class CatalogPageComponent implements OnInit, OnDestroy  {
   public onDestroy: Subject<void> = new Subject<void>();
   public products$:Observable<Product[]>;
 
-  constructor(private readonly _productService: ProductService) {
+  constructor(
+    @Inject(baseUrl) public baseUrl:string,
+    private readonly _productService: ProductService) {
 
   }
 
@@ -21,9 +24,6 @@ export class CatalogPageComponent implements OnInit, OnDestroy  {
   }
 
   ngOnInit() {
-    
-    //this.products$ = this._productService.get();
-
-    this._productService.get().subscribe();
+    this.products$ = this._productService.get();
   }
 }
