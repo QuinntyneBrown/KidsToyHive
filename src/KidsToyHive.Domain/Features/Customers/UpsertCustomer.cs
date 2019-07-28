@@ -59,7 +59,6 @@ namespace KidsToyHive.Domain.Features.Customers
                         request.Customer.Address.Street,
                         request.Customer.Address.City,
                         request.Customer.Address.Province,
-                        request.Customer.Address.Province,
                         request.Customer.Address.PostalCode);
 
                 customer.CustomerLocations.Clear();
@@ -83,7 +82,6 @@ namespace KidsToyHive.Domain.Features.Customers
                     customerLocation.Location.Adddress = new Address(
                         customerLocationDto.Location.Address.Street,
                         customerLocationDto.Location.Address.City,
-                        customerLocationDto.Location.Address.Province,
                         customerLocationDto.Location.Address.Province,
                         customerLocationDto.Location.Address.PostalCode);
 

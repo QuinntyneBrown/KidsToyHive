@@ -63,6 +63,8 @@ namespace KidsToyHive.Api.Migrations
                     Address_City = table.Column<string>(nullable: true),
                     Address_Province = table.Column<string>(nullable: true),
                     Address_PostalCode = table.Column<string>(nullable: true),
+                    Address_Latitude = table.Column<decimal>(nullable: true),
+                    Address_Longitude = table.Column<decimal>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -115,6 +117,8 @@ namespace KidsToyHive.Api.Migrations
                     Adddress_City = table.Column<string>(nullable: true),
                     Adddress_Province = table.Column<string>(nullable: true),
                     Adddress_PostalCode = table.Column<string>(nullable: true),
+                    Adddress_Latitude = table.Column<decimal>(nullable: true),
+                    Adddress_Longitude = table.Column<decimal>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false)
                 },
@@ -163,21 +167,6 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesOrders", x => x.SalesOrderId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ShipmentSalesOrders",
-                columns: table => new
-                {
-                    ShipmentSalesOrderId = table.Column<Guid>(nullable: false),
-                    ShipmentId = table.Column<Guid>(nullable: false),
-                    SalesOrderId = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Version = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ShipmentSalesOrders", x => x.ShipmentSalesOrderId);
                 });
 
             migrationBuilder.CreateTable(
@@ -420,9 +409,12 @@ namespace KidsToyHive.Api.Migrations
                     TenantKey = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
+                    TrackingNumber = table.Column<string>(nullable: true),
+                    TotalWeight = table.Column<decimal>(nullable: true),
                     DriverId = table.Column<Guid>(nullable: false),
                     LocationId = table.Column<Guid>(nullable: true),
                     SignatureId = table.Column<Guid>(nullable: false),
+                    Comment = table.Column<string>(nullable: true),
                     Type = table.Column<byte>(nullable: false),
                     Status = table.Column<int>(nullable: false)
                 },
@@ -575,6 +567,52 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Shipments",
                         principalColumn: "ShipmentId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShipmentItems",
+                columns: table => new
+                {
+                    ShipmentItemId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    ShipmentId = table.Column<Guid>(nullable: false),
+                    SalesOrderDetailId = table.Column<Guid>(nullable: true),
+                    BookingDetailId = table.Column<Guid>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    Comments = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShipmentItems", x => x.ShipmentItemId);
+                    table.ForeignKey(
+                        name: "FK_ShipmentItems_Shipments_ShipmentId",
+                        column: x => x.ShipmentId,
+                        principalTable: "Shipments",
+                        principalColumn: "ShipmentId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShipmentSalesOrders",
+                columns: table => new
+                {
+                    ShipmentSalesOrderId = table.Column<Guid>(nullable: false),
+                    ShipmentId = table.Column<Guid>(nullable: false),
+                    SalesOrderId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Version = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShipmentSalesOrders", x => x.ShipmentSalesOrderId);
+                    table.ForeignKey(
+                        name: "FK_ShipmentSalesOrders_Shipments_ShipmentId",
+                        column: x => x.ShipmentId,
+                        principalTable: "Shipments",
+                        principalColumn: "ShipmentId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -742,6 +780,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "ShipmentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ShipmentItems_ShipmentId",
+                table: "ShipmentItems",
+                column: "ShipmentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Shipments_DriverId",
                 table: "Shipments",
                 column: "DriverId");
@@ -755,6 +798,11 @@ namespace KidsToyHive.Api.Migrations
                 name: "IX_Shipments_SignatureId",
                 table: "Shipments",
                 column: "SignatureId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShipmentSalesOrders_ShipmentId",
+                table: "ShipmentSalesOrders",
+                column: "ShipmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Warehouses_LocationId",
@@ -796,6 +844,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "ShipmentBookings");
+
+            migrationBuilder.DropTable(
+                name: "ShipmentItems");
 
             migrationBuilder.DropTable(
                 name: "ShipmentSalesOrders");

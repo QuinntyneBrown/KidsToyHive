@@ -61,13 +61,16 @@ namespace KidsToyHive.Domain.Features.Bookings
             }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-                var booking = await _context.Bookings.FindAsync(request.Booking.BookingId);
+                Booking booking = await _context.Bookings.FindAsync(request.Booking.BookingId);
 
                 if (booking == null) {
                     booking = new Booking();
                     booking.RaiseDomainEvent(new BookingCreated(booking));
                     _context.Bookings.Add(booking);
                 }
+                booking.CustomerId = request.Booking.CustomerId;
+
+                booking.LocationId = request.Booking.LocationId;
 
                 booking.BookingDetails.Clear();
 

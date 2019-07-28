@@ -1,5 +1,5 @@
 <kth-toy *ngFor='let toy of toys$ | async' 
-[toy]=toy 
+[title]='toy.name'
 [imageUrl]='buildImageUrl(toy)'
 [callToActionText]='"Rent It Now!"'
 (callToActionClick)='onGetItNowClick(toy)'>

@@ -92,6 +92,7 @@ namespace KidsToyHive.Domain.DataAccess
         public DbSet<Role> Roles { get; private set; }
         public DbSet<Signature> Signatures { get; set; }
         public DbSet<Shipment> Shipments { get; private set; }
+        public DbSet<ShipmentItem> ShipmentItems { get; private set; }
         public DbSet<ShipmentBooking> ShipmentBookings { get; private set; }
         public DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; private set; }
         public DbSet<Tax> Taxes { get; private set; }

@@ -1,6 +1,5 @@
 import { Component, OnDestroy, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Product } from '@kids-toy-hive/domain';
 
 @Component({
   templateUrl: './toy.component.html',
@@ -11,13 +10,13 @@ export class ToyComponent implements OnDestroy, OnInit  {
   public onDestroy: Subject<void> = new Subject<void>();
 
   @Input()
-  public toy:Product;
-
-  @Input()
   public callToActionText:string;
 
   @Input()
   public imageUrl:string;
+
+  @Input()
+  public title: string;
   
   @Output()
   public callToActionClick: EventEmitter<any> = new EventEmitter();

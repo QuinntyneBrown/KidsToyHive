@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190728194702_InitialCreate")]
+    [Migration("20190728202759_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -520,6 +520,8 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<Guid>("ShipmentId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Comment");
+
                     b.Property<DateTime>("Created");
 
                     b.Property<Guid>("DriverId");
@@ -531,6 +533,10 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<int>("Status");
 
                     b.Property<Guid>("TenantKey");
+
+                    b.Property<decimal?>("TotalWeight");
+
+                    b.Property<string>("TrackingNumber");
 
                     b.Property<byte>("Type");
 
@@ -569,6 +575,34 @@ namespace KidsToyHive.Api.Migrations
                     b.ToTable("ShipmentBookings");
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ShipmentItem", b =>
+                {
+                    b.Property<Guid>("ShipmentItemId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BookingDetailId");
+
+                    b.Property<string>("Comments");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<Guid?>("SalesOrderDetailId");
+
+                    b.Property<Guid>("ShipmentId");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("ShipmentItemId");
+
+                    b.HasIndex("ShipmentId");
+
+                    b.ToTable("ShipmentItems");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.ShipmentSalesOrder", b =>
                 {
                     b.Property<Guid>("ShipmentSalesOrderId")
@@ -583,6 +617,8 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<int>("Version");
 
                     b.HasKey("ShipmentSalesOrderId");
+
+                    b.HasIndex("ShipmentId");
 
                     b.ToTable("ShipmentSalesOrders");
                 });
@@ -708,6 +744,10 @@ namespace KidsToyHive.Api.Migrations
 
                             b1.Property<string>("City");
 
+                            b1.Property<decimal?>("Latitude");
+
+                            b1.Property<decimal?>("Longitude");
+
                             b1.Property<string>("PostalCode");
 
                             b1.Property<string>("Province");
@@ -785,6 +825,10 @@ namespace KidsToyHive.Api.Migrations
                             b1.Property<Guid>("LocationId");
 
                             b1.Property<string>("City");
+
+                            b1.Property<decimal?>("Latitude");
+
+                            b1.Property<decimal?>("Longitude");
 
                             b1.Property<string>("PostalCode");
 
@@ -873,6 +917,24 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Shipment", null)
                         .WithMany("ShipmentBookings")
                         .HasForeignKey("ShipmentId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ShipmentItem", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Shipment", "Shipment")
+                        .WithMany("ShipmentItems")
+                        .HasForeignKey("ShipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ShipmentSalesOrder", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Shipment", null)
+                        .WithMany("ShipmentSalesOrders")
+                        .HasForeignKey("ShipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Warehouse", b =>

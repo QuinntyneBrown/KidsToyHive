@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using KidsToyHive.Domain.Features.BookingDetails;
 using KidsToyHive.Core.Enums;
+using KidsToyHive.Domain.Features.Customers;
 
 namespace KidsToyHive.Domain.Features.Bookings
 {
@@ -12,6 +13,7 @@ namespace KidsToyHive.Domain.Features.Bookings
         public BookingDtoValidator()
         {
             RuleFor(x => x.BookingId).NotNull();
+            RuleFor(x => x.CustomerId).NotNull();
             RuleFor(x => x.Name).NotNull();
         }
     }
@@ -19,6 +21,9 @@ namespace KidsToyHive.Domain.Features.Bookings
     public class BookingDto
     {        
         public Guid BookingId { get; set; }
+        public Guid CustomerId { get; set; }
+        public Guid? LocationId { get; set; }
+        public CustomerDto Customer { get; set; }
         public ICollection<BookingDetailDto> BookingDetails { get; set; }
         = new HashSet<BookingDetailDto>();
         public string Name { get; set; }
@@ -33,7 +38,10 @@ namespace KidsToyHive.Domain.Features.Bookings
             => new BookingDto
             {
                 BookingId = booking.BookingId,
+                CustomerId = booking.CustomerId,
                 Name = booking.Name,
+                BookingTimeSlot = booking.BookingTimeSlot,
+                LocationId = booking.LocationId,
                 Version = booking.Version
             };
     }

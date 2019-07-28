@@ -12,10 +12,12 @@ namespace KidsToyHive.Domain.Models
         public string City { get; private set; }
         public string Province { get; private set; }
         public string PostalCode { get; private set; }
+        public decimal? Latitude { get; private set; }
+        public decimal? Longitude { get; private set; }
 
         private Address() { }
 
-        public Address(string street, string city, string province, string country, string postalCode)
+        public Address(string street, string city, string province, string postalCode)
         {
             Street = street;
             City = city;
@@ -29,6 +31,8 @@ namespace KidsToyHive.Domain.Models
             yield return City;
             yield return Province;
             yield return PostalCode;
+            yield return Longitude;
+            yield return Latitude;
         }
     }
 }
