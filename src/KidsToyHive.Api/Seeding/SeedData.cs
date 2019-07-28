@@ -82,9 +82,9 @@ namespace KidsToyHive.Api
                         Name = "Jungle Jumparoo",
                         ProductImages = Get(new string [] {
                             "JungleJumparoo1.jpg",
-                            "JungleJumparoo1.png",
-                            "JungleJumparoo1.jpg",
-                            "JungleJumparoo1.jpeg"
+                            "JungleJumparoo2.png",
+                            "JungleJumparoo3.jpg",
+                            "JungleJumparoo4.jpeg"
                         })
                     });
 

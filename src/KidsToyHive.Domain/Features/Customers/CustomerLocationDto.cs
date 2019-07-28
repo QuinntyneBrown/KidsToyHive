@@ -18,7 +18,7 @@ namespace KidsToyHive.Domain.Features.Customers
     {        
         public Guid CustomerLocationId { get; set; }
         public string Name { get; set; }
-        public Guid LocationId { get; set; }
+        public Guid? LocationId { get; set; }
         public LocationDto Location { get; set; }
         public int Version { get; set; }
     }

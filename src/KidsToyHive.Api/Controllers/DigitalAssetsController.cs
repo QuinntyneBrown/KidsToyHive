@@ -21,5 +21,13 @@ namespace KidsToyHive.Api.Controllers
             var response = await _mediator.Send(request);
             return new FileContentResult(response.DigitalAsset.Bytes, response.DigitalAsset.ContentType);
         }
+
+        [AllowAnonymous]
+        [HttpGet("serve/file/{name}")]
+        public async Task<IActionResult> Serve([FromRoute]GetDigitalAssetByName.Request request)
+        {
+            var response = await _mediator.Send(request);
+            return new FileContentResult(response.DigitalAsset.Bytes, response.DigitalAsset.ContentType);
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace KidsToyHive.Domain.Models
     {
         public Guid ShipmentId { get; set; }
         public Guid DriverId { get; set; }
-        public Guid LocationId { get; set; }             
+        public Guid? LocationId { get; set; }             
         public Guid SignatureId { get; set; }
         public Driver Driver { get; set; }
         public Location Location { get; set; }

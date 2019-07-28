@@ -16,7 +16,7 @@ namespace KidsToyHive.Domain.Features.Locations
 
     public class LocationDto
     {        
-        public Guid LocationId { get; set; }
+        public Guid? LocationId { get; set; }
         public AddressDto Address { get; set; }
         public LocationType Type { get; set; }
         public int Version { get; set; }
