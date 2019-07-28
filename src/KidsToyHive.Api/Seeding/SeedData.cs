@@ -1,9 +1,14 @@
 ﻿using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 namespace KidsToyHive.Api
 {
@@ -70,15 +75,46 @@ namespace KidsToyHive.Api
         internal class ProductConfiguration
         {
             public static void Seed(AppDbContext context)
-            {
+            {                
                 if (context.Products.FirstOrDefault() == null)
                     context.Products.Add(new Product
                     {
-                        Name = "Jungle Jumparoo"
+                        Name = "Jungle Jumparoo",
+                        ProductImages = Get(new string [] {
+                            "JungleJumparoo1.jpg",
+                            "JungleJumparoo1.png",
+                            "JungleJumparoo1.jpg",
+                            "JungleJumparoo1.jpeg"
+                        })
                     });
 
                 context.SaveChanges();
             }
+
+            private static ICollection<ProductImage> Get(string[] fileNames)
+            {
+                var productImages = new List<ProductImage>();
+
+                foreach(var fileName in fileNames)
+                {
+                    var provider = new FileExtensionContentTypeProvider();
+                    
+                    provider.TryGetContentType(fileName, out string contentType);
+
+                    productImages.Add(new ProductImage
+                    {
+                        DigitalAsset = new DigitalAsset()
+                        {
+                            Name = fileName,
+                            ContentType = contentType,
+                            Bytes = DigitalAssetLocator.Get(fileName)
+                        }
+                    });
+                }
+
+                return productImages;
+            }
+
         }
 
         internal class InventoryItemConfiguration
@@ -105,8 +141,14 @@ namespace KidsToyHive.Api
                 if (context.Cards.FirstOrDefault(x => x.Name == "Products") == null)
                     context.Cards.Add(new Card() { Name = "Products" });
 
-                if (context.Cards.FirstOrDefault(x => x.Name == "Orders") == null)
-                    context.Cards.Add(new Card() { Name = "Orders" });
+                if (context.Cards.FirstOrDefault(x => x.Name == "Sales Orders") == null)
+                    context.Cards.Add(new Card() { Name = "Sales Orders" });
+
+                if (context.Cards.FirstOrDefault(x => x.Name == "Bookings") == null)
+                    context.Cards.Add(new Card() { Name = "Bookings" });
+
+                if (context.Cards.FirstOrDefault(x => x.Name == "Shipments") == null)
+                    context.Cards.Add(new Card() { Name = "Shipments" });
 
                 if (context.Cards.FirstOrDefault(x => x.Name == "Inventory") == null)
                     context.Cards.Add(new Card() { Name = "Inventory" });
@@ -179,6 +221,83 @@ namespace KidsToyHive.Api
                     context.Warehouses.Add(new Warehouse() { Name = "DefaultWarehouse" });
 
                 context.SaveChanges();
+            }
+        }
+
+        internal class DigitalAssetLocator
+        {
+            public static byte[] Get(string name)
+            {
+                var lines = new List<string>();
+                var fullName = default(string);
+                var assembly = default(Assembly);
+                var embededResourceNames = new List<string>();
+
+                foreach (var assemblyName in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
+                {
+                    foreach (Assembly _assembly in AppDomain.CurrentDomain.GetAssemblies())
+                    {
+                        try
+                        {
+                            foreach (var item in _assembly.GetManifestResourceNames()) embededResourceNames.Add(item);
+
+                            if (!string.IsNullOrEmpty(_assembly.GetManifestResourceNames().SingleOrDefaultResourceName(name)))
+                            {
+                                fullName = _assembly.GetManifestResourceNames().SingleOrDefaultResourceName(name);
+                                assembly = _assembly;
+                            }
+                        }
+                        catch (System.NotSupportedException notSupportedException)
+                        {
+                            //swallow
+                        }
+                    }
+                }
+
+                if (fullName == default(string) && assembly == default(Assembly))
+                    return null;
+
+                try
+                {
+                    using (var stream = assembly.GetManifestResourceStream(fullName))
+                    {
+                        MemoryStream ms = new MemoryStream();
+                        stream.CopyTo(ms);
+                        return ms.ToArray();
+                    }
+                }
+                catch (Exception exception)
+                {
+                    throw exception;
+                }
+            }
+        }
+
+
+    }
+
+    public static class StringListExtensions
+    {
+
+        public static string SingleOrDefaultResourceName(this string[] collection, string name)
+        {
+            try
+            {
+                string result = null;
+
+                if (collection.Length == 0) return null;
+
+                result = collection.SingleOrDefault(x => x.EndsWith(name));
+
+                if (result != null)
+                    return result;
+
+                return collection.SingleOrDefault(x => x.EndsWith($".{name}.txt"));
+
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }
