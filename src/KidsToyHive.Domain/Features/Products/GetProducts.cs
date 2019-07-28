@@ -27,7 +27,11 @@ namespace KidsToyHive.Domain.Features.Products
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
                 =>  new Response()
                 {
-                    Products = await _context.Products.Select(x => x.ToDto()).ToArrayAsync()
+                    Products = await _context.Products                    
+                    .Include(x => x.ProductCategory)
+                    .Include(x => x.ProductImages)
+                    .ThenInclude(x => x.DigitalAsset)
+                    .Select(x => x.ToDto()).ToArrayAsync()
                 };
         }
     }

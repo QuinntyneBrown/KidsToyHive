@@ -17,7 +17,7 @@ const routes: Routes = [
     canActivate
   },
   {
-    path: 'catalog',
+    path: 'toys',
     component: CatalogPageComponent,
     canActivate
   },  

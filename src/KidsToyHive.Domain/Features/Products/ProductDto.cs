@@ -1,6 +1,8 @@
 using KidsToyHive.Domain.Models;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KidsToyHive.Domain.Features.Products
 {
@@ -18,6 +20,8 @@ namespace KidsToyHive.Domain.Features.Products
     {        
         public Guid ProductId { get; set; }
         public string Name { get; set; }
+        public ICollection<ProductImageDto> ProductImages { get; set; }
+        = new HashSet<ProductImageDto>();
         public int HourlyRate { get; set; }
         public int Version { get; set; }
     }
@@ -29,6 +33,7 @@ namespace KidsToyHive.Domain.Features.Products
             {
                 ProductId = product.ProductId,
                 Name = product.Name,
+                ProductImages = product.ProductImages.Select(x => x.ToDto()).ToList(),
                 Version = product.Version,
                 HourlyRate = product.HourlyRate
             };

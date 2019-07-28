@@ -424,8 +424,6 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid>("TenantKey");
 
-                    b.Property<string>("Url");
-
                     b.Property<int>("Version");
 
                     b.HasKey("ProductImageId");

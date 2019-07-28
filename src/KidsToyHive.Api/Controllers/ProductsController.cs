@@ -1,5 +1,6 @@
 using KidsToyHive.Domain.Features.Products;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ namespace KidsToyHive.Api.Controllers
 
         public ProductsController(IMediator mediator) => _meditator = mediator;
 
+        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetProducts.Response), (int)HttpStatusCode.OK)]

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190728004517_Intial")]
-    partial class Intial
+    [Migration("20190728035500_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -425,8 +425,6 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<Guid>("ProductId");
 
                     b.Property<Guid>("TenantKey");
-
-                    b.Property<string>("Url");
 
                     b.Property<int>("Version");
 

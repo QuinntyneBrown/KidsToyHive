@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace KidsToyHive.Api.Migrations
 {
-    public partial class Intial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -509,8 +509,7 @@ namespace KidsToyHive.Api.Migrations
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
-                    DigitalAssetId = table.Column<Guid>(nullable: false),
-                    Url = table.Column<string>(nullable: true)
+                    DigitalAssetId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {

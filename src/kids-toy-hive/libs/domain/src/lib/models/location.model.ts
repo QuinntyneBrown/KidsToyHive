@@ -1,4 +1,4 @@
-import { Address } from 'cluster';
+import { Address } from './address.model';
 
 export interface Location {
   locationId: string;
