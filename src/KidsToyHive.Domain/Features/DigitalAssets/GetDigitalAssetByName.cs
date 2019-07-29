@@ -28,8 +28,6 @@ namespace KidsToyHive.Domain.Features.DigitalAssets
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var digitalAssets = _context.DigitalAssets.ToList();
-
                 return new Response()
                 {
                     DigitalAsset = (await _context.DigitalAssets.SingleAsync(x => x.Name == request.Name)).ToDto()

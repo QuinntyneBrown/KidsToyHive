@@ -25,6 +25,7 @@ namespace KidsToyHive.Api
             WarehouseConfiguration.Seed(context);
             InventoryItemConfiguration.Seed(context);
             HtmlContentConfiguration.Seed(context);
+            DigitalAssetConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
 
@@ -95,6 +96,26 @@ namespace KidsToyHive.Api
             }
         }
 
+        internal class DigitalAssetConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.DigitalAssets.FirstOrDefault(x => x.Name == "Logo.png") == null)
+                {
+                    var provider = new FileExtensionContentTypeProvider();
+
+                    provider.TryGetContentType("KidsToyHiveLogo.png", out string contentType);
+
+                    context.DigitalAssets.Add(new DigitalAsset
+                    {
+                        Name = "Logo.png",
+                        Bytes = StaticFileLocator.Get("KidsToyHiveLogo.png"),
+                        ContentType = contentType
+                    });
+                }
+                context.SaveChanges();
+            }
+        }
         internal class ProductConfiguration
         {
             public static void Seed(AppDbContext context)

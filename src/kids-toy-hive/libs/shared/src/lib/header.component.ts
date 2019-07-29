@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -9,6 +9,9 @@ import { Subject } from 'rxjs';
 export class HeaderComponent implements OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
 
+  @Input()
+  public imageUrl:string;
+  
   ngOnDestroy() {
     this.onDestroy.next();	
   }

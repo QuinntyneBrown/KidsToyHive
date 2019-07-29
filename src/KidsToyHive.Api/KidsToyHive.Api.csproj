@@ -14,6 +14,7 @@
     <None Remove="Seeding\DigitalAssets\JungleJumparoo2.png" />
     <None Remove="Seeding\DigitalAssets\JungleJumparoo3.jpg" />
     <None Remove="Seeding\DigitalAssets\JungleJumparoo4.jpeg" />
+    <None Remove="Seeding\DigitalAssets\KidsToyHiveLogo.png" />
     <None Remove="Seeding\Emails\BookingConfirmationEmail.html" />
     <None Remove="Seeding\Emails\NewRegistrationEmail.html" />
     <None Remove="Seeding\HtmlContent\About.html" />
@@ -25,6 +26,7 @@
     <EmbeddedResource Include="Seeding\DigitalAssets\JungleJumparoo2.png" />
     <EmbeddedResource Include="Seeding\DigitalAssets\JungleJumparoo3.jpg" />
     <EmbeddedResource Include="Seeding\DigitalAssets\JungleJumparoo4.jpeg" />
+    <EmbeddedResource Include="Seeding\DigitalAssets\KidsToyHiveLogo.png" />
     <EmbeddedResource Include="Seeding\Emails\NewRegistrationEmail.html" />
     <EmbeddedResource Include="Seeding\Emails\BookingConfirmationEmail.html" />
     <EmbeddedResource Include="Seeding\HtmlContent\About.html" />

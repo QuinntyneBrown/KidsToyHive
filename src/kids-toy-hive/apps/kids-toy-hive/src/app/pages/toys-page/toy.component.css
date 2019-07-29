@@ -6,12 +6,12 @@
 
 img {
     margin: 0 auto;
-    max-height: 300px;
+    max-height: 250px;
 }
 
 button {
     border: none;
-    background-color: pink;
+    background-color: rgb(104,41,0);
     height: 50px;
     border-radius: 5px;
     color:white;

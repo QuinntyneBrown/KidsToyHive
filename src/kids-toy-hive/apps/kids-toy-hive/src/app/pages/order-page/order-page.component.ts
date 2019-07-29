@@ -5,6 +5,8 @@ import { LocalStorageService } from '@kids-toy-hive/core';
 import { takeUntil, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+export * from './sections';
+
 @Component({
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.css'],

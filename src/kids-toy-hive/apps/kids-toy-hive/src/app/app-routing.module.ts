@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent, ConfirmationPageComponent, OrderPageComponent, AboutPageComponent } from './pages';
+import { HomePageComponent, ConfirmationPageComponent, OrderPageComponent, AboutPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent } from './pages';
 import { ToysPageComponent } from './pages/toys-page';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
 
@@ -25,7 +25,26 @@ const routes: Routes = [
   {
     path: 'order',
     component: OrderPageComponent,
-    canActivate
+    canActivate,
+    children: [
+      {
+        path: '',
+        redirectTo: 'step/1',
+        pathMatch: 'full'
+      },
+      {
+        path:'step/1',
+        component: CreateCustomerSectionComponent
+      },
+      {
+        path:'step/2',
+        component: CreateBookingSectionComponent
+      },
+      {
+        path:'step/3',
+        component: ProcessBookingPaymentComponent
+      }
+    ]
   },  
   {
     path: 'about',
