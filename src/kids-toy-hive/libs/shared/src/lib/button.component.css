@@ -1,0 +1,15 @@
+:host {
+    display: inline-block;
+    border: none;
+    background-color: rgb(104,41,0);
+    height: 50px;
+    line-height: 50px;
+    border-radius: 5px;
+    color:white;
+    margin: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+}

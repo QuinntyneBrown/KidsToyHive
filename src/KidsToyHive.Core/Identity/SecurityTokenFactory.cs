@@ -12,6 +12,7 @@ namespace KidsToyHive.Core.Identity
     public class SecurityTokenFactory : ISecurityTokenFactory
     {
         private IConfiguration _configuration;
+
         public SecurityTokenFactory(IConfiguration configuration)
             => _configuration = configuration;
 

@@ -1,0 +1,39 @@
+<h3>When and Where Are We Delivering Your Toys?</h3>
+
+<form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
+    <div class='field'>
+        <label>Date:</label>
+        <input type='text' />
+    </div>
+
+    <div class='field'>
+        <label>Pick a Time Slot:</label>
+        <input type='text' />
+    </div>
+
+    <div class='field'>
+        <label>Street:</label>
+        <input type='text' formControlName="street" />
+    </div>
+    
+    <div class='field'>
+        <label>City:</label>
+        <input type='text' formControlName="city" />
+    </div>
+    
+    <div class='field'>
+        <label>Province:</label>
+        <input type='text' formControlName="province" />
+    </div>
+    
+    <div class='field'>
+        <label>Postal Code:</label>
+        <input type='text' formControlName="postalCode" />
+    </div>
+
+    <div class='field'>
+        <label>Pick up at same location?:</label>
+        <input type='checkbox' value=checked />
+    </div>
+    <kth-button [text]='"Next"' (click)='tryToCreateBooking(form.value)' ></kth-button>
+</form>

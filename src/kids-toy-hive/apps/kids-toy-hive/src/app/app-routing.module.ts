@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent, ConfirmationPageComponent, OrderPageComponent, AboutPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent } from './pages';
+import { HomePageComponent, ConfirmationPageComponent, OrderPageComponent, AboutPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateCustomerSectionGuard, CreateBookingSectionGuard, ProcessPaymentSectionGuard } from './pages';
 import { ToysPageComponent } from './pages/toys-page';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
 
@@ -34,15 +34,18 @@ const routes: Routes = [
       },
       {
         path:'step/1',
-        component: CreateCustomerSectionComponent
+        component: CreateCustomerSectionComponent,
+        canActivate:[CreateCustomerSectionGuard]
       },
       {
         path:'step/2',
-        component: CreateBookingSectionComponent
+        component: CreateBookingSectionComponent,
+        canActivate:[CreateBookingSectionGuard]
       },
       {
         path:'step/3',
-        component: ProcessBookingPaymentComponent
+        component: ProcessBookingPaymentComponent,
+        canActivate:[ProcessPaymentSectionGuard]
       }
     ]
   },  

@@ -8,6 +8,7 @@ export * from "./customer.model";
 export * from "./dashboard-card.model";
 export * from "./dashboard.model";
 export * from "./digital-asset.model";
+export * from "./html-content.model";
 export * from "./inventory-item.model";
 export * from "./location.model";
 export * from "./product-category.model";

@@ -1,0 +1,31 @@
+:host{
+    display: block;
+}
+
+h3 {
+    display: inline-block;
+    position: relative;
+    margin: 20px auto;
+    width: 100%;
+    text-align: center;
+}
+
+form {
+    display: grid;
+    grid-row-gap: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.field {
+    display: grid;
+    grid-template-columns: 150px 1fr;    
+    margin: 0px 20px;
+}
+
+input, label {
+    line-height: 18pt;
+}
+input {
+    padding: 0 10px;
+}

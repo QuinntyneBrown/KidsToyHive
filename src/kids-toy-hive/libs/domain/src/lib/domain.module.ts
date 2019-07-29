@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddressService, DigitalAssetService, CardService, CustomerService, DashboardCardService, DashboardService, InventoryItemService, ProductCategoryService, ProductService, RoleService, UserService, SalesOrderService, SalesOrderDetailService, BookingService, LocationService } from './services';
-import { HttpClientModule } from '@angular/common/http';
+import { AddressService, DigitalAssetService, CardService, CustomerService, DashboardCardService, DashboardService, InventoryItemService, ProductCategoryService, ProductService, RoleService, UserService, SalesOrderService, SalesOrderDetailService, BookingService, LocationService, HtmlContentService } from './services';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard, LoginRedirectService, AuthService } from './guards';
 import { ShipmentSalesOrderService } from './services/shipment-sales-order.service';
+import { AuthInterceptor } from './interceptors';
 
 export * from './models';
 export * from './guards';
@@ -11,6 +12,12 @@ export * from './services';
 
 @NgModule({
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    
     AuthService,
     AuthGuard,
     LoginRedirectService,
@@ -22,6 +29,7 @@ export * from './services';
     DashboardCardService,
     DashboardService,
     DigitalAssetService,
+    HtmlContentService,
     InventoryItemService,
     LocationService,
     SalesOrderDetailService,

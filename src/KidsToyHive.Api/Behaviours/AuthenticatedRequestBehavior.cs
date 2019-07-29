@@ -25,10 +25,14 @@ namespace KidsToyHive.Api.Behaviours
                 if (!string.IsNullOrEmpty(authenticatedRequest.PartitionKey))
                     return next();
 
-                var user = _httpContextAccessor.HttpContext.User;                
-                authenticatedRequest.CurrentUserId = new Guid(user.Claims.First(x => x.Type == "UserId").Value);
-                authenticatedRequest.PartitionKey = user.Claims.First(x => x.Type == "PartitionKey").Value;
-                authenticatedRequest.CurrentUsername = user.Identity.Name;
+                var user = _httpContextAccessor.HttpContext.User;
+
+                if (user.Identity.IsAuthenticated)
+                {
+                    authenticatedRequest.CurrentUserId = new Guid(user.Claims.First(x => x.Type == "UserId").Value);
+                    authenticatedRequest.PartitionKey = user.Claims.First(x => x.Type == "PartitionKey").Value;
+                    authenticatedRequest.CurrentUsername = user.Identity.Name;
+                }
             }
 
             return next();

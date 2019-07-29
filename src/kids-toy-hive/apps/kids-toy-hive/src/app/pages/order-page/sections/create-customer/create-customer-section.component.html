@@ -1,23 +1,25 @@
-<h3>Create Customer</h3>
+<h3>Create Account So We Can Deliver You Your Toys</h3>
 
-<div class='field'>
-    <label>First Name:</label>
-    <input type='text'/>
-</div>
-
-<div class='field'>
-<label>Last Name:</label>
-<input type='text'/>
-</div>
-
-<div class='field'>
-<label>Email:</label>
-<input type='text'/>
-</div>
-
-<div class='field'>
-<label>Phone Number:</label>
-<input type='text'/>
-</div>
-
-<button>next</button>
+<form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
+    <div class='field'>
+        <label>First Name:</label>
+        <input type='text' formControlName="firstName" />
+    </div>
+    
+    <div class='field'>
+        <label>Last Name:</label>
+        <input type='text' formControlName="lastName" />
+    </div>
+    
+    <div class='field'>
+        <label>Email:</label>
+        <input type='text' formControlName="email" />
+    </div>
+    
+    <div class='field'>
+        <label>Phone Number:</label>
+        <input type='text' formControlName="phoneNumber" />
+    </div>
+    
+    <kth-button [text]='"Next"' (click)='tryToSaveCustomer(form.value)' ></kth-button>
+</form>

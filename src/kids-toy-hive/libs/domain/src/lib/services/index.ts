@@ -5,6 +5,7 @@ export * from "./customer.service";
 export * from "./dashboard-card.service";
 export * from "./dashboard.service";
 export * from "./digital-asset.service";
+export * from "./html-content.service";
 export * from "./inventory-item.service";
 export * from "./location.service";
 export * from "./product-category.service";

@@ -1,8 +1,10 @@
 using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.Addresses;
 using KidsToyHive.Domain.Features.Customers;
 using KidsToyHive.Domain.Features.Locations;
+using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -22,10 +24,13 @@ namespace UnitTests.Domain.Features.Customers
                 .Options;
 
             var mediator = new Mock<IMediator>().Object;
+            var emailSender = new Mock<IEmailSender>().Object;
+            var passwordHasher = new Mock<IPasswordHasher>().Object;
+            var securityTokenFactory = new Mock<ISecurityTokenFactory>().Object;
 
             using (var context = new AppDbContext(options, mediator))
             {
-                var upsertCustomerHandler = new UpsertCustomer.Handler(context);
+                var upsertCustomerHandler = new UpsertCustomer.Handler(context,passwordHasher,emailSender,securityTokenFactory);
 
                 var address = new AddressDto
                 {
@@ -54,7 +59,6 @@ namespace UnitTests.Domain.Features.Customers
                 var result = await upsertCustomerHandler.Handle(new UpsertCustomer.Request {
                     Customer = customer
                 }, default);
-
 
                 var persistedCustomer = context.Customers
                     .Include(x => x.Address)

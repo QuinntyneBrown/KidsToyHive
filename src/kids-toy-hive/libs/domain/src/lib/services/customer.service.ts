@@ -34,8 +34,12 @@ export class CustomerService {
     });
   }
 
-  public create(options: { customer: Customer }): Observable<{ customerId: string, version: number }> {
-    return this._client.post<{ customerId: string, version: number }>(`${this._baseUrl}api/commands`, { customer: options.customer }, {
+  public create(options: { customer: Customer }): Observable<{ customerId: string, version: number, accessToken: string }> {
+    return this._client.post<{ 
+      customerId: string, 
+      version: number, 
+      accessToken: string
+    }>(`${this._baseUrl}api/commands`, { customer: options.customer }, {
       headers: {
         "OperationId":"UpsertCustomer"
       }

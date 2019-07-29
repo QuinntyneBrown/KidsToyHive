@@ -1,6 +1,7 @@
 ﻿using KidsToyHive.Domain;
 using KidsToyHive.Domain.Common;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -32,6 +33,7 @@ namespace KidsToyHive.Api.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> Post(CancellationToken cancellationToken = default)
         {

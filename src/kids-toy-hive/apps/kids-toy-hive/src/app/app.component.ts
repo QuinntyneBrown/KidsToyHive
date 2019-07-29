@@ -9,11 +9,9 @@ import { baseUrl } from '@kids-toy-hive/core';
 export class AppComponent {
   constructor(
     @Inject(baseUrl)public apiBaseUrl:string
-  ) {
-
-  }
+  ) { }
 
   public get imageUrl() {
-    return `${this.apiBaseUrl}/api/digitalassets/serve/file/Logo.png`;
+    return `${this.apiBaseUrl}api/digitalassets/serve/file/Logo.png`;
   }
 }

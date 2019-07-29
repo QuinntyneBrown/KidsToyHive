@@ -26,7 +26,7 @@ export class ToysPageComponent implements OnDestroy  {
     this._router.navigateByUrl('/order');
   }
 
-  public buildImageUrl(toy: Product) {
+  public buildImageUrl(toy: Product) {    
     return `${this._baseUrl}${toy.productImages[0].url}`;
   }
   
