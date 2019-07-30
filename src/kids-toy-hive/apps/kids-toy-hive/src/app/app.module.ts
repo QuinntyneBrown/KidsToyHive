@@ -11,6 +11,7 @@ import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-pa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToysPageComponent, ToyComponent } from './pages/toys-page';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -36,15 +37,23 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     { provide: baseUrl, useValue: environment.baseUrl },
-
+    
     CreateCustomerSectionGuard,
     CreateBookingSectionGuard,
     ProcessPaymentSectionGuard
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+
+
+}

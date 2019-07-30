@@ -3,12 +3,15 @@
 <form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
     <div class='field'>
         <label>Date:</label>
-        <input type='text' />
+        <input type='text' [matDatepicker]="picker" />
+        <a (click)="picker.open()">Pick a date</a>        
+        <mat-datepicker #picker></mat-datepicker>
     </div>
 
     <div class='field'>
         <label>Pick a Time Slot:</label>
         <input type='text' />
+
     </div>
 
     <div class='field'>
