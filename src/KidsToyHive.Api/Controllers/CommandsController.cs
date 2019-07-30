@@ -47,7 +47,7 @@ namespace KidsToyHive.Api.Controllers
 
             var item = await CommandRegistryItem.ParseAsync(Request);
 
-            if (!authorizationResult.Succeeded && item.RequestDotNetType != typeof(UpsertCustomer.Request).AssemblyQualifiedName)
+            if (!authorizationResult.Succeeded && !item.hasAllowAnonymousAttribute)
                 return new UnauthorizedResult();
 
             var syncLock = _locks.GetOrAdd($"{item.PartitionKey}", id => new object());

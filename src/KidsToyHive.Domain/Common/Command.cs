@@ -20,9 +20,4 @@ namespace KidsToyHive.Domain.Common
         public string Build(string key, string id)
             => id == "0" ? $"{IdGenerator.GetNextId()}" : $"{key}";
     }
-
-    public abstract class AnnonymousCommand<TResponse>: Command<TResponse>
-    {
-
-    }
 }

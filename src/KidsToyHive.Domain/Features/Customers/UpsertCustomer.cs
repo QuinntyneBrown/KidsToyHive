@@ -7,6 +7,7 @@ using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,8 @@ namespace KidsToyHive.Domain.Features.Customers
             }
         }
 
-        public class Request : AnnonymousCommand<Response> {
+        [AllowAnonymous]
+        public class Request : Command<Response> {
             public CustomerDto Customer { get; set; }
             public override IEnumerable<string> SideEffects => new string[] { "Customer" };
         }
