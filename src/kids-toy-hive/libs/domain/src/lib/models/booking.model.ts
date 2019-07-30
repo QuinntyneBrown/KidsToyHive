@@ -1,8 +1,11 @@
 import { BookingDetail } from './booking-detail.model';
+import { Location } from './location.model';
 
 export interface Booking {
-  bookingId: string;
-  name: string;
+  bookingId?: string;
+  name?: string;
   bookingDetails: BookingDetail[];
-  version: number;
+  location:Location;
+  version?: number;
+  bookingTimeSlot:number;
 }

@@ -26,13 +26,7 @@ export class AddressService {
       );
   }
 
-  public remove(options: { address: Address }): Observable<void> {
-    return this._client.post<void>(`${this._baseUrl}api/commands/${options.address.addressId}`, {
-      headers: {
-        "OperationId":"RemoveAddress"
-      }
-    });
-  }
+
 
   public create(options: { address: Address }): Observable<{ addressId: string }> {
     return this._client.post<{ addressId: string }>(`${this._baseUrl}api/commands`, { address: options.address }, {

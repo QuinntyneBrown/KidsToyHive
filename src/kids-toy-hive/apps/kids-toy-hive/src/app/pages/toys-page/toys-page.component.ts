@@ -1,7 +1,7 @@
-import { Component, OnDestroy, Inject } from '@angular/core';
+import { Component, OnDestroy, Inject, OnInit } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { ProductService, Product } from '@kids-toy-hive/domain';
-import { baseUrl } from '@kids-toy-hive/core';
+import { baseUrl, LocalStorageService } from '@kids-toy-hive/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,20 +9,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./toys-page.component.css'],
   selector: 'kth-toys-page',  
 })
-export class ToysPageComponent implements OnDestroy  { 
+export class ToysPageComponent implements OnDestroy, OnInit  { 
   public onDestroy: Subject<void> = new Subject<void>();
+  public toys$: Observable<Product[]>;
 
   constructor(
-    @Inject(baseUrl) public readonly _baseUrl:string,    
+    @Inject(baseUrl) public readonly _baseUrl:string, 
+    private readonly _localStorageService: LocalStorageService,   
     private readonly _productService: ProductService,
     private readonly _router: Router
   ) {
-    this.toys$ = _productService.get();
+    
   }
 
-  public toys$: Observable<Product[]>;
+  ngOnInit() {
+    this.toys$ = this._productService.get();
+  }
+
 
   public onGetItNowClick(toy:Product) {
+    this._localStorageService.put({ name: 'productId', value: toy.productId });
     this._router.navigateByUrl('/order');
   }
 

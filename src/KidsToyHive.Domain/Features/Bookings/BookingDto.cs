@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using KidsToyHive.Domain.Features.BookingDetails;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Features.Customers;
+using KidsToyHive.Domain.Features.Locations;
 
 namespace KidsToyHive.Domain.Features.Bookings
 {
@@ -23,6 +24,7 @@ namespace KidsToyHive.Domain.Features.Bookings
         public Guid BookingId { get; set; }
         public Guid CustomerId { get; set; }
         public Guid? LocationId { get; set; }
+        public LocationDto Location { get; set; }
         public CustomerDto Customer { get; set; }
         public ICollection<BookingDetailDto> BookingDetails { get; set; }
         = new HashSet<BookingDetailDto>();

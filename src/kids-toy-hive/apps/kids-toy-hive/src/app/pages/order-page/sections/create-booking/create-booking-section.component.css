@@ -1,4 +1,4 @@
-:host{
+:host {
     display: block;
 }
 
@@ -23,9 +23,13 @@ form {
     margin: 0px 20px;
 }
 
-input, label {
+input, label, select {
     line-height: 18pt;
 }
-input {
+input, select {
     padding: 0 10px;
+}
+
+select {
+    height: 28px;
 }

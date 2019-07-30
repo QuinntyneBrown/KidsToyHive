@@ -37,32 +37,39 @@ namespace KidsToyHive.Api.Controllers
         [HttpPost, DisableRequestSizeLimit]
         public async Task<IActionResult> Post(CancellationToken cancellationToken = default)
         {
-            var item = await CommandRegistryItem.ParseAsync(Request);
-
-            var syncLock = _locks.GetOrAdd($"{item.PartitionKey}", id => new object());
-
-            lock (syncLock)
-                _commandRegistry.TryToAdd(item);
-
-            if (item.HasConflicts())
-                await Observable.Zip(_commandRegistry
-                    .GetByCorrelationIds(item.ConflictingIds.Split(','))
-                    .Select(x => x.Completed));
-
-            dynamic result = default;
-
             try
             {
-                result = await _mediator.Send(JsonConvert.DeserializeObject(item.Request,Type.GetType(item.RequestDotNetType)) as dynamic);
+                var item = await CommandRegistryItem.ParseAsync(Request);
 
-                item.Complete();
+                var syncLock = _locks.GetOrAdd($"{item.PartitionKey}", id => new object());
+
+                lock (syncLock)
+                    _commandRegistry.TryToAdd(item);
+
+                if (item.HasConflicts())
+                    await Observable.Zip(_commandRegistry
+                        .GetByCorrelationIds(item.ConflictingIds.Split(','))
+                        .Select(x => x.Completed));
+
+                dynamic result = default;
+
+                try
+                {
+                    result = await _mediator.Send(JsonConvert.DeserializeObject(item.Request, Type.GetType(item.RequestDotNetType)) as dynamic);
+
+                    item.Complete();
+                }
+                catch (Exception e)
+                {
+                    item.Error();
+                }
+
+                return new JsonResult(result);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                item.Error();
+                throw e;
             }
-
-            return new JsonResult(result);
         }
 
         private HttpRequest Request => _httpContextAccessor.HttpContext.Request;

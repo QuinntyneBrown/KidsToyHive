@@ -5,7 +5,6 @@ using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +18,7 @@ namespace KidsToyHive.Domain.Features.Bookings
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {
-                RuleFor(request => request.Booking).NotNull();
-                RuleFor(request => request.Booking).SetValidator(new BookingDtoValidator());
+
             }
         }
 

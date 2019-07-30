@@ -5,6 +5,7 @@ import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, map } from 'rxjs/operators';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Injectable()
 export class CreateBookingSectionGuard implements CanActivate {
@@ -29,8 +30,12 @@ export class CreateBookingSectionGuard implements CanActivate {
 })
 export class CreateBookingSectionComponent implements OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
-
+  private get _productId():string {
+    return this._localStorageService.get({name: 'productId' })
+  }
   public form = new FormGroup({
+    date: new FormControl(null,[Validators.required]),
+    bookingTimeSlot: new FormControl(null,[Validators.required]),
     street: new FormControl(null, [Validators.required]),
     city: new FormControl(null, [Validators.required]),
     province: new FormControl(null, [Validators.required]),
@@ -43,7 +48,30 @@ export class CreateBookingSectionComponent implements OnDestroy  {
     private readonly _router: Router,
   ) { }
 
-  public tryToCreateBooking(booking:Booking) {
+  public bookingTimeSlots: any[] = [
+    { value: 0, name:'Morning' },
+    { value: 1, name:'Afternoon' },
+    { value: 2, name:'Full Day' },
+  ];
+
+  public tryToCreateBooking(value:any) {
+    const booking: Booking = {
+      bookingDetails:[
+        { 
+          productId: this._productId,
+          quantity:1
+        }
+      ],
+      bookingTimeSlot:value.bookingTimeSlot,
+      location : {
+        address: {
+          street: value.street,
+          city: value.city,
+          province: value.province,
+          postalCode: value.postalCode
+        }
+      }
+    };
     this._bookingService.create({ booking })
     .pipe(takeUntil(this.onDestroy),map(x => { 
       this._localStorageService.put({ name: 'bookingId', value: x.bookingId });

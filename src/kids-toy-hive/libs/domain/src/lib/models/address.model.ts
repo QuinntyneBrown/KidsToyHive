@@ -1,5 +1,6 @@
 export interface Address {
-  addressId: string;
-  name: string;
-  version: number;
+  street:string;
+  city:string;
+  province:string;
+  postalCode:string;
 }

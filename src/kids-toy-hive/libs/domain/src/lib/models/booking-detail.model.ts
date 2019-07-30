@@ -1,5 +1,7 @@
 export interface BookingDetail {
-  bookingDetailId: string;
-  name: string;
-  version: number;
+  bookingDetailId?: string;
+  name?: string;
+  productId: string;
+  quantity:number;
+  version?: number;
 }
