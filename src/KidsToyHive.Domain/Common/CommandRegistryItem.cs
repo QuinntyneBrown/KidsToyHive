@@ -24,6 +24,7 @@ namespace KidsToyHive.Domain
         public string PartitionKey { get; set; }
         public string Key { get; set; }
         public string SideEffects { get; set; }
+        public bool IsAnnonymous { get; set; }
 
         private CommandRegistryItemState _state = CommandRegistryItemState.Sleeping;
         public CommandRegistryItemState State {
@@ -91,7 +92,7 @@ namespace KidsToyHive.Domain
                 Key = request.Key,
                 SideEffects = string.Join(",", request.SideEffects),
                 RequestDotNetType = request.GetType().AssemblyQualifiedName,
-                CancellationToken = token
+                CancellationToken = token,                
             };
             return item;
         }

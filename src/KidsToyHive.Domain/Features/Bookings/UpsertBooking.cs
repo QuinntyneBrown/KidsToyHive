@@ -70,6 +70,7 @@ namespace KidsToyHive.Domain.Features.Bookings
                     booking.RaiseDomainEvent(new BookingCreated(booking));
                     _context.Bookings.Add(booking);
                 }
+
                 booking.CustomerId = new Guid(this._httpContextAccessor.HttpContext.User.Claims.First(x => x.Type == "CustomerId").Value);
 
                 booking.Location = await _context.Locations.FindAsync(request.Booking.LocationId);

@@ -14,7 +14,11 @@ export class CreateCustomerSectionGuard implements CanActivate {
   ) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     const token = this._localStorageService.get({ name: accessTokenKey });
+    const productId = this._localStorageService.get({ name: 'productId' });
     
+    if(!productId)
+      return this._router.parseUrl('toys');
+
     if(token)
       return this._router.parseUrl('order/step/2');
     

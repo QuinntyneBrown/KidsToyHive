@@ -26,7 +26,7 @@ namespace KidsToyHive.Domain.Features.Customers
             }
         }
 
-        public class Request : Command<Response> {
+        public class Request : AnnonymousCommand<Response> {
             public CustomerDto Customer { get; set; }
             public override IEnumerable<string> SideEffects => new string[] { "Customer" };
         }
