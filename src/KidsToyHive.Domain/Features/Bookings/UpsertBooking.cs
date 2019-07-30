@@ -5,6 +5,7 @@ using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,10 +53,13 @@ namespace KidsToyHive.Domain.Features.Bookings
         {
             private readonly IAppDbContext _context;            
             private readonly IInventoryService _inventoryService;
-            public Handler(IAppDbContext context, IInventoryService inventoryService)
+            private readonly IHttpContextAccessor _httpContextAccessor;
+
+            public Handler(IAppDbContext context, IInventoryService inventoryService, IHttpContextAccessor httpContextAccessor)
             {
                 _context = context;
                 _inventoryService = inventoryService;
+                _httpContextAccessor = httpContextAccessor;
             }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
@@ -66,9 +70,18 @@ namespace KidsToyHive.Domain.Features.Bookings
                     booking.RaiseDomainEvent(new BookingCreated(booking));
                     _context.Bookings.Add(booking);
                 }
-                booking.CustomerId = request.Booking.CustomerId;
+                booking.CustomerId = new Guid(this._httpContextAccessor.HttpContext.User.Claims.First(x => x.Type == "CustomerId").Value);
 
-                booking.LocationId = request.Booking.LocationId;
+                booking.Location = await _context.Locations.FindAsync(request.Booking.LocationId);
+
+                if (booking.Location == null)
+                    booking.Location = new Location();
+
+                booking.Location.Adddress = new Address(
+                    request.Booking.Location.Address.Street,
+                    request.Booking.Location.Address.City,
+                    request.Booking.Location.Address.Province,
+                    request.Booking.Location.Address.PostalCode);
 
                 booking.BookingDetails.Clear();
 

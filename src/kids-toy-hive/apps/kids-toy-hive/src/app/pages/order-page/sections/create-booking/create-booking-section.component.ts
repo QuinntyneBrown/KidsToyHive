@@ -15,9 +15,13 @@ export class CreateBookingSectionGuard implements CanActivate {
   ) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     const bookingId = this._localStorageService.get({ name: 'bookingId' });
+    const token = this._localStorageService.get({ name: accessTokenKey });
     
-    if(bookingId)
+    if(!token)
       return this._router.parseUrl('order/step/1');
+
+    if(bookingId)
+      return this._router.parseUrl('order/step/3');
     
     return true;
   }

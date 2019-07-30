@@ -10,6 +10,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -138,7 +139,13 @@ namespace KidsToyHive.Domain.Features.Customers
                 return new Response() {
                     CustomerId = customer.CustomerId,
                     Version = customer.Version,
-                    AccessToken = _securityTokenFactory.Create(user.Username)
+                    AccessToken = _securityTokenFactory.Create(user.Username,new List<Claim>() {
+                        new Claim($"{nameof(customer.CustomerId)}",$"{customer.CustomerId}"),
+                        new Claim(ClaimTypes.Role, nameof(ProfileType.Customer)),
+                        new Claim("UserId",$"{user.UserId}"),
+                        new Claim("CurrentUserName",$"{user.Username}"),
+                        new Claim("PartitionKey",$"{customer.TenantKey}")
+                    })
                 };
             }
         }

@@ -6,6 +6,7 @@ using KidsToyHive.Domain.Features.Bookings;
 using KidsToyHive.Domain.Features.Products;
 using KidsToyHive.Domain.Services;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using System;
@@ -34,8 +35,10 @@ namespace UnitTests.Domain.Features.Bookings
                 var mockInventoryService = new Mock<IInventoryService>();
                 mockInventoryService.Setup(x => x.IsItemAvailable(It.IsAny<DateTime>(), It.IsAny<BookingTimeSlot>(), It.IsAny<Guid>())).Returns(true);
                 var inventoryService = mockInventoryService.Object;
+                var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
+                //CustomerId Claim
 
-                var upsertBookingHandler = new UpsertBooking.Handler(context, inventoryService);
+                var upsertBookingHandler = new UpsertBooking.Handler(context, inventoryService, mockHttpContextAccessor.Object);
 
                 var booking = new BookingDto
                 {

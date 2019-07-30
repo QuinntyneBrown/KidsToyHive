@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AboutPageComponent, HomePageComponent, OrderPageComponent, ConfirmationPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateBookingSectionGuard, ProcessPaymentSectionGuard, CreateCustomerSectionGuard } from './pages';
 import { AppRoutingModule } from './app-routing.module';
-import { CoreModule, baseUrl } from '@kids-toy-hive/core';
+import { CoreModule, baseUrl, LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { DomainModule } from '@kids-toy-hive/domain';
 import { SharedModule } from '@kids-toy-hive/shared';
 import { environment } from '../environments/environment';
@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToysPageComponent, ToyComponent } from './pages/toys-page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+
 
 @NgModule({
   declarations: [
