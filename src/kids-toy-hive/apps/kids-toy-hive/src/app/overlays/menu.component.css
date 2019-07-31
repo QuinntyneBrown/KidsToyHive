@@ -1,0 +1,10 @@
+:host {
+    display: inline-block;
+    background-color: #fff;
+    min-width: 300px;
+    height: 100%;
+}
+
+a {
+    cursor: pointer;
+}

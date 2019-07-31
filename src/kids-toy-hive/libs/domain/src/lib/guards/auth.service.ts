@@ -3,7 +3,9 @@ import { Inject, Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { baseUrl, LocalStorageService, currentUserNameKey, accessTokenKey } from '@kids-toy-hive/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   constructor(
     @Inject(baseUrl) private _baseUrl: string,
@@ -19,5 +21,9 @@ export class AuthService {
         return response.accessToken;
       })
     );
+  }
+
+  public logOut() {
+    localStorage.clear();
   }
 }

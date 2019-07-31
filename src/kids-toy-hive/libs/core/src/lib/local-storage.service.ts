@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { storageKey } from './constants';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LocalStorageService {
   
   public get items() {  
@@ -19,7 +21,7 @@ export class LocalStorageService {
     localStorage.setItem(storageKey, JSON.stringify(value));
   }
 
-  public get = (options: { name: string }) => {
+  public get = (options: { name: string }) => {    
     let storageItem = null;
     for (let i = 0; i < this.items.length; i++) {
       if (options.name === this.items[i].name) storageItem = this.items[i].value;
@@ -31,7 +33,7 @@ export class LocalStorageService {
     let itemExists = false;
 
     this.items.forEach((item: any) => {
-      if (options.name === item.name) {
+      if (options.name === item.name) {        
         itemExists = true;
         item.value = options.value;
       }

@@ -1,13 +1,14 @@
+<h2>Login</h2>
 <form novalidate [formGroup]="form" autocomplete="off" spellcheck="false">
 
-    <div>
-        <label>Username</label>
+    <div class='field'>
+        <label>Username:</label>
         <input type='text' formControlName="username"/>
     </div>
-    <div>
-        <label>Password</label>
+    <div class='field'>
+        <label>Password:</label>
         <input type='password' formControlName="password"/>
     </div>
 
-    <kth-button (click)='tryToLogin.emit(form.value)'>Login</kth-button>
+    <kth-button (click)='tryToLogin()' [text]='"Login"'></kth-button>
 </form>

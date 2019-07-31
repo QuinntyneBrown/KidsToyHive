@@ -11,11 +11,12 @@ import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-pa
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToysPageComponent, ToyComponent } from './pages/toys-page';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material';
+import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { DoneSectionComponent } from './pages/order-page/sections/done';
 import { MyProfilePageComponent } from './pages/my-profile-page';
 import { FeaturesSecurityModule } from '@kids-toy-hive/features/security';
 import { MenuOverlayComponent, MenuOverlay } from './overlays';
+import { MenuComponent } from './overlays/menu.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { MenuOverlayComponent, MenuOverlay } from './overlays';
 
     TermsAndConditionsPageComponent,
     MyProfilePageComponent,
-    MenuOverlayComponent
+    MenuOverlayComponent,
+    MenuComponent
   ],
   entryComponents: [
     MenuOverlayComponent
@@ -51,6 +53,7 @@ import { MenuOverlayComponent, MenuOverlay } from './overlays';
     ReactiveFormsModule,
 
     MatDatepickerModule,
+    MatNativeDateModule,
 
     FeaturesSecurityModule
   ],

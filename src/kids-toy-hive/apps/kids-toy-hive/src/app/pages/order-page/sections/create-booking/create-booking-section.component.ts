@@ -5,7 +5,6 @@ import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, map } from 'rxjs/operators';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Injectable()
 export class CreateBookingSectionGuard implements CanActivate {
@@ -17,6 +16,8 @@ export class CreateBookingSectionGuard implements CanActivate {
     const bookingId = this._localStorageService.get({ name: 'bookingId' });
     const token = this._localStorageService.get({ name: accessTokenKey });
     
+    alert(token);
+
     if(!token)
       return this._router.parseUrl('order/step/1');
 
