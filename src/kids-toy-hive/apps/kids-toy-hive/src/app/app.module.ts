@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AboutPageComponent, HomePageComponent, OrderPageComponent, ConfirmationPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateBookingSectionGuard, ProcessPaymentSectionGuard, CreateCustomerSectionGuard } from './pages';
+import { AboutPageComponent, HomePageComponent, OrderPageComponent, ConfirmationPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateBookingSectionGuard, ProcessPaymentSectionGuard, CreateCustomerSectionGuard, JoinNowComponent, HowItWorksComponent, TestimonialsComponent } from './pages';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule, baseUrl } from '@kids-toy-hive/core';
 import { DomainModule } from '@kids-toy-hive/domain';
@@ -17,10 +17,6 @@ import { MyProfilePageComponent } from './pages/my-profile-page';
 import { FeaturesSecurityModule } from '@kids-toy-hive/features/security';
 import { MenuOverlayComponent, MenuOverlay } from './overlays';
 import { MenuComponent } from './overlays/menu.component';
-import { HowItWorksComponent } from 'libs/shared/src/lib/how-it-works.component';
-import { JoinNowComponent } from './pages/home-page/join-now';
-import { TestimonialsComponent } from './pages/home-page/testimonials';
-
 
 @NgModule({
   declarations: [
