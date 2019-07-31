@@ -1,6 +1,5 @@
 ﻿using KidsToyHive.Domain;
 using KidsToyHive.Domain.Common;
-using KidsToyHive.Domain.Features.Customers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

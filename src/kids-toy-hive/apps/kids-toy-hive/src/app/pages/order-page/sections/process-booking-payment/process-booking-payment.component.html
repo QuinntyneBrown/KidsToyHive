@@ -1,0 +1,25 @@
+<h3>Checkout</h3>
+
+<form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
+    <div class='field'>
+        <label>Credit Card Number:</label>
+        <input type='text' formControlName="number" />
+    </div>
+    
+    <div class='field'>
+        <label>Expiry Month:</label>
+        <input type='text' formControlName="expMonth" />
+    </div>
+    
+    <div class='field'>
+        <label>Expiry Year:</label>
+        <input type='text' formControlName="expYear" />
+    </div>
+    
+    <div class='field'>
+        <label>Cvc:</label>
+        <input type='text' formControlName="cvc" />
+    </div>
+    
+    <kth-button [text]='"Next"' (click)='tryToCheckout(form.value)' ></kth-button>
+</form>

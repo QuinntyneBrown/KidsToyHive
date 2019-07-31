@@ -18,7 +18,13 @@
     "paths": {
       "@kids-toy-hive/core": ["libs/core/src/index.ts"],
       "@kids-toy-hive/domain": ["libs/domain/src/index.ts"],
-      "@kids-toy-hive/shared": ["libs/shared/src/index.ts"]
+      "@kids-toy-hive/shared": ["libs/shared/src/index.ts"],
+      "@kids-toy-hive/feature-kids-toy-hive-security": [
+        "libs/feature-kids-toy-hive-security/src/index.ts"
+      ],
+      "@kids-toy-hive/features/security": [
+        "libs/features/security/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

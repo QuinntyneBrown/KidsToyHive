@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -9,9 +9,15 @@ import { Subject } from 'rxjs';
 export class HeaderComponent implements OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
 
+  @Output()
+  public menuClick: EventEmitter<any> = new EventEmitter();
+  
   @Input()
   public imageUrl:string;
   
+  @Input()
+  public hideNavigation:boolean;
+
   ngOnDestroy() {
     this.onDestroy.next();	
   }

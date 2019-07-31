@@ -1,6 +1,7 @@
+<kth-hamburger-button (click)='menuClick.emit()'></kth-hamburger-button>
 <img [src]='imageUrl' width='300' />
 
-<ul>
+<ul *ngIf='!hideNavigation'>
     <li><a [routerLink]="['/home']" routerLinkActive="active-link">Home</a></li>
     <li><a [routerLink]="['/toys']" routerLinkActive="active-link">View Toys</a></li>
     <li><a [routerLink]="['/about']" routerLinkActive="active-link">About</a></li>

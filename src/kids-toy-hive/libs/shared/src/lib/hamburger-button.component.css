@@ -1,0 +1,7 @@
+:host {
+    display: inline-block;    
+    background-color: rgb(233, 165, 50);    
+    cursor: pointer;
+    line-height: 63px;
+    margin: 0 auto;
+}

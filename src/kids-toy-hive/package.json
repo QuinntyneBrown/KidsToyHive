@@ -39,6 +39,7 @@
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
     "@angular/router": "^8.0.0",
+    "@microsoft/signalr": "^3.0.0-preview7.19365.7",
     "@nrwl/angular": "8.2.0",
     "@types/signature_pad": "^2.3.0",
     "core-js": "^2.5.4",

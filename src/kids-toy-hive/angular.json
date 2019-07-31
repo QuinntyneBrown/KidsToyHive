@@ -79,10 +79,7 @@
               "apps/kids-toy-hive/tsconfig.app.json",
               "apps/kids-toy-hive/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/kids-toy-hive/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/kids-toy-hive/**"]
           }
         },
         "test": {
@@ -117,10 +114,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "apps/kids-toy-hive-e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/kids-toy-hive-e2e/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/kids-toy-hive-e2e/**"]
           }
         }
       }
@@ -201,10 +195,7 @@
               "apps/kids-toy-hive-admin/tsconfig.app.json",
               "apps/kids-toy-hive-admin/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!apps/kids-toy-hive-admin/**"
-            ]
+            "exclude": ["**/node_modules/**", "!apps/kids-toy-hive-admin/**"]
           }
         },
         "test": {
@@ -260,10 +251,7 @@
               "libs/core/tsconfig.lib.json",
               "libs/core/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/core/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/core/**"]
           }
         },
         "test": {
@@ -290,10 +278,7 @@
               "libs/domain/tsconfig.lib.json",
               "libs/domain/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/domain/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/domain/**"]
           }
         },
         "test": {
@@ -320,10 +305,7 @@
               "libs/shared/tsconfig.lib.json",
               "libs/shared/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**",
-              "!libs/shared/**"
-            ]
+            "exclude": ["**/node_modules/**", "!libs/shared/**"]
           }
         },
         "test": {
@@ -458,6 +440,33 @@
           }
         }
       }
+    },
+    "features-security": {
+      "projectType": "library",
+      "root": "libs/features/security",
+      "sourceRoot": "libs/features/security/src",
+      "prefix": "kids-toy-hive",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/features/security/tsconfig.lib.json",
+              "libs/features/security/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/features/security/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/features/security/jest.config.js",
+            "tsConfig": "libs/features/security/tsconfig.spec.json",
+            "setupFile": "libs/features/security/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {}
     }
   },
   "cli": {

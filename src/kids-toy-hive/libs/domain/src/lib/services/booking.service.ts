@@ -19,6 +19,13 @@ export class BookingService {
       );
   }
 
+  public getMy(): Observable<Array<Booking>> {
+    return this._client.get<{ bookings: Array<Booking> }>(`${this._baseUrl}api/bookings/my`)
+      .pipe(
+        map(x => x.bookings)
+      );
+  }
+
   public getById(options: { bookingId: string }): Observable<Booking> {
     return this._client.get<{ booking: Booking }>(`${this._baseUrl}api/bookings/${options.bookingId}`)
       .pipe(
