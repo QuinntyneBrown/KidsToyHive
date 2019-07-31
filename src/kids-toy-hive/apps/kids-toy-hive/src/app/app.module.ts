@@ -17,6 +17,9 @@ import { MyProfilePageComponent } from './pages/my-profile-page';
 import { FeaturesSecurityModule } from '@kids-toy-hive/features/security';
 import { MenuOverlayComponent, MenuOverlay } from './overlays';
 import { MenuComponent } from './overlays/menu.component';
+import { HowItWorksComponent } from 'libs/shared/src/lib/how-it-works.component';
+import { JoinNowComponent } from './pages/home-page/join-now';
+import { TestimonialsComponent } from './pages/home-page/testimonials';
 
 
 @NgModule({
@@ -27,6 +30,11 @@ import { MenuComponent } from './overlays/menu.component';
     ToyComponent,
     ConfirmationPageComponent,
     HomePageComponent,
+
+    HowItWorksComponent,
+    JoinNowComponent,
+    TestimonialsComponent,
+    
     OrderPageComponent,
 
     CreateBookingSectionComponent,    
