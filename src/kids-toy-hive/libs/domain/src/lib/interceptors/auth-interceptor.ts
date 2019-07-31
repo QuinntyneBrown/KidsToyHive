@@ -12,7 +12,7 @@ import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private _storage: LocalStorageService) {}
 
-  intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(httpRequest: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {    
     const token = this._storage.get({ name: accessTokenKey }) || '';
 
     return next.handle(

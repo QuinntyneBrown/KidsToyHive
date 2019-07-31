@@ -32,7 +32,6 @@ export class LoginOverlayComponent implements OnDestroy  {
       password: this.form.value.password
     })
     .pipe(takeUntil(this.onDestroy),map(x => { 
-      this._localStorageService.put({ name: accessTokenKey, value: x.accessToken });
       this._overlayRefWrapper.close();
     }))
     .subscribe();

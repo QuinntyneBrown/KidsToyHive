@@ -24,7 +24,7 @@ export class MenuOverlayComponent  {
 
   }
 
-  public get isAuthenticated():boolean {
+  public get isAuthenticated():boolean {    
     return this._localStorageService.get({ name: accessTokenKey}) != null;
   }
 

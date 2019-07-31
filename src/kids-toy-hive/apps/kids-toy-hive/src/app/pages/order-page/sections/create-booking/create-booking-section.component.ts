@@ -15,8 +15,6 @@ export class CreateBookingSectionGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     const bookingId = this._localStorageService.get({ name: 'bookingId' });
     const token = this._localStorageService.get({ name: accessTokenKey });
-    
-    alert(token);
 
     if(!token)
       return this._router.parseUrl('order/step/1');
@@ -51,7 +49,9 @@ export class CreateBookingSectionComponent implements OnDestroy  {
     private readonly _bookingService: BookingService,
     private readonly _localStorageService: LocalStorageService,
     private readonly _router: Router,
-  ) { }
+  ) { 
+
+  }
 
   public bookingTimeSlots: any[] = [
     { value: 0, name:'Morning' },

@@ -24,6 +24,6 @@ export class AuthService {
   }
 
   public logOut() {
-    localStorage.clear();
+    this._localStorageService.remove({ name: accessTokenKey });
   }
 }

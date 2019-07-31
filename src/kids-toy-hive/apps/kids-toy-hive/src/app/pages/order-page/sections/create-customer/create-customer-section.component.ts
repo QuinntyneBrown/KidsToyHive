@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Injectable } from '@angular/core';
+import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CustomerService, Customer } from '@kids-toy-hive/domain';
 import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
@@ -31,7 +31,7 @@ export class CreateCustomerSectionGuard implements CanActivate {
   styleUrls: ['./create-customer-section.component.css'],
   selector: 'kth-create-customer-section'
 })
-export class CreateCustomerSectionComponent implements OnDestroy  { 
+export class CreateCustomerSectionComponent implements OnInit, OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
 
   public form = new FormGroup({
@@ -46,6 +46,15 @@ export class CreateCustomerSectionComponent implements OnDestroy  {
     private readonly _localStorageService: LocalStorageService,
     private readonly _router: Router,
   ) { }
+
+  public ngOnInit() {
+    this._localStorageService.changes$
+    .pipe(takeUntil(this.onDestroy),map(x => {
+      if(this._localStorageService.get({ name: accessTokenKey }))
+        this._router.navigateByUrl('order/step/2');
+    }))
+    .subscribe()  
+  }
 
   public tryToSaveCustomer(customer:any) {
     this._customerService.create({ customer})

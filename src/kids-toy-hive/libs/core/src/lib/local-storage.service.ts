@@ -1,49 +1,37 @@
 import { Injectable } from '@angular/core';
 import { storageKey } from './constants';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
   
-  public get items() {  
-    const storageItems = localStorage.getItem(storageKey);
+  public changes$:Subject<any> = new Subject();
 
-    if (!storageItems) {
-      localStorage.setItem(storageKey, JSON.stringify([]));
-      return [];
-    }
+  public get = (options: { name: string }) => {
+
+    const item = localStorage.getItem(`${storageKey}:${options.name}`);
     
-    return JSON.parse(storageItems);
-  }
+    if(item === 'undefined') return null;
 
-  public set items(value: Array<any>) {
-    localStorage.setItem(storageKey, JSON.stringify(value));
-  }
-
-  public get = (options: { name: string }) => {    
-    let storageItem = null;
-    for (let i = 0; i < this.items.length; i++) {
-      if (options.name === this.items[i].name) storageItem = this.items[i].value;
+    try {
+      return JSON.parse(item);
+    } catch (e) {
+      return item;
     }
-    return storageItem;
+  }
+
+  public put = (options: { name: string, value: any }) => {    
+    if((typeof options.value) !== 'string')
+      options.value = JSON.stringify(options.value);
+    
+    localStorage.setItem(`${storageKey}:${options.name}`,options.value);
+    this.changes$.next();
   };
 
-  public put = (options: { name: string; value: any }) => {
-    let itemExists = false;
-
-    this.items.forEach((item: any) => {
-      if (options.name === item.name) {        
-        itemExists = true;
-        item.value = options.value;
-      }
-    });
-
-    if (!itemExists) {
-      let items = this.items;
-      items.push({ name: options.name, value: options.value });
-      this.items = items;
-      items = null;
-    }
+  public remove = (options: { name: string }) => {
+    localStorage.removeItem(`${storageKey}:${options.name}`);
+    this.changes$.next();
   };
 }
