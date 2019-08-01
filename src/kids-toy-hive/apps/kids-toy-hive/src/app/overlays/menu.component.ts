@@ -27,6 +27,10 @@ export class MenuComponent implements OnDestroy  {
 
   }
 
+  handleMyProfileClick() {
+    this.navigateToUrl.emit('/myprofile');
+  }
+  
   ngOnDestroy() {
     this.onDestroy.next();	
   }

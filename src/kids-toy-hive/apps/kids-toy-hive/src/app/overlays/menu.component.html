@@ -1,5 +1,5 @@
 <ul>
     <li *ngIf='!isAuthenticated'><a (click)='signIn.emit()'>Sign In</a></li>
-    <li *ngIf='isAuthenticated'><a (click)='navigateToUrl.emit("/myprofile")'>My Profile</a></li>
+    <li *ngIf='isAuthenticated'><a (click)='handleMyProfileClick()'>My Profile</a></li>
     <li *ngIf='isAuthenticated'><a (click)='signOut.emit()'>Sign Out</a></li>
 </ul>

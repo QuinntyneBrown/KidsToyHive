@@ -26,4 +26,8 @@ export class AuthService {
   public logOut() {
     this._localStorageService.remove({ name: accessTokenKey });
   }
+
+  public get isAuthenticated():boolean {    
+    return this._localStorageService.get({ name: accessTokenKey}) != null;
+  }
 }
