@@ -52,7 +52,7 @@ namespace KidsToyHive.Domain.Features.Users
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
-                var user = await _context.Users
+                User user = await _context.Users
                     .SingleOrDefaultAsync(x => x.Username.ToLower() == request.Username.ToLower());
 
                 if (user == null)
@@ -67,6 +67,10 @@ namespace KidsToyHive.Domain.Features.Users
                     .ToList();
 
                 var claims = new List<Claim>();
+
+                claims.Add(new Claim("UserId", $"{user.UserId}"));
+                claims.Add(new Claim("PartitionKey", $"{user.TenantKey}"));
+                claims.Add(new Claim("CurrentUserName", $"{user.Username}"));
 
                 foreach (var profile in profiles) {
                     claims.Add(new Claim("ProfileId", $"{profile.ProfileId}"));

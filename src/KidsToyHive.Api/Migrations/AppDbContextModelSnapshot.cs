@@ -88,6 +88,8 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<DateTime>("Created");
 
+                    b.Property<Guid>("LocationId");
+
                     b.Property<Guid>("ProductId");
 
                     b.Property<int>("Quantity");
@@ -99,6 +101,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasKey("BookingDetailId");
 
                     b.HasIndex("BookingId");
+
+                    b.HasIndex("LocationId");
 
                     b.HasIndex("ProductId");
 
@@ -293,6 +297,20 @@ namespace KidsToyHive.Api.Migrations
                     b.ToTable("Drivers");
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.EmailTemplate", b =>
+                {
+                    b.Property<Guid>("EmailTemplateId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("EmailTemplateId");
+
+                    b.ToTable("EmailTemplates");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.HtmlContent", b =>
                 {
                     b.Property<Guid>("HtmlContentId")
@@ -372,11 +390,11 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid?>("BrandId");
 
+                    b.Property<int>("ChargePeriodPrice");
+
                     b.Property<DateTime>("Created");
 
                     b.Property<string>("Description");
-
-                    b.Property<bool>("IsRental");
 
                     b.Property<string>("Name");
 
@@ -384,9 +402,9 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid?>("ProductCategoryId");
 
-                    b.Property<int>("RentalPrice");
-
                     b.Property<Guid>("TenantKey");
+
+                    b.Property<byte>("Type");
 
                     b.Property<int>("Version");
 
@@ -664,9 +682,13 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<string>("Password");
 
                     b.Property<byte[]>("Salt");
+
+                    b.Property<Guid>("TenantKey");
 
                     b.Property<string>("Username");
 
@@ -726,6 +748,12 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Booking", null)
                         .WithMany("BookingDetails")
                         .HasForeignKey("BookingId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("KidsToyHive.Domain.Models.Product", "Product")
                         .WithMany()

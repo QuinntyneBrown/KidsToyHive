@@ -81,6 +81,7 @@ namespace KidsToyHive.Domain.DataAccess
         public DbSet<DashboardCard> DashboardCards { get; private set; }
         public DbSet<DigitalAsset> DigitalAssets { get; private set; }
         public DbSet<Driver> Drivers { get; private set; }
+        public DbSet<EmailTemplate> EmailTemplates { get; set; }
         public DbSet<HtmlContent> HtmlContents { get; private set; }
         public DbSet<InventoryItem> InventoryItems { get; private set; }
         public DbSet<Location> Locations { get; private set; }

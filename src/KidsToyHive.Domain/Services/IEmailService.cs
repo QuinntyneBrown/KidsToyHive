@@ -5,7 +5,7 @@ using System.Text;
 
 namespace KidsToyHive.Domain.Services
 {
-    public interface IEmailSender
+    public interface IEmailService
     {
         void SendNewCustomerEmail(Customer customer, User user);
         void SendNewDriverEmail(Driver driver, User user);

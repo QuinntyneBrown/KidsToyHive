@@ -35,6 +35,7 @@ export class MenuOverlayComponent  {
 
   public signIn() {
     this._loginOverlay.create();
+    this._overlayRef.close();
   }
 
   public navigateByUrl(url) {

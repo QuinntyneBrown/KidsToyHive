@@ -44,16 +44,16 @@ namespace KidsToyHive.Domain.Features.Customers
         {
             private readonly IAppDbContext _context;
             private readonly IPasswordHasher _passwordHasher;
-            private readonly IEmailSender _emailSender;
+            private readonly IEmailService _emailService;
             private readonly ISecurityTokenFactory _securityTokenFactory;
             public Handler(
                 IAppDbContext context, 
                 IPasswordHasher passwordHasher,
-                IEmailSender emailSender,
+                IEmailService emailService,
                 ISecurityTokenFactory securityTokenFactory)
             {
                 _context = context;
-                _emailSender = emailSender;
+                _emailService = emailService;
                 _passwordHasher = passwordHasher;
                 _securityTokenFactory = securityTokenFactory;
             }
@@ -136,17 +136,17 @@ namespace KidsToyHive.Domain.Features.Customers
                 }
 
                 if (request.Customer.CustomerId == default)
-                    _emailSender.SendNewCustomerEmail(customer, user);
+                    _emailService.SendNewCustomerEmail(customer, user);
 
                 return new Response() {
                     CustomerId = customer.CustomerId,
                     Version = customer.Version,
                     AccessToken = _securityTokenFactory.Create(user.Username,new List<Claim>() {
+                        new Claim("UserId", $"{user.UserId}"),
+                        new Claim("PartitionKey", $"{user.TenantKey}"),
                         new Claim($"{nameof(customer.CustomerId)}",$"{customer.CustomerId}"),
                         new Claim(ClaimTypes.Role, nameof(ProfileType.Customer)),
-                        new Claim("UserId",$"{user.UserId}"),
-                        new Claim("CurrentUserName",$"{user.Username}"),
-                        new Claim("PartitionKey",$"{customer.TenantKey}")
+                        new Claim("CurrentUserName",$"{user.Username}")
                     })
                 };
             }

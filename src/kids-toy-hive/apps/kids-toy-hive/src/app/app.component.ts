@@ -17,16 +17,7 @@ export class AppComponent {
     private readonly _localStorageService: LocalStorageService,
     private readonly _router: Router
   ) { 
-    _localStorageService.changes$
-    .pipe(map(x => {
-      const token = this._localStorageService.get({ name: accessTokenKey });
 
-      if(!token && this.isAuthenticated)
-        this._router.navigateByUrl('/');
-      
-      this.isAuthenticated = token != null;      
-    }))
-    .subscribe();
   }
 
   public handleMenuClick() {
@@ -35,6 +26,4 @@ export class AppComponent {
   public get imageUrl() {
     return `${this.apiBaseUrl}api/digitalassets/serve/file/Logo.png`;
   }
-
-  public isAuthenticated:boolean;
 }

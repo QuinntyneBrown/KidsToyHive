@@ -16,9 +16,9 @@ namespace KidsToyHive.Domain.Models
         public ProductCategory ProductCategory { get; set; }
         public Brand Brand { get; set; }
         public int Price { get; set; }
-        public int RentalPrice { get; set; } = 3125;
+        public int ChargePeriodPrice { get; set; } = 3125;
 
-        public RentalPeriod RentalPeriod = RentalPeriod.Hour;
-        public bool IsRental { get; set; } = true;
+        public ChargePeriod ChargePeriod = ChargePeriod.Hour;
+        public ProductType Type { get; set; } = ProductType.Rental;
     }
 }

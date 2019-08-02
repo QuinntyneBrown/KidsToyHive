@@ -26,7 +26,7 @@ namespace KidsToyHive.Domain.Features.Products
         public ICollection<ProductImageDto> ProductImages { get; set; }
         = new HashSet<ProductImageDto>();
         public int RentalPrice { get; set; }
-        public RentalPeriod RentalPeriod { get; set; }
+        public ChargePeriod RentalPeriod { get; set; }
         public int Version { get; set; }
     }
 
@@ -41,8 +41,8 @@ namespace KidsToyHive.Domain.Features.Products
                 Name = product.Name,
                 ProductImages = product.ProductImages.Select(x => x.ToDto()).ToList(),
                 Version = product.Version,
-                RentalPrice = product.RentalPrice,
-                RentalPeriod = product.RentalPeriod
+                RentalPrice = product.ChargePeriodPrice,
+                RentalPeriod = product.ChargePeriod
             };
     }
 }

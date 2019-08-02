@@ -2,7 +2,8 @@
 {
     public enum BookingTimeSlot: byte
     {
-        Morning = 0,
+        NotApplicable,
+        Morning,
         Afternoon,
         Custom
     }

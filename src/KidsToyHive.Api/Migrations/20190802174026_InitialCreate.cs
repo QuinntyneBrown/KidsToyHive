@@ -90,6 +90,19 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EmailTemplates",
+                columns: table => new
+                {
+                    EmailTemplateId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EmailTemplates", x => x.EmailTemplateId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HtmlContents",
                 columns: table => new
                 {
@@ -205,10 +218,12 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
                     Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    Salt = table.Column<byte[]>(nullable: true),
-                    Version = table.Column<int>(nullable: false)
+                    Salt = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -338,8 +353,8 @@ namespace KidsToyHive.Api.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Price = table.Column<int>(nullable: false),
-                    RentalPrice = table.Column<int>(nullable: false),
-                    IsRental = table.Column<bool>(nullable: false)
+                    ChargePeriodPrice = table.Column<int>(nullable: false),
+                    Type = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -473,6 +488,7 @@ namespace KidsToyHive.Api.Migrations
                     Version = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
+                    LocationId = table.Column<Guid>(nullable: false),
                     Cost = table.Column<int>(nullable: false),
                     BookingId = table.Column<Guid>(nullable: true)
                 },
@@ -485,6 +501,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Bookings",
                         principalColumn: "BookingId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_BookingDetails_Products_ProductId",
                         column: x => x.ProductId,
@@ -685,6 +707,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "BookingId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookingDetails_LocationId",
+                table: "BookingDetails",
+                column: "LocationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookingDetails_ProductId",
                 table: "BookingDetails",
                 column: "ProductId");
@@ -826,6 +853,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "DashboardCards");
+
+            migrationBuilder.DropTable(
+                name: "EmailTemplates");
 
             migrationBuilder.DropTable(
                 name: "HtmlContents");

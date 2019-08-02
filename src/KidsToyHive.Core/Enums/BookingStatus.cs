@@ -2,7 +2,8 @@
 {
     public enum BookingStatus: byte
     {
-        New = 0,
+        Quote = 0,
+        New,
         Paid,
         Delivered,
         PickedUp,

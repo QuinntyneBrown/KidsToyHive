@@ -100,7 +100,7 @@ namespace KidsToyHive.Domain.Features.Bookings
                     {
                         ProductId = bookingDetail.ProductId,
                         Quantity = bookingDetail.Quantity,
-                        Cost = (4 * product.RentalPrice) * bookingDetail.Quantity
+                        Cost = (4 * product.ChargePeriodPrice) * bookingDetail.Quantity
                     });
                 }
 

@@ -1,6 +1,6 @@
-import { Component, OnDestroy, Injectable } from '@angular/core';
+import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { BookingService, Booking } from '@kids-toy-hive/domain';
+import { BookingService, Booking, AuthService } from '@kids-toy-hive/domain';
 import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -10,7 +10,8 @@ import { takeUntil, map } from 'rxjs/operators';
 export class CreateBookingSectionGuard implements CanActivate {
   constructor(
     private _localStorageService: LocalStorageService,
-    private _router: Router
+    private _router: Router,
+    private _authService: AuthService
   ) {}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     const bookingId = this._localStorageService.get({ name: 'bookingId' });
@@ -31,7 +32,7 @@ export class CreateBookingSectionGuard implements CanActivate {
   styleUrls: ['./create-booking-section.component.css'],
   selector: 'kth-create-booking-section'
 })
-export class CreateBookingSectionComponent implements OnDestroy  { 
+export class CreateBookingSectionComponent implements OnInit, OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
   private get _productId():string {
     return this._localStorageService.get({name: 'productId' })
@@ -45,19 +46,30 @@ export class CreateBookingSectionComponent implements OnDestroy  {
     postalCode: new FormControl(null, [Validators.required])
   });
 
-  constructor(
-    private readonly _bookingService: BookingService,
-    private readonly _localStorageService: LocalStorageService,
-    private readonly _router: Router,
-  ) { 
-
-  }
-
   public bookingTimeSlots: any[] = [
     { value: 0, name:'Morning' },
     { value: 1, name:'Afternoon' },
     { value: 2, name:'Full Day' },
   ];
+
+  constructor(
+    private readonly _bookingService: BookingService,
+    private readonly _localStorageService: LocalStorageService,
+    private readonly _router: Router,
+    private readonly _authService: AuthService
+  ) { 
+
+  }
+
+  public ngOnInit() {
+    this._authService.isAuthenticatedChanged$
+    .pipe(takeUntil(this.onDestroy),map(x => {
+      if(!x) {        
+        this._router.navigateByUrl('order/step/1');
+      }
+    }))
+    .subscribe();
+  }
 
   public tryToCreateBooking(value:any) {
     const booking: Booking = {

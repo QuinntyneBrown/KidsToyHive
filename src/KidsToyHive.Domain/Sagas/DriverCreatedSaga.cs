@@ -18,9 +18,9 @@ namespace KidsToyHive.Domain.Sagas
         {
             private readonly IAppDbContext _context;
             private readonly IPasswordHasher _passwordHasher;
-            private readonly IEmailSender _emailSender;
+            private readonly IEmailService _emailSender;
 
-            public Handler(IAppDbContext context, IPasswordHasher passwordHasher, IEmailSender emailSender)
+            public Handler(IAppDbContext context, IPasswordHasher passwordHasher, IEmailService emailSender)
             {
                 _context = context;
                 _passwordHasher = passwordHasher;

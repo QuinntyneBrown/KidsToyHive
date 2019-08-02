@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace KidsToyHive.Domain.Models
 {
-    public class User
+    public class User: BaseModel
     {
         public User()
         {
@@ -21,6 +21,5 @@ namespace KidsToyHive.Domain.Models
         public byte[] Salt { get; private set; }
         public ICollection<Profile> Profiles { get; set; }
         = new HashSet<Profile>();
-        public int Version { get; set; }
     }
 }
