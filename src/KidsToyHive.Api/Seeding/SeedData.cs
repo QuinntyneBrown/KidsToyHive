@@ -1,4 +1,5 @@
-﻿using KidsToyHive.Core.Identity;
+﻿using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
 using Microsoft.AspNetCore.StaticFiles;
@@ -26,6 +27,7 @@ namespace KidsToyHive.Api
             InventoryItemConfiguration.Seed(context);
             HtmlContentConfiguration.Seed(context);
             DigitalAssetConfiguration.Seed(context);
+            EmailTemplateConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
 
@@ -58,6 +60,21 @@ namespace KidsToyHive.Api
                         }
                     }
                 }
+
+                context.SaveChanges();
+            }
+        }
+
+        internal class EmailTemplateConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.EmailTemplates.FirstOrDefault(x => x.Name == nameof(EmailTemplateName.NewCustomer)) == null)
+                    context.EmailTemplates.Add(new EmailTemplate
+                    {
+                        Name = nameof(EmailTemplateName.BookingConfirmation),
+                        Value = StaticFileLocator.GetAsString("BookingConfirmationEmail.html")
+                    });
 
                 context.SaveChanges();
             }

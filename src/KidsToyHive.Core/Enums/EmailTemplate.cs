@@ -4,6 +4,6 @@
     {
         NewCustomer = 0,
         NewDriver,
-        OrderConfirmation
+        BookingConfirmation
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Injectable } from '@angular/core';
+import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CustomerService, Customer, BookingService } from '@kids-toy-hive/domain';
 import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
@@ -12,13 +12,13 @@ export class ProcessPaymentSectionGuard implements CanActivate {
     private _localStorageService: LocalStorageService,
     private _router: Router
   ) {}
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {    
     const bookingId = this._localStorageService.get({ name: 'bookingId' });
     const token = this._localStorageService.get({ name: accessTokenKey });
 
     if(!bookingId || !token)
       return this._router.parseUrl('order/step/2');
-    
+
     return true;
   }
 }
@@ -28,7 +28,7 @@ export class ProcessPaymentSectionGuard implements CanActivate {
   styleUrls: ['./process-booking-payment.component.css'],
   selector: 'kth-process-booking-payment'
 })
-export class ProcessBookingPaymentComponent implements OnDestroy  { 
+export class ProcessBookingPaymentComponent implements OnInit, OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
   public form = new FormGroup({
     number: new FormControl(null, [Validators.required]),
@@ -43,6 +43,17 @@ export class ProcessBookingPaymentComponent implements OnDestroy  {
     private readonly _router: Router
   ) { }
 
+  ngOnInit() {
+    this._localStorageService.changes$
+    .pipe(takeUntil(this.onDestroy),map(x => {
+      const bookingId = this._localStorageService.get({ name: 'bookingId' });
+      const token = this._localStorageService.get({ name: accessTokenKey });
+  
+      if(!bookingId || !token)
+        return this._router.navigateByUrl('order/step/2');
+    }))
+    .subscribe();
+  }
   ngOnDestroy() {
     this.onDestroy.next();	
   }

@@ -30,7 +30,8 @@ export class AuthService {
   }
 
   public logOut() {
-    this._localStorageService.remove({ name: accessTokenKey });
+    localStorage.clear();
+    this._localStorageService.changes$.next(null);
     this.isAuthenticatedChanged$.next(false);
   } 
 

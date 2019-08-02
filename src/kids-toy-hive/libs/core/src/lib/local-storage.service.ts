@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { storageKey } from './constants';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalStorageService {
   
-  public changes$:Subject<any> = new Subject();
+  public changes$:BehaviorSubject<any> = new BehaviorSubject(null);
 
   public get = (options: { name: string }) => {
 
