@@ -88,7 +88,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<Guid>("LocationId");
+                    b.Property<Guid?>("LocationId");
 
                     b.Property<Guid>("ProductId");
 
@@ -739,7 +739,7 @@ namespace KidsToyHive.Api.Migrations
                         .IsRequired();
 
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
-                        .WithMany()
+                        .WithMany("Bookings")
                         .HasForeignKey("LocationId");
                 });
 
@@ -750,10 +750,8 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("BookingId");
 
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("BookingDetails")
+                        .HasForeignKey("LocationId");
 
                     b.HasOne("KidsToyHive.Domain.Models.Product", "Product")
                         .WithMany()

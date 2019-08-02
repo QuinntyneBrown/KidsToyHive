@@ -1,16 +1,18 @@
 using KidsToyHive.Core.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace KidsToyHive.Domain.Models
 {
     public class Booking: BaseModel
     {
-        public Guid BookingId { get; set; }
+        public Guid BookingId { get; set; }        
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
         public string Name { get; set; }
+        [ForeignKey("Location")]
         public Guid? LocationId { get; set; }
         public Location Location { get; set; }
         public DateTime Date { get; set; }

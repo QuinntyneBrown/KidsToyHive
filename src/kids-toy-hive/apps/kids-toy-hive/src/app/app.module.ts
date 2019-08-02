@@ -13,7 +13,7 @@ import { ToysPageComponent, ToyComponent } from './pages/toys-page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { DoneSectionComponent } from './pages/order-page/sections/done';
-import { MyProfilePageComponent } from './pages/my-profile-page';
+import { MyProfilePageComponent, MyBookingComponent } from './pages/my-profile-page';
 import { FeaturesSecurityModule } from '@kids-toy-hive/features/security';
 import { MenuOverlayComponent, MenuOverlay } from './overlays';
 import { MenuComponent } from './overlays/menu.component';
@@ -39,7 +39,11 @@ import { MenuComponent } from './overlays/menu.component';
     DoneSectionComponent,
 
     TermsAndConditionsPageComponent,
+    
     MyProfilePageComponent,
+
+    MyBookingComponent,
+
     MenuOverlayComponent,
     MenuComponent
   ],

@@ -1,10 +1,5 @@
 ﻿using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Models;
-using SendGrid.Helpers.Mail;
-using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
 
 namespace KidsToyHive.Domain.Services
 {
@@ -33,7 +28,9 @@ namespace KidsToyHive.Domain.Services
 
         public void SendNewDriverEmail(Driver driver, User user)
         {
-
+            var mailMessage = _emailBuilder.Build(EmailTemplateName.NewDriver, user);
+            _emailDistributionService.SetDistributionList(ref mailMessage);
+            _emailDeliveryService.Send(mailMessage);
         }
     }
 }

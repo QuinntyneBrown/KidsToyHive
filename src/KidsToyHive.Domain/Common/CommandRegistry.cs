@@ -31,7 +31,7 @@ namespace KidsToyHive.Domain.Common
 
         public void TryToAdd(CommandRegistryItem item, CancellationToken cancellationToken = default)
         {
-            if (_inner.Where(x => x.Value.Key == item.Key && x.Value.State != CommandRegistryItemState.Cancelled).Any())
+            if (_inner.Where(x => x.Value.Key == item.Key && x.Value.State < CommandRegistryItemState.Cancelled).Any())
                 throw new ConcurrencyException();
 
             item.CancellationToken = cancellationToken;

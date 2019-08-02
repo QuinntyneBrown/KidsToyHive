@@ -488,7 +488,7 @@ namespace KidsToyHive.Api.Migrations
                     Version = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
-                    LocationId = table.Column<Guid>(nullable: false),
+                    LocationId = table.Column<Guid>(nullable: true),
                     Cost = table.Column<int>(nullable: false),
                     BookingId = table.Column<Guid>(nullable: true)
                 },
@@ -506,7 +506,7 @@ namespace KidsToyHive.Api.Migrations
                         column: x => x.LocationId,
                         principalTable: "Locations",
                         principalColumn: "LocationId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_BookingDetails_Products_ProductId",
                         column: x => x.ProductId,
