@@ -8,3 +8,13 @@ img {
     margin: 0 auto;
     max-height: 250px;
 }
+
+.toy-price {
+    font-size: 24px;
+    margin: 0 5px 0 0; 
+}
+
+.toy-price-period {
+    font-size: 18px;
+    color: rgb(233, 165, 50);
+}

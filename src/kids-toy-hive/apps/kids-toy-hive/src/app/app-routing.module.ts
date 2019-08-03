@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent, ConfirmationPageComponent, OrderPageComponent, AboutPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateCustomerSectionGuard, CreateBookingSectionGuard, ProcessPaymentSectionGuard } from './pages';
 import { ToysPageComponent } from './pages/toys-page';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
-import { DoneSectionComponent } from './pages/order-page/sections/done';
 import { MyProfilePageComponent } from './pages/my-profile-page';
 
 const canActivate = [];
@@ -48,12 +47,7 @@ const routes: Routes = [
         path:'step/3',
         component: ProcessBookingPaymentComponent,
         canActivate:[ProcessPaymentSectionGuard]
-      },
-      {
-        path:'step/4',
-        component: DoneSectionComponent,
-        canActivate:[ProcessPaymentSectionGuard]
-      }      
+      }  
     ]
   },  
   {

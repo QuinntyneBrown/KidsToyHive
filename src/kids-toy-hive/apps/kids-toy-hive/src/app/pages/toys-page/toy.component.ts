@@ -17,7 +17,7 @@ export class ToyComponent implements OnDestroy, OnInit  {
 
   @Input()
   public title: string;
-  
+
   @Output()
   public callToActionClick: EventEmitter<any> = new EventEmitter();
 

@@ -13,7 +13,7 @@ namespace KidsToyHive.Domain.Features.Products
         {
             RuleFor(x => x.ProductId).NotNull();
             RuleFor(x => x.Name).NotNull();
-            RuleFor(x => x.RentalPrice).NotNull();
+            RuleFor(x => x.ChargePeriodPrice).NotNull();
         }
     }
 
@@ -24,9 +24,9 @@ namespace KidsToyHive.Domain.Features.Products
         public string Description { get; set; }
         public string Name { get; set; }
         public ICollection<ProductImageDto> ProductImages { get; set; }
-        = new HashSet<ProductImageDto>();
-        public int RentalPrice { get; set; }
-        public ChargePeriod RentalPeriod { get; set; }
+            = new HashSet<ProductImageDto>();
+        public int ChargePeriodPrice { get; set; }
+        public ChargePeriod ChargePeriod { get; set; }
         public int Version { get; set; }
     }
 
@@ -41,8 +41,8 @@ namespace KidsToyHive.Domain.Features.Products
                 Name = product.Name,
                 ProductImages = product.ProductImages.Select(x => x.ToDto()).ToList(),
                 Version = product.Version,
-                RentalPrice = product.ChargePeriodPrice,
-                RentalPeriod = product.ChargePeriod
+                ChargePeriodPrice = product.ChargePeriodPrice,
+                ChargePeriod = product.ChargePeriod
             };
     }
 }
