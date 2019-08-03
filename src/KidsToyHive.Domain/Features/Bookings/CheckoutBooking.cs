@@ -2,7 +2,6 @@ using FluentValidation;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
-using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -41,11 +40,13 @@ namespace KidsToyHive.Domain.Features.Bookings
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly IAppDbContext _context;
+            private readonly IEmailService _emailService;
             private readonly IPaymentProcessor _paymentProcessor;
 
-            public Handler(IAppDbContext context, IPaymentProcessor paymentProcessor)
+            public Handler(IAppDbContext context, IPaymentProcessor paymentProcessor, IEmailService emailService)
             {
                 _context = context;
+                _emailService = emailService;
                 _paymentProcessor = paymentProcessor;
             }
 
@@ -73,6 +74,8 @@ namespace KidsToyHive.Domain.Features.Bookings
                     booking.Status = BookingStatus.Paid;
 
                 await _context.SaveChangesAsync(cancellationToken);
+
+                await _emailService.SendBookingConfirmation(booking, null);
 
                 return new Response() {
                     BookingId = booking.BookingId,

@@ -22,6 +22,7 @@ namespace UnitTests.Domain.Features.Bookings
                 .Options;
 
             var mediator = new Mock<IMediator>().Object;
+            var emailService = new Mock<IEmailService>().Object;
 
             using (var context = new AppDbContext(options, mediator))
             {
@@ -40,7 +41,7 @@ namespace UnitTests.Domain.Features.Bookings
 
                 Assert.Equal(12500, booking.Cost);
 
-                var processBookingPaymentHandler = new CheckoutBooking.Handler(context, new FakePaymentProcessor());
+                var processBookingPaymentHandler = new CheckoutBooking.Handler(context, new FakePaymentProcessor(), emailService);
 
                 var result = await processBookingPaymentHandler.Handle(new CheckoutBooking.Request {
                     BookingId = booking.BookingId,
