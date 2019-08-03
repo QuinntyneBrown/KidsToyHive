@@ -1,12 +1,10 @@
 ﻿using SendGrid.Helpers.Mail;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Services
 {
     public interface IEmailDeliveryService
     {
-        void Send(SendGridMessage message);
+        Task Send(SendGridMessage message);
     }
 }
