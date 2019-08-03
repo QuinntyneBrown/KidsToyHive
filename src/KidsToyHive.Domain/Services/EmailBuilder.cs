@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Mail;
 
 namespace KidsToyHive.Domain.Services
@@ -17,13 +19,20 @@ namespace KidsToyHive.Domain.Services
             _context = context;
         }
 
-        public SendGridMessage Build(EmailTemplateName template, User user)
+        public async Task<SendGridMessage> Build(EmailTemplateName template, User user)
         {
             var sendGridMessage = new SendGridMessage();
-
+            
             switch (template)
             {
                 case EmailTemplateName.NewCustomer:
+                    break;
+
+                case EmailTemplateName.BookingConfirmation:
+                    var emailTemplate = await _context.EmailTemplates.SingleAsync(x => x.Name == nameof(EmailTemplateName.BookingConfirmation));
+                    string result = default;
+
+                    sendGridMessage.HtmlContent = result;
                     break;
 
                 default:

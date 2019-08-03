@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Services
 {
     public interface IEmailService
     {
-        void SendNewCustomerEmail(Customer customer, User user);
-        void SendNewDriverEmail(Driver driver, User user);
+        Task SendNewCustomerEmail(Customer customer, User user);
+        Task SendNewDriverEmail(Driver driver, User user);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Models;
+using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Services
 {
@@ -18,17 +19,17 @@ namespace KidsToyHive.Domain.Services
             _emailDistributionService = emailDistributionService;
             _emailDeliveryService = emailDeliveryService;
         }
-        public void SendNewCustomerEmail(Customer customer, User user)
+        public async Task SendNewCustomerEmail(Customer customer, User user)
         {
-            var mailMessage = _emailBuilder.Build(EmailTemplateName.NewCustomer, user);
+            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, user);
             _emailDistributionService.SetDistributionList(ref mailMessage);
             _emailDeliveryService.Send(mailMessage);
 
         }
 
-        public void SendNewDriverEmail(Driver driver, User user)
+        public async Task SendNewDriverEmail(Driver driver, User user)
         {
-            var mailMessage = _emailBuilder.Build(EmailTemplateName.NewDriver, user);
+            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewDriver, user);
             _emailDistributionService.SetDistributionList(ref mailMessage);
             _emailDeliveryService.Send(mailMessage);
         }
