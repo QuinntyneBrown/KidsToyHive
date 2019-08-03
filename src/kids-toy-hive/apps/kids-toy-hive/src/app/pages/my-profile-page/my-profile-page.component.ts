@@ -20,10 +20,14 @@ export class MyProfilePageComponent implements OnInit, OnDestroy  {
   ) { }
   
   public ngOnInit() {
-    this.bookings$ = this._bookingService.getMy();
+    this.bookings$ = this._bookingService.getMy()
+    .pipe(map(x => {
+      console.log(x);
+      return x;
+    }));
 
     this._authService.isAuthenticatedChanged$
-    .pipe(takeUntil(this.onDestroy),map(x => {      
+    .pipe(takeUntil(this.onDestroy),map(x => {            
       if(!x) { 
         this._router.navigateByUrl('toys'); 
       }

@@ -28,7 +28,8 @@ namespace KidsToyHive.Domain.Features.BookingDetails
             => new BookingDetailDto
             {
                 BookingDetailId = bookingDetail.BookingDetailId,
-                Version = bookingDetail.Version,                                
+                Version = bookingDetail.Version, 
+                Product = bookingDetail.Product.ToDto()
             };
     }
 }

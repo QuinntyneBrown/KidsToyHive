@@ -6,6 +6,7 @@ using KidsToyHive.Domain.Features.BookingDetails;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Features.Customers;
 using KidsToyHive.Domain.Features.Locations;
+using System.Linq;
 
 namespace KidsToyHive.Domain.Features.Bookings
 {
@@ -44,7 +45,8 @@ namespace KidsToyHive.Domain.Features.Bookings
                 Name = booking.Name,
                 BookingTimeSlot = booking.BookingTimeSlot,
                 LocationId = booking.LocationId,
-                Version = booking.Version
+                Version = booking.Version,
+                BookingDetails = booking.BookingDetails.Select(x => x.ToDto()).ToList()
             };
     }
 }

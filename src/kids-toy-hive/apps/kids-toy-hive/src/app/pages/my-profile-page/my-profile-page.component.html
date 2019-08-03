@@ -1,5 +1,5 @@
-<h1>My Profile</h1>
+<h1>My Account</h1>
 
-<div *ngFor='let booking of (bookings$ | async)'>
-    Works?
-</div>
+<h2>Recent Bookings</h2>
+<kth-my-booking *ngFor='let booking of (bookings$ | async)' [booking]='booking'>
+</kth-my-booking>

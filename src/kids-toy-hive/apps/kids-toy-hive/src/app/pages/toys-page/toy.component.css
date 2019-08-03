@@ -2,19 +2,30 @@
     display: grid;
     border: 0.75px solid #ccc;
     text-align: center;
+    letter-spacing: 0.5px;
 }
 
+h1 {
+    font-size: 2em;
+    line-height: 1.25em;
+    padding: 0;
+    margin: 0;
+    font-weight: 600;
+}
 img {
     margin: 0 auto;
-    max-height: 250px;
+    max-height: 300px;
 }
-
+.toy-price, .toy-price-period {    
+    line-height: 1em;
+    font-weight: 100;
+}
 .toy-price {
-    font-size: 24px;
+    font-size: 2em;
     margin: 0 5px 0 0; 
 }
 
 .toy-price-period {
-    font-size: 18px;
+    font-size: 1.67em;
     color: rgb(233, 165, 50);
 }
