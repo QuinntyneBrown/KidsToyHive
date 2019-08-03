@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Injectable } from '@angular/core';
+import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CustomerService, Customer, BookingService } from '@kids-toy-hive/domain';
 import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
@@ -23,8 +23,16 @@ export class DoneSectionGuard implements CanActivate {
   styleUrls: ['./done-section.component.css'],
   selector: 'kth-done-section'
 })
-export class DoneSectionComponent implements OnDestroy  { 
+export class DoneSectionComponent implements OnInit, OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
+
+  constructor(private readonly _localStorageService: LocalStorageService) {
+
+  }
+  public ngOnInit() {
+    this._localStorageService.remove({ name: 'bookingId'});
+    this._localStorageService.remove({ name: 'productId'});
+  }
 
   ngOnDestroy() {
     this.onDestroy.next();	

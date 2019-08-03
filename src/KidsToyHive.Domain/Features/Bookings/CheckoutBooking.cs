@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings
 {
-    public class ProcessBookingPayment
+    public class CheckoutBooking
     {
 
         public class Validator: AbstractValidator<Request> {

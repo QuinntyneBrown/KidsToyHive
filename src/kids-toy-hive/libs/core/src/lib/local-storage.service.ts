@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { storageKey } from './constants';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,6 @@ export class LocalStorageService {
   public changes$:BehaviorSubject<any> = new BehaviorSubject(null);
 
   public get = (options: { name: string }) => {
-
     const item = localStorage.getItem(`${storageKey}:${options.name}`);
     
     if(item === 'undefined') return null;

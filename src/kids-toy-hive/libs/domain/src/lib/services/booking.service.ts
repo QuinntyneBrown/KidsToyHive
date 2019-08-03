@@ -58,7 +58,7 @@ export class BookingService {
   }): Observable<{ bookingId: string, version: number }> {
     return this._client.post<{ bookingId: string, version: number }>(`${this._baseUrl}api/commands`, options, {
       headers: {
-        "OperationId":"ProcessBookingPayment"
+        "OperationId":"CheckoutBooking"
       }
     });
   }

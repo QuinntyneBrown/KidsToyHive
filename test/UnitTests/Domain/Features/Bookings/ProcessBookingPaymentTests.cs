@@ -24,7 +24,7 @@ namespace UnitTests.Domain.Features.Bookings
             {
                 var mockPaymentProcessor = new Mock<IPaymentProcessor>();
 
-                var processBookingPaymentHandler = new ProcessBookingPayment.Handler(context,mockPaymentProcessor.Object);
+                var processBookingPaymentHandler = new CheckoutBooking.Handler(context,mockPaymentProcessor.Object);
             }
         }
     }

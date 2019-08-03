@@ -1,6 +1,6 @@
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CustomerService, Customer, BookingService } from '@kids-toy-hive/domain';
+import { CustomerService, Customer, BookingService, AuthService } from '@kids-toy-hive/domain';
 import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -38,19 +38,18 @@ export class ProcessBookingPaymentComponent implements OnInit, OnDestroy  {
   });
 
   constructor(
+    private readonly _authService: AuthService,
     private readonly _bookingService: BookingService,
     private readonly _localStorageService: LocalStorageService,
     private readonly _router: Router
   ) { }
 
   ngOnInit() {
-    this._localStorageService.changes$
-    .pipe(takeUntil(this.onDestroy),map(x => {
-      const bookingId = this._localStorageService.get({ name: 'bookingId' });
-      const token = this._localStorageService.get({ name: accessTokenKey });
-  
-      if(!bookingId || !token)
-        return this._router.navigateByUrl('order/step/2');
+    this._authService.isAuthenticatedChanged$
+    .pipe(takeUntil(this.onDestroy),map(x => {      
+      if(!x) { 
+        this._router.navigateByUrl('order/step/1'); 
+      }
     }))
     .subscribe();
   }
@@ -67,8 +66,10 @@ export class ProcessBookingPaymentComponent implements OnInit, OnDestroy  {
       cvc: formValue.cvc,
       bookingId
     })
-    .pipe(takeUntil(this.onDestroy),map(x => { 
-      this._router.navigateByUrl('order/step/4');
+    .pipe(takeUntil(this.onDestroy),map(x => {       
+      this._localStorageService.remove({ name: 'bookingId'});
+      this._localStorageService.remove({ name: 'productId'});
+      this._router.navigateByUrl('myprofile');
     }))
     .subscribe(); 
   }
