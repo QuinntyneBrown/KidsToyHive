@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.Services;
 using KidsToyHive.Core.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace KidsToyHive.Domain.Features.SalesOrders
 {
-    public class ProcessSalesOrderPayment
+    public class CheckoutSalesOrder
     {
 
         public class Validator: AbstractValidator<Request> {
@@ -22,13 +23,13 @@ namespace KidsToyHive.Domain.Features.SalesOrders
         }
 
         public class Request : Command<Response> {
+            public Guid SalesOrderId { get; set; }
             public string Number { get; set; }
             public long? ExpMonth { get; set; }
             public int ExpYear { get; set; }
             public string Cvc { get; set; }
             public int Value { get; set; }
-            public string Currency { get; set; }
-            public Guid SalesOrderId { get; set; }
+            public string Currency { get; set; }            
         }
 
         public class Response
@@ -49,7 +50,9 @@ namespace KidsToyHive.Domain.Features.SalesOrders
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
 
-                SalesOrder salesOrder = await _context.SalesOrders.FindAsync(request.SalesOrderId);
+                SalesOrder salesOrder = await _context.SalesOrders
+                    .Include(x => x.SalesOrderDetails)
+                    .SingleAsync(x => x.SalesOrderId == request.SalesOrderId);
 
                 var result = await _paymentProcessor.ProcessAsync(new PaymentDto
                 {

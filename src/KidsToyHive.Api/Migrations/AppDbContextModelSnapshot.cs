@@ -664,7 +664,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<DateTime>("Effective");
 
-                    b.Property<int>("Rate");
+                    b.Property<decimal>("Rate");
 
                     b.Property<Guid>("TenantKey");
 

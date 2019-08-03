@@ -1,9 +1,12 @@
+using KidsToyHive.Api;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.Bookings;
+using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Moq;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -22,9 +25,30 @@ namespace UnitTests.Domain.Features.Bookings
 
             using (var context = new AppDbContext(options, mediator))
             {
-                var mockPaymentProcessor = new Mock<IPaymentProcessor>();
+                SeedData.Seed(context, ConfigurationHelper.Seed);
+                var product = context.Products.Single();
 
-                var processBookingPaymentHandler = new CheckoutBooking.Handler(context,mockPaymentProcessor.Object);
+                var booking = new Booking();
+                
+                booking.BookingDetails.Add(new BookingDetail
+                {
+                    Cost = 4 * product.ChargePeriodPrice
+                });
+
+                context.Bookings.Add(booking);
+                context.SaveChanges();
+
+                Assert.Equal(12500, booking.Cost);
+
+                var processBookingPaymentHandler = new CheckoutBooking.Handler(context, new FakePaymentProcessor());
+
+                var result = await processBookingPaymentHandler.Handle(new CheckoutBooking.Request {
+                    BookingId = booking.BookingId,
+                    Number = "",
+                    Cvc = "",
+                    ExpYear = 09,
+                    ExpMonth = 22,
+                }, default);
             }
         }
     }

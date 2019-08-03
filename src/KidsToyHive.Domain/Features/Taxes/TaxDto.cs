@@ -16,7 +16,7 @@ namespace KidsToyHive.Domain.Features.Taxes
     public class TaxDto
     {        
         public Guid TaxId { get; set; }
-        public int Rate { get; set; }
+        public decimal Rate { get; set; }
         public int Version { get; set; }
     }
 

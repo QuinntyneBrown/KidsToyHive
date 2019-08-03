@@ -24,7 +24,7 @@ namespace UnitTests.Domain.Features.SalesOrders
             {
                 var mockPaymentProcessor = new Mock<IPaymentProcessor>();
 
-                var processSalesOrderPaymentHandler = new ProcessSalesOrderPayment.Handler(context, mockPaymentProcessor.Object);
+                var processSalesOrderPaymentHandler = new CheckoutSalesOrder.Handler(context, mockPaymentProcessor.Object);
             }
         }
     }

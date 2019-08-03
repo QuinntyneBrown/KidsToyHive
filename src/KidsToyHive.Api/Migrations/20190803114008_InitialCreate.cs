@@ -204,7 +204,7 @@ namespace KidsToyHive.Api.Migrations
                     TenantKey = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
-                    Rate = table.Column<int>(nullable: false),
+                    Rate = table.Column<decimal>(nullable: false),
                     Type = table.Column<byte>(nullable: false),
                     Effective = table.Column<DateTime>(nullable: false)
                 },

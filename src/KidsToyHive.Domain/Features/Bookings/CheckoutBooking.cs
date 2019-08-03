@@ -57,13 +57,15 @@ namespace KidsToyHive.Domain.Features.Bookings
 
                 var tax = await _context.Taxes.FirstAsync(x => x.Effective <= booking.Created);
 
+                var value = booking.Cost + (int)(booking.Cost * tax.Rate);
+
                 var result = await _paymentProcessor.ProcessAsync(new PaymentDto {
                     Number = request.Number,
                     ExpMonth = request.ExpMonth,
                     ExpYear = request.ExpYear,
                     Cvc = request.Cvc,
                     Currency = request.Currency,
-                    Value = booking.Cost + (booking.Cost * tax.Rate),
+                    Value = value,
                     Description = $"Booking: {booking.BookingId}"
                 });
 

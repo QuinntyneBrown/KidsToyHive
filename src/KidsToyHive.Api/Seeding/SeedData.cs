@@ -114,7 +114,7 @@ namespace KidsToyHive.Api
             public static void Seed(AppDbContext context)
             {
                 if (context.Taxes.FirstOrDefault() == null)
-                    context.Taxes.Add(new Tax() { Rate = 13 });
+                    context.Taxes.Add(new Tax() { Rate = .13M });
 
                 context.SaveChanges();
             }
