@@ -27,11 +27,11 @@ export class LocalStorageService {
       options.value = JSON.stringify(options.value);
     
     localStorage.setItem(`${storageKey}:${options.name}`,options.value);
-    this.changes$.next();
+    this.changes$.next(null);
   };
 
   public remove = (options: { name: string }) => {
     localStorage.removeItem(`${storageKey}:${options.name}`);
-    this.changes$.next();
+    this.changes$.next(null);
   };
 }

@@ -47,6 +47,7 @@ namespace KidsToyHive.Api
             services.AddTransient<IEmailDeliveryService, EmailDeliveryService>();
             services.AddTransient<IEmailDistributionService, EmailDistributionService>();
             services.AddTransient<IInventoryService, InventoryService>();
+            services.AddTransient<IPaymentProcessor, PaymentProcessor>();
 
             services.AddSwaggerGen(options =>
             {
