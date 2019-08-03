@@ -30,6 +30,10 @@ namespace KidsToyHive.Domain.Services
                     emailTemplate = await _context.EmailTemplates.SingleAsync(x => x.Name == nameof(EmailTemplateName.BookingConfirmation));
                     break;
 
+                case EmailTemplateName.NewCustomer:
+                    emailTemplate = await _context.EmailTemplates.SingleAsync(x => x.Name == nameof(EmailTemplateName.NewCustomer));
+                    break;
+
                 default:
                     throw new NotSupportedException("");
             }

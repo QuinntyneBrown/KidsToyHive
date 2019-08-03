@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190803020151_InitialCreate")]
+    [Migration("20190803095617_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

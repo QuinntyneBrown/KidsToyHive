@@ -2,8 +2,6 @@
 using Stripe;
 using System.Threading.Tasks;
 
-//https://www.youtube.com/watch?v=g9E9MHbbwKQ
-
 namespace KidsToyHive.Domain.Services
 {
     public class FakePaymentProcessor : IPaymentProcessor
@@ -16,6 +14,7 @@ namespace KidsToyHive.Domain.Services
     {
         public async Task<bool> ProcessAsync(PaymentDto payment)
         {
+
             var optionsToken = new TokenCreateOptions()
             {
                 Card = new CreditCardOptions

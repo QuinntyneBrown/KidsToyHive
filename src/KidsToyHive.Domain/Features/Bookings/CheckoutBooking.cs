@@ -51,7 +51,9 @@ namespace KidsToyHive.Domain.Features.Bookings
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
 
-                var booking = await _context.Bookings.FindAsync(request.BookingId);
+                var booking = await _context.Bookings
+                    .Include(x => x.BookingDetails)
+                    .SingleAsync(x => x.BookingId == request.BookingId);
 
                 var tax = await _context.Taxes.FirstAsync(x => x.Effective <= booking.Created);
 

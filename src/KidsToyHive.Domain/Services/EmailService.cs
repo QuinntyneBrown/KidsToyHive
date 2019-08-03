@@ -23,14 +23,11 @@ namespace KidsToyHive.Domain.Services
         }
         public async Task SendNewCustomer(Customer customer, User user)
         {
-            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, new Dictionary<string, string>() {
-                { "{{ bookingDate ","" }
-            });
+            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, new Dictionary<string, string>());
             _emailDistributionService.SetDistributionList(ref mailMessage);
             mailMessage.Subject = "New Customer";
             mailMessage.From = new EmailAddress("notications@thekidstoyhive.com", "Kids Toy Hive");
-            //mailMessage.AddTo($"{customer.Email}",$"{customer.FirstName} {customer.LastName}");
-            mailMessage.AddTo($"quinntynebrown@gmail.com", $"{customer.FirstName} {customer.LastName}");
+            mailMessage.AddTo($"{customer.Email}",$"{customer.FirstName} {customer.LastName}");
             await _emailDeliveryService.Send(mailMessage);
 
         }
@@ -52,7 +49,7 @@ namespace KidsToyHive.Domain.Services
             mailMessage.Subject = "Booking Confirmation";
             _emailDistributionService.SetDistributionList(ref mailMessage);
             mailMessage.From = new EmailAddress("notications@thekidstoyhive.com", "Kids Toy Hive");
-            mailMessage.AddTo($"quinntynebrown@gmail.com", $"{customer.FirstName} {customer.LastName}");
+            mailMessage.AddTo($"{customer.Email}", $"{customer.FirstName} {customer.LastName}");
             await _emailDeliveryService.Send(mailMessage);
         }
     }

@@ -69,11 +69,18 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.EmailTemplates.FirstOrDefault(x => x.Name == nameof(EmailTemplateName.NewCustomer)) == null)
+                if (context.EmailTemplates.FirstOrDefault(x => x.Name == nameof(EmailTemplateName.BookingConfirmation)) == null)
                     context.EmailTemplates.Add(new EmailTemplate
                     {
                         Name = nameof(EmailTemplateName.BookingConfirmation),
                         Value = StaticFileLocator.GetAsString("BookingConfirmationEmail.html")
+                    });
+
+                if (context.EmailTemplates.FirstOrDefault(x => x.Name == nameof(EmailTemplateName.NewCustomer)) == null)
+                    context.EmailTemplates.Add(new EmailTemplate
+                    {
+                        Name = nameof(EmailTemplateName.NewCustomer),
+                        Value = StaticFileLocator.GetAsString("NewCustomerEmail.html")
                     });
 
                 context.SaveChanges();
