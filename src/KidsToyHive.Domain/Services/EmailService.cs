@@ -1,5 +1,6 @@
 ﻿using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Services
@@ -19,17 +20,29 @@ namespace KidsToyHive.Domain.Services
             _emailDistributionService = emailDistributionService;
             _emailDeliveryService = emailDeliveryService;
         }
-        public async Task SendNewCustomerEmail(Customer customer, User user)
+        public async Task SendNewCustomer(Customer customer, User user)
         {
-            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, user);
+            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, new Dictionary<string, string>());
             _emailDistributionService.SetDistributionList(ref mailMessage);
             _emailDeliveryService.Send(mailMessage);
 
         }
 
-        public async Task SendNewDriverEmail(Driver driver, User user)
+        public async Task SendNewDriver(Driver driver, User user)
         {
-            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewDriver, user);
+            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewDriver, new Dictionary<string, string>());
+            _emailDistributionService.SetDistributionList(ref mailMessage);
+            _emailDeliveryService.Send(mailMessage);
+        }
+
+
+        public async Task SendBookingConfirmation(Booking booking)
+        {
+            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, new Dictionary<string, string>() {
+                {
+                    "{{ bookingDate }}", booking.Date.ToLongDateString()
+                }
+            });
             _emailDistributionService.SetDistributionList(ref mailMessage);
             _emailDeliveryService.Send(mailMessage);
         }

@@ -19,27 +19,29 @@ namespace KidsToyHive.Domain.Services
             _context = context;
         }
 
-        public async Task<SendGridMessage> Build(EmailTemplateName template, User user)
+        public async Task<SendGridMessage> Build(EmailTemplateName template, Dictionary<string, string> items)
         {
             var sendGridMessage = new SendGridMessage();
-            
+            EmailTemplate emailTemplate;
+
             switch (template)
             {
-                case EmailTemplateName.NewCustomer:
-                    break;
-
                 case EmailTemplateName.BookingConfirmation:
-                    var emailTemplate = await _context.EmailTemplates.SingleAsync(x => x.Name == nameof(EmailTemplateName.BookingConfirmation));
-                    string result = default;
-
-                    sendGridMessage.HtmlContent = result;
+                    emailTemplate = await _context.EmailTemplates.SingleAsync(x => x.Name == nameof(EmailTemplateName.BookingConfirmation));
                     break;
 
                 default:
                     throw new NotSupportedException("");
             }
 
-            
+            string result = emailTemplate.Value;
+
+            foreach (var item in items)
+            {
+                result = result.Replace(item.Key, item.Value);
+            }
+            sendGridMessage.HtmlContent = result;
+
 
             return sendGridMessage;
         }

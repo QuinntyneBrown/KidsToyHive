@@ -136,7 +136,7 @@ namespace KidsToyHive.Domain.Features.Customers
                 }
 
                 if (request.Customer.CustomerId == default)
-                    _emailService.SendNewCustomerEmail(customer, user);
+                    _emailService.SendNewCustomer(customer, user);
 
                 return new Response() {
                     CustomerId = customer.CustomerId,

@@ -53,7 +53,7 @@ namespace KidsToyHive.Domain.Sagas
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                _emailSender.SendNewDriverEmail(driver, user);
+                _emailSender.SendNewDriver(driver, user);
             }
         }
     }
