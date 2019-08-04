@@ -1,0 +1,5 @@
+:host {
+    display: block;
+    min-height: 425px;
+    background-image: url('https://localhost:44329/api/digitalassets/serve/file/Hero.jpg')
+}

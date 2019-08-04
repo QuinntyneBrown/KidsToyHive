@@ -74,9 +74,15 @@ export class CreateBookingSectionComponent implements OnInit, OnDestroy  {
     .subscribe();
   }
 
-  public handleChange() {
+  public handleBookingTimeSlotChange() {
     this._yourOrderService.bookingTimeSlot$.next(this.form.value.bookingTimeSlot);
   }
+
+  public handleBookingDateChange() {
+    this._yourOrderService.bookingDate$.next(this.form.value.date);
+  }
+
+
   public tryToCreateBooking(value:any) {
     const booking: Booking = {
       bookingDetails:[

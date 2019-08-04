@@ -2,6 +2,7 @@ import { Component, OnDestroy, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Booking } from '@kids-toy-hive/domain';
 import { baseUrl } from '@kids-toy-hive/core';
+import * as moment from 'moment';
 
 @Component({
   templateUrl: './my-booking.component.html',
@@ -26,5 +27,9 @@ export class MyBookingComponent implements OnDestroy  {
 
   ngOnDestroy() {
     this.onDestroy.next();	
+  }
+
+  public formatDate(date) {
+    return moment(date).format('dddd MMMM D, YYYY');
   }
 }

@@ -3,13 +3,13 @@
 <form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
     <div class='field'>
         <label>Date:</label>
-        <input type='text' [matDatepicker]="picker" (focus)="picker.open()" formControlName="date" />      
+        <input type='text' (blur)='handleBookingDateChange()' [matDatepicker]="picker" (focus)="picker.open()" formControlName="date" />      
         <mat-datepicker #picker></mat-datepicker>
     </div>
 
     <div class='field'>
         <label>Pick a Time Slot:</label>
-        <select formControlName="bookingTimeSlot" (change)='handleChange()'>
+        <select formControlName="bookingTimeSlot" (change)='handleBookingTimeSlotChange()'>
             <option *ngFor="let slot of bookingTimeSlots;" [value]="slot.value">
             {{ slot.name }}
             </option>

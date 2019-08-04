@@ -10,6 +10,7 @@ export class YourOrderService {
     public product$: BehaviorSubject<Product> = new BehaviorSubject(null);
     public booking$: BehaviorSubject<Booking> = new BehaviorSubject(null);
     public bookingTimeSlot$: BehaviorSubject<number> = new BehaviorSubject(null);
+    public bookingDate$: BehaviorSubject<string> = new BehaviorSubject(null);
     
     public productImageUrl$: Observable<string> = this.product$
     .pipe(

@@ -24,7 +24,6 @@ export class MyProfilePageComponent implements OnInit, OnDestroy  {
   public ngOnInit() {
     this.bookings$ = this._bookingService.getMy()
     .pipe(map(x => {
-      console.log(x);
       return x;
     }));
 

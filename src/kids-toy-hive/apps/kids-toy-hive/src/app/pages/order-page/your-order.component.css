@@ -1,12 +1,37 @@
+:host {
+    display: block;
+}
+
 img {
     max-height: 200px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    width: 133px;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.booking-date {
+    line-height: 1.5;
+    font-weight: 600;
 }
 
 .line-item {
     display: grid;
     grid-template-columns: 2fr 1fr;
+    line-height: 1.5em;
+    margin: 0;
+    padding: 0;
 }
 
 .line-item-amount {
     text-align: right;
+}
+
+.line-item-total {
+    font-weight: 600;
 }

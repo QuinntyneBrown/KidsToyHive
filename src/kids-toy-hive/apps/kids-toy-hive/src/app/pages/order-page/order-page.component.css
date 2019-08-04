@@ -17,6 +17,7 @@ a,a:visited,a:link {
     color: black;
     text-decoration: none;
     margin: 0 20px 0 0;
+    cursor: default;
 }
 
 ul,li {
