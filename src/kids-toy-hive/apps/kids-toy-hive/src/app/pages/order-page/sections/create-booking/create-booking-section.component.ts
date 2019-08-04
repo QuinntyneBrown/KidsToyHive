@@ -5,6 +5,7 @@ import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, map } from 'rxjs/operators';
+import { YourOrderService } from '../../your-order.service';
 
 @Injectable()
 export class CreateBookingSectionGuard implements CanActivate {
@@ -56,12 +57,14 @@ export class CreateBookingSectionComponent implements OnInit, OnDestroy  {
     private readonly _bookingService: BookingService,
     private readonly _localStorageService: LocalStorageService,
     private readonly _router: Router,
-    private readonly _authService: AuthService
+    private readonly _authService: AuthService,
+    private readonly _yourOrderService: YourOrderService
   ) { 
 
   }
 
   public ngOnInit() {
+    this._yourOrderService.booking$.next(<Booking>{});
     this._authService.isAuthenticatedChanged$
     .pipe(takeUntil(this.onDestroy),map(x => {
       if(!x) {        
@@ -71,6 +74,9 @@ export class CreateBookingSectionComponent implements OnInit, OnDestroy  {
     .subscribe();
   }
 
+  public handleChange() {
+    this._yourOrderService.bookingTimeSlot$.next(this.form.value.bookingTimeSlot);
+  }
   public tryToCreateBooking(value:any) {
     const booking: Booking = {
       bookingDetails:[

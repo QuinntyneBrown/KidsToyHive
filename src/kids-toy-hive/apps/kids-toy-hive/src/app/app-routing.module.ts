@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomePageComponent, ConfirmationPageComponent, OrderPageComponent, AboutPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateCustomerSectionGuard, CreateBookingSectionGuard, ProcessPaymentSectionGuard } from './pages';
+import { HomePageComponent, OrderPageComponent, AboutPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateCustomerSectionGuard, CreateBookingSectionGuard, ProcessPaymentSectionGuard } from './pages';
 import { ToysPageComponent } from './pages/toys-page';
 import { TermsAndConditionsPageComponent } from './pages/terms-and-conditions-page';
 import { MyProfilePageComponent } from './pages/my-profile-page';

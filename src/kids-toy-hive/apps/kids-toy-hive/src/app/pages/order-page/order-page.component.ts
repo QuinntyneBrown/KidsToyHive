@@ -3,7 +3,7 @@ import { ProductService, Product } from '@kids-toy-hive/domain';
 import { Observable, Subject } from 'rxjs';
 import { LocalStorageService } from '@kids-toy-hive/core';
 import { takeUntil, map } from 'rxjs/operators';
-import { OrderPageService } from './order-page-service';
+import { YourOrderService } from './your-order.service';
 
 export * from './sections';
 
@@ -18,7 +18,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   private readonly _destroy: Subject<void> = new Subject();
   constructor(
     private readonly _localStorageService: LocalStorageService,
-    private readonly _orderPageService: OrderPageService,
+    private readonly _yourOrderService: YourOrderService,
     private readonly _productService: ProductService,
   ) { }
 
@@ -26,7 +26,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     const productId = this._localStorageService.get({ name: 'productId' });
     this._productService.getById({ productId })
     .pipe(takeUntil(this._destroy), map(x => {
-      this._orderPageService.product$.next(x);
+      this._yourOrderService.product$.next(x);
     }))
     .subscribe();
   }

@@ -2,7 +2,8 @@ import { Component, OnDestroy, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Product } from '@kids-toy-hive/domain';
 import { baseUrl } from '@kids-toy-hive/core';
-import { OrderPageService } from './order-page-service';
+import { YourOrderService } from './your-order.service';
+
 
 @Component({
   templateUrl: './your-order.component.html',
@@ -14,7 +15,7 @@ export class YourOrderComponent implements OnDestroy  {
 
   constructor(
     @Inject(baseUrl) private readonly _baseUrl:string,
-    public readonly orderPageService: OrderPageService
+    public readonly yourOrderService: YourOrderService
   ) {
 
   }
@@ -25,9 +26,14 @@ export class YourOrderComponent implements OnDestroy  {
     this.onDestroy.next();	
   }
 
+  public get price():number {
+    if(this.yourOrderService.bookingTimeSlot$.value > 1) {
+      return 250;
+    } else {
+      return 125;
+    }
+  }
+
   public get baseUrl() { return this._baseUrl; }
 
-  public getImageUrl() {    
-    return `${this.baseUrl}${this.product.productImages[0].url}`;
-  }
 }

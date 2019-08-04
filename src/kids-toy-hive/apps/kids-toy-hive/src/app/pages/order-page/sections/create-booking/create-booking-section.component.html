@@ -9,7 +9,7 @@
 
     <div class='field'>
         <label>Pick a Time Slot:</label>
-        <select formControlName="bookingTimeSlot">
+        <select formControlName="bookingTimeSlot" (change)='handleChange()'>
             <option *ngFor="let slot of bookingTimeSlots;" [value]="slot.value">
             {{ slot.name }}
             </option>

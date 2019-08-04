@@ -1,19 +1,19 @@
 
 <h1>Your Order</h1>
-<h3>{{ (orderPageService.product$ | async)?.name }}</h3>
-<img *ngIf='product' src='{{ baseUrl + (orderPageService.product$ | async)?.name }}' />
+<h3>{{ (yourOrderService.product$ | async)?.name }}</h3>
+<img [src]='yourOrderService.productImageUrl$ | async' />
 
-<div class='line-item'>
+<div class='line-item' *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
     <span>Sub Total:</span>
-    <span class='line-item-amount'>$125.00</span>
+    <span class='line-item-amount'>$ {{ price }}.00</span>
 </div>
 
-<div class='line-item'>
+<div class='line-item' *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
     <span>Tax:</span>
-    <span class='line-item-amount'>${{ 125 * .13 }}</span>
+    <span class='line-item-amount'>${{ (price * .13) | number : '1.2-2' }}</span>
 </div>
 
-<div class='line-item'>
+<div class='line-item' *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
     <span>Total:</span>
-    <span class='line-item-amount'>${{ 125 + (125 * .13) }}</span>
+    <span class='line-item-amount'>${{ (price + (price * .13)) | number : '1.2-2'  }}</span>
 </div>
