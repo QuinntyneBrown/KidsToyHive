@@ -19,13 +19,14 @@ form {
 
 .field {
     display: grid;
-    grid-template-columns: 150px 1fr;    
+    grid-template-columns: 175px 1fr;    
     margin: 0px 20px;
 }
 
 input, label, select {
     line-height: 18pt;
 }
+
 input, select {
     padding: 0 10px;
 }

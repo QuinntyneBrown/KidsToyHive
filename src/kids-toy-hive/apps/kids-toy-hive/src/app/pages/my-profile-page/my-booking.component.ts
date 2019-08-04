@@ -1,6 +1,7 @@
-import { Component, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Booking } from '@kids-toy-hive/domain';
+import { baseUrl } from '@kids-toy-hive/core';
 
 @Component({
   templateUrl: './my-booking.component.html',
@@ -10,6 +11,16 @@ import { Booking } from '@kids-toy-hive/domain';
 export class MyBookingComponent implements OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
 
+  constructor(
+    @Inject(baseUrl) private readonly _baseUrl:string
+  ) {
+
+  }
+
+  public get baseUrl() {
+    return this._baseUrl;
+  }
+  
   @Input()
   public booking: Booking;
 

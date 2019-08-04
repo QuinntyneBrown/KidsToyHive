@@ -79,6 +79,7 @@ export class CreateBookingSectionComponent implements OnInit, OnDestroy  {
           quantity:1
         }
       ],
+      date: value.date,
       bookingTimeSlot:value.bookingTimeSlot,
       location : {
         address: {

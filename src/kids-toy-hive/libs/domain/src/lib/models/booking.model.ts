@@ -8,4 +8,5 @@ export interface Booking {
   location:Location;
   version?: number;
   bookingTimeSlot:number;
+  date:string;
 }

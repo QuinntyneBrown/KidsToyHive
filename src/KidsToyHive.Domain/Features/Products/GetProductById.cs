@@ -1,5 +1,6 @@
 using KidsToyHive.Domain.DataAccess;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,7 +26,11 @@ namespace KidsToyHive.Domain.Features.Products
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
                 => new Response()
                 {
-                    Product = (await _context.Products.FindAsync(request.ProductId)).ToDto()
+                    Product = (await _context.Products
+                    .Include(x => x.ProductCategory)
+                    .Include(x => x.ProductImages)
+                    .ThenInclude(x => x.DigitalAsset)
+                    .SingleAsync(x => x.ProductId == request.ProductId)).ToDto()
                 };
         }
     }

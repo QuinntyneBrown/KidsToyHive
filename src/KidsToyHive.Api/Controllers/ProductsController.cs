@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Api.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/products")]
     public class ProductsController
@@ -15,7 +16,6 @@ namespace KidsToyHive.Api.Controllers
 
         public ProductsController(IMediator mediator) => _meditator = mediator;
 
-        [AllowAnonymous]
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetProducts.Response), (int)HttpStatusCode.OK)]

@@ -4,11 +4,6 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Services
 {
-    public class FakePaymentProcessor : IPaymentProcessor
-    {
-        public Task<bool> ProcessAsync(PaymentDto payment)
-            => Task.FromResult(true);
-    }
 
     public class PaymentProcessor : IPaymentProcessor
     {

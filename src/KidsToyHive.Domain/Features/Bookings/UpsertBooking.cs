@@ -72,7 +72,8 @@ namespace KidsToyHive.Domain.Features.Bookings
                 }
 
                 booking.CustomerId = new Guid(this._httpContextAccessor.HttpContext.User.Claims.First(x => x.Type == "CustomerId").Value);
-
+                booking.Date = request.Booking.Date;
+                booking.BookingTimeSlot = request.Booking.BookingTimeSlot;
                 booking.Location = await _context.Locations.FindAsync(request.Booking.LocationId);
 
                 if (booking.Location == null)

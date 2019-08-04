@@ -1,6 +1,6 @@
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CustomerService, Customer } from '@kids-toy-hive/domain';
+import { CustomerService, Customer, AuthService } from '@kids-toy-hive/domain';
 import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -42,6 +42,7 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
   });
 
   constructor(
+    private readonly _authService: AuthService,    
     private readonly _customerService: CustomerService,
     private readonly _localStorageService: LocalStorageService,
     private readonly _router: Router,
@@ -61,6 +62,7 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
     .pipe(takeUntil(this.onDestroy),map(x => { 
       this._localStorageService.put({ name: accessTokenKey, value: x.accessToken });
       this._router.navigateByUrl('/order/step/2');
+      this._authService.isAuthenticatedChanged$.next(true);
     }))
     .subscribe();    
   }

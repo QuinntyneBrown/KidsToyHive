@@ -1,0 +1,19 @@
+
+<h1>Your Order</h1>
+<h3>{{ (orderPageService.product$ | async)?.name }}</h3>
+<img *ngIf='product' src='{{ baseUrl + (orderPageService.product$ | async)?.name }}' />
+
+<div class='line-item'>
+    <span>Sub Total:</span>
+    <span class='line-item-amount'>$125.00</span>
+</div>
+
+<div class='line-item'>
+    <span>Tax:</span>
+    <span class='line-item-amount'>${{ 125 * .13 }}</span>
+</div>
+
+<div class='line-item'>
+    <span>Total:</span>
+    <span class='line-item-amount'>${{ 125 + (125 * .13) }}</span>
+</div>

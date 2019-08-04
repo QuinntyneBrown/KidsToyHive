@@ -1,3 +1,10 @@
+.grid {
+    display: grid;
+    grid-template-columns: 5fr 2fr;
+    max-width: 800px;
+    margin: 0 auto;
+    grid-column-gap: 20px;
+}
 .field, label {
     display: block;
 }

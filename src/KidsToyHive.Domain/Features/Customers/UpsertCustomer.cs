@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -122,18 +123,16 @@ namespace KidsToyHive.Domain.Features.Customers
 
                     user.Password = _passwordHasher.HashPassword(user.Salt, "P@ssw0rd");
 
-                    await _context.Users.AddAsync(user);
-
-                    user.Profiles.Add(new Profile
-                    {
-                        Name = $"{customer.FirstName} {customer.LastName}",
-                        Type = ProfileType.Customer
-                    });
-
-                    await _context.Users.AddAsync(user);
-
-                    await _context.SaveChangesAsync(cancellationToken);
+                    await _context.Users.AddAsync(user);                    
                 }
+
+                user.Profiles.Add(new Profile
+                {
+                    Name = $"{customer.FirstName} {customer.LastName}",
+                    Type = ProfileType.Customer
+                });
+
+                await _context.SaveChangesAsync(cancellationToken);
 
                 if (request.Customer.CustomerId == default)
                     await _emailService.SendNewCustomer(customer, user);

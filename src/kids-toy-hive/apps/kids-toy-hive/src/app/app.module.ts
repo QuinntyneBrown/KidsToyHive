@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { AboutPageComponent, HomePageComponent, OrderPageComponent, ConfirmationPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateBookingSectionGuard, ProcessPaymentSectionGuard, CreateCustomerSectionGuard, JoinNowComponent, HowItWorksComponent, TestimonialsComponent } from './pages';
+import { AboutPageComponent, HomePageComponent, OrderPageComponent, ConfirmationPageComponent, CreateCustomerSectionComponent, CreateBookingSectionComponent, ProcessBookingPaymentComponent, CreateBookingSectionGuard, ProcessPaymentSectionGuard, CreateCustomerSectionGuard, JoinNowComponent, HowItWorksComponent, TestimonialsComponent, ReceiptComponent } from './pages';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule, baseUrl } from '@kids-toy-hive/core';
 import { DomainModule } from '@kids-toy-hive/domain';
@@ -16,6 +16,7 @@ import { MyProfilePageComponent, MyBookingComponent } from './pages/my-profile-p
 import { FeaturesSecurityModule } from '@kids-toy-hive/features/security';
 import { MenuOverlayComponent, MenuOverlay } from './overlays';
 import { MenuComponent } from './overlays/menu.component';
+import { OrderPageService } from './pages/order-page/order-page-service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { MenuComponent } from './overlays/menu.component';
     TestimonialsComponent,
     
     OrderPageComponent,
-
+    ReceiptComponent,
     CreateBookingSectionComponent,    
     CreateCustomerSectionComponent,
     ProcessBookingPaymentComponent,
@@ -70,7 +71,8 @@ import { MenuComponent } from './overlays/menu.component';
     CreateBookingSectionGuard,
     ProcessPaymentSectionGuard,
 
-    MenuOverlay
+    MenuOverlay,
+    OrderPageService
   ],
   bootstrap: [AppComponent]
 })

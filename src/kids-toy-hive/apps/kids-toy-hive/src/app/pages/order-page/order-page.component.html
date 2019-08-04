@@ -4,4 +4,9 @@
     <li><a [routerLink]="['step/3']" routerLinkActive="active-link">Checkout</a></li>    
 </ul>
 
-<router-outlet></router-outlet>
+<div class='grid'>
+    <div>
+        <router-outlet></router-outlet>
+    </div>    
+    <kth-your-order></kth-your-order>
+</div>

@@ -1,5 +1,6 @@
 using KidsToyHive.Api;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Fakes;
 using KidsToyHive.Domain.Features.Bookings;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Services;

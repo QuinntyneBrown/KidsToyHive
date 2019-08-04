@@ -1,0 +1,12 @@
+img {
+    max-height: 200px;
+}
+
+.line-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.line-item-amount {
+    text-align: right;
+}

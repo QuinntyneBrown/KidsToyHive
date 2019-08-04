@@ -3,6 +3,7 @@ using KidsToyHive.Api.Filters;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Fakes;
 using KidsToyHive.Domain.Features.Users;
 using KidsToyHive.Domain.Services;
 using MediatR;
@@ -44,10 +45,12 @@ namespace KidsToyHive.Api
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<IEmailBuilder, EmailBuilder>();
-            services.AddTransient<IEmailDeliveryService, EmailDeliveryService>();
             services.AddTransient<IEmailDistributionService, EmailDistributionService>();
             services.AddTransient<IInventoryService, InventoryService>();
-            services.AddTransient<IPaymentProcessor, PaymentProcessor>();
+
+            // Fakes if no internet connection
+            services.AddTransient<IPaymentProcessor, FakePaymentProcessor>();
+            services.AddTransient<IEmailDeliveryService, FakeEmailDeliveryService>();
 
             services.AddSwaggerGen(options =>
             {

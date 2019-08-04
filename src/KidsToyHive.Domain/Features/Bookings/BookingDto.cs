@@ -46,7 +46,8 @@ namespace KidsToyHive.Domain.Features.Bookings
                 BookingTimeSlot = booking.BookingTimeSlot,
                 LocationId = booking.LocationId,
                 Version = booking.Version,
-                BookingDetails = booking.BookingDetails.Select(x => x.ToDto()).ToList()
+                BookingDetails = booking.BookingDetails.Select(x => x.ToDto()).ToList(),
+                Date = booking.Date
             };
     }
 }
