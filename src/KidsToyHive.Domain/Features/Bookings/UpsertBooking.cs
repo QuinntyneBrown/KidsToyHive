@@ -1,9 +1,10 @@
 using FluentValidation;
+using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
-using KidsToyHive.Domain.Services;
+using KidsToyHive.Domain.Services;  
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -96,12 +97,28 @@ namespace KidsToyHive.Domain.Features.Bookings
                 foreach(var bookingDetail in request.Booking.BookingDetails)
                 {
                     var product = await _context.Products.FindAsync(bookingDetail.ProductId);
+                    var units = 0;
+                    
+                    switch(booking.BookingTimeSlot)
+                    {
+                        case BookingTimeSlot.FullDay:
+                            units = 8;
+                            break;
+
+                        case BookingTimeSlot.Morning:
+                        case BookingTimeSlot.Afternoon:
+                            units = 4;
+                            break;
+
+                        default:
+                            throw new NotImplementedException();
+                    }
 
                     booking.BookingDetails.Add(new BookingDetail
                     {
                         ProductId = bookingDetail.ProductId,
                         Quantity = bookingDetail.Quantity,
-                        Cost = (4 * product.ChargePeriodPrice) * bookingDetail.Quantity
+                        Cost = (units * product.ChargePeriodPrice) * bookingDetail.Quantity
                     });
                 }
 

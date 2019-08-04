@@ -35,7 +35,7 @@ namespace UnitTests.Api
                 SeedData.Seed(context, configuration);
 
                 Assert.Equal("Username", context.Users.Single().Username);
-                Assert.Equal(13, context.Taxes.Single().Rate);
+                Assert.Equal(.13M, context.Taxes.Single().Rate);
                 Assert.NotNull(context.Products.Single(x => x.Name == "Jungle Jumparoo"));
                 Assert.NotNull(context.Warehouses.Single(x => x.Name == "DefaultWarehouse"));
                 Assert.NotNull(context.InventoryItems.Include(x => x.Product).Single(x => x.Product.Name == "Jungle Jumparoo"));

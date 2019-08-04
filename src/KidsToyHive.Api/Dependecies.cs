@@ -48,9 +48,8 @@ namespace KidsToyHive.Api
             services.AddTransient<IEmailDistributionService, EmailDistributionService>();
             services.AddTransient<IInventoryService, InventoryService>();
 
-            // Fakes if no internet connection
-            services.AddTransient<IPaymentProcessor, FakePaymentProcessor>();
-            services.AddTransient<IEmailDeliveryService, FakeEmailDeliveryService>();
+            services.AddTransient<IPaymentProcessor, PaymentProcessor>();
+            services.AddTransient<IEmailDeliveryService, EmailDeliveryService>();
 
             services.AddSwaggerGen(options =>
             {

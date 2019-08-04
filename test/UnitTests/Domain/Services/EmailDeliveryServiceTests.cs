@@ -14,22 +14,22 @@ namespace UnitTests.Domain.Services
         [Fact]
         public async Task ShouldDeliverEmail()
         {
-            var configuration = new ConfigurationBuilder()
-                .AddInMemoryCollection(new List<KeyValuePair<string, string>>() {
+            //var configuration = new ConfigurationBuilder()
+            //    .AddInMemoryCollection(new List<KeyValuePair<string, string>>() {
 
-                })
-                .Build();
+            //    })
+            //    .Build();
 
-            var emailDeliveryService = new EmailDeliveryService(configuration);
+            //var emailDeliveryService = new EmailDeliveryService(configuration);
 
-            SendGridMessage message = new SendGridMessage
-            {
-                Subject = "Booking Confirmation",
-                From = new EmailAddress("notifications@thekidstoyhive.com", "The Kids Toy Hive Team"),
-                HtmlContent = "<h1>Test</h1>"
-            };
-            message.AddTo("quinntynebrown@gmail.com", "Quinntyne Brown");
-            await emailDeliveryService.Send(message);
+            //SendGridMessage message = new SendGridMessage
+            //{
+            //    Subject = "Booking Confirmation",
+            //    From = new EmailAddress("notifications@thekidstoyhive.com", "The Kids Toy Hive Team"),
+            //    HtmlContent = "<h1>Test</h1>"
+            //};
+            //message.AddTo("quinntynebrown@gmail.com", "Quinntyne Brown");
+            //await emailDeliveryService.Send(message);
         }
     }
 }

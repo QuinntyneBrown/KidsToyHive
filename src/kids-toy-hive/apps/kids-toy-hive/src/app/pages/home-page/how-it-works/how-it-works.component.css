@@ -1,0 +1,5 @@
+:host {
+    display: block;
+    min-height: 425px;
+    background-image: linear-gradient(rgba(69, 36, 56, 0.85), rgba(69, 36, 56, 0.85)), url('https://localhost:44329/api/digitalassets/serve/file/Hero.jpg');
+}   
