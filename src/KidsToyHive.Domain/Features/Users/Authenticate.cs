@@ -24,7 +24,9 @@ namespace KidsToyHive.Domain.Features.Users
         {
             public Validator()
             {
-                RuleFor(request => request.Username).NotEqual(default(string));
+                RuleFor(request => request.Username)
+                    .NotEqual(default(string))
+                    .EmailAddress();
                 RuleFor(request => request.Password).NotEqual(default(string));
             }            
         }
