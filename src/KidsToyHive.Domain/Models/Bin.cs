@@ -10,6 +10,6 @@ namespace KidsToyHive.Domain.Models
         public Guid WarehouseId { get; set; }
         public Warehouse Warehouse { get; set; }
         public ICollection<InventoryItem> InventoryItems { get; set; }
-        = new HashSet<InventoryItem>();
+            = new HashSet<InventoryItem>();
     }
 }

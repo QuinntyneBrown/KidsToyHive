@@ -1,12 +1,7 @@
 ﻿using KidsToyHive.Api;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.DataAccess;
-using KidsToyHive.Domain.Features.Addresses;
-using KidsToyHive.Domain.Features.BookingDetails;
 using KidsToyHive.Domain.Features.Bookings;
-using KidsToyHive.Domain.Features.Locations;
-using KidsToyHive.Domain.Features.Products;
-using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -35,21 +30,16 @@ namespace UnitTests.Domain.Features.Bookings
             using (var context = new AppDbContext(options, mediator))
             {
                 SeedData.Seed(context, ConfigurationHelper.Seed);
-                var customer = new Customer();
-                context.Customers.Add(customer);
-                context.SaveChanges();
 
                 var product = context.Products.First();
-                var mockInventoryService = new Mock<IInventoryService>();
-                mockInventoryService.Setup(x => x.IsItemAvailable(It.IsAny<DateTime>(), It.IsAny<BookingTimeSlot>(), It.IsAny<Guid>())).Returns(true);
-                var inventoryService = mockInventoryService.Object;
+                var inventoryService = new InventoryService(context);
                 var mockHttpContextAccessor = new Mock<IHttpContextAccessor>();
                 var mockHttpContext = new Mock<HttpContext>();
                 var mockUser = new Mock<ClaimsPrincipal>();
 
                 mockUser.Setup(x => x.Claims).Returns(new List<Claim>()
                 {
-                    new Claim("CustomerId",$"{customer.CustomerId}")
+                    new Claim("CustomerId",$"{Guid.NewGuid()}")
                 });
 
                 mockHttpContextAccessor.Setup(x => x.HttpContext).Returns(mockHttpContext.Object);
@@ -57,33 +47,9 @@ namespace UnitTests.Domain.Features.Bookings
                 
                 var upsertBookingHandler = new UpsertBooking.Handler(context, inventoryService, mockHttpContextAccessor.Object);
 
-                var booking = new BookingDto
-                {
-                    BookingDetails = new List<BookingDetailDto> {
-                        new BookingDetailDto {
-                            Quantity = 1,
-                            ProductId = product.ProductId,
-                            Product = new ProductDto {
-                                ProductId = product.ProductId,
-                                ChargePeriodPrice = product.ChargePeriodPrice
-                            }
-                        }
-                    },
-                    Location = new LocationDto
-                    {
-                        Address = new AddressDto
-                        {
-                            Street = "628 Fleet Street",
-                            City = "Toronto",
-                            Province = "Ontario",
-                            PostalCode = "M5V 1A8"
-                        }
-                    }
-                };
-
                 var request = new UpsertBooking.Request
                 {
-                    Booking = booking
+                    Booking = BookingBuilder.Build(BookingTimeSlot.Afternoon, DateTime.Now, product)
                 };
 
                 var response = await upsertBookingHandler.Handle(request, default);
