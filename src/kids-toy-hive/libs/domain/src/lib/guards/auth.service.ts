@@ -12,9 +12,7 @@ export class AuthService {
     @Inject(baseUrl) private _baseUrl: string,
     private _httpClient: HttpClient,    
     private _localStorageService: LocalStorageService
-  ) {}
-
-  private _isAuthenticated: boolean;
+  ) { }
 
   public isAuthenticatedChanged$:BehaviorSubject<boolean> = new BehaviorSubject(this.isAuthenticated);
 

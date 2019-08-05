@@ -3,12 +3,24 @@
 
     <div class='field'>
         <label>Username:</label>
-        <input type='text' formControlName="username"/>
+        <input type='text' formControlName="username" required/>
     </div>
     <div class='field'>
         <label>Password:</label>
-        <input type='password' formControlName="password"/>
+        <input type='password' formControlName="password" required/>
     </div>
 
     <kth-button (click)='tryToLogin()' [text]='"Login"'></kth-button>
+    
+    <div *ngIf='hasErrors' class="error-message">
+        <div>
+            {{ errorMessage }}
+        </div>
+        <div *ngIf="form.controls['username'].hasError('required')">
+            Username is required.
+        </div>
+        <div *ngIf="form.controls['password'].hasError('required')">
+            Password is required.
+        </div>
+    </div>
 </form>

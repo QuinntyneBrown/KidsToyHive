@@ -1,5 +1,6 @@
 using FluentValidation;
 using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Exceptions;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
@@ -56,7 +57,7 @@ namespace KidsToyHive.Domain.Features.Users
                     .SingleOrDefaultAsync(x => x.Username.ToLower() == request.Username.ToLower());
 
                 if (user == null)
-                    throw new Exception();
+                    throw new HttpStatusCodeException(400);
 
                 if (!ValidateUser(user, _passwordHasher.HashPassword(user.Salt, request.Password)))
                     throw new Exception();

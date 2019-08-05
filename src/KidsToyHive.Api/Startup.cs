@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using KidsToyHive.Api.Middleware;
 
 namespace KidsToyHive.Api
 {
@@ -34,6 +35,8 @@ namespace KidsToyHive.Api
             {
                 app.UseHsts();
             }
+
+            app.UseHttpStatusCodeExceptionMiddleware();
 
             app.UseSwagger();
 

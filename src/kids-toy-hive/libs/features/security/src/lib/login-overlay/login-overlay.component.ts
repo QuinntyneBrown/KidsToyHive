@@ -22,19 +22,27 @@ export class LoginOverlayComponent implements OnDestroy  {
     private readonly _authService: AuthService,
     private readonly _localStorageService: LocalStorageService,
     private readonly _overlayRefWrapper: OverlayRefWrapper
-  ) {
+  ) { }
 
-  }
-
+  public errorMessage:string;
+  public hasErrors: boolean;
+  
   public tryToLogin() {
-    this._authService.tryToLogin({ 
-      username: this.form.value.username,
-      password: this.form.value.password
-    })
-    .pipe(takeUntil(this.onDestroy),map(x => { 
-      this._overlayRefWrapper.close();
-    }))
-    .subscribe();
+    if(this.form.valid) {
+      this._authService.tryToLogin({ 
+        username: this.form.value.username,
+        password: this.form.value.password
+      })
+      .pipe(takeUntil(this.onDestroy),map(x => { 
+        this._overlayRefWrapper.close();
+      }))
+      .subscribe();
+    } 
+    else {
+      this.hasErrors = true;
+
+      console.log(this.form.errors);
+    }
   }
 
   ngOnDestroy() {
