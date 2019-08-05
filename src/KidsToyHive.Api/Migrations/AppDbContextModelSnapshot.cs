@@ -134,9 +134,13 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<Guid>("CardId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<Guid>("TenantKey");
 
                     b.Property<int>("Version");
 
