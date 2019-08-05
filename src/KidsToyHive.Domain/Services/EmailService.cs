@@ -41,7 +41,7 @@ namespace KidsToyHive.Domain.Services
         }
 
 
-        public async Task SendBookingConfirmation(Booking booking, Customer customer)
+        public async Task SendBookingConfirmation(Booking booking)
         {
             var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, new Dictionary<string, string>() {
                 { "{{ bookingDate }}",booking.Date.ToLongDateString() }
@@ -49,7 +49,7 @@ namespace KidsToyHive.Domain.Services
             mailMessage.Subject = "Booking Confirmation";
             _emailDistributionService.SetDistributionList(ref mailMessage);
             mailMessage.From = new EmailAddress("notications@thekidstoyhive.com", "Kids Toy Hive");
-            mailMessage.AddTo($"{customer.Email}", $"{customer.FirstName} {customer.LastName}");
+            mailMessage.AddTo($"{booking.Customer.Email}", $"{booking.Customer.FirstName} {booking.Customer.LastName}");
             await _emailDeliveryService.Send(mailMessage);
         }
     }

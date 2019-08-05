@@ -53,6 +53,7 @@ namespace KidsToyHive.Domain.Features.Bookings
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
 
                 var booking = await _context.Bookings
+                    .Include(x => x.Customer)
                     .Include(x => x.BookingDetails)
                     .SingleAsync(x => x.BookingId == request.BookingId);
 
@@ -75,7 +76,7 @@ namespace KidsToyHive.Domain.Features.Bookings
 
                 await _context.SaveChangesAsync(cancellationToken);
 
-                await _emailService.SendBookingConfirmation(booking, null);
+                await _emailService.SendBookingConfirmation(booking);
 
                 return new Response() {
                     BookingId = booking.BookingId,

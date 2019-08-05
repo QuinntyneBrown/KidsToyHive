@@ -98,8 +98,8 @@ namespace KidsToyHive.Domain.Features.Bookings
                 {
                     var product = await _context.Products.FindAsync(bookingDetail.ProductId);
                     var units = 0;
-                    
-                    switch(booking.BookingTimeSlot)
+                    var lowUnitsPremium = 0;
+                    switch (booking.BookingTimeSlot)
                     {
                         case BookingTimeSlot.FullDay:
                             units = 8;
@@ -108,6 +108,7 @@ namespace KidsToyHive.Domain.Features.Bookings
                         case BookingTimeSlot.Morning:
                         case BookingTimeSlot.Afternoon:
                             units = 4;
+                            lowUnitsPremium = 1000;
                             break;
 
                         default:
@@ -118,7 +119,7 @@ namespace KidsToyHive.Domain.Features.Bookings
                     {
                         ProductId = bookingDetail.ProductId,
                         Quantity = bookingDetail.Quantity,
-                        Cost = (units * product.ChargePeriodPrice) * bookingDetail.Quantity
+                        Cost = ((units * product.ChargePeriodPrice) * bookingDetail.Quantity) + lowUnitsPremium
                     });
                 }
 

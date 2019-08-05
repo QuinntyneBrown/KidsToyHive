@@ -7,6 +7,6 @@ namespace KidsToyHive.Domain.Services
     {
         Task SendNewCustomer(Customer customer, User user);
         Task SendNewDriver(Driver driver, User user);
-        Task SendBookingConfirmation(Booking booking, Customer customer);
+        Task SendBookingConfirmation(Booking booking);
     }
 }

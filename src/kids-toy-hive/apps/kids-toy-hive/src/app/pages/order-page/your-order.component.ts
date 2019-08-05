@@ -30,7 +30,7 @@ export class YourOrderComponent implements OnDestroy  {
     if(this.yourOrderService.bookingTimeSlot$.value > 1) {
       return 250;
     } else {
-      return 125;
+      return 135;
     }
   }
 
