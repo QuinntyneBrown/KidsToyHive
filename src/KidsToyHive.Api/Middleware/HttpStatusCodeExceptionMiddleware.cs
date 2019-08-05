@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Api.Middleware
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
     public class HttpStatusCodeExceptionMiddleware
     {
         private readonly RequestDelegate _next;
@@ -44,7 +43,6 @@ namespace KidsToyHive.Api.Middleware
         }
     }
 
-    // Extension method used to add the middleware to the HTTP request pipeline.
     public static class HttpStatusCodeExceptionMiddlewareExtensions
     {
         public static IApplicationBuilder UseHttpStatusCodeExceptionMiddleware(this IApplicationBuilder builder)

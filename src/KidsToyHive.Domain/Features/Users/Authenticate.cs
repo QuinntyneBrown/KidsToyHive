@@ -5,10 +5,13 @@ using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -57,21 +60,26 @@ namespace KidsToyHive.Domain.Features.Users
                     .SingleOrDefaultAsync(x => x.Username.ToLower() == request.Username.ToLower());
 
                 if (user == null)
-                    throw new HttpStatusCodeException(400);
+                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, JObject.FromObject(new ProblemDetails() {
+                        Status = (int)HttpStatusCode.BadRequest,
+                        Detail = "Invalid Username or password",
+                        Title = "Login Failed"                        
+                    }));
 
                 if (!ValidateUser(user, _passwordHasher.HashPassword(user.Salt, request.Password)))
-                    throw new Exception();
+                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, "Invalid username or password");
 
                 var profiles = _context.Profiles
                     .Include(x => x.User)
                     .Where(x => x.User.Username == request.Username)
                     .ToList();
 
-                var claims = new List<Claim>();
-
-                claims.Add(new Claim("UserId", $"{user.UserId}"));
-                claims.Add(new Claim("PartitionKey", $"{user.TenantKey}"));
-                claims.Add(new Claim("CurrentUserName", $"{user.Username}"));
+                var claims = new List<Claim>
+                {
+                    new Claim("UserId", $"{user.UserId}"),
+                    new Claim("PartitionKey", $"{user.TenantKey}"),
+                    new Claim("CurrentUserName", $"{user.Username}")
+                };
 
                 foreach (var profile in profiles) {
                     claims.Add(new Claim("ProfileId", $"{profile.ProfileId}"));
