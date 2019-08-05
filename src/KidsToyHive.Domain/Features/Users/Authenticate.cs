@@ -60,14 +60,10 @@ namespace KidsToyHive.Domain.Features.Users
                     .SingleOrDefaultAsync(x => x.Username.ToLower() == request.Username.ToLower());
 
                 if (user == null)
-                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, JObject.FromObject(new ProblemDetails() {
-                        Status = (int)HttpStatusCode.BadRequest,
-                        Detail = "Invalid Username or password",
-                        Title = "Login Failed"                        
-                    }));
+                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, $"{ExceptionType.InvalidUsernameOrPassword}", "Login Failed", "Invalid username or password");
 
                 if (!ValidateUser(user, _passwordHasher.HashPassword(user.Salt, request.Password)))
-                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, "Invalid username or password");
+                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, $"{ExceptionType.InvalidUsernameOrPassword}", "Login Failed", "Invalid username or password");
 
                 var profiles = _context.Profiles
                     .Include(x => x.User)

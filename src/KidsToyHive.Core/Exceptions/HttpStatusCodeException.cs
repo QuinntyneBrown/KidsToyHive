@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 
 namespace KidsToyHive.Core.Exceptions
@@ -21,6 +23,16 @@ namespace KidsToyHive.Core.Exceptions
         public HttpStatusCodeException(int statusCode, Exception inner) : this(statusCode, inner.ToString()) { }
 
         public HttpStatusCodeException(int statusCode, JObject errorObject) : this(statusCode, errorObject.ToString())
+        {
+            this.ContentType = @"application/json";
+        }
+
+        public HttpStatusCodeException(int statusCode, string type, string title, string detail) : this(statusCode, JsonConvert.SerializeObject(new ProblemDetails {
+            Type = type,
+            Status = statusCode,
+            Title =title,
+            Detail = detail
+        }))
         {
             this.ContentType = @"application/json";
         }
