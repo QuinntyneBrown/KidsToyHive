@@ -1,9 +1,9 @@
 import { Subject } from 'rxjs';
-import { AfterContentInit, Component, ElementRef, EventEmitter, Input, Output, Renderer, OnDestroy } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from '@kids-toy-hive/domain';
 import { takeUntil, map } from 'rxjs/operators';
-import { LocalStorageService, OverlayRefWrapper, accessTokenKey } from '@kids-toy-hive/core';
+import { OverlayRefWrapper, ProblemDetails, isProblemDetails } from '@kids-toy-hive/core';
 
 @Component({
   templateUrl: './login-overlay.component.html',
@@ -20,7 +20,6 @@ export class LoginOverlayComponent implements OnDestroy  {
 
   constructor(
     private readonly _authService: AuthService,
-    private readonly _localStorageService: LocalStorageService,
     private readonly _overlayRefWrapper: OverlayRefWrapper
   ) { }
 
@@ -33,12 +32,20 @@ export class LoginOverlayComponent implements OnDestroy  {
         username: this.form.value.username,
         password: this.form.value.password
       })
-      .pipe(takeUntil(this.onDestroy),map(x => { 
-        this._overlayRefWrapper.close();
-      }))
-      .subscribe();
+      .pipe(
+        takeUntil(this.onDestroy),
+        map(x => {           
+          if(isProblemDetails(x)) {
+            alert(x.detail);
+          } 
+          else {
+            this._overlayRefWrapper.close();
+          }          
+        }))
+        .subscribe();
     } 
     else {
+
       this.hasErrors = true;
 
       console.log(this.form.errors);

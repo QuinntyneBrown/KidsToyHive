@@ -4,7 +4,7 @@ import { AddressService, DigitalAssetService, CardService, CustomerService, Dash
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard, LoginRedirectService, AuthService } from './guards';
 import { ShipmentSalesOrderService } from './services/shipment-sales-order.service';
-import { AuthInterceptor } from './interceptors';
+import { AuthInterceptor, ResponseInterceptor } from './interceptors';
 
 export * from './models';
 export * from './guards';
@@ -17,6 +17,11 @@ export * from './services';
       useClass: AuthInterceptor,
       multi: true
     },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ResponseInterceptor,
+    //   multi: true
+    // },    
     
     AuthService,
     AuthGuard,

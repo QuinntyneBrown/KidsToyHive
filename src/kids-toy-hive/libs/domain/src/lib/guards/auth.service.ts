@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { baseUrl, LocalStorageService, currentUserNameKey, accessTokenKey } from '@kids-toy-hive/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
+import { baseUrl, LocalStorageService, currentUserNameKey, accessTokenKey, ProblemDetails } from '@kids-toy-hive/core';
+import { BehaviorSubject, Subject, throwError, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,17 @@ export class AuthService {
         this._localStorageService.put({ name: currentUserNameKey, value: options.username });
         this.isAuthenticatedChanged$.next(true);        
         return response.accessToken;
-      })
+      }),
+      catchError(e => this.handleHttpError(e))
     );
+  }
+
+  public handleHttpError(response: HttpErrorResponse):Observable<ProblemDetails> {    
+    return of({
+      type:response.error.Type,
+      title: response.error.Title,
+      detail:JSON.parse(response.error.Detail)
+    });
   }
 
   public logOut() {

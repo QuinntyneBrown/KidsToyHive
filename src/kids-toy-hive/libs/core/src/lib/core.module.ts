@@ -9,7 +9,7 @@ export * from './base-overlay.service';
 export * from './overlay-ref-provider';
 export * from './overlay-ref-wrapper';
 export * from './logger';
-
+export * from './problem-details';
 @NgModule({
   providers:[
     Logger,
