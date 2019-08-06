@@ -1,5 +1,6 @@
 using FluentValidation;
 using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Exceptions;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
@@ -11,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -64,7 +64,7 @@ namespace KidsToyHive.Domain.Features.Customers
 
                 if (customer == null) {
                     if (await _context.Customers.AnyAsync(x => x.Email == request.Customer.Email))
-                        throw new Exception();
+                        throw new CustomerExistsWithEmailException();
 
                     customer = new Customer();
                     customer.RaiseDomainEvent(new CustomerCreated(customer));

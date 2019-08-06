@@ -4,6 +4,7 @@
     {
         FailedModelValidation,
         InvalidUsernameOrPassword,
-        Concurrency
+        Concurrency,
+        CustomerExistsWithEmail
     }
 }
