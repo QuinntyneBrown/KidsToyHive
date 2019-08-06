@@ -32,8 +32,8 @@ namespace KidsToyHive.Domain.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Customer>().OwnsOne(c => c.Address);
-            modelBuilder.Entity<Location>().OwnsOne(l => l.Adddress);
+            modelBuilder.Entity<Customer>().OwnsOne(customer => customer.Address);
+            modelBuilder.Entity<Location>().OwnsOne(location => location.Adddress);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -98,6 +98,7 @@ namespace KidsToyHive.Domain.DataAccess
         public DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; private set; }
         public DbSet<Tax> Taxes { get; private set; }
         public DbSet<User> Users { get; private set; }
+        public DbSet<Video> Videos { get; private set; }
         public DbSet<Warehouse> Warehouses { get; private set; }
     }
 

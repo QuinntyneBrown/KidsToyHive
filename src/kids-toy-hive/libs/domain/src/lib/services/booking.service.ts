@@ -48,12 +48,14 @@ export class BookingService {
     );
   }
 
-  public create(options: { booking: Booking }): Observable<{ bookingId: string, version: number }> {
+  public create(options: { booking: Booking }): Observable<{ bookingId: string, version: number }  | ProblemDetails> {
     return this._client.post<{ bookingId: string, version: number }>(`${this._baseUrl}api/commands`, { booking: options.booking }, {
       headers: {
         "OperationId":"UpsertBooking"
       }
-    });
+    }).pipe(
+      catchError(e => this._errorService.handleHttpError(e))
+    );
   }
 
   public processBookingPayment(options: { 
@@ -62,12 +64,14 @@ export class BookingService {
     expYear: number,
     cvc: string,
     bookingId: string 
-  }): Observable<{ bookingId: string, version: number }> {
+  }): Observable<{ bookingId: string, version: number } | ProblemDetails> {
     return this._client.post<{ bookingId: string, version: number }>(`${this._baseUrl}api/commands`, options, {
       headers: {
         "OperationId":"CheckoutBooking"
       }
-    });
+    }).pipe(
+      catchError(e => this._errorService.handleHttpError(e))
+    );
   }
 
   public update(options: { booking: Booking }): Observable<{ bookingId: string }> {

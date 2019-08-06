@@ -1,8 +1,6 @@
-using KidsToyHive.Domain.DataAccess;
-using KidsToyHive.Domain.Models;
 using FluentValidation;
+using KidsToyHive.Domain.DataAccess;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,7 +8,6 @@ namespace KidsToyHive.Domain.Features.Bookings
 {
     public class CancelBooking
     {
-
         public class Validator: AbstractValidator<Request> {
             public Validator()
             {

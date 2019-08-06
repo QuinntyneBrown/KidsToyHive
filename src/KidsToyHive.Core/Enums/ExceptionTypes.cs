@@ -6,6 +6,7 @@
         InvalidUsernameOrPassword,
         Concurrency,
         CustomerExistsWithEmail,
-        OutOfStockException
+        OutOfStock,
+        Payment
     }
 }

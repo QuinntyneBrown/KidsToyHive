@@ -3,23 +3,27 @@
 <form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
     <div class='field'>
         <label>Credit Card Number:</label>
-        <input type='text' formControlName="number" />
+        <input type='text' formControlName="number" (focus)='errorMessage=""' />
     </div>
     
     <div class='field'>
         <label>Expiry Month:</label>
-        <input type='text' formControlName="expMonth" />
+        <input type='text' formControlName="expMonth" (focus)='errorMessage=""'/>
     </div>
     
     <div class='field'>
         <label>Expiry Year:</label>
-        <input type='text' formControlName="expYear" />
+        <input type='text' formControlName="expYear" (focus)='errorMessage=""'/>
     </div>
     
     <div class='field'>
         <label>Cvc:</label>
-        <input type='text' formControlName="cvc" />
+        <input type='text' formControlName="cvc" (focus)='errorMessage=""'/>
     </div>
     
     <kth-button [text]='"Next"' (click)='tryToCheckout(form.value)' ></kth-button>
+
+    <div class='error' *ngIf='errorMessage'>
+        {{ errorMessage }}
+    </div>
 </form>

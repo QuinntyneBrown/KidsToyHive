@@ -3,13 +3,13 @@
 <form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
     <div class='field'>
         <label>Date:</label>
-        <input type='text' (blur)='handleBookingDateChange()' [matDatepicker]="picker" (focus)="picker.open()" formControlName="date" />      
+        <input type='text' (blur)='handleBookingDateChange()' [matDatepicker]="picker" (focus)="picker.open()" formControlName="date" (focus)='errorMessage=""' />      
         <mat-datepicker #picker></mat-datepicker>
     </div>
 
     <div class='field'>
         <label>Pick a Time Slot:</label>
-        <select formControlName="bookingTimeSlot" (change)='handleBookingTimeSlotChange()'>
+        <select formControlName="bookingTimeSlot" (change)='handleBookingTimeSlotChange()' (focus)='errorMessage=""'>
             <option *ngFor="let slot of bookingTimeSlots;" [value]="slot.value">
             {{ slot.name }}
             </option>
@@ -18,23 +18,27 @@
 
     <div class='field'>
         <label>Street:</label>
-        <input type='text' formControlName="street" />
+        <input type='text' formControlName="street" (focus)='errorMessage=""'/>
     </div>
     
     <div class='field'>
         <label>City:</label>
-        <input type='text' formControlName="city" />
+        <input type='text' formControlName="city" (focus)='errorMessage=""'/>
     </div>
     
     <div class='field'>
         <label>Province:</label>
-        <input type='text' formControlName="province" />
+        <input type='text' formControlName="province" (focus)='errorMessage=""'/>
     </div>
     
     <div class='field'>
         <label>Postal Code:</label>
-        <input type='text' formControlName="postalCode" />
+        <input type='text' formControlName="postalCode" (focus)='errorMessage=""' />
     </div>
 
     <kth-button [text]='"Next"' (click)='tryToCreateBooking(form.value)' ></kth-button>
+
+    <div *ngIf='errorMessage'>
+        {{ errorMessage }}
+    </div>
 </form>

@@ -1,5 +1,7 @@
-﻿using KidsToyHive.Domain.Common;
+﻿using KidsToyHive.Core.Exceptions;
+using KidsToyHive.Domain.Common;
 using Stripe;
+using System;
 using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Services
@@ -9,32 +11,38 @@ namespace KidsToyHive.Domain.Services
     {
         public async Task<bool> ProcessAsync(PaymentDto payment)
         {
-
-            var optionsToken = new TokenCreateOptions()
+            try
             {
-                Card = new CreditCardOptions
+                var optionsToken = new TokenCreateOptions()
                 {
-                    Number = payment.Number,
-                    ExpYear = payment.ExpYear,
-                    ExpMonth = payment.ExpMonth,
-                    Cvc = payment.Cvc
-                }
-            };
+                    Card = new CreditCardOptions
+                    {
+                        Number = payment.Number,
+                        ExpYear = payment.ExpYear,
+                        ExpMonth = payment.ExpMonth,
+                        Cvc = payment.Cvc
+                    }
+                };
 
-            var serviceToken = new TokenService();
-            var stripeToken = await serviceToken.CreateAsync(optionsToken);
-            var options = new ChargeCreateOptions
+                var serviceToken = new TokenService();
+                var stripeToken = await serviceToken.CreateAsync(optionsToken);
+                var options = new ChargeCreateOptions
+                {
+                    Amount = payment.Value,
+                    Currency = payment.Currency,
+                    Description = payment.Description,
+                    Source = stripeToken.Id
+                };
+
+                var service = new ChargeService();
+                var charge = await service.CreateAsync(options);
+
+                return charge.Paid;
+            }
+            catch(Exception e)
             {
-                Amount = payment.Value,
-                Currency = payment.Currency,
-                Description = payment.Description,
-                Source = stripeToken.Id
-            };
-
-            var service = new ChargeService();
-            var charge = await service.CreateAsync(options);
-
-            return charge.Paid;
+                throw new PaymentException(e.Message);
+            }
         }
     }
 }

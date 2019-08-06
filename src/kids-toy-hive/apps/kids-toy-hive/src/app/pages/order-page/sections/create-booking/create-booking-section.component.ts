@@ -1,7 +1,7 @@
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { BookingService, Booking, AuthService } from '@kids-toy-hive/domain';
-import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
+import { LocalStorageService, accessTokenKey, bookingIdKey, isProblemDetails } from '@kids-toy-hive/core';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, map } from 'rxjs/operators';
@@ -11,11 +11,11 @@ import { YourOrderService } from '../../your-order.service';
 export class CreateBookingSectionGuard implements CanActivate {
   constructor(
     private _localStorageService: LocalStorageService,
-    private _router: Router,
-    private _authService: AuthService
-  ) {}
+    private _router: Router
+  ) { }
+  
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
-    const bookingId = this._localStorageService.get({ name: 'bookingId' });
+    const bookingId = this._localStorageService.get({ name: bookingIdKey });
     const token = this._localStorageService.get({ name: accessTokenKey });
 
     if(!token)
@@ -35,6 +35,8 @@ export class CreateBookingSectionGuard implements CanActivate {
 })
 export class CreateBookingSectionComponent implements OnInit, OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
+  public errorMessage: string;
+
   private get _productId():string {
     return this._localStorageService.get({name: 'productId' })
   }
@@ -82,7 +84,6 @@ export class CreateBookingSectionComponent implements OnInit, OnDestroy  {
     this._yourOrderService.bookingDate$.next(this.form.value.date);
   }
 
-
   public tryToCreateBooking(value:any) {
     const booking: Booking = {
       bookingDetails:[
@@ -103,9 +104,13 @@ export class CreateBookingSectionComponent implements OnInit, OnDestroy  {
       }
     };
     this._bookingService.create({ booking })
-    .pipe(takeUntil(this.onDestroy),map(x => { 
-      this._localStorageService.put({ name: 'bookingId', value: x.bookingId });
-      this._router.navigateByUrl('/order/step/3');
+    .pipe(takeUntil(this.onDestroy),map((x:any) => { 
+      if(isProblemDetails(x)) {
+        this.errorMessage = 'The Jungle Jumparro is unavaliable for the time and date you have selected';
+      } else {
+        this._localStorageService.put({ name: bookingIdKey, value: x.bookingId });
+        this._router.navigateByUrl('/order/step/3');
+      }
     }))
     .subscribe();    
   }

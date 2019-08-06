@@ -28,7 +28,7 @@ namespace KidsToyHive.Domain.Features.Bookings
         public LocationDto Location { get; set; }
         public CustomerDto Customer { get; set; }
         public ICollection<BookingDetailDto> BookingDetails { get; set; }
-        = new HashSet<BookingDetailDto>();
+            = new HashSet<BookingDetailDto>();
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public BookingTimeSlot BookingTimeSlot { get; set; }

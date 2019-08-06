@@ -91,7 +91,7 @@ namespace KidsToyHive.Domain.Features.Bookings
 
                 foreach(var bookingDetail in request.Booking.BookingDetails)
                 {
-                    if (!_inventoryService.IsItemAvailable(request.Booking.Date, request.Booking.BookingTimeSlot, bookingDetail.ProductId))
+                    if (!await _inventoryService.IsItemAvailable(request.Booking.Date, request.Booking.BookingTimeSlot, bookingDetail.ProductId))
                         throw new OutOfStockException();
                 }
                     

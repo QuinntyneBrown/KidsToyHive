@@ -34,3 +34,8 @@ input, select {
 select {
     height: 28px;
 }
+
+.error {
+    color:red;
+    text-align: center;
+}

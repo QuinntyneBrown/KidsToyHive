@@ -1,7 +1,7 @@
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CustomerService, Customer, BookingService, AuthService } from '@kids-toy-hive/domain';
-import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
+import { LocalStorageService, accessTokenKey, bookingIdKey, productIdKey, isProblemDetails, ProblemDetails } from '@kids-toy-hive/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, map } from 'rxjs/operators';
@@ -30,6 +30,7 @@ export class ProcessPaymentSectionGuard implements CanActivate {
 })
 export class ProcessBookingPaymentComponent implements OnInit, OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
+  public errorMessage: string;
   public form = new FormGroup({
     number: new FormControl(null, [Validators.required]),
     expYear: new FormControl(null, [Validators.required]),
@@ -58,7 +59,7 @@ export class ProcessBookingPaymentComponent implements OnInit, OnDestroy  {
   }
 
   public tryToCheckout(formValue:any) {
-    const bookingId = this._localStorageService.get({ name: 'bookingId' });
+    const bookingId = this._localStorageService.get({ name: bookingIdKey });
     this._bookingService.processBookingPayment({ 
       number: formValue.number,
       expMonth: formValue.expMonth,
@@ -66,10 +67,14 @@ export class ProcessBookingPaymentComponent implements OnInit, OnDestroy  {
       cvc: formValue.cvc,
       bookingId
     })
-    .pipe(takeUntil(this.onDestroy),map(x => {       
-      this._localStorageService.remove({ name: 'bookingId'});
-      this._localStorageService.remove({ name: 'productId'});
-      this._router.navigateByUrl('myprofile');
+    .pipe(takeUntil(this.onDestroy),map((x:ProblemDetails) => {       
+      if(isProblemDetails(x)) {
+        this.errorMessage = x.detail;
+      } else {
+        this._localStorageService.remove({ name: bookingIdKey });
+        this._localStorageService.remove({ name: productIdKey });
+        this._router.navigateByUrl('myprofile');
+      }
     }))
     .subscribe(); 
   }
