@@ -3,6 +3,7 @@
     public enum ExceptionType
     {
         FailedModelValidation,
-        InvalidUsernameOrPassword
+        InvalidUsernameOrPassword,
+        Concurrency
     }
 }
