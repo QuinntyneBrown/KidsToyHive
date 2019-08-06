@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { map, catchError } from 'rxjs/operators';
 import { baseUrl, LocalStorageService, currentUserNameKey, accessTokenKey, ProblemDetails } from '@kids-toy-hive/core';
 import { BehaviorSubject, Subject, throwError, Observable, of } from 'rxjs';
+import { ErrorService } from '../services/error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { BehaviorSubject, Subject, throwError, Observable, of } from 'rxjs';
 export class AuthService {
   constructor(
     @Inject(baseUrl) private _baseUrl: string,
+    private readonly _errorService: ErrorService,
     private _httpClient: HttpClient,    
     private _localStorageService: LocalStorageService
   ) { }
@@ -24,16 +26,8 @@ export class AuthService {
         this.isAuthenticatedChanged$.next(true);        
         return response.accessToken;
       }),
-      catchError(e => this.handleHttpError(e))
+      catchError(e => this._errorService.handleHttpError(e))
     );
-  }
-
-  public handleHttpError(response: HttpErrorResponse):Observable<ProblemDetails> {    
-    return of({
-      type:response.error.Type,
-      title: response.error.Title,
-      detail:JSON.parse(response.error.Detail)
-    });
   }
 
   public logOut() {

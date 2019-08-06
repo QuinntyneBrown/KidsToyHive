@@ -36,7 +36,7 @@ export class LoginOverlayComponent implements OnDestroy  {
         takeUntil(this.onDestroy),
         map(x => {           
           if(isProblemDetails(x)) {
-            alert(x.detail);
+
           } 
           else {
             this._overlayRefWrapper.close();

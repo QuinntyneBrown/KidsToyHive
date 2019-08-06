@@ -24,7 +24,7 @@ export class MyProfilePageComponent implements OnInit, OnDestroy  {
   public ngOnInit() {
     this.bookings$ = this._bookingService.getMy()
     .pipe(map(x => {
-      return x;
+      return x as Booking[];
     }));
 
     this._authService.isAuthenticatedChanged$

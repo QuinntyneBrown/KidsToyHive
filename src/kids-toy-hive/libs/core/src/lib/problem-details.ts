@@ -2,7 +2,6 @@ export interface ProblemDetails {
     detail:string;
     title: string;
     type:string;
-        
 }
 
 export function isProblemDetails(object:any):boolean {
