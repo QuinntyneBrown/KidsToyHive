@@ -1,5 +1,4 @@
 import { Injectable, Injector } from '@angular/core';
-
 import { LoginOverlayComponent } from './login-overlay.component';
 import { BaseOverlayService, OverlayRefProvider, Logger } from '@kids-toy-hive/core';
 

@@ -1,15 +1,17 @@
 import { Injectable, Inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { baseUrl } from '@kids-toy-hive/core';
+import { map, catchError } from "rxjs/operators";
+import { baseUrl, ProblemDetails } from '@kids-toy-hive/core';
 import { Customer } from '../models';
+import { ErrorService } from './error.service';
 
 @Injectable()
 export class CustomerService {
   constructor(
     @Inject(baseUrl) private _baseUrl:string,
-    private _client: HttpClient
+    private _client: HttpClient,
+    private readonly _errorService: ErrorService
   ) { }
 
   public get(): Observable<Array<Customer>> {
@@ -34,7 +36,7 @@ export class CustomerService {
     });
   }
 
-  public create(options: { customer: Customer }): Observable<{ customerId: string, version: number, accessToken: string }> {
+  public create(options: { customer: Customer }): Observable<{ customerId: string, version: number, accessToken: string } | ProblemDetails> {
     return this._client.post<{ 
       customerId: string, 
       version: number, 
@@ -43,7 +45,11 @@ export class CustomerService {
       headers: {
         "OperationId":"UpsertCustomer"
       }
-    });
+    }).pipe(
+      catchError(e => {        
+        return this._errorService.handleHttpError(e);
+      })
+    )
   }
 
   public update(options: { customer: Customer }): Observable<{ customerId: string }> {

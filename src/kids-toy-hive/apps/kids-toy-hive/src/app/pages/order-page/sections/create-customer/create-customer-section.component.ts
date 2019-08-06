@@ -1,7 +1,7 @@
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CustomerService, Customer, AuthService } from '@kids-toy-hive/domain';
-import { LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
+import { LocalStorageService, accessTokenKey, isProblemDetails } from '@kids-toy-hive/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, map } from 'rxjs/operators';
@@ -33,7 +33,7 @@ export class CreateCustomerSectionGuard implements CanActivate {
 })
 export class CreateCustomerSectionComponent implements OnInit, OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
-
+  public errorMessage: string;
   public form = new FormGroup({
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
@@ -59,10 +59,15 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
 
   public tryToSaveCustomer(customer:any) {
     this._customerService.create({ customer})
-    .pipe(takeUntil(this.onDestroy),map(x => { 
-      this._localStorageService.put({ name: accessTokenKey, value: x.accessToken });
-      this._router.navigateByUrl('/order/step/2');
-      this._authService.isAuthenticatedChanged$.next(true);
+    .pipe(takeUntil(this.onDestroy),map(x => {
+      if(isProblemDetails(x)) {
+        this.errorMessage = 'An account exist with this email. Sign in with the existing account.'
+      } else {
+        this._localStorageService.put({ name: accessTokenKey, value: (<any>x).accessToken });
+        this._router.navigateByUrl('/order/step/2');
+        this._authService.isAuthenticatedChanged$.next(true);
+      }
+
     }))
     .subscribe();    
   }

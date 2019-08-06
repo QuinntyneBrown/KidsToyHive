@@ -24,7 +24,6 @@ export class LoginOverlayComponent implements OnDestroy  {
   ) { }
 
   public errorMessage:string;
-  public hasErrors: boolean;
   
   public tryToLogin() {
     if(this.form.valid) {
@@ -34,9 +33,9 @@ export class LoginOverlayComponent implements OnDestroy  {
       })
       .pipe(
         takeUntil(this.onDestroy),
-        map(x => {           
+        map((x: ProblemDetails) => {           
           if(isProblemDetails(x)) {
-
+            this.errorMessage = 'Invalid Username or Password.';
           } 
           else {
             this._overlayRefWrapper.close();
@@ -45,14 +44,13 @@ export class LoginOverlayComponent implements OnDestroy  {
         .subscribe();
     } 
     else {
-
-      this.hasErrors = true;
-
-      console.log(this.form.errors);
+      this.errorMessage = 'Missing required fields.';      
     }
   }
 
   ngOnDestroy() {
     this.onDestroy.next();	
   }
+
+  handleInputFocus() { this.errorMessage = ''; }
 }

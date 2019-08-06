@@ -3,16 +3,16 @@
 
     <div class='field'>
         <label>Username:</label>
-        <input type='text' formControlName="username" required/>
+        <input (focus)='handleInputFocus()' type='text' formControlName="username" required/>
     </div>
     <div class='field'>
         <label>Password:</label>
-        <input type='password' formControlName="password" required/>
+        <input (focus)='handleInputFocus()' type='password' formControlName="password" required/>
     </div>
 
     <kth-button (click)='tryToLogin()' [text]='"Login"'></kth-button>
     
-    <div *ngIf='hasErrors' class="error-message">
+    <div *ngIf='errorMessage' class="error-message">
         <div>
             {{ errorMessage }}
         </div>

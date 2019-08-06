@@ -70,6 +70,8 @@ namespace KidsToyHive.Api.Controllers
             catch (Exception e)
             {
                 item.Error();
+
+                throw e;
             }
 
             return new JsonResult(result);

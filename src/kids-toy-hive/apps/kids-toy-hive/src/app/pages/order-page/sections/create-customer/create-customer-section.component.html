@@ -22,4 +22,9 @@
     </div>
     
     <kth-button [text]='"Next"' (click)='tryToSaveCustomer(form.value)' ></kth-button>
+
+    <div *ngIf='errorMessage'>
+        {{ errorMessage }}
+    </div>
+    
 </form>
