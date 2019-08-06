@@ -5,13 +5,10 @@ using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
@@ -62,10 +59,10 @@ namespace KidsToyHive.Domain.Features.Users
                     .SingleOrDefaultAsync(x => x.Username.ToLower() == request.Username.ToLower());
 
                 if (user == null)
-                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, $"{ExceptionType.InvalidUsernameOrPassword}", "Login Failed", "Invalid username or password");
+                    throw new InvalidUsernameOrPasswordException();
 
                 if (!ValidateUser(user, _passwordHasher.HashPassword(user.Salt, request.Password)))
-                    throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest, $"{ExceptionType.InvalidUsernameOrPassword}", "Login Failed", "Invalid username or password");
+                    throw new InvalidUsernameOrPasswordException();
 
                 var profiles = _context.Profiles
                     .Include(x => x.User)
