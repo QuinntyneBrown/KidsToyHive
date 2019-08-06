@@ -1,5 +1,6 @@
 using FluentValidation;
 using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Exceptions;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
@@ -91,7 +92,7 @@ namespace KidsToyHive.Domain.Features.Bookings
                 foreach(var bookingDetail in request.Booking.BookingDetails)
                 {
                     if (!_inventoryService.IsItemAvailable(request.Booking.Date, request.Booking.BookingTimeSlot, bookingDetail.ProductId))
-                        throw new Exception();
+                        throw new OutOfStockException();
                 }
                     
                 foreach(var bookingDetail in request.Booking.BookingDetails)

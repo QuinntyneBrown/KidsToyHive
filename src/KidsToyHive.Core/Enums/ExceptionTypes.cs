@@ -5,6 +5,7 @@
         FailedModelValidation,
         InvalidUsernameOrPassword,
         Concurrency,
-        CustomerExistsWithEmail
+        CustomerExistsWithEmail,
+        OutOfStockException
     }
 }
