@@ -24,7 +24,7 @@ namespace KidsToyHive.Api.Behaviours
                 .Where(validationFailure => validationFailure != null)
                 .ToList();
 
-            if (failures.Count != 0)
+            if (failures.Any())
                 throw new Core.Exceptions.ValidationException(failures);
 
             return next();
