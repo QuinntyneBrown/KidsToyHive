@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "start:admin": "ng serve --project kids-toy-hive-admin",
+    "start:drivers": "ng serve --project kids-toy-hive-drivers-app",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx lint && ng lint",
