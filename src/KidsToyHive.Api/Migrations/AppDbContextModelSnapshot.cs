@@ -703,6 +703,42 @@ namespace KidsToyHive.Api.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Video", b =>
+                {
+                    b.Property<Guid>("VideoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Abstract");
+
+                    b.Property<string>("Category");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("DurationInSeconds");
+
+                    b.Property<DateTime?>("Published");
+
+                    b.Property<decimal>("Rating");
+
+                    b.Property<string>("Slug");
+
+                    b.Property<string>("SubTitle");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Version");
+
+                    b.Property<string>("YouTubeVideoId");
+
+                    b.HasKey("VideoId");
+
+                    b.ToTable("Videos");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.Warehouse", b =>
                 {
                     b.Property<Guid>("WarehouseId")

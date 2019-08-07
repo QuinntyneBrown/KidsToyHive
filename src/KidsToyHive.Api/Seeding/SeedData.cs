@@ -47,7 +47,7 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context, IConfiguration configuration)
             {
-                foreach(var user in context.Users)
+                foreach(var user in context.Users.Include(x => x.Profiles))
                 {
                     if(configuration["Seed:DefaultUser:Username"].Contains(user.Username))
                     {
@@ -56,6 +56,14 @@ namespace KidsToyHive.Api
                             context.Drivers.Add(new Driver
                             {
                                 Email = user.Username
+                            });
+                        }
+
+                        if (user.Profiles.Where(x => x.Type == ProfileType.Driver).FirstOrDefault() == null)
+                        {
+                            user.Profiles.Add(new Profile
+                            {
+                                Type = ProfileType.Driver
                             });
                         }
                     }

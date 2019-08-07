@@ -233,6 +233,30 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Videos",
+                columns: table => new
+                {
+                    VideoId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Category = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    SubTitle = table.Column<string>(nullable: true),
+                    Slug = table.Column<string>(nullable: true),
+                    YouTubeVideoId = table.Column<string>(nullable: true),
+                    Abstract = table.Column<string>(nullable: true),
+                    DurationInSeconds = table.Column<int>(nullable: false),
+                    Rating = table.Column<decimal>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Published = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Videos", x => x.VideoId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bookings",
                 columns: table => new
                 {
@@ -885,6 +909,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Taxes");
+
+            migrationBuilder.DropTable(
+                name: "Videos");
 
             migrationBuilder.DropTable(
                 name: "Dashboards");

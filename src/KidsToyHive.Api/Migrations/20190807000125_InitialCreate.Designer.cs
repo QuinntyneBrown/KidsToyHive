@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190805124111_InitialCreate")]
+    [Migration("20190807000125_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -703,6 +703,42 @@ namespace KidsToyHive.Api.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Video", b =>
+                {
+                    b.Property<Guid>("VideoId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Abstract");
+
+                    b.Property<string>("Category");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("DurationInSeconds");
+
+                    b.Property<DateTime?>("Published");
+
+                    b.Property<decimal>("Rating");
+
+                    b.Property<string>("Slug");
+
+                    b.Property<string>("SubTitle");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Version");
+
+                    b.Property<string>("YouTubeVideoId");
+
+                    b.HasKey("VideoId");
+
+                    b.ToTable("Videos");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Warehouse", b =>
