@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -12,11 +12,18 @@ export class LoginComponent implements OnDestroy  {
 
   public username: string;
   public password: string;
+  public errorMessage: string;
+  public login:EventEmitter<any> = new EventEmitter();
 
   public form = new FormGroup({
-    username: new FormControl(this.username, [Validators.required]),
-    password: new FormControl(this.password, [Validators.required])
+    username: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [Validators.required])
   });
+
+  public tryToLogin(event$:any) {
+
+  }
+
 
   ngOnDestroy() {
     this.onDestroy.next();	

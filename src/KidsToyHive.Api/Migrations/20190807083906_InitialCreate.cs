@@ -54,6 +54,23 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    ContactId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.ContactId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
@@ -254,6 +271,26 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Videos", x => x.VideoId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ContactMessages",
+                columns: table => new
+                {
+                    ContactMessageId = table.Column<Guid>(nullable: false),
+                    Value = table.Column<string>(nullable: true),
+                    Version = table.Column<int>(nullable: false),
+                    ContactId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactMessages", x => x.ContactMessageId);
+                    table.ForeignKey(
+                        name: "FK_ContactMessages_Contacts_ContactId",
+                        column: x => x.ContactId,
+                        principalTable: "Contacts",
+                        principalColumn: "ContactId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -753,6 +790,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ContactMessages_ContactId",
+                table: "ContactMessages",
+                column: "ContactId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CustomerLocations_CustomerId",
                 table: "CustomerLocations",
                 column: "CustomerId");
@@ -875,6 +917,9 @@ namespace KidsToyHive.Api.Migrations
                 name: "Cards");
 
             migrationBuilder.DropTable(
+                name: "ContactMessages");
+
+            migrationBuilder.DropTable(
                 name: "CustomerLocations");
 
             migrationBuilder.DropTable(
@@ -912,6 +957,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Videos");
+
+            migrationBuilder.DropTable(
+                name: "Contacts");
 
             migrationBuilder.DropTable(
                 name: "Dashboards");

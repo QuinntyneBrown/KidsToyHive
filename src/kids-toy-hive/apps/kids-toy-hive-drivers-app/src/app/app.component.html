@@ -1,2 +1,16 @@
-<h1>Drivers App</h1>
-<router-outlet #router></router-outlet>
+<mat-toolbar color="primary" class="mat-elevation-z6">
+    <button mat-icon-button (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Drivers App</h1>
+</mat-toolbar>
+<mat-sidenav-container>
+    <mat-sidenav #drawer class="sidenav" mode="side">
+        <button mat-button i18n>Logout</button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="router-outlet-container">
+        <router-outlet #router></router-outlet>
+      </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

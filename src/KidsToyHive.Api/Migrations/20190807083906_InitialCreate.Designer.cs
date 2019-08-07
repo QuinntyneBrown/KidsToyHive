@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190807000125_InitialCreate")]
+    [Migration("20190807083906_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -165,6 +165,46 @@ namespace KidsToyHive.Api.Migrations
                     b.HasKey("CardLayoutId");
 
                     b.ToTable("CardLayouts");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Contact", b =>
+                {
+                    b.Property<Guid>("ContactId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("ContactId");
+
+                    b.ToTable("Contacts");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ContactMessage", b =>
+                {
+                    b.Property<Guid>("ContactMessageId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("ContactId");
+
+                    b.Property<string>("Value");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("ContactMessageId");
+
+                    b.HasIndex("ContactId");
+
+                    b.ToTable("ContactMessages");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Customer", b =>
@@ -800,6 +840,13 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ContactMessage", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Contact", null)
+                        .WithMany("ContactMessages")
+                        .HasForeignKey("ContactId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Customer", b =>
