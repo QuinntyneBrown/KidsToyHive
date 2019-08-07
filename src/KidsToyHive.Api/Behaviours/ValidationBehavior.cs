@@ -1,11 +1,7 @@
 ﻿using FluentValidation;
-using KidsToyHive.Core.Enums;
-using KidsToyHive.Core.Exceptions;
 using MediatR;
-using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,7 +25,7 @@ namespace KidsToyHive.Api.Behaviours
                 .ToList();
 
             if (failures.Count != 0)
-                throw new HttpStatusCodeException((int)HttpStatusCode.BadRequest,$"{ExceptionType.FailedModelValidation}","Model Validation Failed",JsonConvert.SerializeObject(failures));
+                throw new Core.Exceptions.ValidationException(failures);
 
             return next();
         }
