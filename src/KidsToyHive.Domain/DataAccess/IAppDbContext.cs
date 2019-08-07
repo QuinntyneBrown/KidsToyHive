@@ -29,6 +29,7 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<SalesOrderDetail> SalesOrderDetails { get; }
         DbSet<Product> Products { get; }
         DbSet<ProductCategory> ProductCategories { get; }
+        DbSet<ProfessionalServiceProvider> ProfessionalServiceProviders { get; }
         DbSet<Profile> Profiles { get; }
         DbSet<Role> Roles { get; }
         DbSet<Shipment> Shipments { get; }

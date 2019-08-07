@@ -14,6 +14,7 @@
     <Folder Include="Features\Drivers\" />
     <Folder Include="Features\Bins\" />
     <Folder Include="Features\Contacts\" />
+    <Folder Include="Features\ProfessionalServiceProviders\" />
     <Folder Include="Features\Videos\" />
     <Folder Include="Features\ShipmentItems\" />
     <Folder Include="Features\Warehouses\" />

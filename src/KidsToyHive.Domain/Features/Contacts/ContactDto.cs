@@ -1,6 +1,8 @@
 using KidsToyHive.Domain.Models;
 using FluentValidation;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KidsToyHive.Domain.Features.Contacts
 {
@@ -18,6 +20,8 @@ namespace KidsToyHive.Domain.Features.Contacts
         public string FullName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public ICollection<ContactMessageDto> ContactMessages { get; set; }
+            = new HashSet<ContactMessageDto>();
         public int Version { get; set; }
     }
 
@@ -29,7 +33,8 @@ namespace KidsToyHive.Domain.Features.Contacts
                 ContactId = contact.ContactId,
                 FullName = contact.FullName,
                 PhoneNumber = contact.PhoneNumber,
-                Version = contact.Version
+                Version = contact.Version,
+                ContactMessages = contact.ContactMessages.Select(x =>x.ToDto()).ToList()
             };
     }
 }
