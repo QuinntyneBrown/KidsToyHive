@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190807083906_InitialCreate")]
+    [Migration("20190809022517_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -499,6 +499,30 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImage");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ProfessionalServiceProvider", b =>
+                {
+                    b.Property<Guid>("ProfessionalServiceProviderId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Type");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("ProfessionalServiceProviderId");
+
+                    b.ToTable("ProfessionalServiceProviders");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Profile", b =>

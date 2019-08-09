@@ -499,6 +499,30 @@ namespace KidsToyHive.Api.Migrations
                     b.ToTable("ProductImage");
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ProfessionalServiceProvider", b =>
+                {
+                    b.Property<Guid>("ProfessionalServiceProviderId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("FullName");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<string>("Title");
+
+                    b.Property<int>("Type");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("ProfessionalServiceProviderId");
+
+                    b.ToTable("ProfessionalServiceProviders");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.Profile", b =>
                 {
                     b.Property<Guid>("ProfileId")

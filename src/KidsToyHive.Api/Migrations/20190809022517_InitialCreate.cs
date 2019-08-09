@@ -173,6 +173,24 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProfessionalServiceProviders",
+                columns: table => new
+                {
+                    ProfessionalServiceProviderId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProfessionalServiceProviders", x => x.ProfessionalServiceProviderId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -936,6 +954,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductImage");
+
+            migrationBuilder.DropTable(
+                name: "ProfessionalServiceProviders");
 
             migrationBuilder.DropTable(
                 name: "Roles");
