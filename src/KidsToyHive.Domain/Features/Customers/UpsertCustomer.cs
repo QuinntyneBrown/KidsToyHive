@@ -121,6 +121,7 @@ namespace KidsToyHive.Domain.Features.Customers
                         Username = customer.Email
                     };
 
+                    //TODO: Make random passwords
                     user.Password = _passwordHasher.HashPassword(user.Salt, "P@ssw0rd");
 
                     await _context.Users.AddAsync(user);                    

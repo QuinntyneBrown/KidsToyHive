@@ -1,11 +1,10 @@
+using KidsToyHive.Core.Extensions;
+using KidsToyHive.Domain.Common;
 using MediatR;
-using System;
-using System.Threading.Tasks;
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
-using KidsToyHive.Core.Extensions;
-using KidsToyHive.Domain.Common;
+using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Geolocation
 {

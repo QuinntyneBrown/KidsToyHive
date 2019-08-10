@@ -82,8 +82,8 @@ namespace KidsToyHive.Api.Migrations
                     Address_City = table.Column<string>(nullable: true),
                     Address_Province = table.Column<string>(nullable: true),
                     Address_PostalCode = table.Column<string>(nullable: true),
-                    Address_Latitude = table.Column<decimal>(nullable: true),
-                    Address_Longitude = table.Column<decimal>(nullable: true),
+                    Address_Latitude = table.Column<double>(nullable: true),
+                    Address_Longitude = table.Column<double>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -149,8 +149,8 @@ namespace KidsToyHive.Api.Migrations
                     Adddress_City = table.Column<string>(nullable: true),
                     Adddress_Province = table.Column<string>(nullable: true),
                     Adddress_PostalCode = table.Column<string>(nullable: true),
-                    Adddress_Latitude = table.Column<decimal>(nullable: true),
-                    Adddress_Longitude = table.Column<decimal>(nullable: true),
+                    Adddress_Latitude = table.Column<double>(nullable: true),
+                    Adddress_Longitude = table.Column<double>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Type = table.Column<int>(nullable: false)
                 },
@@ -260,7 +260,8 @@ namespace KidsToyHive.Api.Migrations
                     Version = table.Column<int>(nullable: false),
                     Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    Salt = table.Column<byte[]>(nullable: true)
+                    Salt = table.Column<byte[]>(nullable: true),
+                    PasswordChangeRequired = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {

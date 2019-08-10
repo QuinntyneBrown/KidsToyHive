@@ -754,6 +754,8 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<bool>("PasswordChangeRequired");
+
                     b.Property<byte[]>("Salt");
 
                     b.Property<Guid>("TenantKey");
@@ -879,9 +881,9 @@ namespace KidsToyHive.Api.Migrations
 
                             b1.Property<string>("City");
 
-                            b1.Property<decimal?>("Latitude");
+                            b1.Property<double>("Latitude");
 
-                            b1.Property<decimal?>("Longitude");
+                            b1.Property<double>("Longitude");
 
                             b1.Property<string>("PostalCode");
 
@@ -961,9 +963,9 @@ namespace KidsToyHive.Api.Migrations
 
                             b1.Property<string>("City");
 
-                            b1.Property<decimal?>("Latitude");
+                            b1.Property<double>("Latitude");
 
-                            b1.Property<decimal?>("Longitude");
+                            b1.Property<double>("Longitude");
 
                             b1.Property<string>("PostalCode");
 

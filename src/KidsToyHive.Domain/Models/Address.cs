@@ -1,4 +1,5 @@
 using KidsToyHive.Core;
+using KidsToyHive.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,17 +7,15 @@ using System.Collections.Generic;
 namespace KidsToyHive.Domain.Models
 {
     [Owned]
-    public class Address : ValueObject
+    public class Address : ValueObject, IGeoCoordinate
     {
         public string Street { get; private set; }
         public string City { get; private set; }
         public string Province { get; private set; }
         public string PostalCode { get; private set; }
-        public decimal? Latitude { get; private set; }
-        public decimal? Longitude { get; private set; }
-
-        private Address() { }
-
+        public double Latitude { get; private set; }
+        public double Longitude { get; private set; }
+        
         public Address(string street, string city, string province, string postalCode)
         {
             Street = street;

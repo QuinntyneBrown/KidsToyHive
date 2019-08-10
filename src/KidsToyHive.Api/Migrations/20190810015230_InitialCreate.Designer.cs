@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190809022517_InitialCreate")]
+    [Migration("20190810015230_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -756,6 +756,8 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<bool>("PasswordChangeRequired");
+
                     b.Property<byte[]>("Salt");
 
                     b.Property<Guid>("TenantKey");
@@ -881,9 +883,9 @@ namespace KidsToyHive.Api.Migrations
 
                             b1.Property<string>("City");
 
-                            b1.Property<decimal?>("Latitude");
+                            b1.Property<double>("Latitude");
 
-                            b1.Property<decimal?>("Longitude");
+                            b1.Property<double>("Longitude");
 
                             b1.Property<string>("PostalCode");
 
@@ -963,9 +965,9 @@ namespace KidsToyHive.Api.Migrations
 
                             b1.Property<string>("City");
 
-                            b1.Property<decimal?>("Latitude");
+                            b1.Property<double>("Latitude");
 
-                            b1.Property<decimal?>("Longitude");
+                            b1.Property<double>("Longitude");
 
                             b1.Property<string>("PostalCode");
 
