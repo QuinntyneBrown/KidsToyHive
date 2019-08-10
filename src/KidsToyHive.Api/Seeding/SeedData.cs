@@ -147,22 +147,36 @@ namespace KidsToyHive.Api
                     context.SaveChanges();
                 }
 
-                if (context.DigitalAssets.FirstOrDefault(x => x.Name == "Hero.jpg") == null)
+                if (context.DigitalAssets.FirstOrDefault(x => x.Name == "Hero1.jpg") == null)
                 {
                     var provider = new FileExtensionContentTypeProvider();
 
-                    provider.TryGetContentType("Hero.jpg", out string contentType);
+                    provider.TryGetContentType("Hero1.jpg", out string contentType);
 
                     context.DigitalAssets.Add(new DigitalAsset
                     {
-                        Name = "Hero.jpg",
-                        Bytes = StaticFileLocator.Get("Hero.jpg"),
+                        Name = "Hero1.jpg",
+                        Bytes = StaticFileLocator.Get("Hero1.jpg"),
                         ContentType = contentType
                     });
                     context.SaveChanges();
                 }
 
-                
+                if (context.DigitalAssets.FirstOrDefault(x => x.Name == "Hero2.jpg") == null)
+                {
+                    var provider = new FileExtensionContentTypeProvider();
+
+                    provider.TryGetContentType("Hero2.jpg", out string contentType);
+
+                    context.DigitalAssets.Add(new DigitalAsset
+                    {
+                        Name = "Hero2.jpg",
+                        Bytes = StaticFileLocator.Get("Hero2.jpg"),
+                        ContentType = contentType
+                    });
+                    context.SaveChanges();
+                }
+
             }
         }
         internal class ProductConfiguration

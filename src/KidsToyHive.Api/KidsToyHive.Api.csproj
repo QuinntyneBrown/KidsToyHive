@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Seeding\DigitalAssets\Hero.jpg" />
+    <None Remove="Seeding\DigitalAssets\Hero1.jpg" />
+    <None Remove="Seeding\DigitalAssets\Hero2.jpg" />
     <None Remove="Seeding\DigitalAssets\JungleJumparoo1.jpg" />
     <None Remove="Seeding\DigitalAssets\JungleJumparoo2.png" />
     <None Remove="Seeding\DigitalAssets\JungleJumparoo3.jpg" />
@@ -25,7 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Seeding\DigitalAssets\Hero.jpg" />
+    <EmbeddedResource Include="Seeding\DigitalAssets\Hero1.jpg" />
+    <EmbeddedResource Include="Seeding\DigitalAssets\Hero2.jpg" />
     <EmbeddedResource Include="Seeding\DigitalAssets\JungleJumparoo1.jpg" />
     <EmbeddedResource Include="Seeding\DigitalAssets\JungleJumparoo2.png" />
     <EmbeddedResource Include="Seeding\DigitalAssets\JungleJumparoo3.jpg" />

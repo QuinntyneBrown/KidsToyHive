@@ -1,7 +1,6 @@
 using KidsToyHive.Core;
 using KidsToyHive.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 
 namespace KidsToyHive.Domain.Models

@@ -1,6 +1,5 @@
 ﻿using GeoCoordinatePortable;
 
-
 namespace KidsToyHive.Core.Interfaces
 {
     public interface IGeoCoordinate
