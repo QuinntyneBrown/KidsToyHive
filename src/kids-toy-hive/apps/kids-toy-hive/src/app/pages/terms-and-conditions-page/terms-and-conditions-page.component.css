@@ -1,0 +1,12 @@
+:host {
+    display: block;
+    margin: 20px;
+}
+
+div {
+    line-height: 1.35em;
+}
+
+.html-content h2 {
+    font-weight: 400;
+}

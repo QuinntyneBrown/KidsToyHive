@@ -1,5 +1,5 @@
 :host {
     display: block;
     min-height: 425px;
-    background-image: linear-gradient(rgba(36, 36, 36, 0.65), rgba(69, 36, 36, 0.65)), url('http://localhost:52115/api/digitalassets/serve/file/Hero.jpg');
+    background-image: linear-gradient(rgba(36, 36, 36, 0.65), rgba(69, 36, 36, 0.65)), url('http://localhost:52115/api/digitalassets/serve/file/Hero1.jpg');
 }

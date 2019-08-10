@@ -256,7 +256,7 @@ namespace KidsToyHive.Api.Migrations
                     TenantKey = table.Column<Guid>(nullable: false),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
-                    Rate = table.Column<decimal>(nullable: false),
+                    Rate = table.Column<double>(nullable: false),
                     Type = table.Column<byte>(nullable: false),
                     Effective = table.Column<DateTime>(nullable: false)
                 },
@@ -298,7 +298,7 @@ namespace KidsToyHive.Api.Migrations
                     YouTubeVideoId = table.Column<string>(nullable: true),
                     Abstract = table.Column<string>(nullable: true),
                     DurationInSeconds = table.Column<int>(nullable: false),
-                    Rating = table.Column<decimal>(nullable: false),
+                    Rating = table.Column<double>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Published = table.Column<DateTime>(nullable: true)
                 },
@@ -570,7 +570,7 @@ namespace KidsToyHive.Api.Migrations
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     TrackingNumber = table.Column<string>(nullable: true),
-                    TotalWeight = table.Column<decimal>(nullable: true),
+                    TotalWeight = table.Column<double>(nullable: false),
                     DriverId = table.Column<Guid>(nullable: false),
                     LocationId = table.Column<Guid>(nullable: true),
                     SignatureId = table.Column<Guid>(nullable: false),

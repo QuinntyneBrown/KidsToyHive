@@ -12,7 +12,7 @@ namespace KidsToyHive.Domain.Models
         public string YouTubeVideoId { get; set; }
         public string Abstract { get; set; }
         public int DurationInSeconds { get; set; }
-        public decimal Rating { get; set; }
+        public double Rating { get; set; }
         public string Description { get; set; }
         public DateTime? Published { get; set; }
     }

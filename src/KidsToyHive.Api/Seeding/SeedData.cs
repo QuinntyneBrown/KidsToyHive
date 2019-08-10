@@ -28,15 +28,28 @@ namespace KidsToyHive.Api
             HtmlContentConfiguration.Seed(context);
             DigitalAssetConfiguration.Seed(context);
             EmailTemplateConfiguration.Seed(context);
+            VideoConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
 
+        internal class VideoConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                if (context.Videos.SingleOrDefault(x => x.Title == "The Kids Toy Hive") == null)
+                    context.Videos.Add(new Video() {
+                        Title = "The Kids Toy Hive"
+                    });
+
+                context.SaveChanges();
+            }
+        }
 
         internal class CardLayoutConfiguration
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.CardLayouts.FirstOrDefault(x => x.Name == "Poster") == null)
+                if (context.CardLayouts.SingleOrDefault(x => x.Name == "Poster") == null)
                     context.CardLayouts.Add(new CardLayout() { Name = "Poster" });
 
                 context.SaveChanges();
@@ -51,7 +64,7 @@ namespace KidsToyHive.Api
                 {
                     if(configuration["Seed:DefaultUser:Username"].Contains(user.Username))
                     {
-                        if (context.Drivers.Where(x => x.Email == user.Username).FirstOrDefault() == null)
+                        if (context.Drivers.Where(x => x.Email == user.Username).SingleOrDefault() == null)
                         {
                             context.Drivers.Add(new Driver
                             {
@@ -59,7 +72,7 @@ namespace KidsToyHive.Api
                             });
                         }
 
-                        if (user.Profiles.Where(x => x.Type == ProfileType.Driver).FirstOrDefault() == null)
+                        if (user.Profiles.Where(x => x.Type == ProfileType.Driver).SingleOrDefault() == null)
                         {
                             user.Profiles.Add(new Profile
                             {
@@ -77,14 +90,14 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.EmailTemplates.FirstOrDefault(x => x.Name == nameof(EmailTemplateName.BookingConfirmation)) == null)
+                if (context.EmailTemplates.SingleOrDefault(x => x.Name == nameof(EmailTemplateName.BookingConfirmation)) == null)
                     context.EmailTemplates.Add(new EmailTemplate
                     {
                         Name = nameof(EmailTemplateName.BookingConfirmation),
                         Value = StaticFileLocator.GetAsString("BookingConfirmationEmail.html")
                     });
 
-                if (context.EmailTemplates.FirstOrDefault(x => x.Name == nameof(EmailTemplateName.NewCustomer)) == null)
+                if (context.EmailTemplates.SingleOrDefault(x => x.Name == nameof(EmailTemplateName.NewCustomer)) == null)
                     context.EmailTemplates.Add(new EmailTemplate
                     {
                         Name = nameof(EmailTemplateName.NewCustomer),
@@ -99,14 +112,14 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.HtmlContents.FirstOrDefault(x => x.Name == "TermsAndConditions.html") == null)
+                if (context.HtmlContents.SingleOrDefault(x => x.Name == "TermsAndConditions.html") == null)
                     context.HtmlContents.Add(new HtmlContent
                     {
                         Name = "TermsAndConditions.html",
                         Value = StaticFileLocator.GetAsString("TermsAndConditions.html")
                     });
 
-                if (context.HtmlContents.FirstOrDefault(x => x.Name == "About.html") == null)
+                if (context.HtmlContents.SingleOrDefault(x => x.Name == "About.html") == null)
                     context.HtmlContents.Add(new HtmlContent
                     {
                         Name = "About.html",
@@ -121,8 +134,8 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.Taxes.FirstOrDefault() == null)
-                    context.Taxes.Add(new Tax() { Rate = .13M });
+                if (context.Taxes.SingleOrDefault() == null)
+                    context.Taxes.Add(new Tax() { Rate = .13 });
 
                 context.SaveChanges();
             }
@@ -132,7 +145,7 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.DigitalAssets.FirstOrDefault(x => x.Name == "Logo.png") == null)
+                if (context.DigitalAssets.SingleOrDefault(x => x.Name == "Logo.png") == null)
                 {
                     var provider = new FileExtensionContentTypeProvider();
 
@@ -147,7 +160,7 @@ namespace KidsToyHive.Api
                     context.SaveChanges();
                 }
 
-                if (context.DigitalAssets.FirstOrDefault(x => x.Name == "Hero1.jpg") == null)
+                if (context.DigitalAssets.SingleOrDefault(x => x.Name == "Hero1.jpg") == null)
                 {
                     var provider = new FileExtensionContentTypeProvider();
 
@@ -162,7 +175,7 @@ namespace KidsToyHive.Api
                     context.SaveChanges();
                 }
 
-                if (context.DigitalAssets.FirstOrDefault(x => x.Name == "Hero2.jpg") == null)
+                if (context.DigitalAssets.SingleOrDefault(x => x.Name == "Hero2.jpg") == null)
                 {
                     var provider = new FileExtensionContentTypeProvider();
 
@@ -183,7 +196,7 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {                
-                if (context.Products.FirstOrDefault() == null)
+                if (context.Products.SingleOrDefault() == null)
                     context.Products.Add(new Product
                     {
                         Name = "Jungle Jumparoo",
@@ -230,7 +243,7 @@ namespace KidsToyHive.Api
             {
                 var product = context.Products.Single(x => x.Name == "Jungle Jumparoo");
 
-                if (context.InventoryItems.Include(x => x.Product).FirstOrDefault(x => x.Product.Name == "Jungle Jumparoo") == null)
+                if (context.InventoryItems.Include(x => x.Product).SingleOrDefault(x => x.Product.Name == "Jungle Jumparoo") == null)
                     context.InventoryItems.Add(new InventoryItem
                     {
                         Quantity = 1,
@@ -245,19 +258,19 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.Cards.FirstOrDefault(x => x.Name == "Products") == null)
+                if (context.Cards.SingleOrDefault(x => x.Name == "Products") == null)
                     context.Cards.Add(new Card() { Name = "Products" });
 
-                if (context.Cards.FirstOrDefault(x => x.Name == "Sales Orders") == null)
+                if (context.Cards.SingleOrDefault(x => x.Name == "Sales Orders") == null)
                     context.Cards.Add(new Card() { Name = "Sales Orders" });
 
-                if (context.Cards.FirstOrDefault(x => x.Name == "Bookings") == null)
+                if (context.Cards.SingleOrDefault(x => x.Name == "Bookings") == null)
                     context.Cards.Add(new Card() { Name = "Bookings" });
 
-                if (context.Cards.FirstOrDefault(x => x.Name == "Shipments") == null)
+                if (context.Cards.SingleOrDefault(x => x.Name == "Shipments") == null)
                     context.Cards.Add(new Card() { Name = "Shipments" });
 
-                if (context.Cards.FirstOrDefault(x => x.Name == "Inventory") == null)
+                if (context.Cards.SingleOrDefault(x => x.Name == "Inventory") == null)
                     context.Cards.Add(new Card() { Name = "Inventory" });
 
                 context.SaveChanges();
@@ -270,7 +283,7 @@ namespace KidsToyHive.Api
             {                
                 foreach(var profileId in context.Profiles.Select(x => x.ProfileId))
                 {
-                    if (context.Dashboards.FirstOrDefault(x => x.Name == "Default" && x.ProfileId == profileId) == null)
+                    if (context.Dashboards.SingleOrDefault(x => x.Name == "Default" && x.ProfileId == profileId) == null)
                     {
                         context.Dashboards.Add(new Dashboard()
                         {
@@ -294,7 +307,7 @@ namespace KidsToyHive.Api
                 {
                     User user = default;
 
-                    if (context.Users.FirstOrDefault(x => x.Username == username) == null)
+                    if (context.Users.SingleOrDefault(x => x.Username == username) == null)
                     {
                         user = new User()
                         {
@@ -324,7 +337,7 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context)
             {
-                if (context.Warehouses.FirstOrDefault(x => x.Name == "DefaultWarehouse") == null)
+                if (context.Warehouses.SingleOrDefault(x => x.Name == "DefaultWarehouse") == null)
                     context.Warehouses.Add(new Warehouse() { Name = "DefaultWarehouse" });
 
                 context.SaveChanges();

@@ -20,7 +20,7 @@ namespace KidsToyHive.Domain.Features.Shipments
     {
         public Guid ShipmentId { get; set; }
         public string TrackingNumber { get; set; }
-        public decimal? TotalWeight { get; set; }
+        public double TotalWeight { get; set; }
         public Guid DriverId { get; set; }
         public Guid? LocationId { get; set; }
         public Guid SignatureId { get; set; }

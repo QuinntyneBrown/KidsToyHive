@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KidsToyHive.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190810081955_InitialCreate")]
+    [Migration("20190810114625_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -704,7 +704,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid>("TenantKey");
 
-                    b.Property<decimal?>("TotalWeight");
+                    b.Property<double>("TotalWeight");
 
                     b.Property<string>("TrackingNumber");
 
@@ -858,7 +858,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<DateTime>("Effective");
 
-                    b.Property<decimal>("Rate");
+                    b.Property<double>("Rate");
 
                     b.Property<Guid>("TenantKey");
 
@@ -912,7 +912,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<DateTime?>("Published");
 
-                    b.Property<decimal>("Rating");
+                    b.Property<double>("Rating");
 
                     b.Property<string>("Slug");
 

@@ -30,7 +30,7 @@ namespace UnitTests.Domain.Features.Taxes
                 var result = await getTaxesHandler.Handle(new GetTaxes.Request { }, default);
 
                 Assert.Single(result.Taxes);
-                Assert.Equal(.13M,result.Taxes.First().Rate);
+                Assert.Equal(.13,result.Taxes.First().Rate);
             }
         }
     }

@@ -12,10 +12,8 @@ namespace KidsToyHive.Api.Controllers
         protected readonly IMediator _mediator;
 
         public GeolocationController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-        
+            => _mediator = mediator;
+
         [Route("getAddress")]
         [AllowAnonymous]
         [HttpGet]

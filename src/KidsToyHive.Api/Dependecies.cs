@@ -3,7 +3,6 @@ using KidsToyHive.Api.Filters;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
-using KidsToyHive.Domain.Fakes;
 using KidsToyHive.Domain.Features.Users;
 using KidsToyHive.Domain.Services;
 using MediatR;
