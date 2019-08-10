@@ -427,6 +427,30 @@ namespace KidsToyHive.Api.Migrations
                     b.ToTable("Locations");
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Option", b =>
+                {
+                    b.Property<Guid>("OptionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Order");
+
+                    b.Property<Guid?>("QuestionId");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("OptionId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Option");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.Product", b =>
                 {
                     b.Property<Guid>("ProductId")
@@ -545,6 +569,66 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Question", b =>
+                {
+                    b.Property<Guid>("QuestionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Order");
+
+                    b.Property<int>("QuestionType");
+
+                    b.Property<Guid?>("SurveyId");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("QuestionId");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("Question");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Response", b =>
+                {
+                    b.Property<Guid>("ResponseId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<Guid?>("OptionId");
+
+                    b.Property<Guid?>("QuestionId");
+
+                    b.Property<Guid?>("SurveyResultId");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<string>("Value");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("ResponseId");
+
+                    b.HasIndex("OptionId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("SurveyResultId");
+
+                    b.ToTable("Response");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Role", b =>
@@ -721,6 +805,46 @@ namespace KidsToyHive.Api.Migrations
                     b.HasKey("SignatureId");
 
                     b.ToTable("Signatures");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Survey", b =>
+                {
+                    b.Property<Guid>("SurveyId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("SurveyId");
+
+                    b.ToTable("Surveys");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.SurveyResult", b =>
+                {
+                    b.Property<Guid>("SurveyResultId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid?>("SurveyId");
+
+                    b.Property<Guid>("TenantKey");
+
+                    b.Property<int>("Version");
+
+                    b.HasKey("SurveyResultId");
+
+                    b.HasIndex("SurveyId");
+
+                    b.ToTable("SurveyResult");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Tax", b =>
@@ -982,6 +1106,13 @@ namespace KidsToyHive.Api.Migrations
                         });
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Option", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Question", "Question")
+                        .WithMany("Options")
+                        .HasForeignKey("QuestionId");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.Product", b =>
                 {
                     b.HasOne("KidsToyHive.Domain.Models.Brand", "Brand")
@@ -1015,6 +1146,28 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Question", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Survey", "Survey")
+                        .WithMany("Questions")
+                        .HasForeignKey("SurveyId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Response", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Option", "Option")
+                        .WithMany("Responses")
+                        .HasForeignKey("OptionId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.SurveyResult", null)
+                        .WithMany("Responses")
+                        .HasForeignKey("SurveyResultId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.SalesOrderDetail", b =>
@@ -1072,6 +1225,13 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("ShipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.SurveyResult", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Survey", "Survey")
+                        .WithMany("SurveyResults")
+                        .HasForeignKey("SurveyId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Warehouse", b =>

@@ -37,6 +37,7 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<ShipmentBooking> ShipmentBookings { get; }
         DbSet<ShipmentSalesOrder> ShipmentSalesOrders { get; }
         DbSet<Signature> Signatures { get; }
+        DbSet<Survey> Surveys { get; }
         DbSet<Tax> Taxes { get; }
         DbSet<User> Users { get; }
         DbSet<Video> Videos { get; }

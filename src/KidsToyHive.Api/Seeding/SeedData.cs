@@ -335,7 +335,6 @@ namespace KidsToyHive.Api
         {
             public static string GetAsString(string name)
             {
-                var lines = new List<string>();
                 var fullName = default(string);
                 var assembly = default(Assembly);
                 var embededResourceNames = new List<string>();
@@ -354,14 +353,14 @@ namespace KidsToyHive.Api
                                 assembly = _assembly;
                             }
                         }
-                        catch (System.NotSupportedException notSupportedException)
+                        catch
                         {
-                            //swallow
+    
                         }
                     }
                 }
 
-                if (fullName == default(string) && assembly == default(Assembly))
+                if (fullName == default && assembly == default)
                     return null;
 
                 try
@@ -381,7 +380,6 @@ namespace KidsToyHive.Api
             }
             public static byte[] Get(string name)
             {
-                var lines = new List<string>();
                 var fullName = default(string);
                 var assembly = default(Assembly);
                 var embededResourceNames = new List<string>();
@@ -400,14 +398,14 @@ namespace KidsToyHive.Api
                                 assembly = _assembly;
                             }
                         }
-                        catch (System.NotSupportedException notSupportedException)
+                        catch
                         {
-                            //swallow
+
                         }
                     }
                 }
 
-                if (fullName == default(string) && assembly == default(Assembly))
+                if (fullName == default && assembly == default)
                     return null;
 
                 try
@@ -425,13 +423,10 @@ namespace KidsToyHive.Api
                 }
             }
         }
-
-
     }
 
     public static class StringListExtensions
     {
-
         public static string SingleOrDefaultResourceName(this string[] collection, string name)
         {
             try

@@ -234,6 +234,21 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Surveys",
+                columns: table => new
+                {
+                    SurveyId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Surveys", x => x.SurveyId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Taxes",
                 columns: table => new
                 {
@@ -476,6 +491,54 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Question",
+                columns: table => new
+                {
+                    QuestionId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    SurveyId = table.Column<Guid>(nullable: true),
+                    QuestionType = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Body = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Order = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Question", x => x.QuestionId);
+                    table.ForeignKey(
+                        name: "FK_Question_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "SurveyId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SurveyResult",
+                columns: table => new
+                {
+                    SurveyResultId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    SurveyId = table.Column<Guid>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SurveyResult", x => x.SurveyResultId);
+                    table.ForeignKey(
+                        name: "FK_SurveyResult_Surveys_SurveyId",
+                        column: x => x.SurveyId,
+                        principalTable: "Surveys",
+                        principalColumn: "SurveyId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Profiles",
                 columns: table => new
                 {
@@ -626,6 +689,29 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Option",
+                columns: table => new
+                {
+                    OptionId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    QuestionId = table.Column<Guid>(nullable: true),
+                    Order = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Option", x => x.OptionId);
+                    table.ForeignKey(
+                        name: "FK_Option_Question_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Question",
+                        principalColumn: "QuestionId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Dashboards",
                 columns: table => new
                 {
@@ -757,6 +843,42 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Response",
+                columns: table => new
+                {
+                    ResponseId = table.Column<Guid>(nullable: false),
+                    TenantKey = table.Column<Guid>(nullable: false),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    OptionId = table.Column<Guid>(nullable: true),
+                    QuestionId = table.Column<Guid>(nullable: true),
+                    Value = table.Column<string>(nullable: true),
+                    SurveyResultId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Response", x => x.ResponseId);
+                    table.ForeignKey(
+                        name: "FK_Response_Option_OptionId",
+                        column: x => x.OptionId,
+                        principalTable: "Option",
+                        principalColumn: "OptionId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Response_Question_QuestionId",
+                        column: x => x.QuestionId,
+                        principalTable: "Question",
+                        principalColumn: "QuestionId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Response_SurveyResult_SurveyResultId",
+                        column: x => x.SurveyResultId,
+                        principalTable: "SurveyResult",
+                        principalColumn: "SurveyResultId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DashboardCards",
                 columns: table => new
                 {
@@ -854,6 +976,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "WarehouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Option_QuestionId",
+                table: "Option",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ProductImage_DigitalAssetId",
                 table: "ProductImage",
                 column: "DigitalAssetId");
@@ -877,6 +1004,26 @@ namespace KidsToyHive.Api.Migrations
                 name: "IX_Profiles_UserId",
                 table: "Profiles",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Question_SurveyId",
+                table: "Question",
+                column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Response_OptionId",
+                table: "Response",
+                column: "OptionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Response_QuestionId",
+                table: "Response",
+                column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Response_SurveyResultId",
+                table: "Response",
+                column: "SurveyResultId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SalesOrderDetails_SalesOrderId",
@@ -917,6 +1064,11 @@ namespace KidsToyHive.Api.Migrations
                 name: "IX_ShipmentSalesOrders_ShipmentId",
                 table: "ShipmentSalesOrders",
                 column: "ShipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SurveyResult_SurveyId",
+                table: "SurveyResult",
+                column: "SurveyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Warehouses_LocationId",
@@ -960,6 +1112,9 @@ namespace KidsToyHive.Api.Migrations
                 name: "ProfessionalServiceProviders");
 
             migrationBuilder.DropTable(
+                name: "Response");
+
+            migrationBuilder.DropTable(
                 name: "Roles");
 
             migrationBuilder.DropTable(
@@ -996,6 +1151,12 @@ namespace KidsToyHive.Api.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
+                name: "Option");
+
+            migrationBuilder.DropTable(
+                name: "SurveyResult");
+
+            migrationBuilder.DropTable(
                 name: "SalesOrders");
 
             migrationBuilder.DropTable(
@@ -1017,6 +1178,9 @@ namespace KidsToyHive.Api.Migrations
                 name: "ProductCategories");
 
             migrationBuilder.DropTable(
+                name: "Question");
+
+            migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
@@ -1027,6 +1191,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Surveys");
 
             migrationBuilder.DropTable(
                 name: "Locations");
