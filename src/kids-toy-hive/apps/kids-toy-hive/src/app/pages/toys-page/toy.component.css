@@ -8,7 +8,7 @@
 h1 {
     font-size: 2em;
     line-height: 1.25em;
-    padding: 0;
+    padding: 10px 0px;
     margin: 0;
     font-weight: 600;
 }
@@ -19,6 +19,7 @@ img {
 .toy-price, .toy-price-period {    
     line-height: 1em;
     font-weight: 100;
+    padding:5px 0;
 }
 .toy-price {
     font-size: 2em;
