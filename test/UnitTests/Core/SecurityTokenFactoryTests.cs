@@ -18,10 +18,7 @@ namespace UnitTests.Core
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(ConfigurationHelper.OAuth2["Authentication:JwtKey"])),
             ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateLifetime = true,
-            ClockSkew = TimeSpan.Zero,
-            NameClaimType = ClaimTypes.Name
+            ValidateAudience = false
         };
 
         [Fact]

@@ -97,7 +97,13 @@ namespace KidsToyHive.Api
                 {
                     options.RequireHttpsMetadata = false;
                     options.SaveToken = true;
-                    options.TokenValidationParameters = GetTokenValidationParameters(configuration);
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtKey"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                    };
                     options.Events = new JwtBearerEvents
                     {
                         OnMessageReceived = context =>
@@ -126,22 +132,6 @@ namespace KidsToyHive.Api
                 options
                 .UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly("KidsToyHive.Api"));
             });
-        }
-
-        private static TokenValidationParameters GetTokenValidationParameters(IConfiguration configuration)
-        {
-            var tokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtKey"])),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateLifetime = true,
-                ClockSkew = TimeSpan.Zero,
-                NameClaimType = ClaimTypes.Name
-            };
-
-            return tokenValidationParameters;
         }
     }
 }
