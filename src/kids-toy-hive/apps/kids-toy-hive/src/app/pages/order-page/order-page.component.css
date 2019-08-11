@@ -1,9 +1,9 @@
 .grid {
     display: grid;
-    grid-template-columns: 5fr 2fr;
+    grid-template-columns: 1fr 225px;
     max-width: 800px;
-    margin: 0 auto;
-    grid-column-gap: 20px;
+    margin: 20px auto 0px;
+    grid-column-gap: 40px;
 }
 .field, label {
     display: block;

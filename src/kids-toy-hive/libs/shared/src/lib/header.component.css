@@ -1,11 +1,28 @@
 :host {
     background-color: rgb(233, 165, 50);
-    min-height: 60px;
+    width: 100%;
+    display: block;
+}
+
+kth-hamburger-button, img {
+    line-height: 80px;
+}
+
+img {
+    margin: 10px 0 0;
+}
+
+section {
+    background-color: rgb(233, 165, 50);
+    min-height: 80px;
     display: grid;
     margin: 0;
     padding: 0;
+    line-height: 80px;
     color: rgb(255,255,255);
-    grid-template-columns: 50px 1.5fr 1fr;
+    grid-template-columns: 60px 1fr min-content;
+    max-width: 1140px;
+    margin: 0 auto;
 }
 
 h1 {
@@ -24,18 +41,25 @@ ul,li {
 ul {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    min-height: 60px;
-    line-height: 60px;
+    min-height: 80px;
+    line-height: 80px;
     margin: 0px 20px 0px 0px;
 }
 
 a, a:link, a:visited {
+    padding: 8px 20px;
     cursor: pointer;
     margin: 0px 10px;
     color: white;
     text-decoration: none;
+    line-height: 60px;
+    border-radius: 5px;
 }
 
 .active-link {
     font-weight: 600;
+}
+
+a:hover {
+    background-color: rgba(0,0,0,.075);
 }

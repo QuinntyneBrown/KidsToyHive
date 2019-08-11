@@ -5,7 +5,7 @@
 h3 {
     display: inline-block;
     position: relative;
-    margin: 20px auto;
+    margin: 20px auto 40px;
     width: 100%;
     text-align: center;
 }
@@ -20,12 +20,17 @@ form {
 .field {
     display: grid;
     grid-template-columns: 150px 1fr;    
-    margin: 0px 20px;
+    margin: 0px 20px 15px;
 }
 
-input, label {
-    line-height: 18pt;
+input, label, select {
+    line-height: 24pt;
 }
-input {
-    padding: 0 10px;
+
+input, select {
+    padding: 0px 12px;
+}
+
+select {
+    padding: 10px 12px;
 }
