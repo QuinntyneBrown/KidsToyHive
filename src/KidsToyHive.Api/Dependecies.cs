@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -92,7 +93,10 @@ namespace KidsToyHive.Api
             };
 
             services
-                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddAuthentication(x => {
+                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
                 .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;
@@ -129,7 +133,8 @@ namespace KidsToyHive.Api
                 .UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly("KidsToyHive.Api"));
             });
         }
-                private static TokenValidationParameters GetTokenValidationParameters(IConfiguration configuration)
+
+        private static TokenValidationParameters GetTokenValidationParameters(IConfiguration configuration)
         {
             var tokenValidationParameters = new TokenValidationParameters
             {
@@ -139,7 +144,7 @@ namespace KidsToyHive.Api
                 ValidateAudience = false,
                 ValidateLifetime = true,
                 ClockSkew = TimeSpan.Zero,
-                NameClaimType = JwtRegisteredClaimNames.UniqueName
+                NameClaimType = ClaimTypes.Name
             };
 
             return tokenValidationParameters;

@@ -8,6 +8,8 @@ using System.Text;
 
 namespace KidsToyHive.Core.Identity
 {
+    //https://github.com/bradygaster/DotNetCore3WithJwtAuth/blob/master/User.cs
+
 
     public class SecurityTokenFactory : ISecurityTokenFactory
     {
@@ -16,31 +18,25 @@ namespace KidsToyHive.Core.Identity
         public SecurityTokenFactory(IConfiguration configuration)
             => _configuration = configuration;
 
-        public string Create(string username, List<Claim> customClaims = null)
-        {
-            var now = DateTime.UtcNow;
-            var nowDateTimeOffset = new DateTimeOffset(now);
+        public string Create(string username, List<Claim> additionalClaims = default)
+        {            
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, username), new Claim(JwtRegisteredClaimNames.UniqueName, username) };
 
-            var claims = new List<Claim>()
-                {
-                    new Claim(JwtRegisteredClaimNames.UniqueName, username),
-                    new Claim(JwtRegisteredClaimNames.Sub, username),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Iat, nowDateTimeOffset.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
-                };
+            if(additionalClaims != default) claims.AddRange(additionalClaims);
 
-            if (customClaims != null)
-                claims.AddRange(customClaims);
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-            var jwt = new JwtSecurityToken(
-                issuer: _configuration["Authentication:JwtIssuer"],
-                audience: _configuration["Authentication:JwtAudience"],
-                claims: claims,
-                notBefore: now,
-                expires: now.AddMinutes(Convert.ToInt16(_configuration["Authentication:ExpirationMinutes"])),
-                signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Authentication:JwtKey"])), SecurityAlgorithms.HmacSha256));
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(int.Parse(_configuration["Authentication:ExpirationMinutes"])),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration["Authentication:JwtKey"])),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
 
-            return new JwtSecurityTokenHandler().WriteToken(jwt);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return tokenHandler.WriteToken(token);
         }
     }
 }
