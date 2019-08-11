@@ -87,10 +87,6 @@ namespace KidsToyHive.Api
                 options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
             });
 
-            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler
-            {
-                InboundClaimTypeMap = new Dictionary<string, string>()
-            };
 
             services
                 .AddAuthentication(x => {
@@ -101,8 +97,6 @@ namespace KidsToyHive.Api
                 {
                     options.RequireHttpsMetadata = false;
                     options.SaveToken = true;
-                    options.SecurityTokenValidators.Clear();
-                    options.SecurityTokenValidators.Add(jwtSecurityTokenHandler);
                     options.TokenValidationParameters = GetTokenValidationParameters(configuration);
                     options.Events = new JwtBearerEvents
                     {

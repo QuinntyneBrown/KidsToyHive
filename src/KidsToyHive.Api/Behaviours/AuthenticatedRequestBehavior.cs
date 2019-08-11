@@ -2,9 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -33,7 +31,7 @@ namespace KidsToyHive.Api.Behaviours
                 {
                     authenticatedRequest.CurrentUserId = new Guid(user.Claims.First(x => x.Type == "UserId").Value);
                     authenticatedRequest.PartitionKey = user.Claims.First(x => x.Type == "PartitionKey").Value;
-                    authenticatedRequest.CurrentUsername = user.Claims.First(x => x.Type == JwtRegisteredClaimNames.UniqueName).Value;
+                    authenticatedRequest.CurrentUsername = user.Identity.Name;
                 }
             }
 

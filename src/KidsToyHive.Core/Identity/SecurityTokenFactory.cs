@@ -8,9 +8,6 @@ using System.Text;
 
 namespace KidsToyHive.Core.Identity
 {
-    //https://github.com/bradygaster/DotNetCore3WithJwtAuth/blob/master/User.cs
-
-
     public class SecurityTokenFactory : ISecurityTokenFactory
     {
         private IConfiguration _configuration;
@@ -20,7 +17,7 @@ namespace KidsToyHive.Core.Identity
 
         public string Create(string username, List<Claim> additionalClaims = default)
         {            
-            var claims = new List<Claim> { new Claim(ClaimTypes.Name, username), new Claim(JwtRegisteredClaimNames.UniqueName, username) };
+            var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
 
             if(additionalClaims != default) claims.AddRange(additionalClaims);
 
