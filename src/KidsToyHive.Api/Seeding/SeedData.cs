@@ -190,6 +190,21 @@ namespace KidsToyHive.Api
                     context.SaveChanges();
                 }
 
+                if (context.DigitalAssets.SingleOrDefault(x => x.Name == "Hero3.jpg") == null)
+                {
+                    var provider = new FileExtensionContentTypeProvider();
+
+                    provider.TryGetContentType("Hero3.jpg", out string contentType);
+
+                    context.DigitalAssets.Add(new DigitalAsset
+                    {
+                        Name = "Hero3.jpg",
+                        Bytes = StaticFileLocator.Get("Hero3.jpg"),
+                        ContentType = contentType
+                    });
+                    context.SaveChanges();
+                }
+
             }
         }
         internal class ProductConfiguration
