@@ -23,6 +23,11 @@ export class AppComponent {
   public handleMenuClick() {
     this._menuOverlay.create();
   }
+
+  public handleLogoClick() {
+    this._router.navigateByUrl('/');
+  }
+  
   public get imageUrl() {
     return `${this.apiBaseUrl}api/digitalassets/serve/file/Logo.png`;
   }

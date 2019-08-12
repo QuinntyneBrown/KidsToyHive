@@ -1,4 +1,5 @@
-<kth-header [imageUrl]='imageUrl' (menuClick)='handleMenuClick()'></kth-header>
+<kth-header [imageUrl]='imageUrl' (menuClick)='handleMenuClick()' (logoClick)='handleLogoClick()'></kth-header>
 <div>
     <router-outlet #router></router-outlet>
 </div>
+<kth-footer></kth-footer>

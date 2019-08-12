@@ -11,6 +11,9 @@ export class HeaderComponent implements OnDestroy  {
 
   @Output()
   public menuClick: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  public logoClick: EventEmitter<any> = new EventEmitter();
   
   @Input()
   public imageUrl:string;

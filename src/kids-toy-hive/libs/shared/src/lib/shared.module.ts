@@ -5,17 +5,20 @@ import { RouterModule } from '@angular/router';
 import { ButtonComponent } from './button.component';
 import { HamburgerButtonComponent } from './hamburger-button.component';
 import { MatIconModule } from '@angular/material/icon';
+import { FooterComponent } from './footer.component';
 
 @NgModule({
   declarations:[
     HeaderComponent,
     ButtonComponent,
-    HamburgerButtonComponent
+    HamburgerButtonComponent,
+    FooterComponent
   ],
   exports:[
     HeaderComponent,
     ButtonComponent,
-    HamburgerButtonComponent
+    HamburgerButtonComponent,
+    FooterComponent
   ],
   imports: [CommonModule, RouterModule, MatIconModule]
 })

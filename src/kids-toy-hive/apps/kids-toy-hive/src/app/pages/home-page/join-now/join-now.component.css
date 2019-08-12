@@ -1,5 +1,6 @@
 :host {
     display: block;
-    min-height: 425px;
-    background-image: linear-gradient(rgba(36, 36, 36, 0.65), rgba(69, 36, 36, 0.65)), url('http://localhost:52114/api/digitalassets/serve/file/Hero1.jpg');
+    min-height: 410px;
+    margin: 35px 0px;
+    background-image: url('http://localhost:52114/api/digitalassets/serve/file/Hero1.jpg');
 }
