@@ -32,6 +32,13 @@ namespace KidsToyHive.Api
             //DashboardConfiguration.Seed(context);
         }
 
+        internal class TenantConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+            }
+        }
+
         internal class VideoConfiguration
         {
             public static void Seed(AppDbContext context)

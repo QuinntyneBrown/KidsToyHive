@@ -1,8 +1,8 @@
 :host {
     display: grid;
-    border: 0.75px solid #ccc;
+    border: none;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.5px;    
 }
 
 h1 {
@@ -29,4 +29,8 @@ img {
 .toy-price-period {
     font-size: 1.67em;
     color: rgb(233, 165, 50);
+}
+
+kth-button {
+    margin: 20px auto 0px;
 }

@@ -39,3 +39,7 @@ select {
     color:red;
     text-align: center;
 }
+
+kth-button {
+    margin: 0 auto;
+}

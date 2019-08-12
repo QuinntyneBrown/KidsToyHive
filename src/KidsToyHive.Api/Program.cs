@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace KidsToyHive.Api
 {
@@ -49,6 +50,15 @@ namespace KidsToyHive.Api
                     context.Database.EnsureCreated();
 
                     SeedData.Seed(context, configuration);
+                }
+
+                if (args.Contains("secret"))
+                {
+                    var tripleDESCryptoServiceProvider = new TripleDESCryptoServiceProvider();
+                    tripleDESCryptoServiceProvider.GenerateKey();
+                    var key = System.Convert.ToBase64String(tripleDESCryptoServiceProvider.Key);
+                    Console.WriteLine(key);
+                    Environment.Exit(0);
                 }
 
                 if (args.Contains("stop"))
