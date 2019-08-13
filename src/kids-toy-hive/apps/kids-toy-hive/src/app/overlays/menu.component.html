@@ -3,3 +3,10 @@
     <li *ngIf='isAuthenticated'><a (click)='handleMyProfileClick()'>My Profile</a></li>
     <li *ngIf='isAuthenticated'><a (click)='signOut.emit()'>Sign Out</a></li>
 </ul>
+
+<ul *ngIf='isMobile'>
+    <li><a (click)='navigateToUrl.emit("/home")'>Home</a></li>
+    <li><a (click)='navigateToUrl.emit("/toys")'>Toys</a></li>
+    <li><a (click)='navigateToUrl.emit("/about")'>About</a></li>
+    <li><a (click)='navigateToUrl.emit("/lrgal")'>Legal</a></li>
+</ul>

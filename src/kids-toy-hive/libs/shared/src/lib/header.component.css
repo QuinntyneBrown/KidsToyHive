@@ -13,6 +13,10 @@ img {
     cursor: pointer;
 }
 
+ul {
+    display: none;
+}
+
 section {
     background-color: rgb(233, 165, 50);
     min-height: 80px;
@@ -26,41 +30,48 @@ section {
     margin: 0 auto;
 }
 
-h1 {
-    margin:0 0 0 20px;
-    padding: 0;
-    line-height: 60px;
-}
+@media screen and (min-width: 768px) {
 
-ul,li {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    display: inline;
-}
 
-ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    min-height: 80px;
-    line-height: 80px;
-    margin: 0px 20px 0px 0px;
-}
 
-a, a:link, a:visited {
-    padding: 8px 20px;
-    cursor: pointer;
-    margin: 0px 10px;
-    color: white;
-    text-decoration: none;
-    line-height: 60px;
-    border-radius: 5px;
-}
 
-.active-link {
-    font-weight: 600;
-}
+    h1 {
+        margin:0 0 0 20px;
+        padding: 0;
+        line-height: 60px;
+    }
 
-a:hover {
-    background-color: rgba(0,0,0,.075);
+    ul,li {
+        margin: 0;
+        padding: 0;
+        position: relative;
+        display: inline;
+    }
+
+    ul {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        min-height: 80px;
+        line-height: 80px;
+        margin: 0px 20px 0px 0px;
+    }
+
+    a, a:link, a:visited {
+        padding: 8px 20px;
+        cursor: pointer;
+        margin: 0px;
+        color: white;
+        text-decoration: none;
+        line-height: 60px;
+        border-radius: 5px;
+    }
+
+    .active-link {
+        font-weight: 600;
+    }
+
+    a:hover {
+        background-color: rgba(0,0,0,.075);
+    }
+
 }

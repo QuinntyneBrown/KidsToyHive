@@ -1,25 +1,37 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from '@kids-toy-hive/domain';
 import { baseUrl, OverlayRefWrapper, LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
 import { LoginOverlay } from '@kids-toy-hive/features/security';
 import { Router } from '@angular/router';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 
 @Component({
   templateUrl: './menu-overlay.component.html',
   styleUrls: ['./menu-overlay.component.css'],
   selector: 'kth-menu-overlay'
 })
-export class MenuOverlayComponent  { 
+export class MenuOverlayComponent implements OnInit { 
   constructor(
     @Inject(baseUrl)public apiBaseUrl:string, 
     private readonly _overlayRef: OverlayRefWrapper,
     private readonly _loginOverlay: LoginOverlay,
     private readonly _router: Router,
     private readonly _authService: AuthService,
+    private readonly _breakpointObserver: BreakpointObserver
   ) { }
 
   public get isAuthenticated():boolean {    
     return this._authService.isAuthenticated;
+  }
+
+  public isMobile = true;
+
+  public ngOnInit() {
+    this._breakpointObserver
+    .observe(['(min-width: 768px)'])
+    .subscribe((state: BreakpointState) => {
+      this.isMobile = !state.matches;
+    });
   }
 
   public handleMenuClick() { this._overlayRef.close(); }

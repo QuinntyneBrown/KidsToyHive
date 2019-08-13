@@ -19,13 +19,10 @@ export class MenuComponent implements OnDestroy  {
   public navigateToUrl: EventEmitter<any> = new EventEmitter();
 
   @Input()
+  public isMobile: boolean;
+
+  @Input()
   public isAuthenticated:boolean;
-
-  constructor(
-
-  ) {
-
-  }
 
   handleMyProfileClick() {
     this.navigateToUrl.emit('/myprofile');
