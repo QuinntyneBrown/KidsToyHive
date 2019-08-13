@@ -5,6 +5,7 @@ import { SharedModule } from '@kids-toy-hive/shared';
 import { DomainModule } from '@kids-toy-hive/domain';
 import { LoginOverlayComponent, LoginOverlay } from './login-overlay';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 export * from './login-overlay';
 
@@ -20,7 +21,8 @@ export * from './login-overlay';
     CoreModule,
     SharedModule,
     DomainModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatIconModule
   ]
 })
 export class FeaturesSecurityModule {}

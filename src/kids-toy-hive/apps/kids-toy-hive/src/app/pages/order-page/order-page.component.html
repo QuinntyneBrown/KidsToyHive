@@ -1,6 +1,6 @@
 <ul>
-    <li><a [routerLink]="['step/1']" routerLinkActive="active-link">Create Account</a></li>
-    <li><a [routerLink]="['step/2']" routerLinkActive="active-link">Create Booking</a></li>
+    <li><a [routerLink]="['step/1']" routerLinkActive="active-link"><span *ngIf='!isMobile'>Create </span>Account</a></li>
+    <li><a [routerLink]="['step/2']" routerLinkActive="active-link"><span *ngIf='!isMobile'>Create </span>Booking</a></li>
     <li><a [routerLink]="['step/3']" routerLinkActive="active-link">Checkout</a></li>    
 </ul>
 
@@ -8,5 +8,5 @@
     <div>
         <router-outlet></router-outlet>
     </div>    
-    <kth-your-order></kth-your-order>
+    <kth-your-order *ngIf='!isMobile'></kth-your-order>
 </div>

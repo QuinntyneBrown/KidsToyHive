@@ -25,6 +25,8 @@ input, label {
 input {
   padding: 0 12px;
   -webkit-appearance: none;
+  border: solid 1px;
+  border-radius: 0;
 }
 
 kth-button {
@@ -35,6 +37,11 @@ kth-button {
 
 h2 {
   margin:20px 0 0 20px;
+}
+
+mat-icon {
+  cursor: pointer;
+  margin: 0px 20px;
 }
 
 /* .field {

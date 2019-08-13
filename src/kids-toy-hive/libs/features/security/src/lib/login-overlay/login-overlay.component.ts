@@ -25,6 +25,10 @@ export class LoginOverlayComponent implements OnDestroy  {
 
   public errorMessage:string;
   
+  public close() {
+    this._overlayRefWrapper.close();
+  }
+  
   public tryToLogin() {
     if(this.form.valid) {
       this._authService.tryToLogin({ 
