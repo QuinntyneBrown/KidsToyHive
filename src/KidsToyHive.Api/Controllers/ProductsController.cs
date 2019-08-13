@@ -19,6 +19,7 @@ namespace KidsToyHive.Api.Controllers
         [HttpGet]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(GetProducts.Response), (int)HttpStatusCode.OK)]
+        [ResponseCache(Duration = 3600, Location = ResponseCacheLocation.Any)]
         public async Task<ActionResult<GetProducts.Response>> Get()
             => await _meditator.Send(new GetProducts.Request());
 

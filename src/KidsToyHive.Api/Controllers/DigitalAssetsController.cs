@@ -24,6 +24,7 @@ namespace KidsToyHive.Api.Controllers
 
         [AllowAnonymous]
         [HttpGet("serve/file/{name}")]
+        [ResponseCache(Duration = 3600, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Serve([FromRoute]GetDigitalAssetByName.Request request)
         {
             var response = await _mediator.Send(request);
