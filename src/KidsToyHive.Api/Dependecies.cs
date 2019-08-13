@@ -16,11 +16,7 @@ using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Stripe;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -32,7 +28,7 @@ namespace KidsToyHive.Api
         {
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder => builder
-                .WithOrigins("http://localhost:4200")
+                .WithOrigins("http://localhost:4200,https://kidstoyhive.z27.web.core.windows.net")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .SetIsOriginAllowed(isOriginAllowed: _ => true)

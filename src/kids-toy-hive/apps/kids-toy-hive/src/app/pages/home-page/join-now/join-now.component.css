@@ -2,5 +2,5 @@
     display: block;
     min-height: 410px;
     margin: 35px 0px;
-    background-image: url('http://localhost:52114/api/digitalassets/serve/file/Hero1.jpg');
+    background-image: url('https://kidstoyhive.azurewebsites.net/api/digitalassets/serve/file/Hero1.jpg');
 }
