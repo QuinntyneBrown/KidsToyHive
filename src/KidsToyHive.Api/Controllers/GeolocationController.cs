@@ -1,8 +1,8 @@
+using KidsToyHive.Domain.Features.Geolocation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using KidsToyHive.Domain.Features.Geolocation;
 
 namespace KidsToyHive.Api.Controllers
 {

@@ -28,7 +28,7 @@ namespace KidsToyHive.Api
         {
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder => builder
-                .WithOrigins("http://localhost:4200,https://kidstoyhive.z27.web.core.windows.net")
+                .WithOrigins(configuration["Cors:Origins"])
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .SetIsOriginAllowed(isOriginAllowed: _ => true)
