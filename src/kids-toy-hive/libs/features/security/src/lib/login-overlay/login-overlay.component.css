@@ -2,6 +2,8 @@
     background-color: #fff;
     display: block;
     min-width: 400px;
+    max-width: calc(100% - 40px);
+    padding: 20px 0px;
 }
 
 form {
@@ -14,13 +16,15 @@ form {
 .field {
   display: grid;
   grid-template-columns: 100px 1fr;
+  margin: 0px 20px 15px;
 }
 
 input, label {
-  line-height: 18pt;
+  line-height: 24pt;
 }
 input {
-  padding: 0 10px;
+  padding: 0 12px;
+  -webkit-appearance: none;
 }
 
 kth-button {
@@ -31,4 +35,26 @@ kth-button {
 
 h2 {
   margin:20px 0 0 20px;
+}
+
+/* .field {
+  display: grid;
+  grid-template-columns: 150px 1fr;    
+  margin: 0px 20px 15px;
+}
+
+input, label, select {
+  line-height: 24pt;
+}
+
+input, select {
+  padding: 0px 12px;
+}
+
+select {
+  padding: 10px 12px;
+} */
+
+kth-button {
+  margin: 0 auto;
 }
