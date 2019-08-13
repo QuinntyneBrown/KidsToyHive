@@ -4,7 +4,9 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-div {
-    max-width: 1140px;
-    margin: 35px auto 35px;
+@media screen and (min-width: 768px) {
+    div {
+        max-width: 1140px;
+        margin: 35px auto 35px;
+    }
 }

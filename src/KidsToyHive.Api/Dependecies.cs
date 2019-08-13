@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using KidsToyHive.Api.Filters;
 using KidsToyHive.Core.Identity;
+using KidsToyHive.Core.Interfaces;
+using KidsToyHive.Core.Services;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.Users;
@@ -37,6 +39,7 @@ namespace KidsToyHive.Api
             services.AddHttpContextAccessor();
             services.AddSingleton<ICommandRegistry, CommandRegistry>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
+            services.AddSingleton<ICache, MemoryCache>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
             services.AddTransient<IEmailService, EmailService>();

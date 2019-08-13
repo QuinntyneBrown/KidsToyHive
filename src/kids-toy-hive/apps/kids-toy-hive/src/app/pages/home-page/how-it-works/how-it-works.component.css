@@ -1,6 +1,27 @@
 :host {
-    display: block;
+    display: grid;
     min-height: 410px;
-    margin: 35px 0px;
+    margin: 0px 0px 35px;
     background-image: url('https://kidstoyhive.azurewebsites.net/api/digitalassets/serve/file/Hero2.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    grid-template-columns: 2fr 1fr;
+    
 }   
+
+div {
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-column: 2;
+    background-color: rgba(255,255,255,0.6);
+    margin:0;
+    padding:0;
+    width: 100%;
+}
+
+kth-button {
+    background-color: rgba(255,255,255,0.6);
+    margin:0 auto;
+    grid-row: 2;
+}

@@ -1,3 +1,4 @@
+using KidsToyHive.Core.Services;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.Products;
 using KidsToyHive.Domain.Models;
@@ -29,7 +30,7 @@ namespace UnitTests.Domain.Features.Products
 
                 context.SaveChanges();
 
-                var getProductsHandler = new GetProducts.Handler(context);
+                var getProductsHandler = new GetProducts.Handler(new MemoryCache(),context);
 
                 var result = await getProductsHandler.Handle(new GetProducts.Request { }, default);
 

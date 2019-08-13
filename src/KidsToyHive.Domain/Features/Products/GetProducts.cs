@@ -1,3 +1,4 @@
+using KidsToyHive.Core.Interfaces;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Models;
 using MediatR;
@@ -21,18 +22,22 @@ namespace KidsToyHive.Domain.Features.Products
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly IAppDbContext _context;
+            private readonly ICache _cache;
 
-            public Handler(IAppDbContext context) => _context = context;
+            public Handler(ICache cache, IAppDbContext context)
+            {
+                _context = context;
+                _cache = cache;
+            }
 
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                =>  new Response()
-                {
-                    Products = await _context.Products                    
-                    .Include(x => x.ProductCategory)
-                    .Include(x => x.ProductImages)
-                    .ThenInclude(x => x.DigitalAsset)
-                    .Select(x => x.ToDto()).ToArrayAsync()
-                };
+            public async Task<Response> Handle(Request request, CancellationToken cancellationToken) => new Response()
+            {
+                Products = await _cache.FromCacheOrServiceAsync(() => _context.Products
+                .Include(x => x.ProductCategory)
+                .Include(x => x.ProductImages)
+                .ThenInclude(x => x.DigitalAsset)
+                .Select(x => x.ToDto()).ToArrayAsync(), "Products")
+            };
         }
     }
 }

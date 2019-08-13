@@ -1,3 +1,4 @@
+using KidsToyHive.Core.Interfaces;
 using KidsToyHive.Domain.DataAccess;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -21,14 +22,19 @@ namespace KidsToyHive.Domain.Features.DigitalAssets
         public class Handler : IRequestHandler<Request, Response>
         {
             private readonly IAppDbContext _context;
+            private readonly ICache _cache;
 
-            public Handler(IAppDbContext context) => _context = context;
+            public Handler(IAppDbContext context, ICache cache)
+            {
+                _context = context;
+                _cache = cache;
+            }
 
             public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
             {
                 return new Response()
                 {
-                    DigitalAsset = (await _context.DigitalAssets.SingleAsync(x => x.Name == request.Name)).ToDto()
+                    DigitalAsset = (await _cache.FromCacheOrServiceAsync(() => _context.DigitalAssets.SingleAsync(x => x.Name == request.Name),request.Name)).ToDto()
                 };
             }
         }

@@ -1,6 +1,9 @@
 :host {
     display: block;
     min-height: 410px;
-    margin: 35px 0px;
+    margin: 0px 0px 35px;
     background-image: url('https://kidstoyhive.azurewebsites.net/api/digitalassets/serve/file/Hero1.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center center;
 }

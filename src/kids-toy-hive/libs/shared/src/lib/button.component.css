@@ -1,18 +1,18 @@
 :host {
-    display: inline-block;
+    background-color: default;
     border: solid 3px;
-    background-color: rgb(255,255,255);
     border-color: rgb(104,41,0);
-    height: 50px;
-    line-height: 50px;
-    border-radius: 5px;
+    border-radius: 5px;    
     color:rgb(104,41,0);
-    margin: 20px;
-    font-size: 20px;
-    font-weight: 600;
     cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 600;        
+    height: 50px;
+    line-height: 50px;        
+    margin: 20px;
+    max-width: 300px;
+    min-width: 150px;
     text-align: center;
     user-select: none;
-    max-width: 300px;
-    min-width: 200px;
 }

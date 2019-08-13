@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -8,6 +8,9 @@ import { Subject } from 'rxjs';
 })
 export class HowItWorksComponent implements OnDestroy  { 
   public onDestroy: Subject<void> = new Subject<void>();
+  
+  @Output()
+  public callToActionClick: EventEmitter<any> = new EventEmitter();
 
   ngOnDestroy() {
     this.onDestroy.next();	
