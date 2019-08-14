@@ -6,22 +6,44 @@
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center center;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 3fr 2fr;
     
 }   
 
 div {
     display: grid;
-    grid-template-rows: 2fr 1fr;
+    grid-template-rows: 1fr 100px;
     grid-column: 2;
     background-color: rgba(255,255,255,0.6);
     margin:0;
     padding:0;
     width: 100%;
+    align-items: center;
+    justify-items: center;
 }
 
 kth-button {
     background-color: rgba(255,255,255,0.6);
     margin:0 auto;
     grid-row: 2;
+}
+
+p {
+    margin: 0 auto;
+    font-weight: 600;
+    font-size: 18px;
+    color: rgb(104,41,0);
+}
+
+@media screen and (min-width: 768px) {
+    p {
+        margin: 0 auto;
+        font-weight: 600;
+        font-size: 24px;
+        color: rgb(104,41,0);
+    }
+
+    div {
+        grid-template-rows: 1fr 140px;
+    }
 }

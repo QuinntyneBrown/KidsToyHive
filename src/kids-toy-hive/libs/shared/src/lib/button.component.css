@@ -6,13 +6,28 @@
     color:rgb(104,41,0);
     cursor: pointer;
     display: inline-block;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 600;        
-    height: 50px;
-    line-height: 50px;        
-    margin: 20px;
-    max-width: 300px;
-    min-width: 150px;
+    height: 40px;
+    line-height: 40px;        
+    margin: 15px;
+    max-width: 200px;
+    min-width: 100px;
     text-align: center;
     user-select: none;
+}
+
+span {
+    display: inline-block;
+    padding: 0px 20px;
+}
+@media screen and (min-width: 768px) {
+    :host {
+        font-size: 20px;      
+        height: 50px;
+        line-height: 50px;        
+        margin: 20px;
+        max-width: 300px;
+        min-width: 150px;
+    }
 }

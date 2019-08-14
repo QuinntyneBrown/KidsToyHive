@@ -1,3 +1,7 @@
+:host {
+    display: block;
+    margin:0px 0px 35px;
+}
 
 @media screen and (min-width: 768px) {
     .grid {
@@ -20,8 +24,9 @@
 a,a:visited,a:link {
     color: black;
     text-decoration: none;
-    margin: 0 20px 0 0;
+    margin: 0 10px 0 10px;
     cursor: default;
+    width:100%;
 }
 
 ul,li {
@@ -31,6 +36,7 @@ ul,li {
     padding: 0;
     position: relative;
     display: inline-block;
+    text-align: center;
 }
 
 ul {

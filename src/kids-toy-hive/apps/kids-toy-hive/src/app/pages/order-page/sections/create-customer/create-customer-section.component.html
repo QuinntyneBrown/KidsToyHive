@@ -1,24 +1,36 @@
-<h3>Create Account So We Can Deliver You Your Toys</h3>
+<h3>Create an Account So We Can Deliver You Your Toys</h3>
 
 <form novalidate autocomplete="off" spellcheck="false" [formGroup]='form' >
     <div class='field'>
         <label>First Name:</label>
-        <input type='text' formControlName="firstName" />
+        <input id='firstName' type='text' formControlName="firstName" required />
+        <div class='field-error' *ngIf="!form.pristine && firstName.errors && firstName.errors.required">
+                First Name is required.
+        </div>
     </div>
     
     <div class='field'>
         <label>Last Name:</label>
         <input type='text' formControlName="lastName" />
+        <div class='field-error' *ngIf="!form.pristine && lastName.errors && lastName.errors.required">
+                Last Name is required.
+        </div>        
     </div>
     
     <div class='field'>
         <label>Email:</label>
         <input type='text' formControlName="email" />
+        <div class='field-error' *ngIf="!form.pristine && email.errors && email.errors.required">
+                Email is required.
+        </div>        
     </div>
     
     <div class='field'>
         <label>Phone Number:</label>
         <input type='text' formControlName="phoneNumber" />
+        <div class='field-error' *ngIf="!form.pristine && phoneNumber.errors && phoneNumber.errors.required">
+                Phone Number is required.
+        </div>        
     </div>
     
     <kth-button [text]='"Next"' (click)='tryToSaveCustomer(form.value)' ></kth-button>

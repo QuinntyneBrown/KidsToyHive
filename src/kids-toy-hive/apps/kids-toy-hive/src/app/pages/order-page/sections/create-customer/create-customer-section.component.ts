@@ -58,19 +58,32 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
   }
 
   public tryToSaveCustomer(customer:any) {
-    this._customerService.create({ customer})
-    .pipe(takeUntil(this.onDestroy),map(x => {
-      if(isProblemDetails(x)) {
-        this.errorMessage = 'An account exist with this email. Sign in with the existing account.'
-      } else {
-        this._localStorageService.put({ name: accessTokenKey, value: (<any>x).accessToken });
-        this._router.navigateByUrl('/order/step/2');
-        this._authService.isAuthenticatedChanged$.next(true);
-      }
 
-    }))
-    .subscribe();    
+    if(this.form.valid) {
+      this._customerService.create({ customer})
+      .pipe(takeUntil(this.onDestroy),map(x => {
+        
+        if(isProblemDetails(x)) {
+          this.errorMessage = 'An account exist with this email. Sign in with the existing account.'
+        } 
+        else 
+        {
+          this._localStorageService.put({ name: accessTokenKey, value: (<any>x).accessToken });
+          this._router.navigateByUrl('/order/step/2');
+          this._authService.isAuthenticatedChanged$.next(true);
+        }
+      }))
+      .subscribe();    
+    }
   }
+
+  get firstName() { return this.form.get('firstName'); }
+
+  get lastName() { return this.form.get('lastName'); }
+
+  get email() { return this.form.get('email'); }
+
+  get phoneNumber() { return this.form.get('phoneNumber'); }
 
   ngOnDestroy() { this.onDestroy.next();	}
 }
