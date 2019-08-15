@@ -4,21 +4,33 @@
     <div class='field'>
         <label>Credit Card Number:</label>
         <input type='text' formControlName="number" (focus)='errorMessage=""' />
+        <div class='field-error' *ngIf="!form.pristine && number.errors && number.errors.required">
+                Credit Card Number is required.
+        </div>
     </div>
     
     <div class='field'>
         <label>Expiry Month:</label>
         <input type='text' formControlName="expMonth" (focus)='errorMessage=""'/>
+        <div class='field-error' *ngIf="!form.pristine && expMonth.errors && expMonth.errors.required">
+                Expiry Month is required.
+        </div>
     </div>
     
     <div class='field'>
         <label>Expiry Year:</label>
         <input type='text' formControlName="expYear" (focus)='errorMessage=""'/>
+        <div class='field-error' *ngIf="!form.pristine && expYear.errors && expYear.errors.required">
+                Expiry Year is required.
+        </div>
     </div>
     
     <div class='field'>
         <label>Cvc:</label>
         <input type='text' formControlName="cvc" (focus)='errorMessage=""'/>
+        <div class='field-error' *ngIf="!form.pristine && cvc.errors && cvc.errors.required">
+                Cvc is required.
+        </div>
     </div>
     
     <kth-button [text]='"Next"' (click)='tryToCheckout(form.value)' ></kth-button>

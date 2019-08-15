@@ -13,8 +13,9 @@ namespace KidsToyHive.Domain.Models
         public string PhoneNumber { get; set; }
         public ICollection<CustomerLocation> CustomerLocations { get; set; }
             = new HashSet<CustomerLocation>();
-
         public ICollection<Booking> Bookings { get; set; }
-        = new HashSet<Booking>();
+            = new HashSet<Booking>();
+        public ICollection<CustomerTermsAndConditions> CustomerTermsAndConditions { get; set; }
+            = new HashSet<CustomerTermsAndConditions>();
     }
 }

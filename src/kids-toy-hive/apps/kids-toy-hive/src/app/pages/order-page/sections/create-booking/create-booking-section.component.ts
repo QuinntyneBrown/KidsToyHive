@@ -115,5 +115,17 @@ export class CreateBookingSectionComponent implements OnInit, OnDestroy  {
     .subscribe();    
   }
 
+  get date() { return this.form.get('date'); }
+
+  get bookingTimeSlot() { return this.form.get('bookingTimeSlot'); }
+
+  get street() { return this.form.get('street'); }
+
+  get city() { return this.form.get('city'); }
+
+  get province() { return this.form.get('province'); }
+
+  get postalCode() { return this.form.get('postalCode'); }
+
   ngOnDestroy() { this.onDestroy.next();	}
 }

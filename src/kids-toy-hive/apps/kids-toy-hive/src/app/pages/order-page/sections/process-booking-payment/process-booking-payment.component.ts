@@ -78,4 +78,12 @@ export class ProcessBookingPaymentComponent implements OnInit, OnDestroy  {
     }))
     .subscribe(); 
   }
+
+  get number() { return this.form.get('number'); }
+
+  get expMonth() { return this.form.get('expMonth'); }
+
+  get expYear() { return this.form.get('expYear'); }
+
+  get cvc() { return this.form.get('cvc'); }
 }

@@ -5,7 +5,7 @@
 h3 {
     display: inline-block;
     position: relative;
-    margin: 20px auto;
+    margin: 20px 20px 40px;
     width: 100%;
     text-align: center;
 }
@@ -21,6 +21,13 @@ form {
     display: grid;
     grid-template-columns: 150px 1fr;    
     margin: 0px 20px 15px;
+}
+
+.field-error {
+    grid-column: 2;    
+    color: red;
+    font-size: .75em;
+    line-height: 2em;
 }
 
 input, label, select {
@@ -42,3 +49,8 @@ kth-button {
     margin: 0 auto;
 }
 
+@media screen and (min-width: 768px) {
+    h3 {
+        margin: 20px auto 40px;
+    }
+}

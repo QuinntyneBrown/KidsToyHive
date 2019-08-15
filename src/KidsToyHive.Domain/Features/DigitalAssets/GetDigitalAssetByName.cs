@@ -34,7 +34,7 @@ namespace KidsToyHive.Domain.Features.DigitalAssets
             {
                 return new Response()
                 {
-                    DigitalAsset = (await _cache.FromCacheOrServiceAsync(() => _context.DigitalAssets.SingleAsync(x => x.Name == request.Name),request.Name)).ToDto()
+                    DigitalAsset = (await _cache.FromCacheOrServiceAsync(() => _context.DigitalAssets.SingleAsync(x => x.Name == request.Name), request.Name)).ToDto()
                 };
             }
         }

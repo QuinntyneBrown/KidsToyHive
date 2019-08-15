@@ -41,6 +41,7 @@ namespace UnitTests.Api
                 Assert.NotNull(context.Products.Single(x => x.Name == "Jungle Jumparoo"));
                 Assert.NotNull(context.Warehouses.Single(x => x.Name == "DefaultWarehouse"));
                 Assert.NotNull(context.InventoryItems.Include(x => x.Product).Single(x => x.Product.Name == "Jungle Jumparoo"));
+                Assert.Equal(3,context.DigitalAssets.Where(x => x.Name.Contains("Hero")).Count());
             }
         }
 

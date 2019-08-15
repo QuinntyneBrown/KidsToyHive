@@ -31,6 +31,7 @@ namespace KidsToyHive.Domain.Features.Customers
         [AllowAnonymous]
         public class Request : Command<Response> {
             public CustomerDto Customer { get; set; }
+            public bool AcceptedTermsAndConditions { get; set; }
             public override IEnumerable<string> SideEffects => new string[] { "Customer" };
         }
 

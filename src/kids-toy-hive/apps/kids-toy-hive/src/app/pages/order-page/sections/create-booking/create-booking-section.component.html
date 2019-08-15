@@ -5,6 +5,9 @@
         <label>Date:</label>
         <input type='text' (blur)='handleBookingDateChange()' [matDatepicker]="picker" (focus)="picker.open()" formControlName="date" (focus)='errorMessage=""' />      
         <mat-datepicker #picker></mat-datepicker>
+        <div class='field-error' *ngIf="!form.pristine && date.errors && date.errors.required">
+                Date is required.
+        </div>
     </div>
 
     <div class='field'>
@@ -14,26 +17,41 @@
             {{ slot.name }}
             </option>
         </select>
+        <div class='field-error' *ngIf="!form.pristine && bookingTimeSlot.errors && bookingTimeSlot.errors.required">
+                Selected TimeSlot is required.
+        </div>
     </div>
 
     <div class='field'>
         <label>Street:</label>
         <input type='text' formControlName="street" (focus)='errorMessage=""'/>
+        <div class='field-error' *ngIf="!form.pristine && street.errors && street.errors.required">
+                Street is required.
+        </div>
     </div>
     
     <div class='field'>
         <label>City:</label>
         <input type='text' formControlName="city" (focus)='errorMessage=""'/>
+        <div class='field-error' *ngIf="!form.pristine && city.errors && city.errors.required">
+                City is required.
+        </div>
     </div>
     
     <div class='field'>
         <label>Province:</label>
         <input type='text' formControlName="province" (focus)='errorMessage=""'/>
+        <div class='field-error' *ngIf="!form.pristine && province.errors && province.errors.required">
+                Province is required.
+        </div>
     </div>
     
     <div class='field'>
         <label>Postal Code:</label>
         <input type='text' formControlName="postalCode" (focus)='errorMessage=""' />
+        <div class='field-error' *ngIf="!form.pristine && postalCode.errors && postalCode.errors.required">
+                Postal Code is required.
+        </div>
     </div>
 
     <kth-button [text]='"Next"' (click)='tryToCreateBooking(form.value)' ></kth-button>
