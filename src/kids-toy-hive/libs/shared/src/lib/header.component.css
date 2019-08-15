@@ -1,73 +1,53 @@
 :host {
     background-color: rgb(233, 165, 50);
-    width: 100%;
-    display: block;
-}
-
-kth-hamburger-button, img {
+    color: rgb(255,255,255);
+    display: flex;
     line-height: 80px;
+    margin: 0 auto;
+    max-width: 1140px;
+    min-height: 80px;        
+    padding: 0;            
 }
 
-img {
-    margin: 10px 0 0;
+a, a:link, a:visited {
+    border-radius: 5px;
+    color: white;    
     cursor: pointer;
+    line-height: 60px;
+    margin: 0px;
+    padding: 8px 20px;
+    text-decoration: none;    
+}
+
+.active-link {
+    font-weight: 600;
+}
+
+a:hover {
+    background-color: rgba(0,0,0,.075);
+}
+
+kth-hamburger-button { 
+    margin: 0 20px;
 }
 
 ul {
     display: none;
+    margin:0;
+    list-style-type: none;
+    justify-content: flex-end;
+    min-height: 80px;
+    line-height: 80px;
+    margin: 0px 20px 0px 0px;  
+    width: 100%;      
 }
 
-section {
-    background-color: rgb(233, 165, 50);
-    min-height: 80px;
-    display: grid;
-    margin: 0;
-    padding: 0;
-    line-height: 80px;
-    color: rgb(255,255,255);
-    grid-template-columns: 60px 1fr min-content;
-    max-width: 1140px;
-    margin: 0 auto;
+img { 
+    cursor: pointer;
 }
 
 @media screen and (min-width: 768px) {
-    h1 {
-        margin:0 0 0 20px;
-        padding: 0;
-        line-height: 60px;
-    }
-
-    ul,li {
-        margin: 0;
-        padding: 0;
-        position: relative;
-        display: inline;
-    }
-
     ul {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        min-height: 80px;
-        line-height: 80px;
-        margin: 0px 20px 0px 0px;
+        display: flex;    
     }
-
-    a, a:link, a:visited {
-        padding: 8px 20px;
-        cursor: pointer;
-        margin: 0px;
-        color: white;
-        text-decoration: none;
-        line-height: 60px;
-        border-radius: 5px;
-    }
-
-    .active-link {
-        font-weight: 600;
-    }
-
-    a:hover {
-        background-color: rgba(0,0,0,.075);
-    }
-
 }

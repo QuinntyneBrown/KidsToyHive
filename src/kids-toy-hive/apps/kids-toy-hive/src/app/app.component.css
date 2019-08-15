@@ -4,8 +4,13 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.header-container {
+    background-color: rgb(233, 165, 50);
+    width: 100%;
+}
+
 @media screen and (min-width: 768px) {
-    div {
+    .content-container {
         max-width: 1140px;
         margin: 35px auto 35px;
     }

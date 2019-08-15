@@ -1,12 +1,11 @@
-<section>
-    <kth-hamburger-button (click)='menuClick.emit()'></kth-hamburger-button>
 
-    <img [src]='imageUrl' width='300' (click)='logoClick.emit()' />
+<kth-hamburger-button (click)='menuClick.emit()'></kth-hamburger-button>
 
-    <ul *ngIf='!hideNavigation'>
-        <li><a [routerLink]="['/home']" routerLinkActive="active-link">Home</a></li>
-        <li><a [routerLink]="['/toys']" routerLinkActive="active-link">Toys</a></li>
-        <li><a [routerLink]="['/about']" routerLinkActive="active-link">About</a></li>
-        <li><a [routerLink]="['/legal']" routerLinkActive="active-link">Legal</a></li>
-    </ul>
-</section>
+<img [src]='imageUrl' width='300' (click)='logoClick.emit()' />
+
+<ul *ngIf='!hideNavigation'>
+    <li><a [routerLink]="['/home']" routerLinkActive="active-link">Home</a></li>
+    <li><a [routerLink]="['/toys']" routerLinkActive="active-link">Toys</a></li>
+    <li><a [routerLink]="['/about']" routerLinkActive="active-link">About</a></li>
+    <li><a [routerLink]="['/legal']" routerLinkActive="active-link">Legal</a></li>
+</ul>
