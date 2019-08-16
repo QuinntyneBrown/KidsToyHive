@@ -2,11 +2,16 @@
     background-color: rgb(233, 165, 50);
     color: rgb(255,255,255);
     display: flex;
-    line-height: 80px;
     margin: 0 auto;
     max-width: 1140px;
-    min-height: 80px;        
+    height: 80px;        
     padding: 0;            
+}
+
+img {
+    width: auto;
+    height: auto;
+    max-width: calc(100vw - 74px);
 }
 
 a, a:link, a:visited {
@@ -28,7 +33,8 @@ a:hover {
 }
 
 kth-hamburger-button { 
-    margin: 0 20px;
+    margin: 0 10px;
+    line-height: 80px;
 }
 
 ul {
@@ -46,8 +52,22 @@ img {
     cursor: pointer;
 }
 
+@media screen and (min-width: 576px) {
+    img {
+        width: auto;
+        height: auto;
+        max-height: 80px;
+        max-width: 386px;
+    }
+}
+
+
 @media screen and (min-width: 768px) {
     ul {
         display: flex;    
+    }
+
+    kth-hamburger-button { 
+        margin: 0 20px;
     }
 }
