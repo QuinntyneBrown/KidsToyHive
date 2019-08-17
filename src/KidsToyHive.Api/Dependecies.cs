@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using KidsToyHive.Api.Filters;
+using KidsToyHive.Api.HealthChecks;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Core.Interfaces;
 using KidsToyHive.Core.Services;
@@ -49,6 +50,9 @@ namespace KidsToyHive.Api
 
             services.AddTransient<IPaymentProcessor, PaymentProcessor>();
             services.AddTransient<IEmailDeliveryService, EmailDeliveryService>();
+
+            services.AddHealthChecks()
+            .AddCheck<SystemMemoryHealthcheck>("Memory");
 
             services.AddSwaggerGen(options =>
             {

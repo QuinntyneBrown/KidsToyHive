@@ -4,6 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using KidsToyHive.Api.Middleware;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using System.Collections.Generic;
 
 namespace KidsToyHive.Api
 {
@@ -45,6 +47,9 @@ namespace KidsToyHive.Api
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Kids Toy Hive Api");
                 options.RoutePrefix = string.Empty;
             });
+            var options = new HealthCheckOptions();
+
+            app.UseHealthChecks("/hc");
 
             app.UseHttpsRedirection();
             app.UseRouting();
