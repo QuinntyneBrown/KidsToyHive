@@ -4,7 +4,6 @@ using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

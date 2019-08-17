@@ -38,7 +38,8 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
     firstName: new FormControl(null, [Validators.required]),
     lastName: new FormControl(null, [Validators.required]),
     phoneNumber: new FormControl(null, [Validators.required]),
-    email: new FormControl(null, [Validators.required, Validators.email])
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    acceptedTermsAndConditions: new FormControl(null,[Validators.required])
   });
 
   constructor(
@@ -60,7 +61,7 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
   public tryToSaveCustomer(customer:any) {
 
     if(this.form.valid) {
-      this._customerService.create({ customer})
+      this._customerService.create({ customer, acceptedTermsAndConditions: this.form.value.acceptedTermsAndConditions })
       .pipe(takeUntil(this.onDestroy),map(x => {
         
         if(isProblemDetails(x)) {
@@ -84,6 +85,8 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
   get email() { return this.form.get('email'); }
 
   get phoneNumber() { return this.form.get('phoneNumber'); }
+
+  get acceptedTermsAndConditions() { return this.form.get('acceptedTermsAndConditions'); }
 
   ngOnDestroy() { this.onDestroy.next();	}
 }

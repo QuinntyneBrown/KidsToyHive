@@ -6,6 +6,7 @@
         InvalidUsernameOrPassword,
         Concurrency,
         CustomerExistsWithEmail,
+        CustomerFailedToAcceptTermsAndConditions,
         OutOfStock,
         Payment
     }

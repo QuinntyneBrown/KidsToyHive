@@ -67,10 +67,21 @@ namespace KidsToyHive.Domain.Features.Customers
                     if (await _context.Customers.AnyAsync(x => x.Email == request.Customer.Email))
                         throw new CustomerExistsWithEmailException();
 
+                    if (!request.AcceptedTermsAndConditions)
+                        throw new CustomerFailedToAcceptTermsAndConditionsException();
+
                     customer = new Customer();
+                    
+                    customer.CustomerTermsAndConditions.Add(new CustomerTermsAndConditions
+                    {
+                        Accepted = DateTime.UtcNow
+                    });
+
                     customer.RaiseDomainEvent(new CustomerCreated(customer));
                     _context.Customers.Add(customer);
                 }
+
+                
 
                 customer.FirstName = request.Customer.FirstName;
                 customer.LastName = request.Customer.LastName;

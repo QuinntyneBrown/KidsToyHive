@@ -57,7 +57,8 @@ namespace UnitTests.Domain.Features.Customers
                 });
 
                 var result = await upsertCustomerHandler.Handle(new UpsertCustomer.Request {
-                    Customer = customer
+                    Customer = customer,
+                    AcceptedTermsAndConditions = true
                 }, default);
 
                 var persistedCustomer = context.Customers

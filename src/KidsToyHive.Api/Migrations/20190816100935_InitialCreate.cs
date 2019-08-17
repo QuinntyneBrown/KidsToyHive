@@ -328,6 +328,25 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CustomerTermsAndConditions",
+                columns: table => new
+                {
+                    CustomerTermsAndConditionsId = table.Column<Guid>(nullable: false),
+                    CustomerId = table.Column<Guid>(nullable: false),
+                    Accepted = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CustomerTermsAndConditions", x => x.CustomerTermsAndConditionsId);
+                    table.ForeignKey(
+                        name: "FK_CustomerTermsAndConditions_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "CustomerId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bookings",
                 columns: table => new
                 {
@@ -946,6 +965,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CustomerTermsAndConditions_CustomerId",
+                table: "CustomerTermsAndConditions",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DashboardCards_DashboardId",
                 table: "DashboardCards",
                 column: "DashboardId");
@@ -1092,6 +1116,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "CustomerLocations");
+
+            migrationBuilder.DropTable(
+                name: "CustomerTermsAndConditions");
 
             migrationBuilder.DropTable(
                 name: "DashboardCards");

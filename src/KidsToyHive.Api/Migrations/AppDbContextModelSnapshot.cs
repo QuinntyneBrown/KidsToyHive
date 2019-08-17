@@ -255,6 +255,22 @@ namespace KidsToyHive.Api.Migrations
                     b.ToTable("CustomerLocations");
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.CustomerTermsAndConditions", b =>
+                {
+                    b.Property<Guid>("CustomerTermsAndConditionsId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Accepted");
+
+                    b.Property<Guid>("CustomerId");
+
+                    b.HasKey("CustomerTermsAndConditionsId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("CustomerTermsAndConditions");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.Dashboard", b =>
                 {
                     b.Property<Guid>("DashboardId")
@@ -1035,6 +1051,15 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.CustomerTermsAndConditions", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Customer", "Customer")
+                        .WithMany("CustomerTermsAndConditions")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Dashboard", b =>

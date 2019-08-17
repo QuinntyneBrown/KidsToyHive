@@ -1,4 +1,6 @@
-<kth-header [imageUrl]='imageUrl' (menuClick)='handleMenuClick()' [hideNavigation]='true'></kth-header>
+<div class='header-container'>
+    <kth-header [imageUrl]='imageUrl' (menuClick)='handleMenuClick()' [hideNavigation]='true'></kth-header>
+</div>
 
 <kth-menu [isAuthenticated]='isAuthenticated' (signOut)='signOut()' (signIn)='signIn()' (navigateToUrl)='navigateByUrl($event)' [isMobile]='isMobile'>
     

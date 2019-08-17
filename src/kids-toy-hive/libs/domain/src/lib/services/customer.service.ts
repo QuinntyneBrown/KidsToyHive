@@ -36,12 +36,12 @@ export class CustomerService {
     });
   }
 
-  public create(options: { customer: Customer }): Observable<{ customerId: string, version: number, accessToken: string } | ProblemDetails> {
+  public create(options: { customer: Customer, acceptedTermsAndConditions: boolean }): Observable<{ customerId: string, version: number, accessToken: string } | ProblemDetails> {
     return this._client.post<{ 
       customerId: string, 
       version: number, 
       accessToken: string
-    }>(`${this._baseUrl}api/commands`, { customer: options.customer }, {
+    }>(`${this._baseUrl}api/commands`, { customer: options.customer, acceptedTermsAndConditions: options.acceptedTermsAndConditions }, {
       headers: {
         "OperationId":"UpsertCustomer"
       }
