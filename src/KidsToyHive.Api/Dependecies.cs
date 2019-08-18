@@ -40,7 +40,7 @@ namespace KidsToyHive.Api
             services.AddHttpContextAccessor();
             services.AddSingleton<ICommandRegistry, CommandRegistry>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
-            services.AddSingleton<ICache, MemoryCache>();
+            services.AddSingleton<ICache, InMemoryCache>();
             services.AddSingleton<IPasswordHasher, PasswordHasher>();
             services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
             services.AddTransient<IEmailService, EmailService>();

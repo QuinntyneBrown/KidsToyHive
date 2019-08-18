@@ -46,16 +46,13 @@ namespace KidsToyHive.Domain.Features.Customers
         {
             private readonly IAppDbContext _context;
             private readonly IPasswordHasher _passwordHasher;
-            private readonly IEmailService _emailService;
             private readonly ISecurityTokenFactory _securityTokenFactory;
             public Handler(
                 IAppDbContext context, 
                 IPasswordHasher passwordHasher,
-                IEmailService emailService,
                 ISecurityTokenFactory securityTokenFactory)
             {
                 _context = context;
-                _emailService = emailService;
                 _passwordHasher = passwordHasher;
                 _securityTokenFactory = securityTokenFactory;
             }
@@ -146,9 +143,6 @@ namespace KidsToyHive.Domain.Features.Customers
                 });
 
                 await _context.SaveChangesAsync(cancellationToken);
-
-                if (request.Customer.CustomerId == default)
-                    await _emailService.SendNewCustomer(customer, user);
 
                 return new Response() {
                     CustomerId = customer.CustomerId,

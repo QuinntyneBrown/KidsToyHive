@@ -24,13 +24,12 @@ namespace UnitTests.Domain.Features.Customers
                 .Options;
 
             var mediator = new Mock<IMediator>().Object;
-            var emailSender = new Mock<IEmailService>().Object;
             var passwordHasher = new Mock<IPasswordHasher>().Object;
             var securityTokenFactory = new Mock<ISecurityTokenFactory>().Object;
 
             using (var context = new AppDbContext(options, mediator))
             {
-                var upsertCustomerHandler = new UpsertCustomer.Handler(context,passwordHasher,emailSender,securityTokenFactory);
+                var upsertCustomerHandler = new UpsertCustomer.Handler(context,passwordHasher,securityTokenFactory);
 
                 var address = new AddressDto
                 {

@@ -30,7 +30,7 @@ namespace UnitTests.Domain.Features.Products
 
                 context.SaveChanges();
 
-                var getProductsHandler = new GetProducts.Handler(new MemoryCache(),context);
+                var getProductsHandler = new GetProducts.Handler(new InMemoryCache(),context);
 
                 var result = await getProductsHandler.Handle(new GetProducts.Request { }, default);
 
