@@ -149,7 +149,7 @@ namespace KidsToyHive.Domain.Features.Customers
                     Version = customer.Version,
                     AccessToken = _securityTokenFactory.Create(user.Username,new List<Claim>() {
                         new Claim("UserId", $"{user.UserId}"),
-                        new Claim("PartitionKey", $"{user.TenantKey}"),
+                        new Claim("PartitionKey", $"{user.TenantId}"),
                         new Claim($"{nameof(customer.CustomerId)}",$"{customer.CustomerId}"),
                         new Claim(ClaimTypes.Role, nameof(ProfileType.Customer)),
                         new Claim("CurrentUserName",$"{user.Username}")

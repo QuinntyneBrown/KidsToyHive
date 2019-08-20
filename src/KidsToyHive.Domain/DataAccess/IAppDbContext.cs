@@ -39,6 +39,7 @@ namespace KidsToyHive.Domain.DataAccess
         DbSet<Signature> Signatures { get; }
         DbSet<Survey> Surveys { get; }
         DbSet<Tax> Taxes { get; }
+        DbSet<Tenant> Tenants { get; }
         DbSet<User> Users { get; }
         DbSet<Video> Videos { get; }
         DbSet<Warehouse> Warehouses { get; }

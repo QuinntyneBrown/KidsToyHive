@@ -8,22 +8,6 @@ namespace KidsToyHive.Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Brands",
-                columns: table => new
-                {
-                    BrandId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Brands", x => x.BrandId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "CardLayouts",
                 columns: table => new
                 {
@@ -35,63 +19,6 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CardLayouts", x => x.CardLayoutId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cards",
-                columns: table => new
-                {
-                    CardId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cards", x => x.CardId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Contacts",
-                columns: table => new
-                {
-                    ContactId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    FullName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Contacts", x => x.ContactId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    CustomerId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Address_Street = table.Column<string>(nullable: true),
-                    Address_City = table.Column<string>(nullable: true),
-                    Address_Province = table.Column<string>(nullable: true),
-                    Address_PostalCode = table.Column<string>(nullable: true),
-                    Address_Latitude = table.Column<double>(nullable: true),
-                    Address_Longitude = table.Column<double>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
                 });
 
             migrationBuilder.CreateTable(
@@ -122,44 +49,6 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HtmlContents",
-                columns: table => new
-                {
-                    HtmlContentId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_HtmlContents", x => x.HtmlContentId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Locations",
-                columns: table => new
-                {
-                    LocationId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Adddress_Street = table.Column<string>(nullable: true),
-                    Adddress_City = table.Column<string>(nullable: true),
-                    Adddress_Province = table.Column<string>(nullable: true),
-                    Adddress_PostalCode = table.Column<string>(nullable: true),
-                    Adddress_Latitude = table.Column<double>(nullable: true),
-                    Adddress_Longitude = table.Column<double>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Type = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Locations", x => x.LocationId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "ProductCategories",
                 columns: table => new
                 {
@@ -173,24 +62,6 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProfessionalServiceProviders",
-                columns: table => new
-                {
-                    ProfessionalServiceProviderId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    FullName = table.Column<string>(nullable: true),
-                    ImageUrl = table.Column<string>(nullable: true),
-                    Type = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProfessionalServiceProviders", x => x.ProfessionalServiceProviderId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Roles",
                 columns: table => new
                 {
@@ -201,22 +72,6 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.RoleId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SalesOrders",
-                columns: table => new
-                {
-                    SalesOrderId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Cost = table.Column<float>(nullable: false),
-                    Status = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SalesOrders", x => x.SalesOrderId);
                 });
 
             migrationBuilder.CreateTable(
@@ -234,11 +89,216 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tenants",
+                columns: table => new
+                {
+                    TenantId = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tenants", x => x.TenantId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Brands",
+                columns: table => new
+                {
+                    BrandId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brands", x => x.BrandId);
+                    table.ForeignKey(
+                        name: "FK_Brands_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cards",
+                columns: table => new
+                {
+                    CardId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cards", x => x.CardId);
+                    table.ForeignKey(
+                        name: "FK_Cards_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Contacts",
+                columns: table => new
+                {
+                    ContactId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    FullName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contacts", x => x.ContactId);
+                    table.ForeignKey(
+                        name: "FK_Contacts_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Customers",
+                columns: table => new
+                {
+                    CustomerId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Address_Street = table.Column<string>(nullable: true),
+                    Address_City = table.Column<string>(nullable: true),
+                    Address_Province = table.Column<string>(nullable: true),
+                    Address_PostalCode = table.Column<string>(nullable: true),
+                    Address_Latitude = table.Column<double>(nullable: true),
+                    Address_Longitude = table.Column<double>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
+                    table.ForeignKey(
+                        name: "FK_Customers_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "HtmlContents",
+                columns: table => new
+                {
+                    HtmlContentId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HtmlContents", x => x.HtmlContentId);
+                    table.ForeignKey(
+                        name: "FK_HtmlContents_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Locations",
+                columns: table => new
+                {
+                    LocationId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Adddress_Street = table.Column<string>(nullable: true),
+                    Adddress_City = table.Column<string>(nullable: true),
+                    Adddress_Province = table.Column<string>(nullable: true),
+                    Adddress_PostalCode = table.Column<string>(nullable: true),
+                    Adddress_Latitude = table.Column<double>(nullable: true),
+                    Adddress_Longitude = table.Column<double>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Locations", x => x.LocationId);
+                    table.ForeignKey(
+                        name: "FK_Locations_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProfessionalServiceProviders",
+                columns: table => new
+                {
+                    ProfessionalServiceProviderId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    FullName = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Type = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProfessionalServiceProviders", x => x.ProfessionalServiceProviderId);
+                    table.ForeignKey(
+                        name: "FK_ProfessionalServiceProviders_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SalesOrders",
+                columns: table => new
+                {
+                    SalesOrderId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Cost = table.Column<float>(nullable: false),
+                    Status = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SalesOrders", x => x.SalesOrderId);
+                    table.ForeignKey(
+                        name: "FK_SalesOrders_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Surveys",
                 columns: table => new
                 {
                     SurveyId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true)
@@ -246,6 +306,12 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Surveys", x => x.SurveyId);
+                    table.ForeignKey(
+                        name: "FK_Surveys_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -253,7 +319,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     TaxId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     Rate = table.Column<double>(nullable: false),
@@ -263,6 +329,12 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Taxes", x => x.TaxId);
+                    table.ForeignKey(
+                        name: "FK_Taxes_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -270,7 +342,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     Username = table.Column<string>(nullable: true),
@@ -281,6 +353,12 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -288,7 +366,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     VideoId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     Category = table.Column<string>(nullable: true),
@@ -305,6 +383,51 @@ namespace KidsToyHive.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Videos", x => x.VideoId);
+                    table.ForeignKey(
+                        name: "FK_Videos_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    BrandId = table.Column<Guid>(nullable: true),
+                    ProductCategoryId = table.Column<Guid>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Price = table.Column<int>(nullable: false),
+                    ChargePeriodPrice = table.Column<int>(nullable: false),
+                    Type = table.Column<byte>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "BrandId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_ProductCategories_ProductCategoryId",
+                        column: x => x.ProductCategoryId,
+                        principalTable: "ProductCategories",
+                        principalColumn: "ProductCategoryId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -351,7 +474,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     BookingId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     CustomerId = table.Column<Guid>(nullable: false),
@@ -378,6 +501,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Locations",
                         principalColumn: "LocationId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Bookings_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -385,7 +514,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     CustomerLocationId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     CustomerId = table.Column<Guid>(nullable: false),
@@ -407,6 +536,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Locations",
                         principalColumn: "LocationId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CustomerLocations_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -414,7 +549,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     DriverId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     FirstName = table.Column<string>(nullable: true),
@@ -432,6 +567,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Locations",
                         principalColumn: "LocationId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Drivers_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -439,7 +580,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     WarehouseId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -454,38 +595,11 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Locations",
                         principalColumn: "LocationId",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    ProductId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    BrandId = table.Column<Guid>(nullable: true),
-                    ProductCategoryId = table.Column<Guid>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
-                    Price = table.Column<int>(nullable: false),
-                    ChargePeriodPrice = table.Column<int>(nullable: false),
-                    Type = table.Column<byte>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
                     table.ForeignKey(
-                        name: "FK_Products_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
-                        principalColumn: "BrandId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Products_ProductCategories_ProductCategoryId",
-                        column: x => x.ProductCategoryId,
-                        principalTable: "ProductCategories",
-                        principalColumn: "ProductCategoryId",
+                        name: "FK_Warehouses_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -514,7 +628,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     QuestionId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     SurveyId = table.Column<Guid>(nullable: true),
@@ -533,6 +647,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Surveys",
                         principalColumn: "SurveyId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Question_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -540,7 +660,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     SurveyResultId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     SurveyId = table.Column<Guid>(nullable: true),
@@ -554,6 +674,12 @@ namespace KidsToyHive.Api.Migrations
                         column: x => x.SurveyId,
                         principalTable: "Surveys",
                         principalColumn: "SurveyId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SurveyResult_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -581,11 +707,88 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductImage",
+                columns: table => new
+                {
+                    ProductImageId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    DigitalAssetId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImage", x => x.ProductImageId);
+                    table.ForeignKey(
+                        name: "FK_ProductImage_DigitalAssets_DigitalAssetId",
+                        column: x => x.DigitalAssetId,
+                        principalTable: "DigitalAssets",
+                        principalColumn: "DigitalAssetId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductImage_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductImage_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookingDetails",
+                columns: table => new
+                {
+                    BookingDetailId = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    Version = table.Column<int>(nullable: false),
+                    Quantity = table.Column<int>(nullable: false),
+                    ProductId = table.Column<Guid>(nullable: false),
+                    LocationId = table.Column<Guid>(nullable: true),
+                    Cost = table.Column<int>(nullable: false),
+                    BookingId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookingDetails", x => x.BookingDetailId);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_Bookings_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "Bookings",
+                        principalColumn: "BookingId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_Locations_LocationId",
+                        column: x => x.LocationId,
+                        principalTable: "Locations",
+                        principalColumn: "LocationId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookingDetails_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Shipments",
                 columns: table => new
                 {
                     ShipmentId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     TrackingNumber = table.Column<string>(nullable: true),
@@ -618,6 +821,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Signatures",
                         principalColumn: "SignatureId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Shipments_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -625,7 +834,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     BinId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
@@ -635,6 +844,12 @@ namespace KidsToyHive.Api.Migrations
                 {
                     table.PrimaryKey("PK_Bins", x => x.BinId);
                     table.ForeignKey(
+                        name: "FK_Bins_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Bins_Warehouses_WarehouseId",
                         column: x => x.WarehouseId,
                         principalTable: "Warehouses",
@@ -643,76 +858,11 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookingDetails",
-                columns: table => new
-                {
-                    BookingDetailId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false),
-                    LocationId = table.Column<Guid>(nullable: true),
-                    Cost = table.Column<int>(nullable: false),
-                    BookingId = table.Column<Guid>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BookingDetails", x => x.BookingDetailId);
-                    table.ForeignKey(
-                        name: "FK_BookingDetails_Bookings_BookingId",
-                        column: x => x.BookingId,
-                        principalTable: "Bookings",
-                        principalColumn: "BookingId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_BookingDetails_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "LocationId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_BookingDetails_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProductImage",
-                columns: table => new
-                {
-                    ProductImageId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
-                    Created = table.Column<DateTime>(nullable: false),
-                    Version = table.Column<int>(nullable: false),
-                    ProductId = table.Column<Guid>(nullable: false),
-                    DigitalAssetId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductImage", x => x.ProductImageId);
-                    table.ForeignKey(
-                        name: "FK_ProductImage_DigitalAssets_DigitalAssetId",
-                        column: x => x.DigitalAssetId,
-                        principalTable: "DigitalAssets",
-                        principalColumn: "DigitalAssetId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductImage_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "ProductId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Option",
                 columns: table => new
                 {
                     OptionId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     QuestionId = table.Column<Guid>(nullable: true),
@@ -727,6 +877,12 @@ namespace KidsToyHive.Api.Migrations
                         column: x => x.QuestionId,
                         principalTable: "Question",
                         principalColumn: "QuestionId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Option_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -783,7 +939,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     ShipmentItemId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     ShipmentId = table.Column<Guid>(nullable: false),
@@ -801,6 +957,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "Shipments",
                         principalColumn: "ShipmentId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ShipmentItems_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -829,7 +991,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     InventoryItemId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     ProductId = table.Column<Guid>(nullable: false),
@@ -854,6 +1016,12 @@ namespace KidsToyHive.Api.Migrations
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_InventoryItems_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_InventoryItems_Warehouses_WarehouseId",
                         column: x => x.WarehouseId,
                         principalTable: "Warehouses",
@@ -866,7 +1034,7 @@ namespace KidsToyHive.Api.Migrations
                 columns: table => new
                 {
                     ResponseId = table.Column<Guid>(nullable: false),
-                    TenantKey = table.Column<Guid>(nullable: false),
+                    TenantId = table.Column<Guid>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     Version = table.Column<int>(nullable: false),
                     OptionId = table.Column<Guid>(nullable: true),
@@ -895,6 +1063,12 @@ namespace KidsToyHive.Api.Migrations
                         principalTable: "SurveyResult",
                         principalColumn: "SurveyResultId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Response_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "TenantId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -920,6 +1094,11 @@ namespace KidsToyHive.Api.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bins_TenantId",
+                table: "Bins",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bins_WarehouseId",
                 table: "Bins",
                 column: "WarehouseId");
@@ -940,6 +1119,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BookingDetails_TenantId",
+                table: "BookingDetails",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_CustomerId",
                 table: "Bookings",
                 column: "CustomerId");
@@ -950,9 +1134,29 @@ namespace KidsToyHive.Api.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookings_TenantId",
+                table: "Bookings",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Brands_TenantId",
+                table: "Brands",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cards_TenantId",
+                table: "Cards",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ContactMessages_ContactId",
                 table: "ContactMessages",
                 column: "ContactId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contacts_TenantId",
+                table: "Contacts",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CustomerLocations_CustomerId",
@@ -963,6 +1167,16 @@ namespace KidsToyHive.Api.Migrations
                 name: "IX_CustomerLocations_LocationId",
                 table: "CustomerLocations",
                 column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CustomerLocations_TenantId",
+                table: "CustomerLocations",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_TenantId",
+                table: "Customers",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CustomerTermsAndConditions_CustomerId",
@@ -985,6 +1199,16 @@ namespace KidsToyHive.Api.Migrations
                 column: "LocationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Drivers_TenantId",
+                table: "Drivers",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HtmlContents_TenantId",
+                table: "HtmlContents",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InventoryItems_BinId",
                 table: "InventoryItems",
                 column: "BinId");
@@ -995,14 +1219,29 @@ namespace KidsToyHive.Api.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InventoryItems_TenantId",
+                table: "InventoryItems",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InventoryItems_WarehouseId",
                 table: "InventoryItems",
                 column: "WarehouseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Locations_TenantId",
+                table: "Locations",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Option_QuestionId",
                 table: "Option",
                 column: "QuestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Option_TenantId",
+                table: "Option",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductImage_DigitalAssetId",
@@ -1015,6 +1254,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductImage_TenantId",
+                table: "ProductImage",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
@@ -1025,6 +1269,16 @@ namespace KidsToyHive.Api.Migrations
                 column: "ProductCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_TenantId",
+                table: "Products",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProfessionalServiceProviders_TenantId",
+                table: "ProfessionalServiceProviders",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Profiles_UserId",
                 table: "Profiles",
                 column: "UserId");
@@ -1033,6 +1287,11 @@ namespace KidsToyHive.Api.Migrations
                 name: "IX_Question_SurveyId",
                 table: "Question",
                 column: "SurveyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Question_TenantId",
+                table: "Question",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Response_OptionId",
@@ -1050,9 +1309,19 @@ namespace KidsToyHive.Api.Migrations
                 column: "SurveyResultId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Response_TenantId",
+                table: "Response",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SalesOrderDetails_SalesOrderId",
                 table: "SalesOrderDetails",
                 column: "SalesOrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SalesOrders_TenantId",
+                table: "SalesOrders",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShipmentBookings_BookingId",
@@ -1070,6 +1339,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "ShipmentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ShipmentItems_TenantId",
+                table: "ShipmentItems",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Shipments_DriverId",
                 table: "Shipments",
                 column: "DriverId");
@@ -1085,6 +1359,11 @@ namespace KidsToyHive.Api.Migrations
                 column: "SignatureId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Shipments_TenantId",
+                table: "Shipments",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ShipmentSalesOrders_ShipmentId",
                 table: "ShipmentSalesOrders",
                 column: "ShipmentId");
@@ -1095,9 +1374,39 @@ namespace KidsToyHive.Api.Migrations
                 column: "SurveyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SurveyResult_TenantId",
+                table: "SurveyResult",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Surveys_TenantId",
+                table: "Surveys",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Taxes_TenantId",
+                table: "Taxes",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_TenantId",
+                table: "Users",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Videos_TenantId",
+                table: "Videos",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Warehouses_LocationId",
                 table: "Warehouses",
                 column: "LocationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Warehouses_TenantId",
+                table: "Warehouses",
+                column: "TenantId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -1224,6 +1533,9 @@ namespace KidsToyHive.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "Locations");
+
+            migrationBuilder.DropTable(
+                name: "Tenants");
         }
     }
 }

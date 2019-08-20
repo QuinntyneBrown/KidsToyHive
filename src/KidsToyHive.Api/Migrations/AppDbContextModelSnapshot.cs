@@ -28,13 +28,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.Property<Guid>("WarehouseId");
 
                     b.HasKey("BinId");
+
+                    b.HasIndex("TenantId");
 
                     b.HasIndex("WarehouseId");
 
@@ -64,7 +66,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<byte>("Status");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
@@ -73,6 +75,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("LocationId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Bookings");
                 });
@@ -94,7 +98,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<int>("Quantity");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
@@ -105,6 +109,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("LocationId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("BookingDetails");
                 });
@@ -120,11 +126,13 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("BrandId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Brands");
                 });
@@ -140,11 +148,13 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("CardId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Cards");
                 });
@@ -178,11 +188,13 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("ContactId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Contacts");
                 });
@@ -220,11 +232,13 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("CustomerId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Customers");
                 });
@@ -242,7 +256,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
@@ -251,6 +265,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("LocationId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("CustomerLocations");
                 });
@@ -346,13 +362,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("PhoneNumber");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("DriverId");
 
                     b.HasIndex("LocationId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Drivers");
                 });
@@ -380,13 +398,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<string>("Value");
 
                     b.Property<int>("Version");
 
                     b.HasKey("HtmlContentId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("HtmlContents");
                 });
@@ -406,7 +426,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<int>("Quantity");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
@@ -417,6 +437,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("BinId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("TenantId");
 
                     b.HasIndex("WarehouseId");
 
@@ -432,13 +454,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Type");
 
                     b.Property<int>("Version");
 
                     b.HasKey("LocationId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Locations");
                 });
@@ -456,13 +480,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid?>("QuestionId");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("OptionId");
 
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Option");
                 });
@@ -486,7 +512,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid?>("ProductCategoryId");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<byte>("Type");
 
@@ -497,6 +523,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("BrandId");
 
                     b.HasIndex("ProductCategoryId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Products");
                 });
@@ -526,7 +554,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid>("ProductId");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
@@ -535,6 +563,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("DigitalAssetId");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("ProductImage");
                 });
@@ -550,7 +580,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("ImageUrl");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<string>("Title");
 
@@ -559,6 +589,8 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<int>("Version");
 
                     b.HasKey("ProfessionalServiceProviderId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("ProfessionalServiceProviders");
                 });
@@ -606,13 +638,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid?>("SurveyId");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("QuestionId");
 
                     b.HasIndex("SurveyId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Question");
                 });
@@ -630,7 +664,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid?>("SurveyResultId");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<string>("Value");
 
@@ -643,6 +677,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("QuestionId");
 
                     b.HasIndex("SurveyResultId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Response");
                 });
@@ -672,11 +708,13 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("SalesOrderId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("SalesOrders");
                 });
@@ -716,7 +754,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<int>("Status");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<double>("TotalWeight");
 
@@ -733,6 +771,8 @@ namespace KidsToyHive.Api.Migrations
                     b.HasIndex("LocationId");
 
                     b.HasIndex("SignatureId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Shipments");
                 });
@@ -776,13 +816,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid>("ShipmentId");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("ShipmentItemId");
 
                     b.HasIndex("ShipmentId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("ShipmentItems");
                 });
@@ -832,11 +874,13 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("SurveyId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Surveys");
                 });
@@ -852,13 +896,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<Guid?>("SurveyId");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
                     b.HasKey("SurveyResultId");
 
                     b.HasIndex("SurveyId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("SurveyResult");
                 });
@@ -874,7 +920,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<double>("Rate");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<byte>("Type");
 
@@ -882,7 +928,21 @@ namespace KidsToyHive.Api.Migrations
 
                     b.HasKey("TaxId");
 
+                    b.HasIndex("TenantId");
+
                     b.ToTable("Taxes");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Tenant", b =>
+                {
+                    b.Property<Guid>("TenantId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("TenantId");
+
+                    b.ToTable("Tenants");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.User", b =>
@@ -898,13 +958,15 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<byte[]>("Salt");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<string>("Username");
 
                     b.Property<int>("Version");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Users");
                 });
@@ -932,7 +994,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("SubTitle");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<string>("Title");
 
@@ -941,6 +1003,8 @@ namespace KidsToyHive.Api.Migrations
                     b.Property<string>("YouTubeVideoId");
 
                     b.HasKey("VideoId");
+
+                    b.HasIndex("TenantId");
 
                     b.ToTable("Videos");
                 });
@@ -956,7 +1020,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<Guid>("TenantKey");
+                    b.Property<Guid?>("TenantId");
 
                     b.Property<int>("Version");
 
@@ -964,11 +1028,17 @@ namespace KidsToyHive.Api.Migrations
 
                     b.HasIndex("LocationId");
 
+                    b.HasIndex("TenantId");
+
                     b.ToTable("Warehouses");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Bin", b =>
                 {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
                     b.HasOne("KidsToyHive.Domain.Models.Warehouse", "Warehouse")
                         .WithMany("Bins")
                         .HasForeignKey("WarehouseId")
@@ -987,6 +1057,10 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
                         .WithMany("Bookings")
                         .HasForeignKey("LocationId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.BookingDetail", b =>
@@ -1004,6 +1078,31 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Brand", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Card", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Contact", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.ContactMessage", b =>
@@ -1015,6 +1114,10 @@ namespace KidsToyHive.Api.Migrations
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Customer", b =>
                 {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
                     b.OwnsOne("KidsToyHive.Domain.Models.Address", "Address", b1 =>
                         {
                             b1.Property<Guid>("CustomerId");
@@ -1051,6 +1154,10 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.CustomerTermsAndConditions", b =>
@@ -1085,6 +1192,17 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.HtmlContent", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.InventoryItem", b =>
@@ -1099,6 +1217,10 @@ namespace KidsToyHive.Api.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
                     b.HasOne("KidsToyHive.Domain.Models.Warehouse", "Warehouse")
                         .WithMany("InventoryItems")
                         .HasForeignKey("WarehouseId");
@@ -1106,6 +1228,10 @@ namespace KidsToyHive.Api.Migrations
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Location", b =>
                 {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+
                     b.OwnsOne("KidsToyHive.Domain.Models.Address", "Adddress", b1 =>
                         {
                             b1.Property<Guid>("LocationId");
@@ -1136,6 +1262,10 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Question", "Question")
                         .WithMany("Options")
                         .HasForeignKey("QuestionId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Product", b =>
@@ -1147,6 +1277,10 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.ProductCategory", "ProductCategory")
                         .WithMany()
                         .HasForeignKey("ProductCategoryId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.ProductImage", b =>
@@ -1162,6 +1296,17 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.ProfessionalServiceProvider", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Profile", b =>
@@ -1178,6 +1323,10 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Survey", "Survey")
                         .WithMany("Questions")
                         .HasForeignKey("SurveyId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Response", b =>
@@ -1193,6 +1342,17 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.SurveyResult", null)
                         .WithMany("Responses")
                         .HasForeignKey("SurveyResultId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.SalesOrder", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.SalesOrderDetail", b =>
@@ -1219,6 +1379,10 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("SignatureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.ShipmentBooking", b =>
@@ -1241,6 +1405,10 @@ namespace KidsToyHive.Api.Migrations
                         .HasForeignKey("ShipmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.ShipmentSalesOrder", b =>
@@ -1252,11 +1420,43 @@ namespace KidsToyHive.Api.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Survey", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
             modelBuilder.Entity("KidsToyHive.Domain.Models.SurveyResult", b =>
                 {
                     b.HasOne("KidsToyHive.Domain.Models.Survey", "Survey")
                         .WithMany("SurveyResults")
                         .HasForeignKey("SurveyId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Tax", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.User", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
+                });
+
+            modelBuilder.Entity("KidsToyHive.Domain.Models.Video", b =>
+                {
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 
             modelBuilder.Entity("KidsToyHive.Domain.Models.Warehouse", b =>
@@ -1264,6 +1464,10 @@ namespace KidsToyHive.Api.Migrations
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
                         .WithMany()
                         .HasForeignKey("LocationId");
+
+                    b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
+                        .WithMany()
+                        .HasForeignKey("TenantId");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,6 +8,8 @@ using System.Text;
 
 namespace KidsToyHive.Core.Identity
 {
+    // Builder pattern? https://github.com/QuinntyneBrown/grandnode/blob/develop/Grand.Api/Jwt/JwtTokenBuilder.cs
+
     public class SecurityTokenFactory : ISecurityTokenFactory
     {
         private IConfiguration _configuration;
@@ -16,7 +18,7 @@ namespace KidsToyHive.Core.Identity
             => _configuration = configuration;
 
         public string Create(string username, List<Claim> additionalClaims = default)
-        {            
+        {
             var claims = new List<Claim> { new Claim(ClaimTypes.Name, username) };
 
             if(additionalClaims != default) claims.AddRange(additionalClaims);

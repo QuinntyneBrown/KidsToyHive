@@ -23,7 +23,7 @@ namespace KidsToyHive.Domain.Features.Bookings
 
         public class Request : Command<Response> {
             public string Number { get; set; }
-            public long? ExpMonth { get; set; }
+            public long ExpMonth { get; set; }
             public int ExpYear { get; set; }
             public string Cvc { get; set; }
             public int Value { get; set; }
@@ -43,7 +43,7 @@ namespace KidsToyHive.Domain.Features.Bookings
             private readonly IEmailService _emailService;
             private readonly IPaymentProcessor _paymentProcessor;
 
-            public Handler(IAppDbContext context, IPaymentProcessor paymentProcessor, IEmailService emailService)
+            public Handler(IAppDbContext context, IEmailService emailService, IPaymentProcessor paymentProcessor)
             {
                 _context = context;
                 _emailService = emailService;

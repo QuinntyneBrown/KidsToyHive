@@ -72,7 +72,7 @@ namespace KidsToyHive.Domain.Features.Users
                 var claims = new List<Claim>
                 {
                     new Claim("UserId", $"{user.UserId}"),
-                    new Claim("PartitionKey", $"{user.TenantKey}"),
+                    new Claim("PartitionKey", $"{user.TenantId}"),
                     new Claim("CurrentUserName", $"{user.Username}")
                 };
 
