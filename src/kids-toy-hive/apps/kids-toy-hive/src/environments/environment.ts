@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"https://kidstoyhive.azurewebsites.net/"
+  baseUrl:"http://localhost:52114/"
 };
 
 /*

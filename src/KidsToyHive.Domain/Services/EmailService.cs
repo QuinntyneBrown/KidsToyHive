@@ -43,7 +43,7 @@ namespace KidsToyHive.Domain.Services
 
         public async Task SendBookingConfirmation(Booking booking)
         {
-            var mailMessage = await _emailBuilder.Build(EmailTemplateName.NewCustomer, new Dictionary<string, string>() {
+            var mailMessage = await _emailBuilder.Build(EmailTemplateName.BookingConfirmation, new Dictionary<string, string>() {
                 { "{{ bookingDate }}",booking.Date.ToLongDateString() }
             });
             mailMessage.Subject = "Booking Confirmation";
