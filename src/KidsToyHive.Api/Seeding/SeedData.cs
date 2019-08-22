@@ -30,6 +30,7 @@ namespace KidsToyHive.Api
             DigitalAssetConfiguration.Seed(context);
             EmailTemplateConfiguration.Seed(context);
             VideoConfiguration.Seed(context);
+            ProfessionalServiceProviderConfiguration.Seed(context);
             //DashboardConfiguration.Seed(context);
         }
 
@@ -56,6 +57,24 @@ namespace KidsToyHive.Api
             }
         }
 
+        internal class ProfessionalServiceProviderConfiguration
+        {
+            public static void Seed(AppDbContext context)
+            {
+                var tenant = context.Tenants.Single(x => x.Name == "Code With QB");
+
+                if (context.ProfessionalServiceProviders.SingleOrDefault(x => x.FullName == "Quinntyne Brown") == null)
+                    context.ProfessionalServiceProviders.Add(new ProfessionalServiceProvider()
+                    {
+                        FullName = "Quinntyne Brown",
+                        Title = "Architect and Senior Software Engineer",
+                        ImageUrl = "https://avatars0.githubusercontent.com/u/1749159?s=400&u=b36e138431ef4f0a383e51eef90248ad07066b28&v=4",
+                        TenantId = tenant.TenantId
+                    });
+
+                context.SaveChanges();
+            }
+        }
         internal class VideoConfiguration
         {
             public static void Seed(AppDbContext context)

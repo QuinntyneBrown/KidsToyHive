@@ -17,6 +17,8 @@ namespace KidsToyHive.Domain.Features.ProfessionalServiceProviders
     {        
         public Guid ProfessionalServiceProviderId { get; set; }
         public string FullName { get; set; }
+        public string Title { get; set; }
+        public string ImageUrl { get; set; }
         public int Version { get; set; }
     }
 
@@ -27,6 +29,8 @@ namespace KidsToyHive.Domain.Features.ProfessionalServiceProviders
             {
                 ProfessionalServiceProviderId = professionalServiceProvider.ProfessionalServiceProviderId,
                 FullName = professionalServiceProvider.FullName,
+                Title = professionalServiceProvider.Title,
+                ImageUrl = professionalServiceProvider.ImageUrl,
                 Version = professionalServiceProvider.Version
             };
     }
