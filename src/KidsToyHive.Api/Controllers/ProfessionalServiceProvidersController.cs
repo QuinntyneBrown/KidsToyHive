@@ -30,7 +30,7 @@ namespace KidsToyHive.Api.Controllers
         [AllowAnonymous]
         [HttpGet("name/{fullName}")]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(GetProfessionalServiceProviderById.Response), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(GetProfessionalServiceProviderByName.Response), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<GetProfessionalServiceProviderByName.Response>> GetByName([FromRoute]GetProfessionalServiceProviderByName.Request request)
             => await _meditator.Send(request);
 
