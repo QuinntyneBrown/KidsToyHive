@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"https://kidstoyhive.z27.web.core.windows.net/"
+  baseUrl:"https://kidstoyhive.azurewebsites.net/"
 };
 
 /*

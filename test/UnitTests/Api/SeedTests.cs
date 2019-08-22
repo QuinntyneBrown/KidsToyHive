@@ -27,7 +27,8 @@ namespace UnitTests.Api
                 .AddInMemoryCollection(new List<KeyValuePair<string, string>>() {
                                 new KeyValuePair<string, string>("Seed:DefaultProfile:Name", "Name"),
                                 new KeyValuePair<string, string>("Seed:DefaultUser:Password", ""),
-                                new KeyValuePair<string, string>("Seed:DefaultUser:Username", "Username")
+                                new KeyValuePair<string, string>("Seed:DefaultUser:Username", "Username"),
+                                new KeyValuePair<string, string>("Seed:DefaultTenants", "The Kids Toy Hive|00000000-0000-0000-0000-000000000000")
                 })
                 .Build();
 

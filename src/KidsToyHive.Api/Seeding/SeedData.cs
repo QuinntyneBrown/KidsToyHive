@@ -37,13 +37,20 @@ namespace KidsToyHive.Api
         {
             public static void Seed(AppDbContext context, IConfiguration configuration)
             {
-                if (context.Tenants.SingleOrDefault(x => x.Name == "The Kids Toy Hive") == null)
-                    context.Tenants.Add(new Tenant()
-                    {
-                        Name = "The Kids Toy Hive",
-                        TenantId = new Guid("05d3ce2b-f0a0-4905-b5cf-d788fe9eec72")
+                var tenantInfos = configuration["Seed:DefaultTenants"].Split(',');
 
-                    });
+                foreach(var tenantInfo in tenantInfos)
+                {
+                    var tenantId = new Guid(tenantInfo.Split('|')[1]);
+                    var name = tenantInfo.Split('|')[0];
+
+                    if (context.Tenants.SingleOrDefault(x => x.Name == name) == null)
+                        context.Tenants.Add(new Tenant()
+                        {
+                            Name = name,
+                            TenantId = tenantId
+                        });
+                }
 
                 context.SaveChanges();
             }
