@@ -6,7 +6,7 @@
 </mat-toolbar>
 <mat-sidenav-container>
     <mat-sidenav #drawer class="sidenav" mode="side">
-        <button mat-button i18n>Logout</button>
+        <button mat-button i18n (click)='tryToLogout()'>Logout</button>
     </mat-sidenav>
     <mat-sidenav-content>
       <div class="router-outlet-container">

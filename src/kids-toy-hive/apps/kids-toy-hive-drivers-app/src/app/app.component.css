@@ -2,3 +2,7 @@
     display: block;
     width: 300px;
 }
+
+.router-outlet-container {
+    min-height: calc(100vh - 64px);
+}
