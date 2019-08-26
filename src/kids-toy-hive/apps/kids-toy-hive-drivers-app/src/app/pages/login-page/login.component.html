@@ -1,7 +1,4 @@
 <mat-card>
-    <section class="mat-typography">
-      <h2>Drivers App</h2>
-    </section>
     <mat-card-title>
       Login
     </mat-card-title>
@@ -14,6 +11,6 @@
         <input matInput placeholder='Password' id="password" formControlName="password" type="password" required>
       </mat-form-field>
   
-      <button mat-raised-button color="primary" (click)="tryToLogin({ value: this.form.value })" [disabled]="!form.valid">Submit</button>
+      <button mat-raised-button color="primary" (click)="login.emit({ value: this.form.value })" [disabled]="!form.valid">Submit</button>
     </form>
   </mat-card>
