@@ -14,10 +14,9 @@ export class YourOrderComponent {
   public product: Product;
 
   public get price():number {
-    if(this.yourOrderService.bookingTimeSlot$.value > 1) {
+    if(this.yourOrderService.bookingTimeSlot$.value > 1)
       return 250;
-    } else {
-      return 135;
-    }
+      
+    return 135;    
   }
 }

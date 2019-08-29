@@ -36,7 +36,7 @@
     <div class='checkbox'>
         <input id='accept-terms-and-conditions-checkbox' type='checkbox' formControlName="acceptedTermsAndConditions" />
         <label for='accept-terms-and-conditions-checkbox'>I have read and accept terms and conditions</label>               
-        <div class='field-error' *ngIf="!form.pristine && phoneNumber.errors && acceptedTermsAndConditions.errors.required">
+        <div class='field-error' *ngIf="!form.pristine && acceptedTermsAndConditions.errors && acceptedTermsAndConditions.errors.required">
                 Please Accept Terms and Conditions
         </div>       
     </div>    
