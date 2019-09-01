@@ -51,6 +51,8 @@ namespace KidsToyHive.Domain.Features.Bookings
                 shipment.ShipmentBookings.Add(shippingBooking);
 
                 await _context.Shipments.AddAsync(shipment);
+
+                await _context.SaveChangesAsync(cancellationToken);
             }
         }
     }

@@ -746,11 +746,11 @@ namespace KidsToyHive.Api.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<Guid>("DriverId");
+                    b.Property<Guid?>("DriverId");
 
                     b.Property<Guid?>("LocationId");
 
-                    b.Property<Guid>("SignatureId");
+                    b.Property<Guid?>("SignatureId");
 
                     b.Property<int>("Status");
 
@@ -1366,9 +1366,7 @@ namespace KidsToyHive.Api.Migrations
                 {
                     b.HasOne("KidsToyHive.Domain.Models.Driver", "Driver")
                         .WithMany("Shipments")
-                        .HasForeignKey("DriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DriverId");
 
                     b.HasOne("KidsToyHive.Domain.Models.Location", "Location")
                         .WithMany()
@@ -1376,9 +1374,7 @@ namespace KidsToyHive.Api.Migrations
 
                     b.HasOne("KidsToyHive.Domain.Models.Signature", "Signature")
                         .WithMany()
-                        .HasForeignKey("SignatureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SignatureId");
 
                     b.HasOne("KidsToyHive.Domain.Models.Tenant", "Tenant")
                         .WithMany()

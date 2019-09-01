@@ -1,6 +1,7 @@
 using KidsToyHive.Core.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KidsToyHive.Domain.Models
 {
@@ -9,11 +10,14 @@ namespace KidsToyHive.Domain.Models
         public Guid ShipmentId { get; set; }        
         public string TrackingNumber { get; set; }
         public double TotalWeight { get; set; }
-        public Guid DriverId { get; set; }
-        public Guid? LocationId { get; set; }             
-        public Guid SignatureId { get; set; }
-        public Driver Driver { get; set; }
-        public Location Location { get; set; }
+        [ForeignKey("Driver")]
+        public Guid? DriverId { get; set; }
+        [ForeignKey("Location")]
+        public Guid? LocationId { get; set; }
+        [ForeignKey("Signature")]
+        public Guid? SignatureId { get; set; }        
+        public Driver Driver { get; set; }        
+        public Location Location { get; set; }        
         public Signature Signature { get; set; }        
         public string Comment { get; set; }
         public ShipmentType Type { get; set; } = ShipmentType.Delivery;

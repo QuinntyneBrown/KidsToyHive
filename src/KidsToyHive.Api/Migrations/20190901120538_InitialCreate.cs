@@ -793,9 +793,9 @@ namespace KidsToyHive.Api.Migrations
                     Version = table.Column<int>(nullable: false),
                     TrackingNumber = table.Column<string>(nullable: true),
                     TotalWeight = table.Column<double>(nullable: false),
-                    DriverId = table.Column<Guid>(nullable: false),
+                    DriverId = table.Column<Guid>(nullable: true),
                     LocationId = table.Column<Guid>(nullable: true),
-                    SignatureId = table.Column<Guid>(nullable: false),
+                    SignatureId = table.Column<Guid>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
                     Type = table.Column<byte>(nullable: false),
                     Status = table.Column<int>(nullable: false)
@@ -808,7 +808,7 @@ namespace KidsToyHive.Api.Migrations
                         column: x => x.DriverId,
                         principalTable: "Drivers",
                         principalColumn: "DriverId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Shipments_Locations_LocationId",
                         column: x => x.LocationId,
@@ -820,7 +820,7 @@ namespace KidsToyHive.Api.Migrations
                         column: x => x.SignatureId,
                         principalTable: "Signatures",
                         principalColumn: "SignatureId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Shipments_Tenants_TenantId",
                         column: x => x.TenantId,

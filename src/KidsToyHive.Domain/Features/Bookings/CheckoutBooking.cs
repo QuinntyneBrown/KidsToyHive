@@ -2,6 +2,7 @@ using FluentValidation;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Common;
 using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -77,6 +78,8 @@ namespace KidsToyHive.Domain.Features.Bookings
                 await _context.SaveChangesAsync(cancellationToken);
 
                 await _emailService.SendBookingConfirmation(booking);
+
+                booking.RaiseDomainEvent(new BookingCreated(booking));
 
                 return new Response() {
                     BookingId = booking.BookingId,

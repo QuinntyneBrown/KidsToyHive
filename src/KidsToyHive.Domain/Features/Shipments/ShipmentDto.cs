@@ -21,9 +21,9 @@ namespace KidsToyHive.Domain.Features.Shipments
         public Guid ShipmentId { get; set; }
         public string TrackingNumber { get; set; }
         public double TotalWeight { get; set; }
-        public Guid DriverId { get; set; }
+        public Guid? DriverId { get; set; }
         public Guid? LocationId { get; set; }
-        public Guid SignatureId { get; set; }
+        public Guid? SignatureId { get; set; }
         public Driver Driver { get; set; }
         public Location Location { get; set; }
         public Signature Signature { get; set; }
