@@ -1,7 +1,10 @@
 :host {
-    margin: 0;
-    padding: 0;
+    display: grid;
     font-family: Arial, Helvetica, sans-serif;
+    grid-template-rows: 80px 1fr 368px;
+    height: 100%;
+    margin: 0;
+    padding: 0;    
 }
 
 .header-container {
