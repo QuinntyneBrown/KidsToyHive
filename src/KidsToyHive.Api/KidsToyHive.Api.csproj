@@ -22,6 +22,7 @@
     <None Remove="Seeding\DigitalAssets\Quinntyne.jpeg" />
     <None Remove="Seeding\Emails\BookingConfirmationEmail.html" />
     <None Remove="Seeding\Emails\NewCustomerEmail.html" />
+    <None Remove="Seeding\Emails\NewOrderEmail.html" />
     <None Remove="Seeding\HtmlContent\About.html" />
     <None Remove="Seeding\HtmlContent\TermsAndConditions.html" />
   </ItemGroup>
@@ -36,6 +37,7 @@
     <EmbeddedResource Include="Seeding\DigitalAssets\JungleJumparoo4.jpeg" />
     <EmbeddedResource Include="Seeding\DigitalAssets\KidsToyHiveLogo.png" />
     <EmbeddedResource Include="Seeding\DigitalAssets\Quinntyne.jpeg" />
+    <EmbeddedResource Include="Seeding\Emails\NewOrderEmail.html" />
     <EmbeddedResource Include="Seeding\Emails\NewCustomerEmail.html" />
     <EmbeddedResource Include="Seeding\Emails\BookingConfirmationEmail.html" />
     <EmbeddedResource Include="Seeding\HtmlContent\About.html" />
