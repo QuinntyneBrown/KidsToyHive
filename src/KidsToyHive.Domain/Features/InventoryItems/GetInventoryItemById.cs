@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.InventoryItems;
 
-public class GetInventoryItemById
-{
-    public class Request : IRequest<Response>
-    {
-        public Guid InventoryItemId { get; set; }
-    }
-    public class Response
-    {
-        public InventoryItemDto InventoryItem { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                InventoryItem = (await _context.InventoryItems.FindAsync(request.InventoryItemId)).ToDto()
-            };
-    }
-}
+ public class GetInventoryItemByIdRequest : IRequest<GetInventoryItemByIdResponse>
+ {
+     public Guid InventoryItemId { get; set; }
+ }
+ public class GetInventoryItemByIdResponse
+ {
+     public InventoryItemDto InventoryItem { get; set; }
+ }
+ public class GetInventoryItemByIdHandler : IRequestHandler<GetInventoryItemByIdRequest, GetInventoryItemByIdResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetInventoryItemByIdHandler(IAppDbContext context) => _context = context;
+     public async Task<GetInventoryItemByIdResponse> Handle(GetInventoryItemByIdRequest request, CancellationToken cancellationToken)
+         => new GetInventoryItemByIdResponse()
+         {
+             InventoryItem = (await _context.InventoryItems.FindAsync(request.InventoryItemId)).ToDto()
+         };
+ }

@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Roles;
 
-public class GetRoles
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<RoleDto> Roles { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Roles = await _context.Roles.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetRolesRequest : IRequest<GetRolesResponse> { }
+ public class GetRolesResponse
+ {
+     public IEnumerable<RoleDto> Roles { get; set; }
+ }
+ public class GetRolesHandler : IRequestHandler<GetRolesRequest, GetRolesResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetRolesHandler(IAppDbContext context) => _context = context;
+     public async Task<GetRolesResponse> Handle(GetRolesRequest request, CancellationToken cancellationToken)
+         => new GetRolesResponse()
+         {
+             Roles = await _context.Roles.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

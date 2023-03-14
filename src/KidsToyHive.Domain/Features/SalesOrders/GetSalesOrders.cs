@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.SalesOrders;
 
-public class GetSalesOrders
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<SalesOrderDto> SalesOrders { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                SalesOrders = await _context.SalesOrders.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetSalesOrdersRequest : IRequest<GetSalesOrdersResponse> { }
+ public class GetSalesOrdersResponse
+ {
+     public IEnumerable<SalesOrderDto> SalesOrders { get; set; }
+ }
+ public class GetSalesOrdersHandler : IRequestHandler<GetSalesOrdersRequest, GetSalesOrdersResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetSalesOrdersHandler(IAppDbContext context) => _context = context;
+     public async Task<GetSalesOrdersResponse> Handle(GetSalesOrdersRequest request, CancellationToken cancellationToken)
+         => new GetSalesOrdersResponse()
+         {
+             SalesOrders = await _context.SalesOrders.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

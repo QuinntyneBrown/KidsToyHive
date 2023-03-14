@@ -7,32 +7,29 @@ using KidsToyHive.Domain.DataAccess;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 
-public class GetProfileById
-{
-    public class Validator : AbstractValidator<Request>
-    {
-        public Validator()
-        {
-            RuleFor(request => request.ProfileId).NotEqual(0);
-        }
-    }
-    public class Request : IRequest<Response>
-    {
-        public int ProfileId { get; set; }
-    }
-    public class Response
-    {
-        public ProfileDto Profile { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
+ public class Validator : AbstractValidator<Request>
+ {
+     public Validator()
+     {
+         RuleFor(request => request.ProfileId).NotEqual(0);
+     }
+ }
+ public class GetProfileByIdRequest : IRequest<GetProfileByIdResponse>
+ {
+     public int ProfileId { get; set; }
+ }
+ public class GetProfileByIdResponse
+ {
+     public ProfileDto Profile { get; set; }
+ }
+ public class GetProfileByIdHandler : IRequestHandler<GetProfileByIdRequest, GetProfileByIdResponse>
+ {
+     private readonly IAppDbContext _context;
 
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Profile = ProfileDto.FromProfile(await _context.Profiles.FindAsync(request.ProfileId))
-            };
-    }
-}
+     public GetProfileByIdHandler(IAppDbContext context) => _context = context;
+     public async Task<GetProfileByIdResponse> Handle(GetProfileByIdRequest request, CancellationToken cancellationToken)
+         => new GetProfileByIdResponse()
+         {
+             Profile = ProfileDto.FromProfile(await _context.Profiles.FindAsync(request.ProfileId))
+         };
+ }

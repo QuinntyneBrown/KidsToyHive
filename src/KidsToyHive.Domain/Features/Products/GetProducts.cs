@@ -10,29 +10,26 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Products;
 
-public class GetProducts
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<ProductDto> Products { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        private readonly ICache _cache;
-        public Handler(ICache cache, IAppDbContext context)
-        {
-            _context = context;
-            _cache = cache;
-        }
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken) => new Response()
-        {
-            Products = await _cache.FromCacheOrServiceAsync(() => _context.Products
-            .Include(x => x.ProductCategory)
-            .Include(x => x.ProductImages)
-            .ThenInclude(x => x.DigitalAsset)
-            .Select(x => x.ToDto()).ToArrayAsync(), "Products")
-        };
-    }
-}
+ public class GetProductsRequest : IRequest<GetProductsResponse> { }
+ public class GetProductsResponse
+ {
+     public IEnumerable<ProductDto> Products { get; set; }
+ }
+ public class GetProductsHandler : IRequestHandler<GetProductsRequest, GetProductsResponse>
+ {
+     private readonly IAppDbContext _context;
+     private readonly ICache _cache;
+     public GetProductsHandler(ICache cache, IAppDbContext context)
+     {
+         _context = context;
+         _cache = cache;
+     }
+     public async Task<GetProductsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken) => new GetProductsResponse()
+     {
+         Products = await _cache.FromCacheOrServiceAsync(() => _context.Products
+         .Include(x => x.ProductCategory)
+         .Include(x => x.ProductImages)
+         .ThenInclude(x => x.DigitalAsset)
+         .Select(x => x.ToDto()).ToArrayAsync(), "Products")
+     };
+ }

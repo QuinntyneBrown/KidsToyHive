@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ShipmentSalesOrders;
 
-public class GetShipmentSalesOrderById
-{
-    public class Request : IRequest<Response>
-    {
-        public Guid ShipmentSalesOrderId { get; set; }
-    }
-    public class Response
-    {
-        public ShipmentSalesOrderDto ShipmentSalesOrder { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                ShipmentSalesOrder = (await _context.ShipmentSalesOrders.FindAsync(request.ShipmentSalesOrderId)).ToDto()
-            };
-    }
-}
+ public class GetShipmentSalesOrderByIdRequest : IRequest<GetShipmentSalesOrderByIdResponse>
+ {
+     public Guid ShipmentSalesOrderId { get; set; }
+ }
+ public class GetShipmentSalesOrderByIdResponse
+ {
+     public ShipmentSalesOrderDto ShipmentSalesOrder { get; set; }
+ }
+ public class GetShipmentSalesOrderByIdHandler : IRequestHandler<GetShipmentSalesOrderByIdRequest, GetShipmentSalesOrderByIdResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetShipmentSalesOrderByIdHandler(IAppDbContext context) => _context = context;
+     public async Task<GetShipmentSalesOrderByIdResponse> Handle(GetShipmentSalesOrderByIdRequest request, CancellationToken cancellationToken)
+         => new GetShipmentSalesOrderByIdResponse()
+         {
+             ShipmentSalesOrder = (await _context.ShipmentSalesOrders.FindAsync(request.ShipmentSalesOrderId)).ToDto()
+         };
+ }

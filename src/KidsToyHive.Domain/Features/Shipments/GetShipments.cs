@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Shipments;
 
-public class GetShipments
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<ShipmentDto> Shipments { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Shipments = await _context.Shipments.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetShipmentsRequest : IRequest<GetShipmentsResponse> { }
+ public class GetShipmentsResponse
+ {
+     public IEnumerable<ShipmentDto> Shipments { get; set; }
+ }
+ public class GetShipmentsHandler : IRequestHandler<GetShipmentsRequest, GetShipmentsResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetShipmentsHandler(IAppDbContext context) => _context = context;
+     public async Task<GetShipmentsResponse> Handle(GetShipmentsRequest request, CancellationToken cancellationToken)
+         => new GetShipmentsResponse()
+         {
+             Shipments = await _context.Shipments.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

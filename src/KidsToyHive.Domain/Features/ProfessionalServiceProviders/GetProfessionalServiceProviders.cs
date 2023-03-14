@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ProfessionalServiceProviders;
 
-public class GetProfessionalServiceProviders
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<ProfessionalServiceProviderDto> ProfessionalServiceProviders { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                ProfessionalServiceProviders = await _context.ProfessionalServiceProviders.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetProfessionalServiceProvidersRequest : IRequest<GetProfessionalServiceProvidersResponse> { }
+ public class GetProfessionalServiceProvidersResponse
+ {
+     public IEnumerable<ProfessionalServiceProviderDto> ProfessionalServiceProviders { get; set; }
+ }
+ public class GetProfessionalServiceProvidersHandler : IRequestHandler<GetProfessionalServiceProvidersRequest, GetProfessionalServiceProvidersResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetProfessionalServiceProvidersHandler(IAppDbContext context) => _context = context;
+     public async Task<GetProfessionalServiceProvidersResponse> Handle(GetProfessionalServiceProvidersRequest request, CancellationToken cancellationToken)
+         => new GetProfessionalServiceProvidersResponse()
+         {
+             ProfessionalServiceProviders = await _context.ProfessionalServiceProviders.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

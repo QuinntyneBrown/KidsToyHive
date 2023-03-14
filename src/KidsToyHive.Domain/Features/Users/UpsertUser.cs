@@ -8,38 +8,35 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Users;
 
-public class UpsertUser
-{
-    public class Validator : AbstractValidator<Request>
-    {
-        public Validator()
-        {
-            RuleFor(request => request.User).NotNull();
-            RuleFor(request => request.User).SetValidator(new UserDtoValidator());
-        }
-    }
-    public class Request : IRequest<Response>
-    {
-        public UserDto User { get; set; }
-    }
-    public class Response
-    {
-        public Guid UserId { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var user = await _context.Users.FindAsync(request.User.UserId);
-            if (user == null)
-            {
-                user = new User();
-                _context.Users.Add(user);
-            }
-            await _context.SaveChangesAsync(cancellationToken);
-            return new Response() { UserId = user.UserId };
-        }
-    }
-}
+ public class Validator : AbstractValidator<Request>
+ {
+     public Validator()
+     {
+         RuleFor(request => request.User).NotNull();
+         RuleFor(request => request.User).SetValidator(new UserDtoValidator());
+     }
+ }
+ public class UpsertUserRequest : IRequest<UpsertUserResponse>
+ {
+     public UserDto User { get; set; }
+ }
+ public class UpsertUserResponse
+ {
+     public Guid UserId { get; set; }
+ }
+ public class UpsertUserHandler : IRequestHandler<UpsertUserRequest, UpsertUserResponse>
+ {
+     private readonly IAppDbContext _context;
+     public UpsertUserHandler(IAppDbContext context) => _context = context;
+     public async Task<UpsertUserResponse> Handle(UpsertUserRequest request, CancellationToken cancellationToken)
+     {
+         var user = await _context.Users.FindAsync(request.User.UserId);
+         if (user == null)
+         {
+             user = new User();
+             _context.Users.Add(user);
+         }
+         await _context.SaveChangesAsync(cancellationToken);
+         return new UpsertUserResponse() { UserId = user.UserId };
+     }
+ }

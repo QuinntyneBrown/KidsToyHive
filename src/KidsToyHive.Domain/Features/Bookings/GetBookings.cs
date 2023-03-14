@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings;
 
-public class GetBookings
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<BookingDto> Bookings { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Bookings = await _context.Bookings.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetBookingsRequest : IRequest<GetBookingsResponse> { }
+ public class GetBookingsResponse
+ {
+     public IEnumerable<BookingDto> Bookings { get; set; }
+ }
+ public class GetBookingsHandler : IRequestHandler<GetBookingsRequest, GetBookingsResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetBookingsHandler(IAppDbContext context) => _context = context;
+     public async Task<GetBookingsResponse> Handle(GetBookingsRequest request, CancellationToken cancellationToken)
+         => new GetBookingsResponse()
+         {
+             Bookings = await _context.Bookings.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

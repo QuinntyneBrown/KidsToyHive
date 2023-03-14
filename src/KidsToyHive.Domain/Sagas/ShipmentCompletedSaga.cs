@@ -9,20 +9,17 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Sagas;
 
-public class ShipmentCompletedSaga
-{
-    public class Handler : INotificationHandler<ShipmentCompleted>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context)
-        {
-            _context = context;
-        }
-        public Task Handle(ShipmentCompleted notification, CancellationToken cancellationToken)
-        {
-            //TO DO: create pickup shipment if shipment contained bookings
+ public class ShipmentCompletedSagaHandler : INotificationHandler<ShipmentCompleted>
+ {
+     private readonly IAppDbContext _context;
+     public ShipmentCompletedSagaHandler(IAppDbContext context)
+     {
+         _context = context;
+     }
+     public Task Handle(ShipmentCompleted notification, CancellationToken cancellationToken)
+     {
+         //TO DO: create pickup shipment if shipment contained bookings
 
-            throw new NotImplementedException();
-        }
-    }
-}
+         throw new NotImplementedException();
+     }
+ }

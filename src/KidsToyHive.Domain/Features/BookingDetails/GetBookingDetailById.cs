@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.BookingDetails;
 
-public class GetBookingDetailById
-{
-    public class Request : IRequest<Response>
-    {
-        public Guid BookingDetailId { get; set; }
-    }
-    public class Response
-    {
-        public BookingDetailDto BookingDetail { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                BookingDetail = (await _context.BookingDetails.FindAsync(request.BookingDetailId)).ToDto()
-            };
-    }
-}
+ public class GetBookingDetailByIdRequest : IRequest<GetBookingDetailByIdResponse>
+ {
+     public Guid BookingDetailId { get; set; }
+ }
+ public class GetBookingDetailByIdResponse
+ {
+     public BookingDetailDto BookingDetail { get; set; }
+ }
+ public class GetBookingDetailByIdHandler : IRequestHandler<GetBookingDetailByIdRequest, GetBookingDetailByIdResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetBookingDetailByIdHandler(IAppDbContext context) => _context = context;
+     public async Task<GetBookingDetailByIdResponse> Handle(GetBookingDetailByIdRequest request, CancellationToken cancellationToken)
+         => new GetBookingDetailByIdResponse()
+         {
+             BookingDetail = (await _context.BookingDetails.FindAsync(request.BookingDetailId)).ToDto()
+         };
+ }

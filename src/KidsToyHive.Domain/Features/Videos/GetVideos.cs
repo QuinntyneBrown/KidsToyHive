@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Videos;
 
-public class GetVideos
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<VideoDto> Videos { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Videos = await _context.Videos.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetVideosRequest : IRequest<GetVideosResponse> { }
+ public class GetVideosResponse
+ {
+     public IEnumerable<VideoDto> Videos { get; set; }
+ }
+ public class GetVideosHandler : IRequestHandler<GetVideosRequest, GetVideosResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetVideosHandler(IAppDbContext context) => _context = context;
+     public async Task<GetVideosResponse> Handle(GetVideosRequest request, CancellationToken cancellationToken)
+         => new GetVideosResponse()
+         {
+             Videos = await _context.Videos.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

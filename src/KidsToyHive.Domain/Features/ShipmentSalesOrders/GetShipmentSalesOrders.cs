@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ShipmentSalesOrders;
 
-public class GetShipmentSalesOrders
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<ShipmentSalesOrderDto> ShipmentSalesOrders { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                ShipmentSalesOrders = await _context.ShipmentSalesOrders.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetShipmentSalesOrdersRequest : IRequest<GetShipmentSalesOrdersResponse> { }
+ public class GetShipmentSalesOrdersResponse
+ {
+     public IEnumerable<ShipmentSalesOrderDto> ShipmentSalesOrders { get; set; }
+ }
+ public class GetShipmentSalesOrdersHandler : IRequestHandler<GetShipmentSalesOrdersRequest, GetShipmentSalesOrdersResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetShipmentSalesOrdersHandler(IAppDbContext context) => _context = context;
+     public async Task<GetShipmentSalesOrdersResponse> Handle(GetShipmentSalesOrdersRequest request, CancellationToken cancellationToken)
+         => new GetShipmentSalesOrdersResponse()
+         {
+             ShipmentSalesOrders = await _context.ShipmentSalesOrders.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

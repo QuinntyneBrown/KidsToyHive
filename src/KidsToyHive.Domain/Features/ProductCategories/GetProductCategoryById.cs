@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ProductCategories;
 
-public class GetProductCategoryById
-{
-    public class Request : IRequest<Response>
-    {
-        public Guid ProductCategoryId { get; set; }
-    }
-    public class Response
-    {
-        public ProductCategoryDto ProductCategory { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                ProductCategory = (await _context.ProductCategories.FindAsync(request.ProductCategoryId)).ToDto()
-            };
-    }
-}
+ public class GetProductCategoryByIdRequest : IRequest<GetProductCategoryByIdResponse>
+ {
+     public Guid ProductCategoryId { get; set; }
+ }
+ public class GetProductCategoryByIdResponse
+ {
+     public ProductCategoryDto ProductCategory { get; set; }
+ }
+ public class GetProductCategoryByIdHandler : IRequestHandler<GetProductCategoryByIdRequest, GetProductCategoryByIdResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetProductCategoryByIdHandler(IAppDbContext context) => _context = context;
+     public async Task<GetProductCategoryByIdResponse> Handle(GetProductCategoryByIdRequest request, CancellationToken cancellationToken)
+         => new GetProductCategoryByIdResponse()
+         {
+             ProductCategory = (await _context.ProductCategories.FindAsync(request.ProductCategoryId)).ToDto()
+         };
+ }

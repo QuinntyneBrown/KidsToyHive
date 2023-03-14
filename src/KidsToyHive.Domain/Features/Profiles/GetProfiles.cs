@@ -9,22 +9,19 @@ using KidsToyHive.Domain.DataAccess;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 
-public class GetProfiles
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<ProfileDto> Profiles { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
+ public class GetProfilesRequest : IRequest<GetProfilesResponse> { }
+ public class GetProfilesResponse
+ {
+     public IEnumerable<ProfileDto> Profiles { get; set; }
+ }
+ public class GetProfilesHandler : IRequestHandler<GetProfilesRequest, GetProfilesResponse>
+ {
+     private readonly IAppDbContext _context;
 
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Profiles = await _context.Profiles.Select(x => ProfileDto.FromProfile(x)).ToListAsync()
-            };
-    }
-}
+     public GetProfilesHandler(IAppDbContext context) => _context = context;
+     public async Task<GetProfilesResponse> Handle(GetProfilesRequest request, CancellationToken cancellationToken)
+         => new GetProfilesResponse()
+         {
+             Profiles = await _context.Profiles.Select(x => ProfileDto.FromProfile(x)).ToListAsync()
+         };
+ }

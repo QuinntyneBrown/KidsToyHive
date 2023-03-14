@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Users;
 
-public class GetUsers
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<UserDto> Users { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Users = await _context.Users.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetUsersRequest : IRequest<GetUsersResponse> { }
+ public class GetUsersResponse
+ {
+     public IEnumerable<UserDto> Users { get; set; }
+ }
+ public class GetUsersHandler : IRequestHandler<GetUsersRequest, GetUsersResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetUsersHandler(IAppDbContext context) => _context = context;
+     public async Task<GetUsersResponse> Handle(GetUsersRequest request, CancellationToken cancellationToken)
+         => new GetUsersResponse()
+         {
+             Users = await _context.Users.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

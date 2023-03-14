@@ -6,28 +6,25 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings;
 
-public class CancelBooking
-{
-    public class Validator : AbstractValidator<Request>
-    {
-        public Validator()
-        {
-        }
-    }
-    public class Request : IRequest<Response>
-    {
-    }
-    public class Response
-    {
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            await _context.SaveChangesAsync(cancellationToken);
-            return new Response() { };
-        }
-    }
-}
+ public class Validator : AbstractValidator<Request>
+ {
+     public Validator()
+     {
+     }
+ }
+ public class CancelBookingRequest : IRequest<CancelBookingResponse>
+ {
+ }
+ public class CancelBookingResponse
+ {
+ }
+ public class CancelBookingHandler : IRequestHandler<CancelBookingRequest, CancelBookingResponse>
+ {
+     private readonly IAppDbContext _context;
+     public CancelBookingHandler(IAppDbContext context) => _context = context;
+     public async Task<CancelBookingResponse> Handle(CancelBookingRequest request, CancellationToken cancellationToken)
+     {
+         await _context.SaveChangesAsync(cancellationToken);
+         return new CancelBookingResponse() { };
+     }
+ }

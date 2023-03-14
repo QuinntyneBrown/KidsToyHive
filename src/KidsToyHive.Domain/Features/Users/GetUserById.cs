@@ -6,24 +6,21 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Users;
 
-public class GetUserById
-{
-    public class Request : IRequest<Response>
-    {
-        public Guid UserId { get; set; }
-    }
-    public class Response
-    {
-        public UserDto User { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                User = (await _context.Users.FindAsync(request.UserId)).ToDto()
-            };
-    }
-}
+ public class GetUserByIdRequest : IRequest<GetUserByIdResponse>
+ {
+     public Guid UserId { get; set; }
+ }
+ public class GetUserByIdResponse
+ {
+     public UserDto User { get; set; }
+ }
+ public class GetUserByIdHandler : IRequestHandler<GetUserByIdRequest, GetUserByIdResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetUserByIdHandler(IAppDbContext context) => _context = context;
+     public async Task<GetUserByIdResponse> Handle(GetUserByIdRequest request, CancellationToken cancellationToken)
+         => new GetUserByIdResponse()
+         {
+             User = (await _context.Users.FindAsync(request.UserId)).ToDto()
+         };
+ }

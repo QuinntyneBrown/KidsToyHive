@@ -11,44 +11,41 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.InventoryItems;
 
-public class RemoveStock
-{
-    public class Validator : AbstractValidator<Request>
-    {
-        public Validator()
-        {
-        }
-    }
-    public class Request : Command<Response>
-    {
-        public Guid ProductId { get; set; }
-        public int Quantity { get; set; }
-        public override IEnumerable<string> SideEffects => new List<string>
+ public class Validator : AbstractValidator<Request>
+ {
+     public Validator()
+     {
+     }
+ }
+ public class RemoveStockRequest : Command<Response>
+ {
+     public Guid ProductId { get; set; }
+     public int Quantity { get; set; }
+     public override IEnumerable<string> SideEffects => new List<string>
+      {
+          $"ProductId {ProductId}"
+      };
+ }
+ public class RemoveStockResponse
+ {
+     public Guid InventoryItemId { get; set; }
+     public int Version { get; set; }
+ }
+ public class RemoveStockHandler : IRequestHandler<RemoveStockRequest, RemoveStockResponse>
+ {
+     private readonly IAppDbContext _context;
+     public RemoveStockHandler(IAppDbContext context) => _context = context;
+     public async Task<RemoveStockResponse> Handle(RemoveStockRequest request, CancellationToken cancellationToken)
+     {
+         var inventoryItem = await _context.InventoryItems.Where(x => x.ProductId == request.ProductId).SingleAsync();
+         if (request.Quantity > inventoryItem.Quantity)
+             throw new Exception();
+         inventoryItem.Quantity -= request.Quantity;
+         await _context.SaveChangesAsync(cancellationToken);
+         return new RemoveStockResponse()
          {
-             $"ProductId {ProductId}"
+             InventoryItemId = inventoryItem.InventoryItemId,
+             Version = inventoryItem.Version
          };
-    }
-    public class Response
-    {
-        public Guid InventoryItemId { get; set; }
-        public int Version { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-        {
-            var inventoryItem = await _context.InventoryItems.Where(x => x.ProductId == request.ProductId).SingleAsync();
-            if (request.Quantity > inventoryItem.Quantity)
-                throw new Exception();
-            inventoryItem.Quantity -= request.Quantity;
-            await _context.SaveChangesAsync(cancellationToken);
-            return new Response()
-            {
-                InventoryItemId = inventoryItem.InventoryItemId,
-                Version = inventoryItem.Version
-            };
-        }
-    }
-}
+     }
+ }

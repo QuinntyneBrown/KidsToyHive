@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bins;
 
-public class GetBins
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<BinDto> Bins { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                Bins = await _context.Bins.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetBinsRequest : IRequest<GetBinsResponse> { }
+ public class GetBinsResponse
+ {
+     public IEnumerable<BinDto> Bins { get; set; }
+ }
+ public class GetBinsHandler : IRequestHandler<GetBinsRequest, GetBinsResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetBinsHandler(IAppDbContext context) => _context = context;
+     public async Task<GetBinsResponse> Handle(GetBinsRequest request, CancellationToken cancellationToken)
+         => new GetBinsResponse()
+         {
+             Bins = await _context.Bins.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }

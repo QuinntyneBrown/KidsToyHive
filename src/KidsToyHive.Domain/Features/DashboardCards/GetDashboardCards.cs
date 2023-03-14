@@ -9,21 +9,18 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.DashboardCards;
 
-public class GetDashboardCards
-{
-    public class Request : IRequest<Response> { }
-    public class Response
-    {
-        public IEnumerable<DashboardCardDto> DashboardCards { get; set; }
-    }
-    public class Handler : IRequestHandler<Request, Response>
-    {
-        private readonly IAppDbContext _context;
-        public Handler(IAppDbContext context) => _context = context;
-        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            => new Response()
-            {
-                DashboardCards = await _context.DashboardCards.Select(x => x.ToDto()).ToArrayAsync()
-            };
-    }
-}
+ public class GetDashboardCardsRequest : IRequest<GetDashboardCardsResponse> { }
+ public class GetDashboardCardsResponse
+ {
+     public IEnumerable<DashboardCardDto> DashboardCards { get; set; }
+ }
+ public class GetDashboardCardsHandler : IRequestHandler<GetDashboardCardsRequest, GetDashboardCardsResponse>
+ {
+     private readonly IAppDbContext _context;
+     public GetDashboardCardsHandler(IAppDbContext context) => _context = context;
+     public async Task<GetDashboardCardsResponse> Handle(GetDashboardCardsRequest request, CancellationToken cancellationToken)
+         => new GetDashboardCardsResponse()
+         {
+             DashboardCards = await _context.DashboardCards.Select(x => x.ToDto()).ToArrayAsync()
+         };
+ }
