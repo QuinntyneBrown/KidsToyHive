@@ -27,7 +27,7 @@ public class UpsertCustomerTests
         var securityTokenFactory = new Mock<ISecurityTokenFactory>().Object;
         using (var context = new AppDbContext(options, mediator))
         {
-            var upsertCustomerHandler = new UpsertCustomer.Handler(context, passwordHasher, securityTokenFactory);
+            var upsertCustomerHandler = new UpsertCustomerHandler(context, passwordHasher, securityTokenFactory);
             var address = new AddressDto
             {
                 City = "Toronto",
@@ -50,7 +50,7 @@ public class UpsertCustomerTests
                     Address = address
                 }
             });
-            var result = await upsertCustomerHandler.Handle(new UpsertCustomer.Request
+            var result = await upsertCustomerHandler.Handle(new UpsertCustomerRequest
             {
                 Customer = customer,
                 AcceptedTermsAndConditions = true

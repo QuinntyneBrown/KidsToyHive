@@ -36,8 +36,8 @@ public class ProcessBookingPaymentTests
             context.Bookings.Add(booking);
             context.SaveChanges();
             Assert.Equal(12500, booking.Cost);
-            var processBookingPaymentHandler = new CheckoutBooking.Handler(context, emailService, new FakePaymentProcessor());
-            var result = await processBookingPaymentHandler.Handle(new CheckoutBooking.Request
+            var processBookingPaymentHandler = new CheckoutBookingHandler(context, emailService, new FakePaymentProcessor());
+            var result = await processBookingPaymentHandler.Handle(new CheckoutBookingRequest
             {
                 BookingId = booking.BookingId,
                 Number = "",

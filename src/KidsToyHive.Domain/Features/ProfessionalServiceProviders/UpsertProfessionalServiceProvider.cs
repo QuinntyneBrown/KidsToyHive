@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ProfessionalServiceProviders;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertProfessionalServiceProviderValidator : AbstractValidator<UpsertProfessionalServiceProviderRequest>
 {
-    public Validator()
+    public UpsertProfessionalServiceProviderValidator()
     {
         RuleFor(request => request.ProfessionalServiceProvider).NotNull();
         RuleFor(request => request.ProfessionalServiceProvider).SetValidator(new ProfessionalServiceProviderDtoValidator());

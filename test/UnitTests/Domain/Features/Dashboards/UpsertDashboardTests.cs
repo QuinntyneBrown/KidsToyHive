@@ -19,7 +19,7 @@ public class UpsertDashboardTests
         var mediator = new Mock<IMediator>().Object;
         using (var context = new AppDbContext(options, mediator))
         {
-            var upsertDashboardHandler = new UpsertDashboard.Handler(context);
+            var upsertDashboardHandler = new UpsertDashboardHandler(context);
         }
     }
 }

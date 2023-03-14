@@ -14,12 +14,12 @@ public class RolesController
     public RolesController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetRoles.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetRoles.Response>> Get()
-        => await _meditator.Send(new GetRoles.Request());
+    [ProducesResponseType(typeof(GetRolesResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetRolesResponse>> Get()
+        => await _meditator.Send(new GetRolesRequest());
     [HttpGet("{roleId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetRoleById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetRoleById.Response>> GetById([FromRoute] GetRoleById.Request request)
+    [ProducesResponseType(typeof(GetRoleByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetRoleByIdResponse>> GetById([FromRoute] GetRoleByIdRequest request)
         => await _meditator.Send(request);
 }

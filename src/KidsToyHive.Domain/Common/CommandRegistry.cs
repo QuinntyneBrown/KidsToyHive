@@ -14,14 +14,16 @@ public class CommandRegistry : ICommandRegistry
 {
     private readonly ConcurrentDictionary<string, CommandRegistryItem> _inner = new ConcurrentDictionary<string, CommandRegistryItem>();
     private readonly ConcurrentDictionary<string, string> _types = new ConcurrentDictionary<string, string>();
+    
     public CommandRegistry()
     {
-        foreach (var type in typeof(Authenticate).GetTypeInfo().Assembly.GetTypes())
+        foreach (var type in typeof(AuthenticateRequest).GetTypeInfo().Assembly.GetTypes())
         {
             if (type.AssemblyQualifiedName.Contains("+Request"))
                 _types.TryAdd(type.DeclaringType.Name, type.AssemblyQualifiedName);
         }
     }
+
     public List<CommandRegistryItem> GetByCorrelationIds(string[] correlationIds)
          => _inner
         .Where(x => correlationIds.Contains(x.Key))

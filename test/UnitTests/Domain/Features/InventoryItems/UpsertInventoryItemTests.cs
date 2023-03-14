@@ -19,7 +19,7 @@ public class UpsertInventoryItemTests
         var mediator = new Mock<IMediator>().Object;
         using (var context = new AppDbContext(options, mediator))
         {
-            var upsertInventoryItemHandler = new UpsertInventoryItem.Handler(context);
+            var upsertInventoryItemHandler = new UpsertInventoryItemHandler(context);
         }
     }
 }

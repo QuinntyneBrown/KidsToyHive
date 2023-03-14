@@ -15,19 +15,19 @@ public class HtmlContentsController
     public HtmlContentsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetHtmlContents.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetHtmlContents.Response>> Get()
-        => await _meditator.Send(new GetHtmlContents.Request());
+    [ProducesResponseType(typeof(GetHtmlContentsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetHtmlContentsResponse>> Get()
+        => await _meditator.Send(new GetHtmlContentsRequest());
     [AllowAnonymous]
     [HttpGet("{htmlContentId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetHtmlContentById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetHtmlContentById.Response>> GetById([FromRoute] GetHtmlContentById.Request request)
+    [ProducesResponseType(typeof(GetHtmlContentByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetHtmlContentByIdResponse>> GetById([FromRoute] GetHtmlContentByIdRequest request)
         => await _meditator.Send(request);
     [AllowAnonymous]
     [HttpGet("name/{name}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetHtmlContentByName.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetHtmlContentByName.Response>> GetByName([FromRoute] GetHtmlContentByName.Request request)
+    [ProducesResponseType(typeof(GetHtmlContentByNameResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetHtmlContentByNameResponse>> GetByName([FromRoute] GetHtmlContentByNameRequest request)
         => await _meditator.Send(request);
 }

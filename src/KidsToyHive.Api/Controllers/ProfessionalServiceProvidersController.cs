@@ -15,18 +15,18 @@ public class ProfessionalServiceProvidersController
     public ProfessionalServiceProvidersController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetProfessionalServiceProviders.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetProfessionalServiceProviders.Response>> Get()
-        => await _meditator.Send(new GetProfessionalServiceProviders.Request());
+    [ProducesResponseType(typeof(GetProfessionalServiceProvidersResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetProfessionalServiceProvidersResponse>> Get()
+        => await _meditator.Send(new GetProfessionalServiceProvidersRequest());
     [HttpGet("{professionalServiceProviderId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetProfessionalServiceProviderById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetProfessionalServiceProviderById.Response>> GetById([FromRoute] GetProfessionalServiceProviderById.Request request)
+    [ProducesResponseType(typeof(GetProfessionalServiceProviderByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetProfessionalServiceProviderByIdResponse>> GetById([FromRoute] GetProfessionalServiceProviderByIdRequest request)
         => await _meditator.Send(request);
     [AllowAnonymous]
     [HttpGet("name/{fullName}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetProfessionalServiceProviderByName.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetProfessionalServiceProviderByName.Response>> GetByName([FromRoute] GetProfessionalServiceProviderByName.Request request)
+    [ProducesResponseType(typeof(GetProfessionalServiceProviderByNameResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetProfessionalServiceProviderByNameResponse>> GetByName([FromRoute] GetProfessionalServiceProviderByNameRequest request)
         => await _meditator.Send(request);
 }

@@ -14,12 +14,12 @@ public class ProductCategoriesController
     public ProductCategoriesController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetProductCategories.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetProductCategories.Response>> Get()
-        => await _meditator.Send(new GetProductCategories.Request());
+    [ProducesResponseType(typeof(GetProductCategoriesResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetProductCategoriesResponse>> Get()
+        => await _meditator.Send(new GetProductCategoriesRequest());
     [HttpGet("{productCategoryId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetProductCategoryById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetProductCategoryById.Response>> GetById([FromRoute] GetProductCategoryById.Request request)
+    [ProducesResponseType(typeof(GetProductCategoryByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetProductCategoryByIdResponse>> GetById([FromRoute] GetProductCategoryByIdRequest request)
         => await _meditator.Send(request);
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Shipments;
 
-public class GetCommittedShipmentsRequest : AuthenticatedRequest<Response>
+public class GetCommittedShipmentsRequest : AuthenticatedRequest<GetCommittedShipmentsResponse>
 {
 
 }

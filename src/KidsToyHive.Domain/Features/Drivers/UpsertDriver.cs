@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Drivers;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertDriverValidator : AbstractValidator<UpsertDriverRequest>
 {
-    public Validator()
+    public UpsertDriverValidator()
     {
         RuleFor(request => request.Driver).NotNull();
         RuleFor(request => request.Driver).SetValidator(new DriverDtoValidator());

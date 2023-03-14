@@ -14,12 +14,12 @@ public class CustomersController
     public CustomersController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetCustomers.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetCustomers.Response>> Get()
-        => await _meditator.Send(new GetCustomers.Request());
+    [ProducesResponseType(typeof(GetCustomersResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetCustomersResponse>> Get()
+        => await _meditator.Send(new GetCustomersRequest());
     [HttpGet("{customerId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetCustomerById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetCustomerById.Response>> GetById([FromRoute] GetCustomerById.Request request)
+    [ProducesResponseType(typeof(GetCustomerByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetCustomerByIdResponse>> GetById([FromRoute] GetCustomerByIdRequest request)
         => await _meditator.Send(request);
 }

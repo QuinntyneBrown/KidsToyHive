@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="codeGeneratorSettings.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Seeding\DigitalAssets\Hero1.jpg" />
     <None Remove="Seeding\DigitalAssets\Hero2.jpg" />
     <None Remove="Seeding\DigitalAssets\Hero3.jpg" />
@@ -62,10 +58,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0-rc2" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.0.0-rc2" />
     <PackageReference Include="System.Reactive" Version="4.1.5" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="codeGeneratorSettings.json" />
   </ItemGroup>
 
   <ItemGroup>

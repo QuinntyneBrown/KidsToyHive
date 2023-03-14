@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Taxes;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertTaxValidator : AbstractValidator<UpsertTaxRequest>
 {
-    public Validator()
+    public UpsertTaxValidator()
     {
         RuleFor(request => request.Tax).NotNull();
         RuleFor(request => request.Tax).SetValidator(new TaxDtoValidator());

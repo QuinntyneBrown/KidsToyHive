@@ -15,18 +15,18 @@ public class UsersController
     public UsersController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetUsers.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetUsers.Response>> Get()
-        => await _meditator.Send(new GetUsers.Request());
+    [ProducesResponseType(typeof(GetUsersResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetUsersResponse>> Get()
+        => await _meditator.Send(new GetUsersRequest());
     [HttpGet("{userId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetUserById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetUserById.Response>> GetById([FromRoute] GetUserById.Request request)
+    [ProducesResponseType(typeof(GetUserByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetUserByIdResponse>> GetById([FromRoute] GetUserByIdRequest request)
         => await _meditator.Send(request);
     [AllowAnonymous]
     [HttpPost, Route("token")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(Authenticate.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<Authenticate.Response>> Post([FromBody] Authenticate.Request request)
+    [ProducesResponseType(typeof(AuthenticateResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<AuthenticateResponse>> Post([FromBody] AuthenticateRequest request)
         => await _meditator.Send(request);
 }

@@ -21,7 +21,7 @@ public class UpsertTaxTests
         using (var context = new AppDbContext(options, mediator))
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
-            var upsertTaxHandler = new UpsertTax.Handler(context);
+            var upsertTaxHandler = new UpsertTaxHandler(context);
         }
     }
 }

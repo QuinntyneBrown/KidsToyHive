@@ -21,7 +21,7 @@ public class UpsertShipmentTests
         using (var context = new AppDbContext(options, mediator))
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
-            var upsertShipmentHandler = new UpsertShipment.Handler(context);
+            var upsertShipmentHandler = new UpsertShipmentHandler(context);
         }
     }
 }

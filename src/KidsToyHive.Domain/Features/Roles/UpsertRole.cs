@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Roles;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertRoleValidator : AbstractValidator<UpsertRoleRequest>
 {
-    public Validator()
+    public UpsertRoleValidator()
     {
         RuleFor(request => request.Role).NotNull();
         RuleFor(request => request.Role).SetValidator(new RoleDtoValidator());

@@ -18,16 +18,16 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Customers;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertCustomerValidator : AbstractValidator<UpsertCustomerRequest>
 {
-    public Validator()
+    public UpsertCustomerValidator()
     {
         RuleFor(request => request.Customer).NotNull();
         RuleFor(request => request.Customer).SetValidator(new CustomerDtoValidator());
     }
 }
 [AllowAnonymous]
-public class UpsertCustomerRequest : Command<Response>
+public class UpsertCustomerRequest : Command<UpsertCustomerResponse>
 {
     public CustomerDto Customer { get; set; }
     public bool AcceptedTermsAndConditions { get; set; }

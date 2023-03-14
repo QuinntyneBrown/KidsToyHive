@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Videos;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertVideoValidator : AbstractValidator<UpsertVideoRequest>
 {
-    public Validator()
+    public UpsertVideoValidator()
     {
         RuleFor(request => request.Video).NotNull();
         RuleFor(request => request.Video).SetValidator(new VideoDtoValidator());

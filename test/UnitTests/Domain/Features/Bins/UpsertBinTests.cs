@@ -21,7 +21,7 @@ public class UpsertBinTests
         using (var context = new AppDbContext(options, mediator))
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
-            var upsertBinHandler = new UpsertBin.Handler(context);
+            var upsertBinHandler = new UpsertBinHandler(context);
         }
     }
 }

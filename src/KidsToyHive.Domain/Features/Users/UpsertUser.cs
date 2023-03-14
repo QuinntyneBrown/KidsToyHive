@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Users;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertUserValidator : AbstractValidator<UpsertUserRequest>
 {
-    public Validator()
+    public UpsertUserValidator()
     {
         RuleFor(request => request.User).NotNull();
         RuleFor(request => request.User).SetValidator(new UserDtoValidator());

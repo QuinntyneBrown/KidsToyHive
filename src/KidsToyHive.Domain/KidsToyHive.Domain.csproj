@@ -6,14 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Cards\" />
     <Folder Include="Features\HtmlContents\" />
     <Folder Include="Features\CardLayouts\" />
     <Folder Include="Features\BookingDetails\" />
     <Folder Include="Features\Addresses\" />
     <Folder Include="Features\Locations\" />
     <Folder Include="Features\Drivers\" />
-    <Folder Include="Features\Bins\" />
     <Folder Include="Features\Contacts\" />
     <Folder Include="Features\Surveys\" />
     <Folder Include="Features\ProfessionalServiceProviders\" />

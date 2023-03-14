@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ShipmentSalesOrders;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveShipmentSalesOrderValidator : AbstractValidator<RemoveShipmentSalesOrderRequest>
 {
-    public Validator()
+    public RemoveShipmentSalesOrderValidator()
     {
         RuleFor(request => request.ShipmentSalesOrderId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveShipmentSalesOrderRequest : IRequest
 {
     public Guid ShipmentSalesOrderId { get; set; }
 }
-public class RemoveShipmentSalesOrderHandler : IRequestHandler<Request>
+public class RemoveShipmentSalesOrderHandler : IRequestHandler<RemoveShipmentSalesOrderRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveShipmentSalesOrderHandler(IAppDbContext context) => _context = context;

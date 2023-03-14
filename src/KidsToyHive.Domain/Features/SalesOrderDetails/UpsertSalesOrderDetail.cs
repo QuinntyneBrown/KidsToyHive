@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.SalesOrderDetails;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertSalesOrderDetailValidator : AbstractValidator<UpsertSalesOrderDetailRequest>
 {
-    public Validator()
+    public UpsertSalesOrderDetailValidator()
     {
         RuleFor(request => request.SalesOrderDetail).NotNull();
         RuleFor(request => request.SalesOrderDetail).SetValidator(new SalesOrderDetailDtoValidator());

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Drivers;
 
-public class Validator : AbstractValidator<Request>
+public class CommitToShipmentValidator : AbstractValidator<CommitToShipmentRequest>
 {
-    public Validator()
+    public CommitToShipmentValidator()
     {
     }
 }

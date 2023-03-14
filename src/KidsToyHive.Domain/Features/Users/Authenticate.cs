@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Users;
 
-public class Validator : AbstractValidator<Request>
+public class AuthenticateValidator : AbstractValidator<AuthenticateRequest>
 {
-    public Validator()
+    public AuthenticateValidator()
     {
         RuleFor(request => request.Username)
             .NotEqual(default(string))

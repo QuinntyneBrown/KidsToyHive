@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Shipments;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertShipmentValidator : AbstractValidator<UpsertShipmentRequest>
 {
-    public Validator()
+    public UpsertShipmentValidator()
     {
         RuleFor(request => request.Shipment).NotNull();
         RuleFor(request => request.Shipment).SetValidator(new ShipmentDtoValidator());

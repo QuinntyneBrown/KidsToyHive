@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Cards;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveCardValidator : AbstractValidator<RemoveCardRequest>
 {
-    public Validator()
+    public RemoveCardValidator()
     {
         RuleFor(request => request.CardId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveCardRequest : IRequest
 {
     public Guid CardId { get; set; }
 }
-public class RemoveCardHandler : IRequestHandler<Request>
+public class RemoveCardHandler : IRequestHandler<RemoveCardRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveCardHandler(IAppDbContext context) => _context = context;

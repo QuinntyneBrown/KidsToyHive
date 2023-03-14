@@ -38,9 +38,14 @@ public class ChangePasswordHandler : IRequestHandler<ChangePasswordRequest, Chan
             .Where(x => x.ProfileId == request.ProfileId)
             .Select(x => x.User)
             .SingleAsync();
+
         if (user.Password != _passwordHasher.HashPassword(user.Salt, request.OldPassword))
             throw new Exception();
+
         user.Password = _passwordHasher.HashPassword(user.Salt, request.NewPassword);
+
         await _context.SaveChangesAsync(cancellationToken);
+
+        return new ChangePasswordResponse();
     }
 }

@@ -16,13 +16,13 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertBookingValidator : AbstractValidator<UpsertBookingRequest>
 {
-    public Validator()
+    public UpsertBookingValidator()
     {
     }
 }
-public class UpsertBookingRequest : Command<Response>
+public class UpsertBookingRequest : Command<UpsertBookingResponse>
 {
     public BookingDto Booking { get; set; }
     public override string Key => Build("Booking", $"{Booking.BookingId}", $"{Booking.Version}");

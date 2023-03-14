@@ -24,8 +24,8 @@ public class GetCommittedShipmentsTests
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
             var user = await context.Users.FirstAsync();
-            var getCommittedShipmentsHandler = new GetCommittedShipments.Handler(context);
-            var result = await getCommittedShipmentsHandler.Handle(new GetCommittedShipments.Request
+            var getCommittedShipmentsHandler = new GetCommittedShipmentsHandler(context);
+            var result = await getCommittedShipmentsHandler.Handle(new GetCommittedShipmentsRequest
             {
                 CurrentUsername = user.Username
             }, default);
@@ -59,8 +59,8 @@ public class GetCommittedShipmentsTests
             });
             context.SaveChanges();
             var user = await context.Users.FirstAsync();
-            var getCommittedShipmentsHandler = new GetCommittedShipments.Handler(context);
-            var result = await getCommittedShipmentsHandler.Handle(new GetCommittedShipments.Request
+            var getCommittedShipmentsHandler = new GetCommittedShipmentsHandler(context);
+            var result = await getCommittedShipmentsHandler.Handle(new GetCommittedShipmentsRequest
             {
                 CurrentUsername = user.Username
             }, default);

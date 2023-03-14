@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings;
 
-public class Validator : AbstractValidator<Request>
+public class CheckoutBookingValidator : AbstractValidator<CheckoutBookingRequest>
 {
-    public Validator()
+    public CheckoutBookingValidator()
     {
     }
 }
-public class CheckoutBookingRequest : Command<Response>
+public class CheckoutBookingRequest : Command<CheckoutBookingResponse>
 {
     public string Number { get; set; }
     public long ExpMonth { get; set; }

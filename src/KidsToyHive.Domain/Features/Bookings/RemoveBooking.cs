@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveBookingValidator : AbstractValidator<RemoveBookingRequest>
 {
-    public Validator()
+    public RemoveBookingValidator()
     {
         RuleFor(request => request.BookingId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveBookingRequest : IRequest
 {
     public Guid BookingId { get; set; }
 }
-public class RemoveBookingHandler : IRequestHandler<Request>
+public class RemoveBookingHandler : IRequestHandler<RemoveBookingRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveBookingHandler(IAppDbContext context) => _context = context;

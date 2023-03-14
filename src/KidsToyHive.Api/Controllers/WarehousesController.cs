@@ -14,12 +14,12 @@ public class WarehousesController
     public WarehousesController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetWarehouses.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetWarehouses.Response>> Get()
-        => await _meditator.Send(new GetWarehouses.Request());
+    [ProducesResponseType(typeof(GetWarehousesResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetWarehousesResponse>> Get()
+        => await _meditator.Send(new GetWarehousesRequest());
     [HttpGet("{warehouseId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetWarehouseById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetWarehouseById.Response>> GetById([FromRoute] GetWarehouseById.Request request)
+    [ProducesResponseType(typeof(GetWarehouseByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetWarehouseByIdResponse>> GetById([FromRoute] GetWarehouseByIdRequest request)
         => await _meditator.Send(request);
 }

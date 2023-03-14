@@ -37,8 +37,8 @@ public class GetMyBookingsTests
             {
             });
             context.SaveChanges();
-            var getMyBookingsHandler = new GetMyBookings.Handler(context);
-            var result = await getMyBookingsHandler.Handle(new GetMyBookings.Request
+            var getMyBookingsHandler = new GetMyBookingsHandler(context);
+            var result = await getMyBookingsHandler.Handle(new GetMyBookingsRequest
             {
                 CurrentUsername = user.Username
             }, default);
@@ -61,8 +61,8 @@ public class GetMyBookingsTests
                 Email = user.Username
             });
             context.SaveChanges();
-            var getMyBookingsHandler = new GetMyBookings.Handler(context);
-            var result = await getMyBookingsHandler.Handle(new GetMyBookings.Request
+            var getMyBookingsHandler = new GetMyBookingsHandler(context);
+            var result = await getMyBookingsHandler.Handle(new GetMyBookingsRequest
             {
                 CurrentUsername = user.Username
             }, default);

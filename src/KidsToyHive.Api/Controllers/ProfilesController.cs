@@ -14,12 +14,12 @@ public class ProfilesController
     public ProfilesController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetProfiles.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetProfiles.Response>> Get()
-        => await _meditator.Send(new GetProfiles.Request());
+    [ProducesResponseType(typeof(GetProfilesResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetProfilesResponse>> Get()
+        => await _meditator.Send(new GetProfilesRequest());
     [HttpGet("{profileId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetProfileById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetProfileById.Response>> GetById([FromRoute] GetProfileById.Request request)
+    [ProducesResponseType(typeof(GetProfileByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetProfileByIdResponse>> GetById([FromRoute] GetProfileByIdRequest request)
         => await _meditator.Send(request);
 }

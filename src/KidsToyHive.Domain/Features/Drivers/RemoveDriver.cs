@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Drivers;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveDriverValidator : AbstractValidator<RemoveDriverRequest>
 {
-    public Validator()
+    public RemoveDriverValidator()
     {
         RuleFor(request => request.DriverId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveDriverRequest : IRequest
 {
     public Guid DriverId { get; set; }
 }
-public class RemoveDriverHandler : IRequestHandler<Request>
+public class RemoveDriverHandler : IRequestHandler<RemoveDriverRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveDriverHandler(IAppDbContext context) => _context = context;

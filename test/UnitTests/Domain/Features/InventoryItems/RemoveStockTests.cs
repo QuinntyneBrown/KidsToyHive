@@ -19,7 +19,7 @@ public class RemoveStockTests
         var mediator = new Mock<IMediator>().Object;
         using (var context = new AppDbContext(options, mediator))
         {
-            var removeStockHandler = new RemoveStock.Handler(context);
+            var removeStockHandler = new RemoveStockHandler(context);
         }
     }
 }

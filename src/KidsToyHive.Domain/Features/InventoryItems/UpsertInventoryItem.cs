@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.InventoryItems;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertInventoryItemValidator : AbstractValidator<UpsertInventoryItemRequest>
 {
-    public Validator()
+    public UpsertInventoryItemValidator()
     {
         RuleFor(request => request.InventoryItem).NotNull();
         RuleFor(request => request.InventoryItem).SetValidator(new InventoryItemDtoValidator());

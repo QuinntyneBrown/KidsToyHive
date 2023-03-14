@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Roles;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveRoleValidator : AbstractValidator<RemoveRoleRequest>
 {
-    public Validator()
+    public RemoveRoleValidator()
     {
         RuleFor(request => request.RoleId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveRoleRequest : IRequest
 {
     public Guid RoleId { get; set; }
 }
-public class RemoveRoleHandler : IRequestHandler<Request>
+public class RemoveRoleHandler : IRequestHandler<RemoveRoleRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveRoleHandler(IAppDbContext context) => _context = context;

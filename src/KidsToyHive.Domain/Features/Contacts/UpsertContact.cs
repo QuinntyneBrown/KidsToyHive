@@ -10,16 +10,16 @@ using KidsToyHive.Domain.Common;
 
 namespace KidsToyHive.Domain.Features.Contacts;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertContactValidator : AbstractValidator<UpsertContactRequest>
 {
-    public Validator()
+    public UpsertContactValidator()
     {
         RuleFor(request => request.Contact).NotNull();
         RuleFor(request => request.Contact).SetValidator(new ContactDtoValidator());
     }
 }
 [AllowAnonymous]
-public class UpsertContactRequest : Command<Response>
+public class UpsertContactRequest : Command<UpsertContactResponse>
 {
     public ContactDto Contact { get; set; }
 }

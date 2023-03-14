@@ -26,8 +26,8 @@ public class GetProductsTests
                 Name = "Jungle Jumpaoo"
             });
             context.SaveChanges();
-            var getProductsHandler = new GetProducts.Handler(new InMemoryCache(), context);
-            var result = await getProductsHandler.Handle(new GetProducts.Request { }, default);
+            var getProductsHandler = new GetProductsHandler(new InMemoryCache(), context);
+            var result = await getProductsHandler.Handle(new GetProductsRequest { }, default);
             Assert.NotNull(result);
             Assert.Single(result.Products);
         }

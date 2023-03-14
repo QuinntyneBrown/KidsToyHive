@@ -37,8 +37,8 @@ public class AuthenticateTests
             user.Password = new PasswordHasher().HashPassword(user.Salt, "bar");
             context.Users.Add(user);
             context.SaveChanges();
-            var authenticateHandler = new Authenticate.Handler(context, securityTokenFactory, passwordHasher);
-            var result = await authenticateHandler.Handle(new Authenticate.Request
+            var authenticateHandler = new AuthenticateHandler(context, securityTokenFactory, passwordHasher);
+            var result = await authenticateHandler.Handle(new AuthenticateRequest
             {
                 Username = "foo",
                 Password = "bar"

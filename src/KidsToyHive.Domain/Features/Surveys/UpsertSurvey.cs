@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Surveys;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertSurveyValidator : AbstractValidator<UpsertSurveyRequest>
 {
-    public Validator()
+    public UpsertSurveyValidator()
     {
         RuleFor(request => request.Survey).NotNull();
         RuleFor(request => request.Survey).SetValidator(new SurveyDtoValidator());

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.HtmlContents;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertHtmlContentValidator : AbstractValidator<UpsertHtmlContentRequest>
 {
-    public Validator()
+    public UpsertHtmlContentValidator()
     {
         RuleFor(request => request.HtmlContent).NotNull();
         RuleFor(request => request.HtmlContent).SetValidator(new HtmlContentDtoValidator());

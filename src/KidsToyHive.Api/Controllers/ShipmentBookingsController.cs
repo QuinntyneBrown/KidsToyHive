@@ -14,12 +14,12 @@ public class ShipmentBookingsController
     public ShipmentBookingsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetShipmentBookings.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetShipmentBookings.Response>> Get()
-        => await _meditator.Send(new GetShipmentBookings.Request());
+    [ProducesResponseType(typeof(GetShipmentBookingsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetShipmentBookingsResponse>> Get()
+        => await _meditator.Send(new GetShipmentBookingsRequest());
     [HttpGet("{shipmentBookingId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetShipmentBookingById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetShipmentBookingById.Response>> GetById([FromRoute] GetShipmentBookingById.Request request)
+    [ProducesResponseType(typeof(GetShipmentBookingByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetShipmentBookingByIdResponse>> GetById([FromRoute] GetShipmentBookingByIdRequest request)
         => await _meditator.Send(request);
 }

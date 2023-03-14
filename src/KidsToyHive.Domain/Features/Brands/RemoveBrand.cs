@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Brands;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveBrandValidator : AbstractValidator<RemoveBrandRequest>
 {
-    public Validator()
+    public RemoveBrandValidator()
     {
         RuleFor(request => request.BrandId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveBrandRequest : IRequest
 {
     public Guid BrandId { get; set; }
 }
-public class RemoveBrandHandler : IRequestHandler<Request>
+public class RemoveBrandHandler : IRequestHandler<RemoveBrandRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveBrandHandler(IAppDbContext context) => _context = context;

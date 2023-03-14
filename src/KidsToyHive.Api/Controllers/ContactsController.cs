@@ -15,12 +15,12 @@ public class ContactsController
     public ContactsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetContacts.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetContacts.Response>> Get()
-        => await _meditator.Send(new GetContacts.Request());
+    [ProducesResponseType(typeof(GetContactsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetContactsResponse>> Get()
+        => await _meditator.Send(new GetContactsRequest());
     [HttpGet("{contactId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetContactById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetContactById.Response>> GetById([FromRoute] GetContactById.Request request)
+    [ProducesResponseType(typeof(GetContactByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetContactByIdResponse>> GetById([FromRoute] GetContactByIdRequest request)
         => await _meditator.Send(request);
 }

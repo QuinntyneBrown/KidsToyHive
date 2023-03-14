@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KidsToyHive.Domain.Models;
 
-public class ResponseResponse : BaseModel
+public class Response : BaseModel
 {
     public Guid ResponseId { get; set; }
     [ForeignKey("Option")]

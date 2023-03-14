@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Shipments;
 
-public class Validator : AbstractValidator<Request>
+public class ConfirmShipmentValidator : AbstractValidator<ConfirmShipmentRequest>
 {
-    public Validator()
+    public ConfirmShipmentValidator()
     {
         RuleFor(x => x.ShipmentId).NotNull();
         RuleFor(x => x.SignatureId).NotNull();

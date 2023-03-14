@@ -23,8 +23,8 @@ public class AddStockTests
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
             var product = context.Products.First();
-            var addStockHandler = new AddStock.Handler(context);
-            var result = await addStockHandler.Handle(new AddStock.Request
+            var addStockHandler = new AddStockHandler(context);
+            var result = await addStockHandler.Handle(new AddStockRequest
             {
                 ProductId = product.ProductId,
                 Quantity = 1

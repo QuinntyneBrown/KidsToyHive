@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.HtmlContents;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveHtmlContentValidator : AbstractValidator<RemoveHtmlContentRequest>
 {
-    public Validator()
+    public RemoveHtmlContentValidator()
     {
         RuleFor(request => request.HtmlContentId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveHtmlContentRequest : IRequest
 {
     public Guid HtmlContentId { get; set; }
 }
-public class RemoveHtmlContentHandler : IRequestHandler<Request>
+public class RemoveHtmlContentHandler : IRequestHandler<RemoveHtmlContentRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveHtmlContentHandler(IAppDbContext context) => _context = context;

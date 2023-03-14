@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings;
 
-public class Validator : AbstractValidator<Request>
+public class CancelBookingValidator : AbstractValidator<CancelBookingRequest>
 {
-    public Validator()
+    public CancelBookingValidator()
     {
     }
 }

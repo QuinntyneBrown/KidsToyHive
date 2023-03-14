@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Products;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveProductValidator : AbstractValidator<RemoveProductRequest>
 {
-    public Validator()
+    public RemoveProductValidator()
     {
         RuleFor(request => request.ProductId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveProductRequest : IRequest
 {
     public Guid ProductId { get; set; }
 }
-public class RemoveProductHandler : IRequestHandler<Request>
+public class RemoveProductHandler : IRequestHandler<RemoveProductRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveProductHandler(IAppDbContext context) => _context = context;

@@ -21,7 +21,7 @@ public class ProcessSalesOrderPaymentTests
         using (var context = new AppDbContext(options, mediator))
         {
             var mockPaymentProcessor = new Mock<IPaymentProcessor>();
-            var processSalesOrderPaymentHandler = new CheckoutSalesOrder.Handler(context, mockPaymentProcessor.Object);
+            var processSalesOrderPaymentHandler = new CheckoutSalesOrderHandler(context, mockPaymentProcessor.Object);
         }
     }
 }

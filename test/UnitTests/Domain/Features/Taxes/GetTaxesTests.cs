@@ -22,8 +22,8 @@ public class GetTaxesTests
         using (var context = new AppDbContext(options, mediator))
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
-            var getTaxesHandler = new GetTaxes.Handler(context);
-            var result = await getTaxesHandler.Handle(new GetTaxes.Request { }, default);
+            var getTaxesHandler = new GetTaxesHandler(context);
+            var result = await getTaxesHandler.Handle(new GetTaxesRequest { }, default);
             Assert.Single(result.Taxes);
             Assert.Equal(.13, result.Taxes.First().Rate);
         }

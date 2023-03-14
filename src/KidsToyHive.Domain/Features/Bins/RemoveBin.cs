@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bins;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveBinValidator : AbstractValidator<RemoveBinRequest>
 {
-    public Validator()
+    public RemoveBinValidator()
     {
         RuleFor(request => request.BinId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveBinRequest : IRequest
 {
     public Guid BinId { get; set; }
 }
-public class RemoveBinHandler : IRequestHandler<Request>
+public class RemoveBinHandler : IRequestHandler<RemoveBinRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveBinHandler(IAppDbContext context) => _context = context;

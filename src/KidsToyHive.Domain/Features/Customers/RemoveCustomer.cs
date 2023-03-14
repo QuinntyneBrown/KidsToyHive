@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Customers;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveCustomerValidator : AbstractValidator<RemoveCustomerRequest>
 {
-    public Validator()
+    public RemoveCustomerValidator()
     {
         RuleFor(request => request.CustomerId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveCustomerRequest : IRequest
 {
     public Guid CustomerId { get; set; }
 }
-public class RemoveCustomerHandler : IRequestHandler<Request>
+public class RemoveCustomerHandler : IRequestHandler<RemoveCustomerRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveCustomerHandler(IAppDbContext context) => _context = context;

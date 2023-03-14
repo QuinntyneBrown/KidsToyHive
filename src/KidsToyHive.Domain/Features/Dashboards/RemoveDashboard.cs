@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Dashboards;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveDashboardValidator : AbstractValidator<RemoveDashboardRequest>
 {
-    public Validator()
+    public RemoveDashboardValidator()
     {
         RuleFor(request => request.DashboardId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveDashboardRequest : IRequest
 {
     public Guid DashboardId { get; set; }
 }
-public class RemoveDashboardHandler : IRequestHandler<Request>
+public class RemoveDashboardHandler : IRequestHandler<RemoveDashboardRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveDashboardHandler(IAppDbContext context) => _context = context;

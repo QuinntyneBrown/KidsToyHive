@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Taxes;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveTaxValidator : AbstractValidator<RemoveTaxRequest>
 {
-    public Validator()
+    public RemoveTaxValidator()
     {
         RuleFor(request => request.TaxId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveTaxRequest : IRequest
 {
     public Guid TaxId { get; set; }
 }
-public class RemoveTaxHandler : IRequestHandler<Request>
+public class RemoveTaxHandler : IRequestHandler<RemoveTaxRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveTaxHandler(IAppDbContext context) => _context = context;

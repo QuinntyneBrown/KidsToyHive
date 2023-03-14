@@ -19,7 +19,7 @@ public class UpsertDriverTests
         var mediator = new Mock<IMediator>().Object;
         using (var context = new AppDbContext(options, mediator))
         {
-            var upsertDriverHandler = new UpsertDriver.Handler(context);
+            var upsertDriverHandler = new UpsertDriverHandler(context);
         }
     }
 }

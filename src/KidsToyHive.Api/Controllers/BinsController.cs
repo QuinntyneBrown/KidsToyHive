@@ -7,19 +7,21 @@ using System.Threading.Tasks;
 namespace KidsToyHive.Api.Controllers;
 
 [ApiController]
-[Route("api/bins")]
+[Route("api/[controller]")]
 public class BinsController
 {
     private readonly IMediator _meditator;
     public BinsController(IMediator mediator) => _meditator = mediator;
+    
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBins.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBins.Response>> Get()
-        => await _meditator.Send(new GetBins.Request());
+    [ProducesResponseType(typeof(GetBinsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBinsResponse>> Get()
+        => await _meditator.Send(new GetBinsRequest());
+
     [HttpGet("{binId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBinById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBinById.Response>> GetById([FromRoute] GetBinById.Request request)
+    [ProducesResponseType(typeof(GetBinByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBinByIdResponse>> GetById([FromRoute] GetBinByIdRequest request)
         => await _meditator.Send(request);
 }

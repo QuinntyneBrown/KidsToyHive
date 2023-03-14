@@ -14,12 +14,12 @@ public class DashboardCardsController
     public DashboardCardsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetDashboardCards.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetDashboardCards.Response>> Get()
-        => await _meditator.Send(new GetDashboardCards.Request());
+    [ProducesResponseType(typeof(GetDashboardCardsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetDashboardCardsResponse>> Get()
+        => await _meditator.Send(new GetDashboardCardsRequest());
     [HttpGet("{dashboardCardId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetDashboardCardById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetDashboardCardById.Response>> GetById([FromRoute] GetDashboardCardById.Request request)
+    [ProducesResponseType(typeof(GetDashboardCardByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetDashboardCardByIdResponse>> GetById([FromRoute] GetDashboardCardByIdRequest request)
         => await _meditator.Send(request);
 }

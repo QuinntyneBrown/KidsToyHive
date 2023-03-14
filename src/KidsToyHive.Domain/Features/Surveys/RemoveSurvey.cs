@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Surveys;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveSurveyValidator : AbstractValidator<RemoveSurveyRequest>
 {
-    public Validator()
+    public RemoveSurveyValidator()
     {
         RuleFor(request => request.SurveyId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveSurveyRequest : IRequest
 {
     public Guid SurveyId { get; set; }
 }
-public class RemoveSurveyHandler : IRequestHandler<Request>
+public class RemoveSurveyHandler : IRequestHandler<RemoveSurveyRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveSurveyHandler(IAppDbContext context) => _context = context;

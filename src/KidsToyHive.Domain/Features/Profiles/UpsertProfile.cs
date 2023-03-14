@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertProfileValidator : AbstractValidator<UpsertProfileRequest>
 {
-    public Validator()
+    public UpsertProfileValidator()
     {
         RuleFor(request => request.Profile.ProfileId).NotNull();
     }

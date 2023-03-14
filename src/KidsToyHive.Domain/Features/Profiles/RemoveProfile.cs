@@ -8,9 +8,9 @@ using KidsToyHive.Domain.DataAccess;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveProfileValidator : AbstractValidator<RemoveProfileRequest>
 {
-    public Validator()
+    public RemoveProfileValidator()
     {
         RuleFor(request => request.ProfileId).NotEqual(0);
     }

@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.InventoryItems;
 
-public class Validator : AbstractValidator<Request>
+public class AddStockValidator : AbstractValidator<AddStockRequest>
 {
-    public Validator()
+    public AddStockValidator()
     {
     }
 }
-public class AddStockRequest : Command<Response>
+public class AddStockRequest : Command<AddStockResponse>
 {
     public Guid ProductId { get; set; }
     public int Quantity { get; set; }

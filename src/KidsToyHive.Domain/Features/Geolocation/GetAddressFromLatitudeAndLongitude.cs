@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Geolocation;
 
-public class GetAddressFromLatitudeAndLongitudeRequest : AuthenticatedRequest<Response>
+public class GetAddressFromLatitudeAndLongitudeRequest : AuthenticatedRequest<GetAddressFromLatitudeAndLongitudeResponse>
 {
     public double Latitude { get; set; }
     public double Longitude { get; set; }

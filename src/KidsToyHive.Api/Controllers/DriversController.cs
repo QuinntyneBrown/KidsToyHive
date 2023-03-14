@@ -14,12 +14,12 @@ public class DriversController
     public DriversController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetDrivers.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetDrivers.Response>> Get()
-        => await _meditator.Send(new GetDrivers.Request());
+    [ProducesResponseType(typeof(GetDriversResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetDriversResponse>> Get()
+        => await _meditator.Send(new GetDriversRequest());
     [HttpGet("{driverId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetDriverById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetDriverById.Response>> GetById([FromRoute] GetDriverById.Request request)
+    [ProducesResponseType(typeof(GetDriverByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetDriverByIdResponse>> GetById([FromRoute] GetDriverByIdRequest request)
         => await _meditator.Send(request);
 }

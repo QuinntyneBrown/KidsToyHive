@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ProductCategories;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertProductCategoryValidator : AbstractValidator<UpsertProductCategoryRequest>
 {
-    public Validator()
+    public UpsertProductCategoryValidator()
     {
         RuleFor(request => request.ProductCategory).NotNull();
         RuleFor(request => request.ProductCategory).SetValidator(new ProductCategoryDtoValidator());

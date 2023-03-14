@@ -14,12 +14,12 @@ public class CardsController
     public CardsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetCards.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetCards.Response>> Get()
-        => await _meditator.Send(new GetCards.Request());
+    [ProducesResponseType(typeof(GetCardsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetCardsResponse>> Get()
+        => await _meditator.Send(new GetCardsRequest());
     [HttpGet("{cardId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetCardById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetCardById.Response>> GetById([FromRoute] GetCardById.Request request)
+    [ProducesResponseType(typeof(GetCardByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetCardByIdResponse>> GetById([FromRoute] GetCardByIdRequest request)
         => await _meditator.Send(request);
 }

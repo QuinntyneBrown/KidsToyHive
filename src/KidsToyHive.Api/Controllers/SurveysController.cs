@@ -14,12 +14,12 @@ public class SurveysController
     public SurveysController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetSurveys.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetSurveys.Response>> Get()
-        => await _meditator.Send(new GetSurveys.Request());
+    [ProducesResponseType(typeof(GetSurveysResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetSurveysResponse>> Get()
+        => await _meditator.Send(new GetSurveysRequest());
     [HttpGet("{surveyId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetSurveyById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetSurveyById.Response>> GetById([FromRoute] GetSurveyById.Request request)
+    [ProducesResponseType(typeof(GetSurveyByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetSurveyByIdResponse>> GetById([FromRoute] GetSurveyByIdRequest request)
         => await _meditator.Send(request);
 }

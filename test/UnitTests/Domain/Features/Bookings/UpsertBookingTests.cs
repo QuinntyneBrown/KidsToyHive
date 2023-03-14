@@ -40,8 +40,8 @@ public class UpsertBookingTests
             mockHttpContextAccessor.Setup(x => x.HttpContext).Returns(mockHttpContext.Object);
             mockHttpContext.Setup(x => x.User).Returns(mockUser.Object);
 
-            var upsertBookingHandler = new UpsertBooking.Handler(context, inventoryService, mockHttpContextAccessor.Object);
-            var request = new UpsertBooking.Request
+            var upsertBookingHandler = new UpsertBookingHandler(context, inventoryService, mockHttpContextAccessor.Object);
+            var request = new UpsertBookingRequest
             {
                 Booking = BookingBuilder.Build(BookingTimeSlot.Afternoon, DateTime.Now, product)
             };

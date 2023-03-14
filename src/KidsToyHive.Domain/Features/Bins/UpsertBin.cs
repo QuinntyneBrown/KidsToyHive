@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bins;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertBinValidator : AbstractValidator<UpsertBinRequest>
 {
-    public Validator()
+    public UpsertBinValidator()
     {
         RuleFor(request => request.Bin).NotNull();
         RuleFor(request => request.Bin).SetValidator(new BinDtoValidator());

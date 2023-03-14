@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Videos;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveVideoValidator : AbstractValidator<RemoveVideoRequest>
 {
-    public Validator()
+    public RemoveVideoValidator()
     {
         RuleFor(request => request.VideoId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveVideoRequest : IRequest
 {
     public Guid VideoId { get; set; }
 }
-public class RemoveVideoHandler : IRequestHandler<Request>
+public class RemoveVideoHandler : IRequestHandler<RemoveVideoRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveVideoHandler(IAppDbContext context) => _context = context;

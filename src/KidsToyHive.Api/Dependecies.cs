@@ -65,9 +65,9 @@ public static class Dependencies
         services.AddMediatR(p =>
         {
             p.AsTransient();
-        }, typeof(Authenticate).GetTypeInfo().Assembly);
+        }, typeof(AuthenticateRequest).GetTypeInfo().Assembly);
         services.Scan(
-            scan => scan.FromAssemblies(typeof(Authenticate).GetTypeInfo().Assembly)
+            scan => scan.FromAssemblies(typeof(AuthenticateRequest).GetTypeInfo().Assembly)
                 .AddClasses(x => x.AssignableTo(typeof(IValidator<>)))
                 .AsImplementedInterfaces()
                 .WithSingletonLifetime());

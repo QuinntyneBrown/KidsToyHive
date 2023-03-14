@@ -14,12 +14,12 @@ public class BookingDetailsController
     public BookingDetailsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBookingDetails.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBookingDetails.Response>> Get()
-        => await _meditator.Send(new GetBookingDetails.Request());
+    [ProducesResponseType(typeof(GetBookingDetailsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBookingDetailsResponse>> Get()
+        => await _meditator.Send(new GetBookingDetailsRequest());
     [HttpGet("{bookingDetailId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBookingDetailById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBookingDetailById.Response>> GetById([FromRoute] GetBookingDetailById.Request request)
+    [ProducesResponseType(typeof(GetBookingDetailByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBookingDetailByIdResponse>> GetById([FromRoute] GetBookingDetailByIdRequest request)
         => await _meditator.Send(request);
 }

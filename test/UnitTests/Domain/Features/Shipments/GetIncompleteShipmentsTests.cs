@@ -21,8 +21,8 @@ public class GetIncompleteShipmentsTests
         using (var context = new AppDbContext(options, mediator))
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
-            var getIncompleteShipmentsHandler = new GetIncompleteShipments.Handler(context);
-            var result = await getIncompleteShipmentsHandler.Handle(new GetIncompleteShipments.Request { }, default);
+            var getIncompleteShipmentsHandler = new GetIncompleteShipmentsHandler(context);
+            var result = await getIncompleteShipmentsHandler.Handle(new GetIncompleteShipmentsRequest { }, default);
             Assert.Empty(result.Shipments);
         }
     }

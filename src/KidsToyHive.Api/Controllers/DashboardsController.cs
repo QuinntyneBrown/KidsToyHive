@@ -14,12 +14,12 @@ public class DashboardsController
     public DashboardsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetDashboards.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetDashboards.Response>> Get()
-        => await _meditator.Send(new GetDashboards.Request());
+    [ProducesResponseType(typeof(GetDashboardsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetDashboardsResponse>> Get()
+        => await _meditator.Send(new GetDashboardsRequest());
     [HttpGet("{dashboardId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetDashboardById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetDashboardById.Response>> GetById([FromRoute] GetDashboardById.Request request)
+    [ProducesResponseType(typeof(GetDashboardByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetDashboardByIdResponse>> GetById([FromRoute] GetDashboardByIdRequest request)
         => await _meditator.Send(request);
 }

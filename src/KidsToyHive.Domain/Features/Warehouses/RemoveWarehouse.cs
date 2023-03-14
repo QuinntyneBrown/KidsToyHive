@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Warehouses;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveWarehouseValidator : AbstractValidator<RemoveWarehouseRequest>
 {
-    public Validator()
+    public RemoveWarehouseValidator()
     {
         RuleFor(request => request.WarehouseId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveWarehouseRequest : IRequest
 {
     public Guid WarehouseId { get; set; }
 }
-public class RemoveWarehouseHandler : IRequestHandler<Request>
+public class RemoveWarehouseHandler : IRequestHandler<RemoveWarehouseRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveWarehouseHandler(IAppDbContext context) => _context = context;

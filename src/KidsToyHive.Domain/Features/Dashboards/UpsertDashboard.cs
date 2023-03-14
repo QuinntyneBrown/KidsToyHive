@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Dashboards;
 
-public class Validator : AbstractValidator<Request>
+public class UpsertDashboardValidator : AbstractValidator<UpsertDashboardRequest>
 {
-    public Validator()
+    public UpsertDashboardValidator()
     {
         RuleFor(request => request.Dashboard).NotNull();
         RuleFor(request => request.Dashboard).SetValidator(new DashboardDtoValidator());

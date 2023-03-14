@@ -16,13 +16,13 @@ public class VideosController
     [AllowAnonymous]
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetVideos.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetVideos.Response>> Get()
-        => await _meditator.Send(new GetVideos.Request());
+    [ProducesResponseType(typeof(GetVideosResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetVideosResponse>> Get()
+        => await _meditator.Send(new GetVideosRequest());
     [AllowAnonymous]
     [HttpGet("{videoId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetVideoById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetVideoById.Response>> GetById([FromRoute] GetVideoById.Request request)
+    [ProducesResponseType(typeof(GetVideoByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetVideoByIdResponse>> GetById([FromRoute] GetVideoByIdRequest request)
         => await _meditator.Send(request);
 }

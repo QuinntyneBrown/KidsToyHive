@@ -1,4 +1,4 @@
-using KidsToyHive.Domain;
+/*using KidsToyHive.Domain;
 using KidsToyHive.Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -34,12 +34,13 @@ public class CommandsController
         _httpContextAccessor = httpContextAccessor;
         _mediator = mediator;
     }
+
     [AllowAnonymous]
     [HttpPost, DisableRequestSizeLimit]
     public async Task<IActionResult> Post(CancellationToken cancellationToken = default)
     {
         var authorizationResult = await _authorizationService.AuthorizeAsync(_httpContextAccessor.HttpContext.User, new AuthorizationPolicyBuilder()
-            .RequireAuthenticatedUser()
+            Require.AuthenticatedUser()
             .Build());
         var item = await CommandRegistryItem.ParseAsync(Request);
         if (!authorizationResult.Succeeded && !item.hasAllowAnonymousAttribute)
@@ -54,7 +55,7 @@ public class CommandsController
         dynamic result = default;
         try
         {
-            result = await _mediator.Send(JsonConvert.DeserializeObject(item.Request, Type.GetType(item.RequestDotNetType)) as dynamic);
+            result = await _mediator.Send(JsonConvert.DeserializeObject(itemRequest, Type.GetType(itemRequestDotNetType)) as dynamic);
             item.Complete();
         }
         catch (Exception e)
@@ -64,5 +65,6 @@ public class CommandsController
         }
         return new JsonResult(result);
     }
-    private HttpRequest Request => _httpContextAccessor.HttpContext.Request;
+    private HttpRequest Request => _httpContextAccessor.Httpcontext.Request;
 }
+*/

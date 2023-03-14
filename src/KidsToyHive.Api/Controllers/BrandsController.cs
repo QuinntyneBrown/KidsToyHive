@@ -14,12 +14,12 @@ public class BrandsController
     public BrandsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBrands.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBrands.Response>> Get()
-        => await _meditator.Send(new GetBrands.Request());
+    [ProducesResponseType(typeof(GetBrandsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBrandsResponse>> Get()
+        => await _meditator.Send(new GetBrandsRequest());
     [HttpGet("{brandId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBrandById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBrandById.Response>> GetById([FromRoute] GetBrandById.Request request)
+    [ProducesResponseType(typeof(GetBrandByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBrandByIdResponse>> GetById([FromRoute] GetBrandByIdRequest request)
         => await _meditator.Send(request);
 }

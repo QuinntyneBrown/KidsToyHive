@@ -19,7 +19,7 @@ public class UpsertSalesOrderTests
         var mediator = new Mock<IMediator>().Object;
         using (var context = new AppDbContext(options, mediator))
         {
-            var upsertSalesOrderHandler = new UpsertSalesOrder.Handler(context);
+            var upsertSalesOrderHandler = new UpsertSalesOrderHandler(context);
         }
     }
 }

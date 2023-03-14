@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.Bookings;
 
-public class GetMyBookingsRequest : AuthenticatedRequest<Response> { }
+public class GetMyBookingsRequest : AuthenticatedRequest<GetMyBookingsResponse> { }
 public class GetMyBookingsResponse
 {
     public ICollection<BookingDto> Bookings { get; set; }

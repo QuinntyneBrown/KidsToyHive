@@ -15,7 +15,7 @@ public class GeolocationController : Controller
     [Route("getAddress")]
     [AllowAnonymous]
     [HttpGet]
-    [Produces(typeof(GetAddressFromLatitudeAndLongitude.Response))]
-    public async Task<IActionResult> GetAddress([FromRoute] GetAddressFromLatitudeAndLongitude.Request request)
+    [Produces(typeof(GetAddressFromLatitudeAndLongitudeResponse))]
+    public async Task<IActionResult> GetAddress([FromRoute] GetAddressFromLatitudeAndLongitudeRequest request)
         => Ok(await _mediator.Send(request));
 }

@@ -12,9 +12,9 @@ using KidsToyHive.Core.Enums;
 
 namespace KidsToyHive.Domain.Features.Shipments;
 
-public class Validator : AbstractValidator<Request>
+public class GetIncompleteShipmentsValidator : AbstractValidator<GetIncompleteShipmentsRequest>
 {
-    public Validator()
+    public GetIncompleteShipmentsValidator()
     {
     }
 }

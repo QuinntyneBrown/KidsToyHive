@@ -14,17 +14,17 @@ public class ShipmentsController
     public ShipmentsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetShipments.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetShipments.Response>> Get()
-        => await _meditator.Send(new GetShipments.Request());
+    [ProducesResponseType(typeof(GetShipmentsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetShipmentsResponse>> Get()
+        => await _meditator.Send(new GetShipmentsRequest());
     [HttpGet("incomplete")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetShipments.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetIncompleteShipments.Response>> GetIncomplete()
-        => await _meditator.Send(new GetIncompleteShipments.Request());
+    [ProducesResponseType(typeof(GetShipmentsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetIncompleteShipmentsResponse>> GetIncomplete()
+        => await _meditator.Send(new GetIncompleteShipmentsRequest());
     [HttpGet("{shipmentId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetShipmentById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetShipmentById.Response>> GetById([FromRoute] GetShipmentById.Request request)
+    [ProducesResponseType(typeof(GetShipmentByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetShipmentByIdResponse>> GetById([FromRoute] GetShipmentByIdRequest request)
         => await _meditator.Send(request);
 }

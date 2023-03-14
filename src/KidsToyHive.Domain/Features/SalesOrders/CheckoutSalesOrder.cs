@@ -12,13 +12,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KidsToyHive.Domain.Features.SalesOrders;
 
-public class Validator : AbstractValidator<Request>
+public class CheckoutSalesOrderValidator : AbstractValidator<CheckoutSalesOrderRequest>
 {
-    public Validator()
+    public CheckoutSalesOrderValidator()
     {
     }
 }
-public class CheckoutSalesOrderRequest : Command<Response>
+public class CheckoutSalesOrderRequest : Command<CheckoutSalesOrderResponse>
 {
     public Guid SalesOrderId { get; set; }
     public string Number { get; set; }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace KidsToyHive.Domain.Features.ProfessionalServiceProviders;
 
-public class Validator : AbstractValidator<Request>
+public class RemoveProfessionalServiceProviderValidator : AbstractValidator<RemoveProfessionalServiceProviderRequest>
 {
-    public Validator()
+    public RemoveProfessionalServiceProviderValidator()
     {
         RuleFor(request => request.ProfessionalServiceProviderId).NotNull();
     }
@@ -18,7 +18,7 @@ public class RemoveProfessionalServiceProviderRequest : IRequest
 {
     public Guid ProfessionalServiceProviderId { get; set; }
 }
-public class RemoveProfessionalServiceProviderHandler : IRequestHandler<Request>
+public class RemoveProfessionalServiceProviderHandler : IRequestHandler<RemoveProfessionalServiceProviderRequest>
 {
     private readonly IAppDbContext _context;
     public RemoveProfessionalServiceProviderHandler(IAppDbContext context) => _context = context;

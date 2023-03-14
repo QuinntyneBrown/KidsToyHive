@@ -14,12 +14,12 @@ public class TaxesController
     public TaxesController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetTaxes.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetTaxes.Response>> Get()
-        => await _meditator.Send(new GetTaxes.Request());
+    [ProducesResponseType(typeof(GetTaxesResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetTaxesResponse>> Get()
+        => await _meditator.Send(new GetTaxesRequest());
     [HttpGet("{taxId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetTaxById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetTaxById.Response>> GetById([FromRoute] GetTaxById.Request request)
+    [ProducesResponseType(typeof(GetTaxByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetTaxByIdResponse>> GetById([FromRoute] GetTaxByIdRequest request)
         => await _meditator.Send(request);
 }

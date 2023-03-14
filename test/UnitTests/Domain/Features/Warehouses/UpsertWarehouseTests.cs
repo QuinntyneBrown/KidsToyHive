@@ -21,7 +21,7 @@ public class UpsertWarehouseTests
         using (var context = new AppDbContext(options, mediator))
         {
             SeedData.Seed(context, ConfigurationHelper.Seed);
-            var upsertWarehouseHandler = new UpsertWarehouse.Handler(context);
+            var upsertWarehouseHandler = new UpsertWarehouseHandler(context);
         }
     }
 }

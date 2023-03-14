@@ -14,17 +14,17 @@ public class BookingsController
     public BookingsController(IMediator mediator) => _meditator = mediator;
     [HttpGet]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBookings.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBookings.Response>> Get()
-        => await _meditator.Send(new GetBookings.Request());
+    [ProducesResponseType(typeof(GetBookingsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBookingsResponse>> Get()
+        => await _meditator.Send(new GetBookingsRequest());
     [HttpGet("my")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBookings.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetMyBookings.Response>> GetMy()
-        => await _meditator.Send(new GetMyBookings.Request());
+    [ProducesResponseType(typeof(GetBookingsResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetMyBookingsResponse>> GetMy()
+        => await _meditator.Send(new GetMyBookingsRequest());
     [HttpGet("{bookingId}")]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-    [ProducesResponseType(typeof(GetBookingById.Response), (int)HttpStatusCode.OK)]
-    public async Task<ActionResult<GetBookingById.Response>> GetById([FromRoute] GetBookingById.Request request)
+    [ProducesResponseType(typeof(GetBookingByIdResponse), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<GetBookingByIdResponse>> GetById([FromRoute] GetBookingByIdRequest request)
         => await _meditator.Send(request);
 }
