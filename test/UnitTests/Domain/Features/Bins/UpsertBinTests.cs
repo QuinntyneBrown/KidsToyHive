@@ -7,25 +7,21 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.Bins
+namespace UnitTests.Domain.Features.Bins;
+
+public class UpsertBinTests
 {
-    public class UpsertBinTests
+    [Fact]
+    public async Task ShouldUpsertBin()
     {
-        [Fact]
-        public async Task ShouldUpsertBin()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(UpsertBinTests)}:{nameof(ShouldUpsertBin)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(UpsertBinTests)}:{nameof(ShouldUpsertBin)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
-            {
-                SeedData.Seed(context, ConfigurationHelper.Seed);
-
-                var upsertBinHandler = new UpsertBin.Handler(context);
-            }
+            SeedData.Seed(context, ConfigurationHelper.Seed);
+            var upsertBinHandler = new UpsertBin.Handler(context);
         }
     }
 }

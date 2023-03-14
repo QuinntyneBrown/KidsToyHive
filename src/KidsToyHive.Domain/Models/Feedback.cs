@@ -1,9 +1,8 @@
 using System;
 
-namespace KidsToyHive.Domain.Models
+namespace KidsToyHive.Domain.Models;
+
+public class Feedback : BaseModel
 {
-    public class Feedback: BaseModel
-    {
-        public Guid FeedbackId { get; set; }
-    }
+    public Guid FeedbackId { get; set; }
 }

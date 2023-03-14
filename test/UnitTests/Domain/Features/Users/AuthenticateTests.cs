@@ -1,4 +1,4 @@
-﻿using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.DataAccess;
 using KidsToyHive.Domain.Features.BookingDetails;
@@ -16,39 +16,34 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.Users
+namespace UnitTests.Domain.Features.Users;
+
+public class AuthenticateTests
 {
-    public class AuthenticateTests
+    [Fact]
+    public async Task ShouldAuthenticate()
     {
-        [Fact]
-        public async Task ShouldAuthenticate()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(AuthenticateTests)}:{nameof(ShouldAuthenticate)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        var mockSecurityTokenFactory = new Mock<ISecurityTokenFactory>();
+        mockSecurityTokenFactory.Setup(x => x.Create(It.IsAny<string>(), It.IsAny<List<Claim>>())).Returns("token");
+        var securityTokenFactory = mockSecurityTokenFactory.Object;
+        var passwordHasher = new PasswordHasher();
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(AuthenticateTests)}:{nameof(ShouldAuthenticate)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-            var mockSecurityTokenFactory = new Mock<ISecurityTokenFactory>();
-            mockSecurityTokenFactory.Setup(x => x.Create(It.IsAny<string>(), It.IsAny<List<Claim>>())).Returns("token");
-            var securityTokenFactory = mockSecurityTokenFactory.Object;
-            var passwordHasher = new PasswordHasher();
-
-            using (var context = new AppDbContext(options, mediator))
+            var user = new User { Username = "foo" };
+            user.Password = new PasswordHasher().HashPassword(user.Salt, "bar");
+            context.Users.Add(user);
+            context.SaveChanges();
+            var authenticateHandler = new Authenticate.Handler(context, securityTokenFactory, passwordHasher);
+            var result = await authenticateHandler.Handle(new Authenticate.Request
             {
-                var user = new User { Username = "foo" };
-                user.Password = new PasswordHasher().HashPassword(user.Salt, "bar");
-                context.Users.Add(user);
-                context.SaveChanges();
-
-                var authenticateHandler = new Authenticate.Handler(context, securityTokenFactory, passwordHasher);
-
-                var result = await authenticateHandler.Handle(new Authenticate.Request {
-                    Username = "foo",Password ="bar"
-                }, default);
-
-                Assert.Equal("token", result.AccessToken);
-
-            }
+                Username = "foo",
+                Password = "bar"
+            }, default);
+            Assert.Equal("token", result.AccessToken);
         }
     }
 }

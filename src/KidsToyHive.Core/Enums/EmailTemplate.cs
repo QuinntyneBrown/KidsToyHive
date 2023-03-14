@@ -1,9 +1,9 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum EmailTemplateName
 {
-    public enum EmailTemplateName
-    {
-        NewCustomer = 0,
-        NewDriver,
-        BookingConfirmation
-    }
+    NewCustomer = 0,
+    NewDriver,
+    BookingConfirmation
 }

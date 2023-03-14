@@ -6,23 +6,20 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.Drivers
+namespace UnitTests.Domain.Features.Drivers;
+
+public class UpsertDriverTests
 {
-    public class UpsertDriverTests
+    [Fact]
+    public async Task ShouldUpsertDriver()
     {
-        [Fact]
-        public async Task ShouldUpsertDriver()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(UpsertDriverTests)}:{nameof(ShouldUpsertDriver)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(UpsertDriverTests)}:{nameof(ShouldUpsertDriver)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
-            {
-                var upsertDriverHandler = new UpsertDriver.Handler(context);
-            }
+            var upsertDriverHandler = new UpsertDriver.Handler(context);
         }
     }
 }

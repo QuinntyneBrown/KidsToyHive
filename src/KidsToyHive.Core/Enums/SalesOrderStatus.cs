@@ -1,8 +1,8 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum SalesOrderStatus
 {
-    public enum SalesOrderStatus
-    {
-        New,
-        Paid
-    }
+    New,
+    Paid
 }

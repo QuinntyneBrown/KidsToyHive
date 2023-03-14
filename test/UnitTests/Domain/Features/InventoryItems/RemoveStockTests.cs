@@ -6,23 +6,20 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.InventoryItems
+namespace UnitTests.Domain.Features.InventoryItems;
+
+public class RemoveStockTests
 {
-    public class RemoveStockTests
+    [Fact]
+    public async Task ShouldRemoveStock()
     {
-        [Fact]
-        public async Task ShouldRemoveStock()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(RemoveStockTests)}:{nameof(ShouldRemoveStock)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(RemoveStockTests)}:{nameof(ShouldRemoveStock)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
-            {
-                var removeStockHandler = new RemoveStock.Handler(context);
-            }
+            var removeStockHandler = new RemoveStock.Handler(context);
         }
     }
 }

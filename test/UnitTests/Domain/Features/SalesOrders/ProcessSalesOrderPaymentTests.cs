@@ -7,25 +7,21 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.SalesOrders
+namespace UnitTests.Domain.Features.SalesOrders;
+
+public class ProcessSalesOrderPaymentTests
 {
-    public class ProcessSalesOrderPaymentTests
+    [Fact]
+    public async Task ShouldProcessSalesOrderPayment()
     {
-        [Fact]
-        public async Task ShouldProcessSalesOrderPayment()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(ProcessSalesOrderPaymentTests)}:{nameof(ShouldProcessSalesOrderPayment)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(ProcessSalesOrderPaymentTests)}:{nameof(ShouldProcessSalesOrderPayment)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
-            {
-                var mockPaymentProcessor = new Mock<IPaymentProcessor>();
-
-                var processSalesOrderPaymentHandler = new CheckoutSalesOrder.Handler(context, mockPaymentProcessor.Object);
-            }
+            var mockPaymentProcessor = new Mock<IPaymentProcessor>();
+            var processSalesOrderPaymentHandler = new CheckoutSalesOrder.Handler(context, mockPaymentProcessor.Object);
         }
     }
 }

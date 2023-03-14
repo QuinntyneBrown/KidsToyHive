@@ -1,9 +1,9 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum BookingTimeSlot : byte
 {
-    public enum BookingTimeSlot: byte
-    {
-        Morning = 0,
-        Afternoon,
-        FullDay
-    }
+    Morning = 0,
+    Afternoon,
+    FullDay
 }

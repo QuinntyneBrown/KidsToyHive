@@ -1,14 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace KidsToyHive.Core.Enums
+namespace KidsToyHive.Core.Enums;
+
+public enum ProfileType : byte
 {
-    public enum ProfileType: byte
-    {
-        Anonymous = 0,
-        Customer,
-        Driver,
-        Admin
-    }
+    Anonymous = 0,
+    Customer,
+    Driver,
+    Admin
 }

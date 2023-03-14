@@ -1,8 +1,8 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum ShipmentType : byte
 {
-    public enum ShipmentType: byte
-    {
-        Delivery,
-        PickUp
-    }
+    Delivery,
+    PickUp
 }

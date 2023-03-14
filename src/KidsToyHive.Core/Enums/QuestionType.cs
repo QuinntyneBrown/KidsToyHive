@@ -1,11 +1,11 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum QuestionType
 {
-    public enum QuestionType
-    {
-        Default = 0,
-        SingleLine,
-        HTML,
-        Date,
-        SelectList
-    }
+    Default = 0,
+    SingleLine,
+    HTML,
+    Date,
+    SelectList
 }

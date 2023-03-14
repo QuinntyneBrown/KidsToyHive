@@ -1,11 +1,11 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum CommandRegistryItemState
 {
-    public enum CommandRegistryItemState
-    {
-        Sleeping = 0,
-        Activated,
-        Completed,
-        Cancelled,
-        Failed
-    }
+    Sleeping = 0,
+    Activated,
+    Completed,
+    Cancelled,
+    Failed
 }

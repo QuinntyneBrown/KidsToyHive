@@ -1,11 +1,10 @@
 using System;
 
-namespace KidsToyHive.Domain.Models
+namespace KidsToyHive.Domain.Models;
+
+public class Role
 {
-    public class Role
-    {
-        public Guid RoleId { get; set; }
-        public string Name { get; set; }
-        public int Version { get; set; }
-    }
+    public Guid RoleId { get; set; }
+    public string Name { get; set; }
+    public int Version { get; set; }
 }

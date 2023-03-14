@@ -1,7 +1,7 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum TaxRateType : byte
 {
-    public enum TaxRateType: byte
-    {
-        HST = 0
-    }
+    HST = 0
 }

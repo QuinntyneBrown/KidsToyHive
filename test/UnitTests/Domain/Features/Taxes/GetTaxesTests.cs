@@ -8,30 +8,24 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.Taxes
+namespace UnitTests.Domain.Features.Taxes;
+
+public class GetTaxesTests
 {
-    public class GetTaxesTests
+    [Fact]
+    public async Task ShouldGetTaxes()
     {
-        [Fact]
-        public async Task ShouldGetTaxes()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(GetTaxesTests)}:{nameof(ShouldGetTaxes)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(GetTaxesTests)}:{nameof(ShouldGetTaxes)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
-            {
-                SeedData.Seed(context, ConfigurationHelper.Seed);
-
-                var getTaxesHandler = new GetTaxes.Handler(context);
-
-                var result = await getTaxesHandler.Handle(new GetTaxes.Request { }, default);
-
-                Assert.Single(result.Taxes);
-                Assert.Equal(.13,result.Taxes.First().Rate);
-            }
+            SeedData.Seed(context, ConfigurationHelper.Seed);
+            var getTaxesHandler = new GetTaxes.Handler(context);
+            var result = await getTaxesHandler.Handle(new GetTaxes.Request { }, default);
+            Assert.Single(result.Taxes);
+            Assert.Equal(.13, result.Taxes.First().Rate);
         }
     }
 }

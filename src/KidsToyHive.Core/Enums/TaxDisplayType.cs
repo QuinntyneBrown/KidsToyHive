@@ -1,8 +1,8 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum TaxDisplayType : byte
 {
-    public enum TaxDisplayType: byte
-    {
-        IncludingTax = 0,
-        ExcludingTax
-    }
+    IncludingTax = 0,
+    ExcludingTax
 }

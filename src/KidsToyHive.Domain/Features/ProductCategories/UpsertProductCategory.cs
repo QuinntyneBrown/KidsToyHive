@@ -6,47 +6,41 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.ProductCategories
+namespace KidsToyHive.Domain.Features.ProductCategories;
+
+public class UpsertProductCategory
 {
-    public class UpsertProductCategory
+    public class Validator : AbstractValidator<Request>
     {
-
-        public class Validator: AbstractValidator<Request> {
-            public Validator()
+        public Validator()
+        {
+            RuleFor(request => request.ProductCategory).NotNull();
+            RuleFor(request => request.ProductCategory).SetValidator(new ProductCategoryDtoValidator());
+        }
+    }
+    public class Request : IRequest<Response>
+    {
+        public ProductCategoryDto ProductCategory { get; set; }
+    }
+    public class Response
+    {
+        public Guid ProductCategoryId { get; set; }
+    }
+    public class Handler : IRequestHandler<Request, Response>
+    {
+        private readonly IAppDbContext _context;
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+        {
+            var productCategory = await _context.ProductCategories.FindAsync(request.ProductCategory.ProductCategoryId);
+            if (productCategory == null)
             {
-                RuleFor(request => request.ProductCategory).NotNull();
-                RuleFor(request => request.ProductCategory).SetValidator(new ProductCategoryDtoValidator());
+                productCategory = new ProductCategory();
+                _context.ProductCategories.Add(productCategory);
             }
-        }
-
-        public class Request : IRequest<Response> {
-            public ProductCategoryDto ProductCategory { get; set; }
-        }
-
-        public class Response
-        {
-            public Guid ProductCategoryId { get;set; }
-        }
-
-        public class Handler : IRequestHandler<Request, Response>
-        {
-            private readonly IAppDbContext _context;
-            public Handler(IAppDbContext context) => _context = context;
-
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-                var productCategory = await _context.ProductCategories.FindAsync(request.ProductCategory.ProductCategoryId);
-
-                if (productCategory == null) {
-                    productCategory = new ProductCategory();
-                    _context.ProductCategories.Add(productCategory);
-                }
-
-                productCategory.Name = request.ProductCategory.Name;
-
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return new Response() { ProductCategoryId = productCategory.ProductCategoryId };
-            }
+            productCategory.Name = request.ProductCategory.Name;
+            await _context.SaveChangesAsync(cancellationToken);
+            return new Response() { ProductCategoryId = productCategory.ProductCategoryId };
         }
     }
 }

@@ -1,28 +1,27 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Services
+namespace KidsToyHive.Domain.Services;
+
+public class EmailDeliveryService : IEmailDeliveryService
 {
-    public class EmailDeliveryService : IEmailDeliveryService
+    private readonly SendGridClient _client;
+    public EmailDeliveryService(IConfiguration configuration)
     {
-        private readonly SendGridClient _client;
-        public EmailDeliveryService(IConfiguration configuration)
+        _client = new SendGridClient(configuration["SendGrid:ApiKey"]);
+    }
+    public async Task Send(SendGridMessage message)
+    {
+        try
         {
-            _client = new SendGridClient(configuration["SendGrid:ApiKey"]);
+            await _client.SendEmailAsync(message);
         }
-        public async Task Send(SendGridMessage message)
+        catch (Exception e)
         {
-            try
-            {
-                await _client.SendEmailAsync(message);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            throw;
         }
     }
 }

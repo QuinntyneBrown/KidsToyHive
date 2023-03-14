@@ -1,8 +1,8 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum ProfessionalServiceProviderType
 {
-    public enum ProfessionalServiceProviderType
-    {
-        Mentor,
-        Photographer
-    }
+    Mentor,
+    Photographer
 }

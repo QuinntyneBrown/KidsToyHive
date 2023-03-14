@@ -1,12 +1,11 @@
-﻿using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Enums;
 using System.Net;
 
-namespace KidsToyHive.Core.Exceptions
+namespace KidsToyHive.Core.Exceptions;
+
+public class InvalidUsernameOrPasswordException : HttpStatusCodeException
 {
-    public class InvalidUsernameOrPasswordException: HttpStatusCodeException
-    {
-        public InvalidUsernameOrPasswordException()
-            :base((int)HttpStatusCode.BadRequest, $"{ExceptionType.InvalidUsernameOrPassword}", "Login Failed", "Invalid username or password")
-        { }
-    }
+    public InvalidUsernameOrPasswordException()
+        : base((int)HttpStatusCode.BadRequest, $"{ExceptionType.InvalidUsernameOrPassword}", "Login Failed", "Invalid username or password")
+    { }
 }

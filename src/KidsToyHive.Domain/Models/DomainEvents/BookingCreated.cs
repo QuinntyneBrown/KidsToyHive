@@ -1,13 +1,12 @@
-﻿using MediatR;
+using MediatR;
 
-namespace KidsToyHive.Domain.Models.DomainEvents
+namespace KidsToyHive.Domain.Models.DomainEvents;
+
+public class BookingCreated : INotification
 {
-    public class BookingCreated : INotification
+    public BookingCreated(Booking booking)
     {
-        public BookingCreated(Booking booking)
-        {
-            Booking = booking;
-        }
-        public Booking Booking { get; private set; }
+        Booking = booking;
     }
+    public Booking Booking { get; private set; }
 }

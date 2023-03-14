@@ -1,10 +1,9 @@
 using System;
 
-namespace KidsToyHive.Domain.Models
+namespace KidsToyHive.Domain.Models;
+
+public class Tenant
 {
-    public class Tenant
-    {
-        public Guid TenantId { get; set; }
-        public string Name { get; set; }
-    }
+    public Guid TenantId { get; set; }
+    public string Name { get; set; }
 }

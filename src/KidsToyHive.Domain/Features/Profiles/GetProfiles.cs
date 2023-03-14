@@ -7,28 +7,24 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using KidsToyHive.Domain.DataAccess;
 
-namespace KidsToyHive.Domain.Features.Profiles
+namespace KidsToyHive.Domain.Features.Profiles;
+
+public class GetProfiles
 {
-    public class GetProfiles
+    public class Request : IRequest<Response> { }
+    public class Response
     {
-        public class Request : IRequest<Response> { }
+        public IEnumerable<ProfileDto> Profiles { get; set; }
+    }
+    public class Handler : IRequestHandler<Request, Response>
+    {
+        private readonly IAppDbContext _context;
 
-        public class Response
-        {
-            public IEnumerable<ProfileDto> Profiles { get; set; }
-        }
-
-        public class Handler : IRequestHandler<Request, Response>
-        {
-            private readonly IAppDbContext _context;
-            
-            public Handler(IAppDbContext context) => _context = context;
-
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => new Response()
-                {
-                    Profiles = await _context.Profiles.Select(x => ProfileDto.FromProfile(x)).ToListAsync()
-                };
-        }
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            => new Response()
+            {
+                Profiles = await _context.Profiles.Select(x => ProfileDto.FromProfile(x)).ToListAsync()
+            };
     }
 }

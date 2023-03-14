@@ -1,14 +1,12 @@
-﻿using MediatR;
+using MediatR;
 
-namespace KidsToyHive.Domain.Models.DomainEvents
+namespace KidsToyHive.Domain.Models.DomainEvents;
+
+public class DriverCreated : INotification
 {
-    public class DriverCreated: INotification
+    public DriverCreated(Driver driver)
     {
-        public DriverCreated(Driver driver)
-        {
-            Driver = driver;
-        }
-
-        public Driver Driver { get; private set; }
+        Driver = driver;
     }
+    public Driver Driver { get; private set; }
 }

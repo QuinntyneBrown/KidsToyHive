@@ -8,35 +8,28 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.Products
+namespace UnitTests.Domain.Features.Products;
+
+public class GetProductsTests
 {
-    public class GetProductsTests
+    [Fact]
+    public async Task ShouldGetProducts()
     {
-        [Fact]
-        public async Task ShouldGetProducts()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(GetProductsTests)}:{nameof(ShouldGetProducts)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(GetProductsTests)}:{nameof(ShouldGetProducts)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
+            context.Products.Add(new Product
             {
-                context.Products.Add(new Product
-                {
-                    Name = "Jungle Jumpaoo"
-                });
-
-                context.SaveChanges();
-
-                var getProductsHandler = new GetProducts.Handler(new InMemoryCache(),context);
-
-                var result = await getProductsHandler.Handle(new GetProducts.Request { }, default);
-
-                Assert.NotNull(result);
-                Assert.Single(result.Products);
-            }
+                Name = "Jungle Jumpaoo"
+            });
+            context.SaveChanges();
+            var getProductsHandler = new GetProducts.Handler(new InMemoryCache(), context);
+            var result = await getProductsHandler.Handle(new GetProducts.Request { }, default);
+            Assert.NotNull(result);
+            Assert.Single(result.Products);
         }
     }
 }

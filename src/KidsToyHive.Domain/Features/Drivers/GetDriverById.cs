@@ -4,29 +4,26 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Drivers
+namespace KidsToyHive.Domain.Features.Drivers;
+
+public class GetDriverById
 {
-    public class GetDriverById
+    public class Request : IRequest<Response>
     {
-        public class Request : IRequest<Response> {
-            public Guid DriverId { get; set; }
-        }
-
-        public class Response
-        {
-            public DriverDto Driver { get; set; }
-        }
-
-        public class Handler : IRequestHandler<Request, Response>
-        {
-            private readonly IAppDbContext _context;
-            public Handler(IAppDbContext context) => _context = context;
-
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => new Response()
-                {
-                    Driver = (await _context.Drivers.FindAsync(request.DriverId)).ToDto()
-                };
-        }
+        public Guid DriverId { get; set; }
+    }
+    public class Response
+    {
+        public DriverDto Driver { get; set; }
+    }
+    public class Handler : IRequestHandler<Request, Response>
+    {
+        private readonly IAppDbContext _context;
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            => new Response()
+            {
+                Driver = (await _context.Drivers.FindAsync(request.DriverId)).ToDto()
+            };
     }
 }

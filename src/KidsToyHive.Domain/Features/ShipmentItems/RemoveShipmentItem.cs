@@ -5,39 +5,31 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.ShipmentItems
+namespace KidsToyHive.Domain.Features.ShipmentItems;
+
+public class RemoveShipmentItem
 {
-    public class RemoveShipmentItem
+    public class Validator : AbstractValidator<Request>
     {
-        public class Validator : AbstractValidator<Request>
+        public Validator()
         {
-            public Validator()
-            {
-                RuleFor(request => request.ShipmentItemId).NotNull();
-            }
+            RuleFor(request => request.ShipmentItemId).NotNull();
         }
-
-        public class Request: IRequest
+    }
+    public class Request : IRequest
+    {
+        public Guid ShipmentItemId { get; set; }
+    }
+    public class Handler : IRequestHandler<Request>
+    {
+        private readonly IAppDbContext _context;
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
         {
-            public Guid ShipmentItemId { get; set; }
-        }
-
-        public class Handler : IRequestHandler<Request>
-        {
-            private readonly IAppDbContext _context;
-
-            public Handler(IAppDbContext context) => _context = context;
-
-            public async Task<Unit> Handle(Request request, CancellationToken cancellationToken)
-            {
-                var shipmentItem = await _context.ShipmentItems.FindAsync(request.ShipmentItemId);
-
-                _context.ShipmentItems.Remove(shipmentItem);
-
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return new Unit();
-            }
+            var shipmentItem = await _context.ShipmentItems.FindAsync(request.ShipmentItemId);
+            _context.ShipmentItems.Remove(shipmentItem);
+            await _context.SaveChangesAsync(cancellationToken);
+            return new Unit();
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum ProductType : byte
 {
-    public enum ProductType: byte
-    {
-        Default,
-        Rental,
-        Service
-    }
+    Default,
+    Rental,
+    Service
 }

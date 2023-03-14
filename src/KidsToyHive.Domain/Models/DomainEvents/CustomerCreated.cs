@@ -1,14 +1,13 @@
-﻿using MediatR;
+using MediatR;
 using System;
 
-namespace KidsToyHive.Domain.Models.DomainEvents
+namespace KidsToyHive.Domain.Models.DomainEvents;
+
+public class CustomerCreated : INotification
 {
-    public class CustomerCreated : INotification
+    public CustomerCreated(Customer customer)
     {
-        public CustomerCreated(Customer customer)
-        {
-            Customer = customer;
-        }
-        public Customer Customer { get; private set; }
+        Customer = customer;
     }
+    public Customer Customer { get; private set; }
 }

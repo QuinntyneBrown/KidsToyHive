@@ -1,16 +1,18 @@
 using System;
 
-namespace KidsToyHive.Domain.Models
+namespace KidsToyHive.Domain.Models;
+
+public class ProductImage : BaseModel
 {
-    public class ProductImage: BaseModel
+    public Guid ProductImageId { get; set; }
+    public Guid ProductId { get; set; }
+    public Guid DigitalAssetId { get; set; }
+    public DigitalAsset DigitalAsset { get; set; }
+    public string Url
     {
-        public Guid ProductImageId { get; set; }
-        public Guid ProductId { get; set; }
-        public Guid DigitalAssetId { get; set; }
-        public DigitalAsset DigitalAsset { get; set; }
-        public string Url { get {
-                return $"api/digitalassets/serve/file/{DigitalAsset.Name}";
-            }
+        get
+        {
+            return $"api/digitalassets/serve/file/{DigitalAsset.Name}";
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using KidsToyHive.Core.Enums;
+using KidsToyHive.Core.Enums;
 using SendGrid.Helpers.Mail;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Services
+namespace KidsToyHive.Domain.Services;
+
+public interface IEmailBuilder
 {
-    public interface IEmailBuilder
-    {
-        Task<SendGridMessage> Build(EmailTemplateName template, Dictionary<string, string> items);
-    }
+    Task<SendGridMessage> Build(EmailTemplateName template, Dictionary<string, string> items);
 }

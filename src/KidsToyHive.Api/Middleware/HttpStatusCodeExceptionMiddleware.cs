@@ -1,53 +1,46 @@
-﻿using KidsToyHive.Core.Exceptions;
+using KidsToyHive.Core.Exceptions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Api.Middleware
+namespace KidsToyHive.Api.Middleware;
+
+public class HttpStatusCodeExceptionMiddleware
 {
-    public class HttpStatusCodeExceptionMiddleware
+    private readonly RequestDelegate _next;
+    private readonly ILogger<HttpStatusCodeExceptionMiddleware> _logger;
+    public HttpStatusCodeExceptionMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger<HttpStatusCodeExceptionMiddleware> _logger;
-
-        public HttpStatusCodeExceptionMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
+        _next = next ?? throw new ArgumentNullException(nameof(next));
+        _logger = loggerFactory?.CreateLogger<HttpStatusCodeExceptionMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
+    }
+    public async Task Invoke(HttpContext context)
+    {
+        try
         {
-            _next = next ?? throw new ArgumentNullException(nameof(next));
-            _logger = loggerFactory?.CreateLogger<HttpStatusCodeExceptionMiddleware>() ?? throw new ArgumentNullException(nameof(loggerFactory));
+            await _next(context);
         }
-
-        public async Task Invoke(HttpContext context)
+        catch (HttpStatusCodeException ex)
         {
-            try
+            if (context.Response.HasStarted)
             {
-                await _next(context);
+                _logger.LogWarning("The response has already started, the http status code middleware will not be executed.");
+                throw;
             }
-            catch (HttpStatusCodeException ex)
-            {
-                if (context.Response.HasStarted)
-                {
-                    _logger.LogWarning("The response has already started, the http status code middleware will not be executed.");
-                    throw;
-                }
-
-                context.Response.Clear();
-                context.Response.StatusCode = ex.StatusCode;
-                context.Response.ContentType = ex.ContentType;
-
-                await context.Response.WriteAsync(ex.Message);
-
-                return;
-            }
+            context.Response.Clear();
+            context.Response.StatusCode = ex.StatusCode;
+            context.Response.ContentType = ex.ContentType;
+            await context.Response.WriteAsync(ex.Message);
+            return;
         }
     }
-
-    public static class HttpStatusCodeExceptionMiddlewareExtensions
+}
+public static class HttpStatusCodeExceptionMiddlewareExtensions
+{
+    public static IApplicationBuilder UseHttpStatusCodeExceptionMiddleware(this IApplicationBuilder builder)
     {
-        public static IApplicationBuilder UseHttpStatusCodeExceptionMiddleware(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<HttpStatusCodeExceptionMiddleware>();
-        }
+        return builder.UseMiddleware<HttpStatusCodeExceptionMiddleware>();
     }
 }

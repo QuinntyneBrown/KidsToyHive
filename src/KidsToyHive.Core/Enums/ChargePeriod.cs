@@ -1,8 +1,8 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum ChargePeriod : byte
 {
-    public enum ChargePeriod: byte
-    {
-        None = 0,
-        Hour = 1
-    }
+    None = 0,
+    Hour = 1
 }

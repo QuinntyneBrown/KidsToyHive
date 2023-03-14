@@ -6,23 +6,20 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.InventoryItems
+namespace UnitTests.Domain.Features.InventoryItems;
+
+public class UpsertInventoryItemTests
 {
-    public class UpsertInventoryItemTests
+    [Fact]
+    public async Task ShouldUpsertInventoryItem()
     {
-        [Fact]
-        public async Task ShouldUpsertInventoryItem()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(UpsertInventoryItemTests)}:{nameof(ShouldUpsertInventoryItem)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(UpsertInventoryItemTests)}:{nameof(ShouldUpsertInventoryItem)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
-            {
-                var upsertInventoryItemHandler = new UpsertInventoryItem.Handler(context);
-            }
+            var upsertInventoryItemHandler = new UpsertInventoryItem.Handler(context);
         }
     }
 }

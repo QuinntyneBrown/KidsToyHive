@@ -8,34 +8,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.InventoryItems
+namespace UnitTests.Domain.Features.InventoryItems;
+
+public class AddStockTests
 {
-    public class AddStockTests
+    [Fact]
+    public async Task ShouldAddStock()
     {
-        [Fact]
-        public async Task ShouldAddStock()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(AddStockTests)}:{nameof(ShouldAddStock)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(AddStockTests)}:{nameof(ShouldAddStock)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
+            SeedData.Seed(context, ConfigurationHelper.Seed);
+            var product = context.Products.First();
+            var addStockHandler = new AddStock.Handler(context);
+            var result = await addStockHandler.Handle(new AddStock.Request
             {
-                SeedData.Seed(context, ConfigurationHelper.Seed);
-
-                var product = context.Products.First();
-
-                var addStockHandler = new AddStock.Handler(context);
-
-                var result = await addStockHandler.Handle(new AddStock.Request {
-                    ProductId = product.ProductId,
-                    Quantity = 1
-                }, default);
-
-                Assert.NotNull(result);
-            }
+                ProductId = product.ProductId,
+                Quantity = 1
+            }, default);
+            Assert.NotNull(result);
         }
     }
 }

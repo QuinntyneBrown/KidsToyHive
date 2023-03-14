@@ -1,9 +1,9 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum LocationType
 {
-    public enum LocationType
-    {
-        Delivery,
-        PickUp,
-        DeliveryPickUp
-    }
+    Delivery,
+    PickUp,
+    DeliveryPickUp
 }

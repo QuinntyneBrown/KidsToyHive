@@ -1,10 +1,9 @@
-﻿using MediatR;
+using MediatR;
 using System;
 
-namespace KidsToyHive.Domain.Models.DomainEvents
+namespace KidsToyHive.Domain.Models.DomainEvents;
+
+public class ShipmentCompleted : INotification
 {
-    public class ShipmentCompleted: INotification
-    {
-        public Guid ShipmentId { get; set; }
-    }
+    public Guid ShipmentId { get; set; }
 }

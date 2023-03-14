@@ -1,4 +1,4 @@
-﻿using FluentValidation;
+using FluentValidation;
 using KidsToyHive.Api.Filters;
 using KidsToyHive.Api.HealthChecks;
 using KidsToyHive.Core.Identity;
@@ -23,118 +23,102 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Api
+namespace KidsToyHive.Api;
+
+public static class Dependencies
 {
-    public static class Dependencies
+    public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
     {
-        public static void ConfigureServices(this IServiceCollection services, IConfiguration configuration)
+        services.AddCors(options => options.AddPolicy("CorsPolicy",
+            builder => builder
+            .WithOrigins(configuration["Cors:Origins"])
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .SetIsOriginAllowed(isOriginAllowed: _ => true)
+            .AllowCredentials()));
+        services.AddHttpContextAccessor();
+        services.AddSingleton<ICommandRegistry, CommandRegistry>();
+        services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
+        services.AddSingleton<ICache, InMemoryCache>();
+        services.AddSingleton<IPasswordHasher, PasswordHasher>();
+        services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
+        services.AddTransient<IEmailService, EmailService>();
+        services.AddTransient<IEmailBuilder, EmailBuilder>();
+        services.AddTransient<IEmailDistributionService, EmailDistributionService>();
+        services.AddTransient<IInventoryService, InventoryService>();
+        services.AddTransient<IPaymentProcessor, PaymentProcessor>();
+        services.AddTransient<IEmailDeliveryService, EmailDeliveryService>();
+        services.AddHealthChecks()
+        .AddCheck<SystemMemoryHealthcheck>("Memory");
+        services.AddSwaggerGen(options =>
         {
-            services.AddCors(options => options.AddPolicy("CorsPolicy",
-                builder => builder
-                .WithOrigins(configuration["Cors:Origins"])
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .SetIsOriginAllowed(isOriginAllowed: _ => true)
-                .AllowCredentials()));
-
-            services.AddHttpContextAccessor();
-            services.AddSingleton<ICommandRegistry, CommandRegistry>();
-            services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
-            services.AddSingleton<ICache, InMemoryCache>();
-            services.AddSingleton<IPasswordHasher, PasswordHasher>();
-            services.AddSingleton<ISecurityTokenFactory, SecurityTokenFactory>();
-            services.AddTransient<IEmailService, EmailService>();
-            services.AddTransient<IEmailBuilder, EmailBuilder>();
-            services.AddTransient<IEmailDistributionService, EmailDistributionService>();
-            services.AddTransient<IInventoryService, InventoryService>();
-
-            services.AddTransient<IPaymentProcessor, PaymentProcessor>();
-            services.AddTransient<IEmailDeliveryService, EmailDeliveryService>();
-
-            services.AddHealthChecks()
-            .AddCheck<SystemMemoryHealthcheck>("Memory");
-
-            services.AddSwaggerGen(options =>
+            options.DescribeAllEnumsAsStrings();
+            options.SwaggerDoc("v1", new OpenApiInfo
             {
-                options.DescribeAllEnumsAsStrings();
-                options.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "Kids Toy Hive Api",
-                    Version = "v1",
-                    Description = "Kids Toy Hive Api",
-                });
-                options.CustomSchemaIds(x => x.FullName);
+                Title = "Kids Toy Hive Api",
+                Version = "v1",
+                Description = "Kids Toy Hive Api",
             });
-
-            StripeConfiguration.ApiKey = configuration["Stripe:SecretKey"];
-
-            services.AddMediatR(p =>
+            options.CustomSchemaIds(x => x.FullName);
+        });
+        StripeConfiguration.ApiKey = configuration["Stripe:SecretKey"];
+        services.AddMediatR(p =>
+        {
+            p.AsTransient();
+        }, typeof(Authenticate).GetTypeInfo().Assembly);
+        services.Scan(
+            scan => scan.FromAssemblies(typeof(Authenticate).GetTypeInfo().Assembly)
+                .AddClasses(x => x.AssignableTo(typeof(IValidator<>)))
+                .AsImplementedInterfaces()
+                .WithSingletonLifetime());
+        services.Scan(
+            scan => scan.FromAssemblies(typeof(Startup).GetTypeInfo().Assembly)
+                .AddClasses(x => x.AssignableTo(typeof(IPipelineBehavior<,>)))
+                .AsImplementedInterfaces()
+                .WithTransientLifetime());
+        services.ConfigureSwaggerGen(options =>
+        {
+            options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+        });
+        services
+            .AddAuthentication(x =>
             {
-                p.AsTransient();
-
-            }, typeof(Authenticate).GetTypeInfo().Assembly);
-
-            services.Scan(
-                scan => scan.FromAssemblies(typeof(Authenticate).GetTypeInfo().Assembly)
-                    .AddClasses(x => x.AssignableTo(typeof(IValidator<>)))
-                    .AsImplementedInterfaces()
-                    .WithSingletonLifetime());
-
-            services.Scan(
-                scan => scan.FromAssemblies(typeof(Startup).GetTypeInfo().Assembly)
-                    .AddClasses(x => x.AssignableTo(typeof(IPipelineBehavior<,>)))
-                    .AsImplementedInterfaces()
-                    .WithTransientLifetime());
-
-            services.ConfigureSwaggerGen(options => {
-                options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
-            });
-
-
-            services
-                .AddAuthentication(x => {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
-                .AddJwtBearer(options =>
-                {
-                    options.RequireHttpsMetadata = false;
-                    options.SaveToken = true;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtKey"])),
-                        ValidateIssuer = false,
-                        ValidateAudience = false,
-                    };
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnMessageReceived = context =>
-                        {
-                            context.Request.Query.TryGetValue("access_token", out StringValues token);
-
-                            if (!string.IsNullOrEmpty(token))
-                                context.Token = token;
-
-                            return Task.CompletedTask;
-                        }
-                    };
-                });
-
-            services.AddControllers(x =>
-            {
-                x.Filters.Add(new AuthorizeFilter());
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-            .AddNewtonsoftJson()
-            .SetCompatibilityVersion(CompatibilityVersion.Latest);  
-
-            services.AddTransient<IAppDbContext, AppDbContext>();
-
-            services.AddDbContext<AppDbContext>(options =>
+            .AddJwtBearer(options =>
             {
-                options
-                .UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly("KidsToyHive.Api"));
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["Authentication:JwtKey"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                };
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        context.Request.Query.TryGetValue("access_token", out StringValues token);
+                        if (!string.IsNullOrEmpty(token))
+                            context.Token = token;
+                        return Task.CompletedTask;
+                    }
+                };
             });
-        }
+        services.AddControllers(x =>
+        {
+            x.Filters.Add(new AuthorizeFilter());
+        })
+        .AddNewtonsoftJson()
+        .SetCompatibilityVersion(CompatibilityVersion.Latest);
+        services.AddTransient<IAppDbContext, AppDbContext>();
+        services.AddDbContext<AppDbContext>(options =>
+        {
+            options
+            .UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly("KidsToyHive.Api"));
+        });
     }
 }

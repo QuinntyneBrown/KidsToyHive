@@ -1,14 +1,13 @@
-﻿using KidsToyHive.Domain.Services;
+using KidsToyHive.Domain.Services;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Fakes
+namespace KidsToyHive.Domain.Fakes;
+
+public class FakeEmailDeliveryService : IEmailDeliveryService
 {
-    public class FakeEmailDeliveryService : IEmailDeliveryService
+    public Task Send(SendGridMessage message)
     {
-        public Task Send(SendGridMessage message)
-        {
-            return Task.CompletedTask;
-        }
+        return Task.CompletedTask;
     }
 }

@@ -1,10 +1,9 @@
-﻿using SendGrid.Helpers.Mail;
+using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Services
+namespace KidsToyHive.Domain.Services;
+
+public interface IEmailDeliveryService
 {
-    public interface IEmailDeliveryService
-    {
-        Task Send(SendGridMessage message);
-    }
+    Task Send(SendGridMessage message);
 }

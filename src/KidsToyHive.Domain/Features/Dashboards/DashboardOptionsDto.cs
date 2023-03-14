@@ -2,18 +2,14 @@ using KidsToyHive.Domain.Models;
 using FluentValidation;
 using System;
 
-namespace KidsToyHive.Domain.Features.Dashboards
+namespace KidsToyHive.Domain.Features.Dashboards;
+
+public class DashboardOptionsDtoValidator : AbstractValidator<DashboardOptionsDto>
 {
-    public class DashboardOptionsDtoValidator : AbstractValidator<DashboardOptionsDto>
+    public DashboardOptionsDtoValidator()
     {
-        public DashboardOptionsDtoValidator ()
-        {
-
-        }
     }
-
-    public class DashboardOptionsDto
-    {        
-
-    }
+}
+public class DashboardOptionsDto
+{
 }

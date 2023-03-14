@@ -6,44 +6,37 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Profiles
+namespace KidsToyHive.Domain.Features.Profiles;
+
+public class UpsertProfile
 {
-    public class UpsertProfile
+    public class Validator : AbstractValidator<Request>
     {
-        public class Validator: AbstractValidator<Request> {
-            public Validator()
-            {
-                RuleFor(request => request.Profile.ProfileId).NotNull();
-            }
-        }
-
-        public class Request : IRequest<Response> {
-            public ProfileDto Profile { get; set; }
-        }
-
-        public class Response
-        {            
-            public Guid ProfileId { get; set; }
-        }
-
-        public class Handler : IRequestHandler<Request, Response>
+        public Validator()
         {
-            private readonly IAppDbContext _context;
-            
-            public Handler(IAppDbContext context) => _context = context;
+            RuleFor(request => request.Profile.ProfileId).NotNull();
+        }
+    }
+    public class Request : IRequest<Response>
+    {
+        public ProfileDto Profile { get; set; }
+    }
+    public class Response
+    {
+        public Guid ProfileId { get; set; }
+    }
+    public class Handler : IRequestHandler<Request, Response>
+    {
+        private readonly IAppDbContext _context;
 
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-            {
-                var profile = await _context.Profiles.FindAsync(request.Profile.ProfileId);
-
-                if (profile == null) _context.Profiles.Add(profile = new Profile());
-
-                profile.Name = request.Profile.Name;
-
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return new Response() { ProfileId = profile.ProfileId };
-            }
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+        {
+            var profile = await _context.Profiles.FindAsync(request.Profile.ProfileId);
+            if (profile == null) _context.Profiles.Add(profile = new Profile());
+            profile.Name = request.Profile.Name;
+            await _context.SaveChangesAsync(cancellationToken);
+            return new Response() { ProfileId = profile.ProfileId };
         }
     }
 }

@@ -7,25 +7,21 @@ using Moq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.Taxes
+namespace UnitTests.Domain.Features.Taxes;
+
+public class UpsertTaxTests
 {
-    public class UpsertTaxTests
+    [Fact]
+    public async Task ShouldUpsertTax()
     {
-        [Fact]
-        public async Task ShouldUpsertTax()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(UpsertTaxTests)}:{nameof(ShouldUpsertTax)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(UpsertTaxTests)}:{nameof(ShouldUpsertTax)}")
-                .Options;
-
-            var mediator = new Mock<IMediator>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
-            {
-                SeedData.Seed(context, ConfigurationHelper.Seed);
-
-                var upsertTaxHandler = new UpsertTax.Handler(context);
-            }
+            SeedData.Seed(context, ConfigurationHelper.Seed);
+            var upsertTaxHandler = new UpsertTax.Handler(context);
         }
     }
 }

@@ -1,10 +1,9 @@
-﻿using KidsToyHive.Domain.Common;
+using KidsToyHive.Domain.Common;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Services
+namespace KidsToyHive.Domain.Services;
+
+public interface IPaymentProcessor
 {
-    public interface IPaymentProcessor
-    {
-        Task<bool> ProcessAsync(PaymentDto payment);
-    }
+    Task<bool> ProcessAsync(PaymentDto payment);
 }

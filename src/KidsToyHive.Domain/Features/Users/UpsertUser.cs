@@ -6,46 +6,40 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Users
+namespace KidsToyHive.Domain.Features.Users;
+
+public class UpsertUser
 {
-    public class UpsertUser
+    public class Validator : AbstractValidator<Request>
     {
-
-        public class Validator: AbstractValidator<Request> {
-            public Validator()
+        public Validator()
+        {
+            RuleFor(request => request.User).NotNull();
+            RuleFor(request => request.User).SetValidator(new UserDtoValidator());
+        }
+    }
+    public class Request : IRequest<Response>
+    {
+        public UserDto User { get; set; }
+    }
+    public class Response
+    {
+        public Guid UserId { get; set; }
+    }
+    public class Handler : IRequestHandler<Request, Response>
+    {
+        private readonly IAppDbContext _context;
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+        {
+            var user = await _context.Users.FindAsync(request.User.UserId);
+            if (user == null)
             {
-                RuleFor(request => request.User).NotNull();
-                RuleFor(request => request.User).SetValidator(new UserDtoValidator());
+                user = new User();
+                _context.Users.Add(user);
             }
-        }
-
-        public class Request : IRequest<Response> {
-            public UserDto User { get; set; }
-        }
-
-        public class Response
-        {
-            public Guid UserId { get;set; }
-        }
-
-        public class Handler : IRequestHandler<Request, Response>
-        {
-            private readonly IAppDbContext _context;
-            public Handler(IAppDbContext context) => _context = context;
-
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-                var user = await _context.Users.FindAsync(request.User.UserId);
-
-                if (user == null) {
-                    user = new User();
-                    _context.Users.Add(user);
-                }
-
-
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return new Response() { UserId = user.UserId };
-            }
+            await _context.SaveChangesAsync(cancellationToken);
+            return new Response() { UserId = user.UserId };
         }
     }
 }

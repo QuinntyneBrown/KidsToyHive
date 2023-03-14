@@ -5,44 +5,35 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.Drivers
+namespace KidsToyHive.Domain.Features.Drivers;
+
+public class CommitToShipment
 {
-    public class CommitToShipment
+    public class Validator : AbstractValidator<Request>
     {
-        public class Validator: AbstractValidator<Request> {
-            public Validator()
-            {
-
-            }
-        }
-
-        public class Request : IRequest<Response> {
-            public Guid DriverId { get; set; }
-            public Guid ShipmentId { get; set; }
-        }
-
-        public class Response
+        public Validator()
         {
-
         }
-
-        public class Handler : IRequestHandler<Request, Response>
+    }
+    public class Request : IRequest<Response>
+    {
+        public Guid DriverId { get; set; }
+        public Guid ShipmentId { get; set; }
+    }
+    public class Response
+    {
+    }
+    public class Handler : IRequestHandler<Request, Response>
+    {
+        private readonly IAppDbContext _context;
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
         {
-            private readonly IAppDbContext _context;
-            public Handler(IAppDbContext context) => _context = context;
-
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken) {
-
-                var driver = await _context.Drivers.FindAsync(request.DriverId);
-
-                var shipment = await _context.Shipments.FindAsync(request.ShipmentId);
-
-                driver.Shipments.Add(shipment);
-
-                await _context.SaveChangesAsync(cancellationToken);
-
-                return new Response() { };
-            }
+            var driver = await _context.Drivers.FindAsync(request.DriverId);
+            var shipment = await _context.Shipments.FindAsync(request.ShipmentId);
+            driver.Shipments.Add(shipment);
+            await _context.SaveChangesAsync(cancellationToken);
+            return new Response() { };
         }
     }
 }

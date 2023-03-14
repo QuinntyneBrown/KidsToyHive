@@ -4,29 +4,26 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.Features.DashboardCards
+namespace KidsToyHive.Domain.Features.DashboardCards;
+
+public class GetDashboardCardById
 {
-    public class GetDashboardCardById
+    public class Request : IRequest<Response>
     {
-        public class Request : IRequest<Response> {
-            public Guid DashboardCardId { get; set; }
-        }
-
-        public class Response
-        {
-            public DashboardCardDto DashboardCard { get; set; }
-        }
-
-        public class Handler : IRequestHandler<Request, Response>
-        {
-            private readonly IAppDbContext _context;
-            public Handler(IAppDbContext context) => _context = context;
-
-            public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
-                => new Response()
-                {
-                    DashboardCard = (await _context.DashboardCards.FindAsync(request.DashboardCardId)).ToDto()
-                };
-        }
+        public Guid DashboardCardId { get; set; }
+    }
+    public class Response
+    {
+        public DashboardCardDto DashboardCard { get; set; }
+    }
+    public class Handler : IRequestHandler<Request, Response>
+    {
+        private readonly IAppDbContext _context;
+        public Handler(IAppDbContext context) => _context = context;
+        public async Task<Response> Handle(Request request, CancellationToken cancellationToken)
+            => new Response()
+            {
+                DashboardCard = (await _context.DashboardCards.FindAsync(request.DashboardCardId)).ToDto()
+            };
     }
 }

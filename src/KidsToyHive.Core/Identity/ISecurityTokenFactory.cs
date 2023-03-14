@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace KidsToyHive.Core.Identity
+namespace KidsToyHive.Core.Identity;
+
+public interface ISecurityTokenFactory
 {
-    public interface ISecurityTokenFactory
-    {
-        string Create(string username, List<Claim> customClaims = null);
-    }
+    string Create(string username, List<Claim> customClaims = null);
 }

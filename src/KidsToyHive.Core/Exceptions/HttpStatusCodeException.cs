@@ -1,40 +1,35 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace KidsToyHive.Core.Exceptions
+namespace KidsToyHive.Core.Exceptions;
+
+public class HttpStatusCodeException : Exception
 {
-    public class HttpStatusCodeException : Exception
+    public int StatusCode { get; set; }
+    public string ContentType { get; set; } = @"text/plain";
+    public HttpStatusCodeException(int statusCode)
     {
-        public int StatusCode { get; set; }
-        public string ContentType { get; set; } = @"text/plain";
-
-        public HttpStatusCodeException(int statusCode)
-        {
-            this.StatusCode = statusCode;
-        }
-
-        public HttpStatusCodeException(int statusCode, string message) : base(message)
-        {
-            this.StatusCode = statusCode;
-        }
-
-        public HttpStatusCodeException(int statusCode, Exception inner) : this(statusCode, inner.ToString()) { }
-
-        public HttpStatusCodeException(int statusCode, JObject errorObject) : this(statusCode, errorObject.ToString())
-        {
-            this.ContentType = @"application/json";
-        }
-
-        public HttpStatusCodeException(int statusCode, string type, string title, string detail) : this(statusCode, JsonConvert.SerializeObject(new ProblemDetails {
-            Type = type,
-            Status = statusCode,
-            Title =title,
-            Detail = detail
-        }))
-        {
-            this.ContentType = @"application/json";
-        }
+        this.StatusCode = statusCode;
+    }
+    public HttpStatusCodeException(int statusCode, string message) : base(message)
+    {
+        this.StatusCode = statusCode;
+    }
+    public HttpStatusCodeException(int statusCode, Exception inner) : this(statusCode, inner.ToString()) { }
+    public HttpStatusCodeException(int statusCode, JObject errorObject) : this(statusCode, errorObject.ToString())
+    {
+        this.ContentType = @"application/json";
+    }
+    public HttpStatusCodeException(int statusCode, string type, string title, string detail) : this(statusCode, JsonConvert.SerializeObject(new ProblemDetails
+    {
+        Type = type,
+        Status = statusCode,
+        Title = title,
+        Detail = detail
+    }))
+    {
+        this.ContentType = @"application/json";
     }
 }

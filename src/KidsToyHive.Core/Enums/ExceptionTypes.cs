@@ -1,13 +1,13 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum ExceptionType
 {
-    public enum ExceptionType
-    {
-        FailedModelValidation,
-        InvalidUsernameOrPassword,
-        Concurrency,
-        CustomerExistsWithEmail,
-        CustomerFailedToAcceptTermsAndConditions,
-        OutOfStock,
-        Payment
-    }
+    FailedModelValidation,
+    InvalidUsernameOrPassword,
+    Concurrency,
+    CustomerExistsWithEmail,
+    CustomerFailedToAcceptTermsAndConditions,
+    OutOfStock,
+    Payment
 }

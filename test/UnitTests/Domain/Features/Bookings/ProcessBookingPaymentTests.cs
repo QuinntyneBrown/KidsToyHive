@@ -11,47 +11,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace UnitTests.Domain.Features.Bookings
+namespace UnitTests.Domain.Features.Bookings;
+
+public class ProcessBookingPaymentTests
 {
-    public class ProcessBookingPaymentTests
+    [Fact]
+    public async Task ShouldProcessBookingPayment()
     {
-        [Fact]
-        public async Task ShouldProcessBookingPayment()
+        var options = new DbContextOptionsBuilder<AppDbContext>()
+            .UseInMemoryDatabase($"{nameof(ProcessBookingPaymentTests)}:{nameof(ShouldProcessBookingPayment)}")
+            .Options;
+        var mediator = new Mock<IMediator>().Object;
+        var emailService = new Mock<IEmailService>().Object;
+        using (var context = new AppDbContext(options, mediator))
         {
-            var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase($"{nameof(ProcessBookingPaymentTests)}:{nameof(ShouldProcessBookingPayment)}")
-                .Options;
+            SeedData.Seed(context, ConfigurationHelper.Seed);
+            var product = context.Products.Single();
+            var booking = new Booking();
 
-            var mediator = new Mock<IMediator>().Object;
-            var emailService = new Mock<IEmailService>().Object;
-
-            using (var context = new AppDbContext(options, mediator))
+            booking.BookingDetails.Add(new BookingDetail
             {
-                SeedData.Seed(context, ConfigurationHelper.Seed);
-                var product = context.Products.Single();
-
-                var booking = new Booking();
-                
-                booking.BookingDetails.Add(new BookingDetail
-                {
-                    Cost = 4 * product.ChargePeriodPrice
-                });
-
-                context.Bookings.Add(booking);
-                context.SaveChanges();
-
-                Assert.Equal(12500, booking.Cost);
-
-                var processBookingPaymentHandler = new CheckoutBooking.Handler(context, emailService, new FakePaymentProcessor());
-
-                var result = await processBookingPaymentHandler.Handle(new CheckoutBooking.Request {
-                    BookingId = booking.BookingId,
-                    Number = "",
-                    Cvc = "",
-                    ExpYear = 09,
-                    ExpMonth = 22,
-                }, default);
-            }
+                Cost = 4 * product.ChargePeriodPrice
+            });
+            context.Bookings.Add(booking);
+            context.SaveChanges();
+            Assert.Equal(12500, booking.Cost);
+            var processBookingPaymentHandler = new CheckoutBooking.Handler(context, emailService, new FakePaymentProcessor());
+            var result = await processBookingPaymentHandler.Handle(new CheckoutBooking.Request
+            {
+                BookingId = booking.BookingId,
+                Number = "",
+                Cvc = "",
+                ExpYear = 09,
+                ExpMonth = 22,
+            }, default);
         }
     }
 }

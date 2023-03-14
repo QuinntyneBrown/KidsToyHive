@@ -1,12 +1,12 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum BookingStatus : byte
 {
-    public enum BookingStatus: byte
-    {
-        Quote = 0,
-        New,
-        Paid,
-        Delivered,
-        PickedUp,
-        Cancelled
-    }
+    Quote = 0,
+    New,
+    Paid,
+    Delivered,
+    PickedUp,
+    Cancelled
 }

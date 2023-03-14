@@ -1,9 +1,9 @@
-﻿namespace KidsToyHive.Core.Enums
+
+namespace KidsToyHive.Core.Enums;
+
+public enum ShipmentStatus
 {
-    public enum ShipmentStatus
-    {
-        New,
-        Committed,
-        Completed
-    }
+    New,
+    Committed,
+    Completed
 }
