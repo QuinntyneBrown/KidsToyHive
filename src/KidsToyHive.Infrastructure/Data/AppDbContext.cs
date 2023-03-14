@@ -1,3 +1,4 @@
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.DataAccess;
+namespace KidsToyHive.Infrastructure.Data;
 
 public class AppDbContext : DbContext, IAppDbContext
 {
@@ -21,12 +22,14 @@ public class AppDbContext : DbContext, IAppDbContext
     {
         _mediator = mediator;
     }
+
     [Obsolete]
     public static readonly LoggerFactory ConsoleLoggerFactory
         = new LoggerFactory(new[] {
              new ConsoleLoggerProvider((category, level)
                  => category == DbLoggerCategory.Database.Command.Name
              && level == LogLevel.Information, true) });
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>().OwnsOne(customer => customer.Address);

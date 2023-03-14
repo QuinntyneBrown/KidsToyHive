@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Core.Interfaces;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 

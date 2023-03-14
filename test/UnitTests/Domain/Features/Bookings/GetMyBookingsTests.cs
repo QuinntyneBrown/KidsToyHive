@@ -1,5 +1,5 @@
 using KidsToyHive.Api;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Bookings;
 using KidsToyHive.Domain.Models;
 using MediatR;
@@ -45,6 +45,7 @@ public class GetMyBookingsTests
             Assert.Single(result.Bookings);
         }
     }
+
     [Fact]
     public async Task ShouldGetMyBookingsEmpty()
     {

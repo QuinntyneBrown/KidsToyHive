@@ -11,7 +11,7 @@ using System.Threading;
 using KidsToyHive.Core.Helpers;
 using KidsToyHive.Domain.Models;
 using System.Linq;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 
 namespace KidsToyHive.Domain.Features.DigitalAssets;
 

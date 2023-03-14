@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using KidsToyHive.Core.Enums;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using SendGrid.Helpers.Mail;

@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using KidsToyHive.Core.Interfaces;
 using FluentValidation;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 

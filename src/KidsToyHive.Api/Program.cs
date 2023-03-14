@@ -1,4 +1,4 @@
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;

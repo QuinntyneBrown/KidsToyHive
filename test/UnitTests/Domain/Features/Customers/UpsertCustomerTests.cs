@@ -1,6 +1,6 @@
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Addresses;
 using KidsToyHive.Domain.Features.Customers;
 using KidsToyHive.Domain.Features.Locations;

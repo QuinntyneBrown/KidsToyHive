@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using KidsToyHive.Core.Interfaces;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 

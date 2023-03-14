@@ -1,5 +1,5 @@
 using FluentValidation;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Models;
 using MediatR;
 using System;

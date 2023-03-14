@@ -1,4 +1,4 @@
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using FluentValidation;
 using MediatR;
 using System;

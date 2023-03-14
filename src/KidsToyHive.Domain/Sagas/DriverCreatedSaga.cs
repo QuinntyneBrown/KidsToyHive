@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;

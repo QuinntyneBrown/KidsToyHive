@@ -1,7 +1,7 @@
 using FluentValidation;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Common;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

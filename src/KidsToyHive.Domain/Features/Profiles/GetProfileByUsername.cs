@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using KidsToyHive.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 
 namespace KidsToyHive.Domain.Features.Profiles;
 

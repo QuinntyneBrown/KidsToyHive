@@ -7,7 +7,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using KidsToyHive.Core.Identity;
 using System;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 
 namespace KidsToyHive.Domain.Features.Users;
 

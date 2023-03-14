@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33402.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KidsToyHive.Core", "src\KidsToyHive.Core\KidsToyHive.Core.csproj", "{34528940-52AE-4A6C-AA49-E72BED83D875}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "test\IntegrationTests\IntegrationTests.csproj", "{10A12BCD-A0C8-49A9-96C8-0FE38755A576}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "test\UnitTests\UnitTests.csproj", "{DA9621B5-A23E-439F-87DF-A5B99E0F5140}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KidsToyHive.Infrastructure", "src\KidsToyHive.Infrastructure\KidsToyHive.Infrastructure.csproj", "{BE0AD2CA-CAB8-4312-85D7-BA7D6E4F4863}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{DA9621B5-A23E-439F-87DF-A5B99E0F5140}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DA9621B5-A23E-439F-87DF-A5B99E0F5140}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DA9621B5-A23E-439F-87DF-A5B99E0F5140}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE0AD2CA-CAB8-4312-85D7-BA7D6E4F4863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE0AD2CA-CAB8-4312-85D7-BA7D6E4F4863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE0AD2CA-CAB8-4312-85D7-BA7D6E4F4863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE0AD2CA-CAB8-4312-85D7-BA7D6E4F4863}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{4702E5A7-2621-4CBB-B0CF-92DF4AA12AEB} = {4FAAB9A0-42F9-4995-873A-C9305AAF9AE4}
 		{10A12BCD-A0C8-49A9-96C8-0FE38755A576} = {C04322ED-C8BE-4022-8917-82543915731B}
 		{DA9621B5-A23E-439F-87DF-A5B99E0F5140} = {C04322ED-C8BE-4022-8917-82543915731B}
+		{BE0AD2CA-CAB8-4312-85D7-BA7D6E4F4863} = {4FAAB9A0-42F9-4995-873A-C9305AAF9AE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16439BF2-D1DD-4CEB-8149-4C8012639495}

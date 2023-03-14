@@ -2,7 +2,7 @@ using FluentValidation;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Exceptions;
 using KidsToyHive.Core.Identity;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

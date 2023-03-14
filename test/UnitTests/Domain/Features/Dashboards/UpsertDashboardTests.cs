@@ -1,4 +1,4 @@
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Dashboards;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

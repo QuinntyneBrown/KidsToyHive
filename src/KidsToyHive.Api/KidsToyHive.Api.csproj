@@ -61,8 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\KidsToyHive.Core\KidsToyHive.Core.csproj" />
-    <ProjectReference Include="..\KidsToyHive.Domain\KidsToyHive.Domain.csproj" />
+    <ProjectReference Include="..\KidsToyHive.Infrastructure\KidsToyHive.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

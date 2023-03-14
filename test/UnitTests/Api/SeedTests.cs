@@ -1,6 +1,6 @@
 using KidsToyHive.Api;
 using KidsToyHive.Core.Enums;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

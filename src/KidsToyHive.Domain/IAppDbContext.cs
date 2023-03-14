@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KidsToyHive.Domain.DataAccess;
+namespace KidsToyHive.Domain;
 
 public interface IAppDbContext
 {

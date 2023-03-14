@@ -1,5 +1,5 @@
 using KidsToyHive.Core.Services;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Products;
 using KidsToyHive.Domain.Models;
 using MediatR;

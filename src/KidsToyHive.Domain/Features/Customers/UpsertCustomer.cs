@@ -3,7 +3,7 @@ using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Exceptions;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Domain.Common;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using KidsToyHive.Domain.Services;

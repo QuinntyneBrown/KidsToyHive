@@ -1,5 +1,5 @@
 using KidsToyHive.Api;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Bins;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

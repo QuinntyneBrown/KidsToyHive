@@ -1,5 +1,5 @@
 using KidsToyHive.Core.Enums;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Models;
 using KidsToyHive.Domain.Models.DomainEvents;
 using MediatR;

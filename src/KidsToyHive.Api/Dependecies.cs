@@ -5,7 +5,7 @@ using KidsToyHive.Core.Identity;
 using KidsToyHive.Core.Interfaces;
 using KidsToyHive.Core.Services;
 using KidsToyHive.Domain.Common;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Users;
 using KidsToyHive.Domain.Services;
 using MediatR;
@@ -22,6 +22,7 @@ using Stripe;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using KidsToyHive.Domain;
 
 namespace KidsToyHive.Api;
 

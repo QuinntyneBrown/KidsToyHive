@@ -19,6 +19,7 @@
     <ProjectReference Include="..\..\src\KidsToyHive.Api\KidsToyHive.Api.csproj" />
     <ProjectReference Include="..\..\src\KidsToyHive.Core\KidsToyHive.Core.csproj" />
     <ProjectReference Include="..\..\src\KidsToyHive.Domain\KidsToyHive.Domain.csproj" />
+    <ProjectReference Include="..\..\src\KidsToyHive.Infrastructure\KidsToyHive.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

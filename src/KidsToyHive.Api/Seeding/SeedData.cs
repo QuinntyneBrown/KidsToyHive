@@ -1,6 +1,6 @@
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
-using KidsToyHive.Domain.DataAccess;
+using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Models;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
