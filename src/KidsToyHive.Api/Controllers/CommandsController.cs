@@ -1,4 +1,4 @@
-/*using KidsToyHive.Domain;
+using KidsToyHive.Domain;
 using KidsToyHive.Domain.Common;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -23,6 +23,7 @@ public class CommandsController
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly ConcurrentDictionary<string, object> _locks = new ConcurrentDictionary<string, object>();
     private readonly IMediator _mediator;
+
     public CommandsController(
         IAuthorizationService authorizationService,
         ICommandRegistry commandRegistry,
@@ -40,22 +41,29 @@ public class CommandsController
     public async Task<IActionResult> Post(CancellationToken cancellationToken = default)
     {
         var authorizationResult = await _authorizationService.AuthorizeAsync(_httpContextAccessor.HttpContext.User, new AuthorizationPolicyBuilder()
-            Require.AuthenticatedUser()
+            .RequireAuthenticatedUser()
             .Build());
+        
         var item = await CommandRegistryItem.ParseAsync(Request);
+        
         if (!authorizationResult.Succeeded && !item.hasAllowAnonymousAttribute)
             return new UnauthorizedResult();
+        
         var syncLock = _locks.GetOrAdd($"{item.PartitionKey}", id => new object());
+        
         lock (syncLock)
             _commandRegistry.TryToAdd(item);
+        
         if (item.HasConflicts())
             await Observable.Zip(_commandRegistry
                 .GetByCorrelationIds(item.ConflictingIds.Split(','))
                 .Select(x => x.Completed));
+        
         dynamic result = default;
+        
         try
         {
-            result = await _mediator.Send(JsonConvert.DeserializeObject(itemRequest, Type.GetType(itemRequestDotNetType)) as dynamic);
+            result = await _mediator.Send(JsonConvert.DeserializeObject(item.Request, Type.GetType(item.RequestDotNetType)) as dynamic);
             item.Complete();
         }
         catch (Exception e)
@@ -65,6 +73,6 @@ public class CommandsController
         }
         return new JsonResult(result);
     }
-    private HttpRequest Request => _httpContextAccessor.Httpcontext.Request;
+    
+    private HttpRequest Request => _httpContextAccessor.HttpContext.Request;
 }
-*/

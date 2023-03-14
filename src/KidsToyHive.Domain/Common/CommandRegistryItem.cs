@@ -26,7 +26,9 @@ public class CommandRegistryItem
     public string Key { get; set; }
     public string SideEffects { get; set; }
     public bool hasAllowAnonymousAttribute { get; set; }
+    
     private CommandRegistryItemState _state = CommandRegistryItemState.Sleeping;
+    
     public CommandRegistryItemState State
     {
         get
@@ -61,19 +63,27 @@ public class CommandRegistryItem
     {
         State = CommandRegistryItemState.Activated;
     }
+    
     public bool ConflictsWith(CommandRegistryItem request)
         => request.SideEffects.Split(',')
             .Intersect(SideEffects.Split(',')).Any()
             && !string.IsNullOrEmpty(SideEffects);
+
     public async static Task<CommandRegistryItem> ParseAsync(HttpRequest httpRequest, CancellationToken token = default)
     {
         var body = await new StreamReader(httpRequest.Body).ReadToEndAsync();
+        
         httpRequest.Headers.TryGetValue(Strings.PartitionKey, out StringValues partitionKey);
+        
         httpRequest.Headers.TryGetValue(Strings.OperationId, out StringValues operationId);
+        
         dynamic request = JsonConvert.DeserializeObject(body, Type.GetType(DotNetTypeMapper.Map(operationId)));
+        
         return Parse(request, operationId, partitionKey, token);
     }
+
     public CancellationToken CancellationToken { get; set; }
+    
     public static CommandRegistryItem Parse(dynamic request, string operationId, string partitionKey, CancellationToken token = default)
     {
         var item = new CommandRegistryItem
@@ -91,6 +101,7 @@ public class CommandRegistryItem
     }
     public bool HasConflicts()
         => !string.IsNullOrEmpty(ConflictingIds);
+    
     public IObservable<CommandRegistryItemState> Completed => StateChanges
      .Where(x => x >= CommandRegistryItemState.Completed)
      .Take(1);
