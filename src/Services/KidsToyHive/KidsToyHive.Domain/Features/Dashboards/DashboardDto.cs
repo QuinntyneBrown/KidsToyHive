@@ -12,12 +12,14 @@ public class DashboardDtoValidator : AbstractValidator<DashboardDto>
         RuleFor(x => x.Name).NotNull();
     }
 }
+
 public class DashboardDto
 {
     public Guid DashboardId { get; set; }
     public string Name { get; set; }
     public int Version { get; set; }
 }
+
 public static class DashboardExtensions
 {
     public static DashboardDto ToDto(this Dashboard dashboard)

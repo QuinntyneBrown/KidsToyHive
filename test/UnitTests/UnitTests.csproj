@@ -16,13 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\KidsToyHive.Api\KidsToyHive.Api.csproj" />
-    <ProjectReference Include="..\..\src\KidsToyHive.Core\KidsToyHive.Core.csproj" />
-    <ProjectReference Include="..\..\src\KidsToyHive.Domain\KidsToyHive.Domain.csproj" />
-    <ProjectReference Include="..\..\src\KidsToyHive.Infrastructure\KidsToyHive.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Domain\Features\Customers\" />
     <Folder Include="Domain\Features\Drivers\" />
     <Folder Include="Domain\Features\InventoryItems\" />
@@ -35,6 +28,10 @@
     <Folder Include="Domain\Features\Shipments\" />
     <Folder Include="Domain\Sagas\" />
     <Folder Include="Api\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Services\KidsToyHive\KidsToyHive.Api\KidsToyHive.Api.csproj" />
   </ItemGroup>
 
 </Project>
