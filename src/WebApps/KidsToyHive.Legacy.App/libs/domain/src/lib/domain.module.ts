@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddressService, DigitalAssetService, CardService, CustomerService, DashboardCardService, DashboardService, InventoryItemService, ProductCategoryService, ProductService, RoleService, UserService, SalesOrderService, SalesOrderDetailService, BookingService, LocationService, HtmlContentService } from './services';
@@ -49,3 +52,4 @@ export * from './services';
   ]
 })
 export class DomainModule {}
+

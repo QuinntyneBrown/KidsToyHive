@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Taxes;
@@ -15,7 +18,7 @@ public class GetTaxesTests
     [Fact]
     public async Task ShouldGetTaxes()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(GetTaxesTests)}:{nameof(ShouldGetTaxes)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -29,3 +32,4 @@ public class GetTaxesTests
         }
     }
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { ComponentType } from "@angular/cdk/overlay";
 import { ComponentPortal, PortalInjector } from "@angular/cdk/portal";
 import { ComponentRef, Injector } from "@angular/core";
@@ -31,3 +34,4 @@ export class BaseOverlayService<TComponent> {
     return overlayPortalRef.instance;
   }
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Infrastructure.Data;
@@ -16,7 +19,7 @@ public class GetCommittedShipmentsTests
     [Fact]
     public async Task ShouldGetCommittedShipmentsEmpty()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(GetCommittedShipmentsTests)}:{nameof(ShouldGetCommittedShipmentsEmpty)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -35,7 +38,7 @@ public class GetCommittedShipmentsTests
     [Fact]
     public async Task ShouldGetCommittedShipments()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(GetCommittedShipmentsTests)}:{nameof(ShouldGetCommittedShipments)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -68,3 +71,4 @@ public class GetCommittedShipmentsTests
         }
     }
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Injectable, Injector } from '@angular/core';
 //import { BaseOverlayService, OverlayRefProvider } from '@k/domain';
 import {} from '@kids-toy-hive/core';
@@ -13,3 +16,4 @@ export class AddDashboardCard extends BaseOverlayService<AddDashboardCardCompone
     super(injector, overlayRefProvider, AddDashboardCardComponent, logger);
   }
 }
+

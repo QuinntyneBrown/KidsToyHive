@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain.Features.Products;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -26,3 +29,4 @@ public class ProductsController
     public async Task<ActionResult<GetProductByIdResponse>> GetById([FromRoute] GetProductByIdRequest request)
         => await _meditator.Send(request);
 }
+

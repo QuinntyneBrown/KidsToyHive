@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain.Features.SalesOrderDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -23,3 +26,4 @@ public class SalesOrderDetailsController
     public async Task<ActionResult<GetSalesOrderDetailByIdResponse>> GetById([FromRoute] GetSalesOrderDetailByIdRequest request)
         => await _meditator.Send(request);
 }
+

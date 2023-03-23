@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -20,3 +23,4 @@ module.exports = (on, config) => {
   // Preprocess Typescript
   on('file:preprocessor', preprocessTypescript(config));
 };
+

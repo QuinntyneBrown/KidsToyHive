@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Infrastructure.Data;
@@ -15,7 +18,7 @@ namespace KidsToyHive.Api;
 
 public class SeedData
 {
-    public static void Seed(AppDbContext context, IConfiguration configuration)
+    public static void Seed(KidsToyHiveDbContext context, IConfiguration configuration)
     {
         TenantConfiguration.Seed(context, configuration);
         CardConfiguration.Seed(context);
@@ -35,7 +38,7 @@ public class SeedData
     }
     internal class TenantConfiguration
     {
-        public static void Seed(AppDbContext context, IConfiguration configuration)
+        public static void Seed(KidsToyHiveDbContext context, IConfiguration configuration)
         {
             var tenantInfos = configuration["Seed:DefaultTenants"].Split(',');
             foreach (var tenantInfo in tenantInfos)
@@ -54,7 +57,7 @@ public class SeedData
     }
     internal class ProfessionalServiceProviderConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             var tenant = context.Tenants.Single(x => x.Name == "Code With QB");
             if (context.ProfessionalServiceProviders.SingleOrDefault(x => x.FullName == "Quinntyne Brown") == null)
@@ -70,7 +73,7 @@ public class SeedData
     }
     internal class VideoConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.Videos.SingleOrDefault(x => x.Title == "The Kids Toy Hive") == null)
                 context.Videos.Add(new Video()
@@ -82,7 +85,7 @@ public class SeedData
     }
     internal class CardLayoutConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.CardLayouts.SingleOrDefault(x => x.Name == "Poster") == null)
                 context.CardLayouts.Add(new CardLayout() { Name = "Poster" });
@@ -91,7 +94,7 @@ public class SeedData
     }
     internal class DriverConfiguration
     {
-        public static void Seed(AppDbContext context, IConfiguration configuration)
+        public static void Seed(KidsToyHiveDbContext context, IConfiguration configuration)
         {
             foreach (var user in context.Users.Include(x => x.Profiles))
             {
@@ -118,7 +121,7 @@ public class SeedData
     }
     internal class EmailTemplateConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.EmailTemplates.SingleOrDefault(x => x.Name == nameof(EmailTemplateName.BookingConfirmation)) == null)
                 context.EmailTemplates.Add(new EmailTemplate
@@ -137,7 +140,7 @@ public class SeedData
     }
     internal class HtmlContentConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.HtmlContents.SingleOrDefault(x => x.Name == "TermsAndConditions.html") == null)
                 context.HtmlContents.Add(new HtmlContent
@@ -156,7 +159,7 @@ public class SeedData
     }
     internal class TaxConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.Taxes.SingleOrDefault() == null)
                 context.Taxes.Add(new Tax() { Rate = .13 });
@@ -165,7 +168,7 @@ public class SeedData
     }
     internal class DigitalAssetConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.DigitalAssets.SingleOrDefault(x => x.Name == "Logo.png") == null)
             {
@@ -219,7 +222,7 @@ public class SeedData
     }
     internal class ProductConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.Products.SingleOrDefault() == null)
                 context.Products.Add(new Product
@@ -257,7 +260,7 @@ public class SeedData
     }
     internal class InventoryItemConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             var product = context.Products.Single(x => x.Name == "Jungle Jumparoo");
             if (context.InventoryItems.Include(x => x.Product).SingleOrDefault(x => x.Product.Name == "Jungle Jumparoo") == null)
@@ -271,7 +274,7 @@ public class SeedData
     }
     internal class CardConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.Cards.SingleOrDefault(x => x.Name == "Products") == null)
                 context.Cards.Add(new Card() { Name = "Products" });
@@ -288,7 +291,7 @@ public class SeedData
     }
     internal class DashboardConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             foreach (var profileId in context.Profiles.Select(x => x.ProfileId))
             {
@@ -306,7 +309,7 @@ public class SeedData
     }
     internal class UserConfiguration
     {
-        public static void Seed(AppDbContext context, IConfiguration configuration)
+        public static void Seed(KidsToyHiveDbContext context, IConfiguration configuration)
         {
             var index = 0;
             foreach (var username in configuration["Seed:DefaultUser:Username"].Split(','))
@@ -334,7 +337,7 @@ public class SeedData
     }
     internal class WarehouseConfiguration
     {
-        public static void Seed(AppDbContext context)
+        public static void Seed(KidsToyHiveDbContext context)
         {
             if (context.Warehouses.SingleOrDefault(x => x.Name == "DefaultWarehouse") == null)
                 context.Warehouses.Add(new Warehouse() { Name = "DefaultWarehouse" });
@@ -444,3 +447,4 @@ public static class StringListExtensions
         }
     }
 }
+

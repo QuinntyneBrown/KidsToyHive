@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using FluentValidation;
 using KidsToyHive.Api.Filters;
 using KidsToyHive.Api.HealthChecks;
@@ -23,6 +26,8 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using KidsToyHive.Domain;
+using KidsToyHive.Core.Extensions;
+using FluentValidation;
 
 namespace KidsToyHive.Api;
 
@@ -53,7 +58,6 @@ public static class Dependencies
         .AddCheck<SystemMemoryHealthcheck>("Memory");
         services.AddSwaggerGen(options =>
         {
-            options.DescribeAllEnumsAsStrings();
             options.SwaggerDoc("v1", new OpenApiInfo
             {
                 Title = "Kids Toy Hive Api",
@@ -63,24 +67,14 @@ public static class Dependencies
             options.CustomSchemaIds(x => x.FullName);
         });
         StripeConfiguration.ApiKey = configuration["Stripe:SecretKey"];
-        services.AddMediatR(p =>
-        {
-            p.AsTransient();
-        }, typeof(AuthenticateRequest).GetTypeInfo().Assembly);
-        services.Scan(
-            scan => scan.FromAssemblies(typeof(AuthenticateRequest).GetTypeInfo().Assembly)
-                .AddClasses(x => x.AssignableTo(typeof(IValidator<>)))
-                .AsImplementedInterfaces()
-                .WithSingletonLifetime());
-        services.Scan(
-            scan => scan.FromAssemblies(typeof(Startup).GetTypeInfo().Assembly)
-                .AddClasses(x => x.AssignableTo(typeof(IPipelineBehavior<,>)))
-                .AsImplementedInterfaces()
-                .WithTransientLifetime());
+
+        services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<AuthenticateRequest>());
+
         services.ConfigureSwaggerGen(options =>
         {
             options.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
         });
+
         services
             .AddAuthentication(x =>
             {
@@ -115,11 +109,12 @@ public static class Dependencies
         })
         .AddNewtonsoftJson()
         .SetCompatibilityVersion(CompatibilityVersion.Latest);
-        services.AddTransient<IAppDbContext, AppDbContext>();
-        services.AddDbContext<AppDbContext>(options =>
+        services.AddTransient<IKidsToyHiveDbContext, KidsToyHiveDbContext>();
+        services.AddDbContext<KidsToyHiveDbContext>(options =>
         {
             options
             .UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"], b => b.MigrationsAssembly("KidsToyHive.Api"));
         });
     }
 }
+

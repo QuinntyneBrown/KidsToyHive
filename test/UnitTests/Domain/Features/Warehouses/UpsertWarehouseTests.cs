@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Warehouses;
@@ -14,7 +17,7 @@ public class UpsertWarehouseTests
     [Fact]
     public async Task ShouldUpsertWarehouse()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(UpsertWarehouseTests)}:{nameof(ShouldUpsertWarehouse)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -25,3 +28,4 @@ public class UpsertWarehouseTests
         }
     }
 }
+

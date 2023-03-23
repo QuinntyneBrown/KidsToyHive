@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Infrastructure.Data;
 using Microsoft.ApplicationInsights;
 using Microsoft.AspNetCore;
@@ -25,7 +28,7 @@ public class Program
         var services = (IServiceScopeFactory)host.Services.GetService(typeof(IServiceScopeFactory));
         using (var scope = services.CreateScope())
         {
-            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<KidsToyHiveDbContext>();
             var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
             if (args.Contains("ci"))
                 args = new string[4] { "dropdb", "migratedb", "seeddb", "stop" };
@@ -62,8 +65,9 @@ public class Program
             config
                 .MinimumLevel.Information()
                 .Enrich.FromLogContext()
-                .WriteTo.Console()
-                .WriteTo.ApplicationInsightsTraces(new TelemetryClient());
+                .WriteTo.Console();
+                //.WriteTo.ApplicationInsightsTraces(new TelemetryClient());
         })
         .UseStartup<Startup>();
 }
+

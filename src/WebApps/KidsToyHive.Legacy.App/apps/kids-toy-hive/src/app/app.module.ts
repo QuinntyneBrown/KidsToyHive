@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -77,3 +80,4 @@ import { YourOrderService } from './pages/order-page/your-order.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

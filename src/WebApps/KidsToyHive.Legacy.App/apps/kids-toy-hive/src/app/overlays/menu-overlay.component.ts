@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from '@kids-toy-hive/domain';
 import { baseUrl, OverlayRefWrapper, LocalStorageService, accessTokenKey } from '@kids-toy-hive/core';
@@ -55,3 +58,4 @@ export class MenuOverlayComponent implements OnInit {
     this._overlayRef.close();
   }
 }
+

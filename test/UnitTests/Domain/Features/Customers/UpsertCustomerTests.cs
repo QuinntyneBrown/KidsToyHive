@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Infrastructure.Data;
@@ -19,7 +22,7 @@ public class UpsertCustomerTests
     [Fact]
     public async Task ShouldUpsertCustomer()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(UpsertCustomerTests)}:{nameof(ShouldUpsertCustomer)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -66,3 +69,4 @@ public class UpsertCustomerTests
         }
     }
 }
+

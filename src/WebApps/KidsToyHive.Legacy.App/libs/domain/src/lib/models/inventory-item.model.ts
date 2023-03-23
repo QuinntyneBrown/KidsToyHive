@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Product } from './product.model';
 
 export interface InventoryItem {
@@ -7,3 +10,4 @@ export interface InventoryItem {
   version: number;
   product: Product;
 }
+

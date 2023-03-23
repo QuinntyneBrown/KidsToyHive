@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Bookings;
@@ -16,7 +19,7 @@ public class GetMyBookingsTests
     [Fact]
     public async Task ShouldGetMyBookings()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(GetMyBookingsTests)}:{nameof(ShouldGetMyBookings)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -49,7 +52,7 @@ public class GetMyBookingsTests
     [Fact]
     public async Task ShouldGetMyBookingsEmpty()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(GetMyBookingsTests)}:{nameof(ShouldGetMyBookingsEmpty)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -71,3 +74,4 @@ public class GetMyBookingsTests
         }
     }
 }
+

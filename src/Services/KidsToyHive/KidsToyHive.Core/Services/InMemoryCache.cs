@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Core.Interfaces;
 using System.Collections.Concurrent;
 
@@ -19,3 +22,4 @@ public class InMemoryCache : ICache
     }
     public void Remove(string key) => _concurrentDictionary.TryRemove(key, out _);
 }
+

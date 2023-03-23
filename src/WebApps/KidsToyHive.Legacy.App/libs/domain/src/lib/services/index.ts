@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 export * from "./address.service";
 export * from "./booking.service";
 export * from "./card.service";
@@ -15,3 +18,4 @@ export * from "./sales-order-detail.service";
 export * from "./sales-order.service";
 export * from "./shipment-sales-order.service";
 export * from "./user.service";
+

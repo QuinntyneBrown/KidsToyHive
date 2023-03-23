@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Infrastructure.Data;
@@ -20,7 +23,7 @@ public class InventoryServiceTests
     [Fact]
     public async Task ShouldReturnNotAvailableIfBookingsOnSameDateAndTimeSlot()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(InventoryServiceTests)}:{nameof(ShouldReturnNotAvailableIfBookingsOnSameDateAndTimeSlot)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -48,7 +51,7 @@ public class InventoryServiceTests
     [Fact]
     public async Task ShouldReturnAvailableIfBookingsOnSameDateAndDifferentTimeSlot()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(InventoryServiceTests)}:{nameof(ShouldReturnAvailableIfBookingsOnSameDateAndDifferentTimeSlot)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -74,3 +77,4 @@ public class InventoryServiceTests
         }
     }
 }
+

@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Subject } from 'rxjs';
 import { Component, OnDestroy } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
@@ -58,3 +61,4 @@ export class LoginOverlayComponent implements OnDestroy  {
 
   handleInputFocus() { this.errorMessage = ''; }
 }
+

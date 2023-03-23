@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain.Features.Geolocation;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -19,3 +22,4 @@ public class GeolocationController : Controller
     public async Task<IActionResult> GetAddress([FromRoute] GetAddressFromLatitudeAndLongitudeRequest request)
         => Ok(await _mediator.Send(request));
 }
+

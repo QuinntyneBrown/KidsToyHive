@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Drivers;
 using MediatR;
@@ -13,7 +16,7 @@ public class UpsertDriverTests
     [Fact]
     public async Task ShouldUpsertDriver()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(UpsertDriverTests)}:{nameof(ShouldUpsertDriver)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -23,3 +26,4 @@ public class UpsertDriverTests
         }
     }
 }
+

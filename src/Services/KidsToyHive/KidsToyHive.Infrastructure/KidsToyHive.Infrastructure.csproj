@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KidsToyHive.Core\KidsToyHive.Core.csproj" />
-    <ProjectReference Include="..\KidsToyHive.Domain\KidsToyHive.Domain.csproj" />
   </ItemGroup>
 
 </Project>

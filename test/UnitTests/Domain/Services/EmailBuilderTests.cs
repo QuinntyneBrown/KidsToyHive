@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Infrastructure.Data;
@@ -16,7 +19,7 @@ public class EmailBuilderTests
     [Fact]
     public async Task ShouldBuildTemplate()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(EmailBuilderTests)}:{nameof(ShouldBuildTemplate)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -37,3 +40,4 @@ public class EmailBuilderTests
         //var email = await emailBuilder.Build(EmailTemplateName.NewCustomer, new Dictionary<string, string>());
     }
 }
+

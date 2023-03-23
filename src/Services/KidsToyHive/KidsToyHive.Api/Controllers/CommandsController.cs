@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain;
 using KidsToyHive.Domain.Common;
 using MediatR;
@@ -76,3 +79,4 @@ public class CommandsController
     
     private HttpRequest Request => _httpContextAccessor.HttpContext.Request;
 }
+

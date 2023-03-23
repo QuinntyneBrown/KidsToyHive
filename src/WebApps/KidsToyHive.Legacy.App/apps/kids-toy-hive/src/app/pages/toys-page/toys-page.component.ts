@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, OnDestroy, Inject, OnInit } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { ProductService, Product } from '@kids-toy-hive/domain';
@@ -40,3 +43,4 @@ export class ToysPageComponent implements OnDestroy, OnInit  {
     this.onDestroy.next();	
   }
 }
+

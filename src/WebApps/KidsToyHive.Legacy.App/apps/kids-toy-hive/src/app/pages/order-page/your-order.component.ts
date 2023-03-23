@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, Input } from '@angular/core';
 import { Product } from '@kids-toy-hive/domain';
 import { YourOrderService } from './your-order.service';
@@ -20,3 +23,4 @@ export class YourOrderComponent {
     return 135;    
   }
 }
+

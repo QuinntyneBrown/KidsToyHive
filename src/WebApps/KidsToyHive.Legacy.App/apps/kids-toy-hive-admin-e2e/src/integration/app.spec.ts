@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { getGreeting } from '../support/app.po';
 
 describe('kids-toy-hive-admin', () => {
@@ -7,3 +10,4 @@ describe('kids-toy-hive-admin', () => {
     getGreeting().contains('Welcome to kids-toy-hive-admin!');
   });
 });
+

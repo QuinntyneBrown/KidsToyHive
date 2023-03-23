@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService, Product } from '@kids-toy-hive/domain';
 import { Observable, Subject } from 'rxjs';
@@ -48,3 +51,4 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     this._destroy.next();
   }
 }
+

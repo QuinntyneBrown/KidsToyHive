@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using MediatR;
 using System;
 
@@ -9,3 +12,4 @@ public interface IAuthenticatedRequest<TResponse> : IRequest<TResponse>
     string PartitionKey { get; set; }
     string CurrentUsername { get; set; }
 }
+

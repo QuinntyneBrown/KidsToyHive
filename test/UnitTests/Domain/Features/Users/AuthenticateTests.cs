@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Core.Identity;
 using KidsToyHive.Infrastructure.Data;
@@ -23,7 +26,7 @@ public class AuthenticateTests
     [Fact]
     public async Task ShouldAuthenticate()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(AuthenticateTests)}:{nameof(ShouldAuthenticate)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -47,3 +50,4 @@ public class AuthenticateTests
         }
     }
 }
+

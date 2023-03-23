@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Infrastructure.Data;
@@ -17,7 +20,7 @@ public class SeedTests
     [Fact]
     public async Task ShouldSeed()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(SeedTests)}:{nameof(ShouldSeed)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -42,3 +45,4 @@ public class SeedTests
         }
     }
 }
+

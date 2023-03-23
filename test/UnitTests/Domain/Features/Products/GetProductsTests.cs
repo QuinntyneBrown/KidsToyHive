@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Core.Services;
 using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.Products;
@@ -15,7 +18,7 @@ public class GetProductsTests
     [Fact]
     public async Task ShouldGetProducts()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(GetProductsTests)}:{nameof(ShouldGetProducts)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -33,3 +36,4 @@ public class GetProductsTests
         }
     }
 }
+

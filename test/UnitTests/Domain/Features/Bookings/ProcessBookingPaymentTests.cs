@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Api;
 using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Fakes;
@@ -18,7 +21,7 @@ public class ProcessBookingPaymentTests
     [Fact]
     public async Task ShouldProcessBookingPayment()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(ProcessBookingPaymentTests)}:{nameof(ShouldProcessBookingPayment)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -48,3 +51,4 @@ public class ProcessBookingPaymentTests
         }
     }
 }
+

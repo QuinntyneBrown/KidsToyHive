@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain.Features.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -30,3 +33,4 @@ public class UsersController
     public async Task<ActionResult<AuthenticateResponse>> Post([FromBody] AuthenticateRequest request)
         => await _meditator.Send(request);
 }
+

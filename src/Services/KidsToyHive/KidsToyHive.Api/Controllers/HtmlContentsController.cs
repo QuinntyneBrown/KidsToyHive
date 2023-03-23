@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain.Features.HtmlContents;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -31,3 +34,4 @@ public class HtmlContentsController
     public async Task<ActionResult<GetHtmlContentByNameResponse>> GetByName([FromRoute] GetHtmlContentByNameRequest request)
         => await _meditator.Send(request);
 }
+

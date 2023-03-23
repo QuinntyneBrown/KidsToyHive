@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Injectable } from '@angular/core';
 import { ILogger, LogLevel } from '@microsoft/signalr';
 import { LocalStorageService } from './local-storage.service';
@@ -41,3 +44,4 @@ export class Logger implements ILogger {
     this.log(LogLevel.Error, `(${title}) ${message}`);
   }
 }
+

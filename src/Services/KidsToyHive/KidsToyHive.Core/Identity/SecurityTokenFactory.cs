@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -30,3 +33,4 @@ public class SecurityTokenFactory : ISecurityTokenFactory
         return tokenHandler.WriteToken(token);
     }
 }
+

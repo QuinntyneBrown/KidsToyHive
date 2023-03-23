@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Core.Enums;
 using KidsToyHive.Domain.Features.Addresses;
 using KidsToyHive.Domain.Features.BookingDetails;
@@ -42,3 +45,4 @@ public class BookingBuilder
         return booking;
     }
 }
+

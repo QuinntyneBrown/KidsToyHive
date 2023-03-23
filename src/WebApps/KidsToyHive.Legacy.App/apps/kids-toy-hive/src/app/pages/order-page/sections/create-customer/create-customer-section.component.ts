@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, OnDestroy, Injectable, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { CustomerService, Customer, AuthService } from '@kids-toy-hive/domain';
@@ -90,3 +93,4 @@ export class CreateCustomerSectionComponent implements OnInit, OnDestroy  {
 
   ngOnDestroy() { this.onDestroy.next();	}
 }
+

@@ -7,23 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Seeding\DigitalAssets\Hero1.jpg" />
-    <None Remove="Seeding\DigitalAssets\Hero2.jpg" />
-    <None Remove="Seeding\DigitalAssets\Hero3.jpg" />
-    <None Remove="Seeding\DigitalAssets\JungleJumparoo1.jpg" />
-    <None Remove="Seeding\DigitalAssets\JungleJumparoo2.png" />
-    <None Remove="Seeding\DigitalAssets\JungleJumparoo3.jpg" />
-    <None Remove="Seeding\DigitalAssets\JungleJumparoo4.jpeg" />
-    <None Remove="Seeding\DigitalAssets\KidsToyHiveLogo.png" />
-    <None Remove="Seeding\DigitalAssets\Quinntyne.jpeg" />
-    <None Remove="Seeding\Emails\BookingConfirmationEmail.html" />
-    <None Remove="Seeding\Emails\NewCustomerEmail.html" />
-    <None Remove="Seeding\Emails\NewOrderEmail.html" />
-    <None Remove="Seeding\HtmlContent\About.html" />
-    <None Remove="Seeding\HtmlContent\TermsAndConditions.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Seeding\DigitalAssets\Hero1.jpg" />
     <EmbeddedResource Include="Seeding\DigitalAssets\Hero2.jpg" />
     <EmbeddedResource Include="Seeding\DigitalAssets\Hero3.jpg" />
@@ -41,23 +24,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.7.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0-preview6.19307.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.0.0-preview5.19227.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0-preview5.19227.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="2.2.0" />
-    <PackageReference Include="Polly" Version="7.1.0" />
-    <PackageReference Include="Serilog" Version="2.8.0" />
-    <PackageReference Include="Serilog.AspNetCore" Version="2.1.1" />
-    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="2.6.0" />
-    <PackageReference Include="Serilog.Sinks.Console" Version="3.1.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.0.0-rc2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.0.0-rc2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="5.0.0-rc2" />
-    <PackageReference Include="System.Reactive" Version="4.1.5" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.AzureKeyVault" Version="3.1.24" />
+    <PackageReference Include="Polly" Version="7.2.3" />
+    <PackageReference Include="Serilog" Version="2.12.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>

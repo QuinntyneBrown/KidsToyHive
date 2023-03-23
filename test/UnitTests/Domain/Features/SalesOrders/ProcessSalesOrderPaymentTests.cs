@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Infrastructure.Data;
 using KidsToyHive.Domain.Features.SalesOrders;
 using KidsToyHive.Domain.Services;
@@ -14,7 +17,7 @@ public class ProcessSalesOrderPaymentTests
     [Fact]
     public async Task ShouldProcessSalesOrderPayment()
     {
-        var options = new DbContextOptionsBuilder<AppDbContext>()
+        var options = new DbContextOptionsBuilder<KidsToyHiveDbContext>()
             .UseInMemoryDatabase($"{nameof(ProcessSalesOrderPaymentTests)}:{nameof(ShouldProcessSalesOrderPayment)}")
             .Options;
         var mediator = new Mock<IMediator>().Object;
@@ -25,3 +28,4 @@ public class ProcessSalesOrderPaymentTests
         }
     }
 }
+

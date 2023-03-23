@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System;
 using System.Collections.Generic;
@@ -106,3 +109,4 @@ public class SystemMemoryHealthcheck : IHealthCheck
         return await Task.FromResult(result);
     }
 }
+

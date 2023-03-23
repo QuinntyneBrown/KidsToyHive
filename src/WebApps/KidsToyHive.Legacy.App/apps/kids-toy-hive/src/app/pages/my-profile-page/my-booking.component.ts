@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, OnDestroy, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Booking } from '@kids-toy-hive/domain';
@@ -33,3 +36,4 @@ export class MyBookingComponent implements OnDestroy  {
     return moment(date).format('dddd MMMM D, YYYY');
   }
 }
+

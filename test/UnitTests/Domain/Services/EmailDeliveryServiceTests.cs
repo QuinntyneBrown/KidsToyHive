@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain.Services;
 using Microsoft.Extensions.Configuration;
 using SendGrid.Helpers.Mail;
@@ -29,3 +32,4 @@ public class EmailDeliveryServiceTests
         //await emailDeliveryService.Send(message);
     }
 }
+

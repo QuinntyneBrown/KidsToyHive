@@ -6,21 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\HtmlContents\" />
-    <Folder Include="Features\CardLayouts\" />
-    <Folder Include="Features\BookingDetails\" />
-    <Folder Include="Features\Addresses\" />
-    <Folder Include="Features\Locations\" />
-    <Folder Include="Features\Drivers\" />
-    <Folder Include="Features\Contacts\" />
-    <Folder Include="Features\Surveys\" />
-    <Folder Include="Features\ProfessionalServiceProviders\" />
-    <Folder Include="Features\Videos\" />
-    <Folder Include="Features\ShipmentItems\" />
-    <Folder Include="Features\Warehouses\" />
-    <Folder Include="Features\Taxes\" />
-    <Folder Include="Features\ShipmentSalesOrders\" />
-    <Folder Include="Features\SalesOrderDetails\" />
+    <Folder Include="Common\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

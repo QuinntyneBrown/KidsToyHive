@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Threading;
@@ -12,7 +15,8 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
     {
         _logger = logger;
     }
-    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         _logger.LogInformation($"Handling {typeof(TResponse).Name}");
         var response = await next();
@@ -20,3 +24,4 @@ public class LoggingBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, 
         return response;
     }
 }
+

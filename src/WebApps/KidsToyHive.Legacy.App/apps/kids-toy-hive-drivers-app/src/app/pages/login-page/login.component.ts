@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -26,3 +29,4 @@ export class LoginComponent implements OnDestroy  {
     this.onDestroy.next();	
   }
 }
+

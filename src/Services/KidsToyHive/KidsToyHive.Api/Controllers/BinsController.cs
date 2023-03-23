@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Domain.Features.Bins;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,3 +28,4 @@ public class BinsController
     public async Task<ActionResult<GetBinByIdResponse>> GetById([FromRoute] GetBinByIdRequest request)
         => await _meditator.Send(request);
 }
+

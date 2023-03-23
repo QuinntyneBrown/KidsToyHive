@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, OnDestroy, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -32,3 +35,4 @@ export class ToyComponent implements OnDestroy, OnInit  {
     this.onDestroy.next();	
   }
 }
+

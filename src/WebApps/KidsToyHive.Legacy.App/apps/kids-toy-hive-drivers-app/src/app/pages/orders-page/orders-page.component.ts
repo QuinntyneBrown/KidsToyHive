@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ShipmentSalesOrderService } from '@kids-toy-hive/domain';
@@ -22,3 +25,4 @@ export class OrdersPageComponent implements OnDestroy  {
     this.onDestroy.next();	
   }
 }
+

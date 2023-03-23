@@ -1,3 +1,6 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
 using KidsToyHive.Core.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,12 +19,14 @@ public class AuthenticatedRequestBehavior<TRequest, TResponse> : IPipelineBehavi
     {
         _httpContextAccessor = httpContextAccessor;
     }
-    public Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
+
+
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
         if (request is IAuthenticatedRequest<TResponse> authenticatedRequest)
         {
             if (!string.IsNullOrEmpty(authenticatedRequest.PartitionKey))
-                return next();
+                return await next();
             var user = _httpContextAccessor.HttpContext.User;
             if (user.Identity.IsAuthenticated)
             {
@@ -30,6 +35,7 @@ public class AuthenticatedRequestBehavior<TRequest, TResponse> : IPipelineBehavi
                 authenticatedRequest.CurrentUsername = user.Identity.Name;
             }
         }
-        return next();
+        return await next();
     }
 }
+
