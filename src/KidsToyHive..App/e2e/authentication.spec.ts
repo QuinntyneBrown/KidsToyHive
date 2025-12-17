@@ -7,10 +7,12 @@ test.describe('Authentication', () => {
     // Open menu
     const menuButton = page.locator('kth-hamburger-button');
     await menuButton.click();
+    await page.waitForTimeout(500);
     
-    // Click sign in
-    const signInButton = page.getByRole('button', { name: /sign in/i });
-    await signInButton.click();
+    // Look for sign in link in the menu
+    const signInLink = page.locator('a', { hasText: /Sign In/i });
+    await expect(signInLink).toBeVisible();
+    await signInLink.click();
     
     // Verify login dialog is visible
     const loginDialog = page.locator('kth-login-dialog');
@@ -23,8 +25,9 @@ test.describe('Authentication', () => {
     // Open menu and login dialog
     const menuButton = page.locator('kth-hamburger-button');
     await menuButton.click();
-    const signInButton = page.getByRole('button', { name: /sign in/i });
-    await signInButton.click();
+    await page.waitForTimeout(500);
+    const signInLink = page.locator('a', { hasText: /Sign In/i });
+    await signInLink.click();
     
     // Try to submit empty form
     const submitButton = page.locator('kth-login-dialog button[type="submit"]');
@@ -41,8 +44,9 @@ test.describe('Authentication', () => {
     // Open login dialog
     const menuButton = page.locator('kth-hamburger-button');
     await menuButton.click();
-    const signInButton = page.getByRole('button', { name: /sign in/i });
-    await signInButton.click();
+    await page.waitForTimeout(500);
+    const signInLink = page.locator('a', { hasText: /Sign In/i });
+    await signInLink.click();
     
     // Close dialog
     const closeButton = page.locator('kth-login-dialog button[mat-dialog-close], kth-login-dialog .close');
@@ -58,8 +62,9 @@ test.describe('Authentication', () => {
     
     const menuButton = page.locator('kth-hamburger-button');
     await menuButton.click();
-    const signInButton = page.getByRole('button', { name: /sign in/i });
-    await signInButton.click();
+    await page.waitForTimeout(500);
+    const signInLink = page.locator('a', { hasText: /Sign In/i });
+    await signInLink.click();
     
     const usernameInput = page.locator('input[formControlName="username"], input[name="username"]');
     const passwordInput = page.locator('input[formControlName="password"], input[name="password"]');

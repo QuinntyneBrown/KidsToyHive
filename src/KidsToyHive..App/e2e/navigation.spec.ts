@@ -15,8 +15,8 @@ test.describe('Navigation', () => {
 
   test('should navigate to terms and conditions', async ({ page }) => {
     await page.goto('/');
-    await page.goto('/terms-and-conditions');
-    await expect(page).toHaveURL(/\/terms-and-conditions/);
+    await page.goto('/legal');
+    await expect(page).toHaveURL(/\/legal/);
   });
 
   test('should navigate back to home from logo click', async ({ page }) => {
