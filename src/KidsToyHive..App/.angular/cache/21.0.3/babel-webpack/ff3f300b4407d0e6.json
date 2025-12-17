@@ -1,0 +1,1 @@
+{"ast":null,"code":"/**\n * @license Angular v21.0.5\n * (c) 2010-2025 Google LLC. https://angular.dev/\n * License: MIT\n */\n\nconst Attribute = {\n  JSACTION: 'jsaction'\n};\nexport { Attribute };\n//# sourceMappingURL=_attribute-chunk.mjs.map","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

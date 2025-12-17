@@ -1,0 +1,39 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+import { Injectable, Inject } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Product } from '../../core/models/product.model';
+import { Booking } from '../../core/models/booking.model';
+import { Customer } from '../../core/models/customer.model';
+import { baseUrl } from '../../core/constants';
+import { map } from 'rxjs/operators';
+
+@Injectable()
+export class YourOrderService {
+    public customer$: BehaviorSubject<Customer> = new BehaviorSubject(null);
+    public product$: BehaviorSubject<Product> = new BehaviorSubject(null);
+    public booking$: BehaviorSubject<Booking> = new BehaviorSubject(null);
+    public bookingTimeSlot$: BehaviorSubject<number> = new BehaviorSubject(null);
+    public bookingDate$: BehaviorSubject<string> = new BehaviorSubject(null);
+    
+    public productImageUrl$: Observable<string> = this.product$
+    .pipe(
+        map(x => {
+            if(x)
+                return `${this._baseUrl}${x.productImages[0].url}`;
+
+                return '';
+        })
+    );
+
+    public subTotal$: Observable<string>;
+
+    public total$: Observable<string>;
+
+    constructor(
+        @Inject(baseUrl) private readonly _baseUrl:string
+    ) {
+
+    }
+}

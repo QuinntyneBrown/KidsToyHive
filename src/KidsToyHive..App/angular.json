@@ -1,0 +1,115 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "",
+  "projects": {
+    "kids-toy-hive": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/kids-toy-hive",
+      "sourceRoot": "projects/kids-toy-hive/src",
+      "prefix": "kids-toy-hive",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/projects/kids-toy-hive",
+            "index": "projects/kids-toy-hive/src/index.html",
+            "main": "projects/kids-toy-hive/src/main.ts",
+            "polyfills": "projects/kids-toy-hive/src/polyfills.ts",
+            "tsConfig": "projects/kids-toy-hive/tsconfig.app.json",
+            "assets": [
+              "projects/kids-toy-hive/src/favicon.ico",
+              "projects/kids-toy-hive/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/kids-toy-hive/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/kids-toy-hive/src/environments/environment.ts",
+                  "with": "projects/kids-toy-hive/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "kids-toy-hive:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "kids-toy-hive:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "kids-toy-hive:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/kids-toy-hive/tsconfig.app.json",
+              "projects/kids-toy-hive/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!projects/kids-toy-hive/**"]
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:jest",
+          "options": {
+            "jestConfig": "projects/kids-toy-hive/jest.config.js",
+            "tsConfig": "projects/kids-toy-hive/tsconfig.spec.json",
+            "setupFile": "projects/kids-toy-hive/src/test-setup.ts"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false,
+      "versionMismatch": false
+    },
+    "defaultCollection": "@schematics/angular"
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "style": "scss"
+    },
+    "@schematics/angular:application": {
+      "strict": true
+    }
+  }
+}

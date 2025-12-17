@@ -1,37 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.0.0-preview5.19227.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.0.1" />
-    <PackageReference Include="Moq" Version="4.12.0" />
-    <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.0" />
+    <PackageReference Include="xunit" Version="2.9.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Features\Customers\" />
-    <Folder Include="Domain\Features\Drivers\" />
-    <Folder Include="Domain\Features\InventoryItems\" />
-    <Folder Include="Domain\Features\Dashboards\" />
-    <Folder Include="Domain\Features\Bins\" />
-    <Folder Include="Domain\Features\Warehouses\" />
-    <Folder Include="Domain\Features\Taxes\" />
-    <Folder Include="Domain\Features\Products\" />
-    <Folder Include="Domain\Features\SalesOrders\" />
-    <Folder Include="Domain\Features\Shipments\" />
-    <Folder Include="Domain\Sagas\" />
-    <Folder Include="Api\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Services\KidsToyHive\KidsToyHive.Api\KidsToyHive.Api.csproj" />
+    <ProjectReference Include="..\..\src\KidsToyHive.Core\KidsToyHive.Core.csproj" />
+    <ProjectReference Include="..\..\src\KidsToyHive.Infrastructure\KidsToyHive.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

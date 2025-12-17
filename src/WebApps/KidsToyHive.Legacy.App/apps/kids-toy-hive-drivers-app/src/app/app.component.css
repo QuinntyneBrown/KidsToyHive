@@ -1,9 +1,0 @@
-.sidenav {
-    display: block;
-    width: 300px;
-}
-
-.router-outlet-container {
-    display: block;
-    min-height: calc(100vh - 64px);
-}

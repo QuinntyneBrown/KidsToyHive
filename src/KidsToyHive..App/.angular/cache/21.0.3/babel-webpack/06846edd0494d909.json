@@ -1,0 +1,1 @@
+{"ast":null,"code":"function coerceCssPixelValue(value) {\n  if (value == null) {\n    return '';\n  }\n  return typeof value === 'string' ? value : `${value}px`;\n}\nexport { coerceCssPixelValue };\n//# sourceMappingURL=_css-pixel-value-chunk.mjs.map","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
