@@ -1,84 +1,227 @@
-# KidsToyHive
+# KidsToyHive Angular Application
 
-This project was generated using [Nx](https://nx.dev).
+Modern Angular 21 application for toy rental services, featuring standalone components, Angular Material design, and comprehensive end-to-end testing.
 
-<p align="center"><img src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" width="450"></p>
+## Technology Stack
 
-🔎 **Nx is a set of Angular CLI power-ups for modern development.**
+- **Angular 21.0** - Standalone components architecture
+- **Angular Material 21.0** - Material Design UI components
+- **TypeScript** - Type-safe development
+- **RxJS** - Reactive programming
+- **Playwright** - End-to-end testing
+- **Jest** - Unit testing
+- **SCSS** - Styling
 
-## Quick Start & Documentation
+## Project Structure
 
-[Nx Documentation](https://nx.dev)
+```
+projects/kids-toy-hive/
+├── src/
+│   ├── app/
+│   │   ├── app.component.ts          # Root component
+│   │   ├── app.routes.ts             # Application routing
+│   │   ├── components/               # Reusable UI components
+│   │   ├── core/                     # Core services and models
+│   │   ├── dialogs/                  # Material dialogs
+│   │   ├── pages/                    # Page components
+│   │   └── sections/                 # Multi-step sections
+│   ├── assets/                       # Images, fonts, etc.
+│   └── styles/                       # Global styles
+├── e2e/                              # Playwright e2e tests
+└── playwright.config.ts              # Playwright configuration
+```
 
-[30-minute video showing all Nx features](https://nx.dev/getting-started/what-is-nx)
+## Getting Started
 
-[Interactive Tutorial](https://nx.dev/tutorial/01-create-application)
+### Prerequisites
 
-## Adding capabilities to your workspace
+- Node.js (v18 or higher)
+- npm or yarn
 
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
+### Installation
 
-These capabilities include generating applications, libraries, .etc as well as the devtools to test, and build projects as well.
+```bash
+# Install dependencies
+npm install
 
-Below are some plugins which you can add to your workspace:
+# Note: Use --legacy-peer-deps if you encounter peer dependency issues
+npm install --legacy-peer-deps
+```
 
-- [Angular](https://angular.io)
-  - `ng add @nrwl/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nrwl/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nrwl/node`
+### Development Server
 
-## Generate an application
+```bash
+# Start development server
+npm run start
+# or
+ng serve kids-toy-hive
+```
 
-Run `ng g @nrwl/angular:app my-app` to generate an application.
+Navigate to `http://localhost:4200/`. The app will automatically reload when you change source files.
 
-> You can use any of the plugins above to generate applications as well.
+### Build
 
-When using Nx, you can create multiple applications and libraries in the same workspace.
+```bash
+# Development build
+npm run build
+# or
+ng build kids-toy-hive
 
-## Generate a library
+# Production build
+ng build kids-toy-hive --configuration production
+```
 
-Run `ng g @nrwl/angular:lib my-lib` to generate a library.
+Build artifacts are stored in the `dist/` directory.
 
-> You can also use any of the plugins above to generate libraries as well.
+## Testing
 
-Libraries are sharable across libraries and applications. They can be imported from `@kids-toy-hive/mylib`.
+### Unit Tests
 
-## Development server
+```bash
+# Run unit tests
+npm test
+# or
+ng test kids-toy-hive
+```
 
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+Tests run via [Jest](https://jestjs.io).
 
-## Code scaffolding
+### End-to-End Tests
 
-Run `ng g component my-component --project=my-app` to generate a new component.
+Comprehensive Playwright tests covering all application behaviors:
 
-## Build
+```bash
+# Run all e2e tests (headless)
+npm run e2e
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+# Run tests with UI mode (interactive)
+npm run e2e:ui
 
-## Running unit tests
+# Run tests with browser visible
+npm run e2e:headed
 
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+# Debug tests
+npm run e2e:debug
 
-Run `npm run affected:test` to execute the unit tests affected by a change.
+# View test report
+npm run e2e:report
+```
 
-## Running end-to-end tests
+#### E2E Test Coverage
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+- **Home Page** - Navigation, CTAs, menu interactions
+- **Authentication** - Login/logout flows, form validation
+- **Product Browsing** - Toy listing, filtering, selection
+- **Order Flow** - Multi-step booking process:
+  - Step 1: Customer information
+  - Step 2: Booking details (date/time selection)
+  - Step 3: Payment processing
+- **Profile** - User profile and booking history
+- **Static Pages** - About, Terms & Conditions
+- **Responsive Design** - Mobile, tablet, desktop viewports
+- **Accessibility** - Keyboard navigation, labels, ARIA
 
-Run `npm run affected:e2e` to execute the end-to-end tests affected by a change.
+## Code Scaffolding
 
-## Understand your workspace
+```bash
+# Generate a new standalone component
+ng generate component my-component --project=kids-toy-hive
 
-Run `npm run dep-graph` to see a diagram of the dependencies of your projects.
+# Generate a service
+ng generate service my-service --project=kids-toy-hive
 
-## Further help
+# Generate a dialog
+ng generate component dialogs/my-dialog --project=kids-toy-hive
+```
 
-Visit the [Nx Documentation](https://nx.dev) to learn more.
+## Architecture
+
+### Standalone Components
+
+This application uses Angular's standalone component architecture (no NgModules). Components directly import their dependencies:
+
+```typescript
+@Component({
+  selector: 'kth-my-component',
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, RouterModule],
+  templateUrl: './my-component.html'
+})
+export class MyComponent { }
+```
+
+### Routing
+
+Routes are defined in [app.routes.ts](projects/kids-toy-hive/src/app/app.routes.ts) using the new functional router configuration.
+
+### Services
+
+Core services are located in `src/app/core/services/`:
+- **AuthService** - Authentication and user management
+- **BookingService** - Booking operations
+- **ProductService** - Product catalog
+- **PaymentService** - Payment processing
+
+### Dialogs
+
+Material dialogs replace custom overlay services:
+- **MenuDialog** - Navigation menu
+- **LoginDialog** - User authentication
+
+## Features
+
+### Customer-Facing Features
+
+- Browse toy catalog with images and descriptions
+- Multi-step booking process with form validation
+- Date and time slot selection
+- Secure payment processing
+- User profile and booking history
+- Responsive design for all devices
+
+### Technical Features
+
+- Standalone components (no NgModules)
+- Angular Material design system
+- Reactive forms with validation
+- HTTP interceptors for API communication
+- Route guards for protected pages
+- Lazy loading for performance
+- Comprehensive e2e test coverage
+
+## Scripts Reference
+
+```bash
+npm run start              # Start dev server
+npm run build              # Build project
+npm test                   # Run unit tests
+npm run lint               # Lint code
+npm run e2e                # Run e2e tests
+npm run e2e:ui             # Run e2e tests in UI mode
+npm run e2e:headed         # Run e2e tests with browser visible
+npm run e2e:debug          # Debug e2e tests
+npm run e2e:report         # View e2e test report
+```
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers (iOS Safari, Chrome for Android)
+
+## Contributing
+
+1. Create a feature branch
+2. Make your changes
+3. Run tests: `npm test` and `npm run e2e`
+4. Ensure build passes: `npm run build`
+5. Submit a pull request
+
+## Learn More
+
+- [Angular Documentation](https://angular.dev)
+- [Angular Material](https://material.angular.io)
+- [Playwright](https://playwright.dev)
+- [RxJS](https://rxjs.dev)
