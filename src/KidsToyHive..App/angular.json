@@ -89,9 +89,8 @@
         "test": {
           "builder": "@angular-devkit/build-angular:jest",
           "options": {
-            "jestConfig": "projects/kids-toy-hive/jest.config.js",
             "tsConfig": "projects/kids-toy-hive/tsconfig.spec.json",
-            "setupFile": "projects/kids-toy-hive/src/test-setup.ts"
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         }
       }
