@@ -82,11 +82,15 @@ export abstract class BaseMasterDetailComponent<T extends { id: string }> implem
 
   /**
    * Optional: Customize search matching logic
-   * Default implementation searches in JSON representation
+   * Default implementation searches in 'name', 'title', and 'description' properties if they exist
+   * Override this method for custom search behavior
    */
   protected matchesSearchTerm(item: T, searchTerm: string): boolean {
-    const itemStr = JSON.stringify(item).toLowerCase();
-    return itemStr.includes(searchTerm);
+    const searchableProps = ['name', 'title', 'description', 'category'];
+    return searchableProps.some(prop => {
+      const value = (item as any)[prop];
+      return typeof value === 'string' && value.toLowerCase().includes(searchTerm);
+    });
   }
 
   constructor(

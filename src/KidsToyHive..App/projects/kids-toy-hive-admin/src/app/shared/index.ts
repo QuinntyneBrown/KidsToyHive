@@ -16,3 +16,6 @@ export * from './dialogs/confirm-dialog.component';
 
 // Models
 export * from './models/confirm-dialog-data';
+
+// Guards
+export * from './guards/unsaved-changes.guard';

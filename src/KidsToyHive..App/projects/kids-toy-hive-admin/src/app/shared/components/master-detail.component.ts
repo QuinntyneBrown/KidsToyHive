@@ -284,7 +284,14 @@ export class MasterDetailComponent<T extends { id: string }> {
    * Default display for items
    * Override by providing itemTemplate
    */
-  getItemDisplay(item: any): string {
-    return item.name || item.title || item.id || JSON.stringify(item);
+  getItemDisplay(item: T): string {
+    // Try common property names
+    const displayProps = ['name', 'title', 'displayName'];
+    for (const prop of displayProps) {
+      if (prop in item && typeof (item as any)[prop] === 'string') {
+        return (item as any)[prop];
+      }
+    }
+    return item.id;
   }
 }

@@ -77,8 +77,16 @@ export abstract class BaseHttpService<T> {
       // Client-side error
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-side error
-      errorMessage = error.error?.message || `Error Code: ${error.status}\nMessage: ${error.message}`;
+      // Server-side error - provide user-friendly message
+      if (error.status === 0) {
+        errorMessage = 'Unable to connect to the server. Please check your connection.';
+      } else if (error.status >= 400 && error.status < 500) {
+        errorMessage = error.error?.message || 'Invalid request. Please check your input.';
+      } else if (error.status >= 500) {
+        errorMessage = 'Server error occurred. Please try again later.';
+      } else {
+        errorMessage = error.error?.message || `Error: ${error.message}`;
+      }
     }
     
     return throwError(() => new Error(errorMessage));
