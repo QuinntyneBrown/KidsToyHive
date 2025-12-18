@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UnauthorizedComponent } from './pages/unauthorized/unauthorized.component';
+import { DemoComponent } from './pages/demo/demo.component';
 import { authGuard } from './core/guards/auth.guard';
 import { roleGuard } from './core/guards/role.guard';
 import { Role } from './core/enums/role.enum';
@@ -27,6 +28,11 @@ export const routes: Routes = [
   {
     path: 'unauthorized',
     component: UnauthorizedComponent
+  },
+  {
+    path: 'demo',
+    component: DemoComponent,
+    canActivate: [authGuard]
   },
   // Example of route with role guard
   // {
