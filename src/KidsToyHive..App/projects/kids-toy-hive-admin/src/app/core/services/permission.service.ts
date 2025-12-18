@@ -54,7 +54,7 @@ export class PermissionService {
    * Check if user has a specific role
    */
   hasRole(role: Role): boolean {
-    const user = this.authService['currentUserSubject'].getValue();
+    const user = this.authService.getCurrentUserValue();
     if (!user || !user.roles) {
       return false;
     }
@@ -79,7 +79,7 @@ export class PermissionService {
    * Check if user has a specific permission
    */
   hasPermission(permission: Permission): boolean {
-    const user = this.authService['currentUserSubject'].getValue();
+    const user = this.authService.getCurrentUserValue();
     if (!user || !user.roles) {
       return false;
     }
@@ -114,7 +114,7 @@ export class PermissionService {
    * Check if user has a role at or above a minimum level
    */
   hasMinimumRole(minimumRole: Role): boolean {
-    const user = this.authService['currentUserSubject'].getValue();
+    const user = this.authService.getCurrentUserValue();
     if (!user || !user.roles) {
       return false;
     }
@@ -130,7 +130,7 @@ export class PermissionService {
    * Get all permissions for current user
    */
   getUserPermissions(): Permission[] {
-    const user = this.authService['currentUserSubject'].getValue();
+    const user = this.authService.getCurrentUserValue();
     if (!user || !user.roles) {
       return [];
     }

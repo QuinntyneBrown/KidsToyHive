@@ -103,6 +103,13 @@ export class AuthService {
   }
 
   /**
+   * Get current user value synchronously
+   */
+  getCurrentUserValue(): User | null {
+    return this.currentUserSubject.value;
+  }
+
+  /**
    * Check if user is authenticated
    */
   isAuthenticated(): boolean {

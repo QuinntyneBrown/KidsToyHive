@@ -56,6 +56,10 @@ form {
   color: #667eea;
   text-decoration: none;
   font-size: 0.875rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 
   &:hover {
     text-decoration: underline;
