@@ -1,0 +1,53 @@
+<!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
+<!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
+
+<div class="sidebar">
+  <!-- Dashboard Link (always visible) -->
+  <mat-nav-list>
+    <a
+      mat-list-item
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      (click)="onNavigate()"
+      [routerLinkActiveOptions]="{ exact: true }">
+      <mat-icon matListItemIcon>dashboard</mat-icon>
+      <span matListItemTitle>Dashboard</span>
+    </a>
+  </mat-nav-list>
+
+  <mat-divider></mat-divider>
+
+  <!-- Navigation Groups -->
+  <mat-accordion class="navigation-accordion" multi>
+    <mat-expansion-panel
+      *ngFor="let group of navigationGroups"
+      class="navigation-group">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ group.label }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <mat-nav-list>
+        <a
+          mat-list-item
+          *ngFor="let item of group.items"
+          [routerLink]="item.route"
+          routerLinkActive="active"
+          (click)="onNavigate()">
+          <mat-icon matListItemIcon>{{ item.icon }}</mat-icon>
+          <span matListItemTitle>{{ item.label }}</span>
+        </a>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Footer -->
+  <div class="sidebar-footer">
+    <mat-divider></mat-divider>
+    <div class="footer-content">
+      <div class="version">Version 1.0.0</div>
+      <div class="copyright">© 2024 KidsToyHive</div>
+    </div>
+  </div>
+</div>

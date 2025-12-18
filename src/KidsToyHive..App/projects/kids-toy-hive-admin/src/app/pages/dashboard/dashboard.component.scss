@@ -1,95 +1,257 @@
-// Copyright (c) Quinntyne Brown. All Rights Reserved.
-// Licensed under the MIT License. See License.txt in the project root for license information.
+/* Copyright (c) Quinntyne Brown. All Rights Reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
 
 .dashboard-container {
-  padding: 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-
-  h1 {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: 600;
+.welcome-section {
+  margin-bottom: 32px;
+  
+  .dashboard-title {
+    font-size: 32px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
   }
+  
+  .dashboard-subtitle {
+    font-size: 16px;
+    opacity: 0.7;
+    margin: 0;
+  }
+}
 
-  button {
+.error-card {
+  margin-bottom: 24px;
+  
+  .error-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 16px;
+    }
+  }
+}
+
+// Metrics Grid
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+  
+  @media (max-width: 767.98px) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.metric-card {
+  mat-card-content {
+    padding: 24px;
+  }
+  
+  .metric-content {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 16px;
+  }
+  
+  .metric-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    mat-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      color: white;
+    }
+    
+    &.bookings {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    &.customers {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    
+    &.orders {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    
+    &.revenue {
+      background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+  }
+  
+  .metric-details {
+    flex: 1;
+    
+    .metric-value {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .metric-label {
+      font-size: 14px;
+      font-weight: 500;
+      opacity: 0.8;
+    }
+    
+    .metric-period {
+      font-size: 12px;
+      opacity: 0.6;
+      margin-top: 2px;
+    }
+  }
+  
+  .skeleton-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
   }
 }
 
-.content {
-  .welcome-card {
-    margin-bottom: 2rem;
-
-    mat-card-content {
-      p {
-        margin: 0.5rem 0;
+// Quick Actions
+.quick-actions-card {
+  margin-bottom: 32px;
+  
+  .quick-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    
+    button {
+      mat-icon {
+        margin-right: 8px;
       }
     }
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-
-    .feature-card {
-      mat-card-header {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1rem;
-
-        mat-icon {
-          font-size: 2rem;
-          width: 2rem;
-          height: 2rem;
-          color: #667eea;
-        }
-      }
-
-      mat-card-actions {
-        padding: 1rem;
+    
+    @media (max-width: 767.98px) {
+      flex-direction: column;
+      
+      button {
+        width: 100%;
       }
     }
   }
 }
 
-@media (max-width: 768px) {
-  .dashboard-container {
-    padding: 1rem;
-  }
-
-  .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-
-    h1 {
-      font-size: 1.5rem;
-    }
-  }
-
-  .content .features-grid {
+// Content Grid
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+  
+  @media (max-width: 767.98px) {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 }
 
-@media (max-width: 480px) {
-  .dashboard-container {
-    padding: 0.5rem;
+.activity-card,
+.bookings-card {
+  mat-card-content {
+    padding: 0 !important;
+    
+    mat-list {
+      padding: 0;
+    }
+    
+    mat-list-item {
+      height: auto;
+      min-height: 72px;
+      padding: 16px;
+      
+      .activity-time {
+        font-size: 12px;
+        opacity: 0.6;
+      }
+    }
   }
+  
+  .loading-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 48px;
+  }
+  
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    opacity: 0.6;
+    
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 14px;
+    }
+  }
+}
 
-  .header h1 {
-    font-size: 1.25rem;
+.status-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+  
+  &.confirmed {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+  }
+  
+  &.pending {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+  }
+}
+
+// Dark theme adjustments
+:host-context(.dark-theme) {
+  .metric-value {
+    color: rgba(255, 255, 255, 0.87);
+  }
+  
+  .status-badge {
+    &.confirmed {
+      background-color: rgba(76, 175, 80, 0.2);
+      color: #81c784;
+    }
+    
+    &.pending {
+      background-color: rgba(255, 152, 0, 0.2);
+      color: #ffb74d;
+    }
   }
 }

@@ -1,0 +1,28 @@
+<!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
+<!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
+
+<div class="not-found-container">
+  <mat-card class="not-found-card">
+    <mat-card-content>
+      <div class="error-icon">
+        <mat-icon>error_outline</mat-icon>
+      </div>
+      <h1 class="error-code">404</h1>
+      <h2 class="error-title">Page Not Found</h2>
+      <p class="error-message">
+        The page you are looking for might have been removed, had its name changed,
+        or is temporarily unavailable.
+      </p>
+      <div class="actions">
+        <button mat-raised-button color="primary" (click)="onGoHome()">
+          <mat-icon>home</mat-icon>
+          Go to Dashboard
+        </button>
+        <button mat-button (click)="onGoBack()">
+          <mat-icon>arrow_back</mat-icon>
+          Go Back
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

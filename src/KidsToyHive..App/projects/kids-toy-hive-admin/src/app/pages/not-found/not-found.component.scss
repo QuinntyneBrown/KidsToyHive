@@ -1,0 +1,65 @@
+/* Copyright (c) Quinntyne Brown. All Rights Reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 24px;
+}
+
+.not-found-card {
+  max-width: 600px;
+  text-align: center;
+  
+  .error-icon {
+    mat-icon {
+      font-size: 80px;
+      width: 80px;
+      height: 80px;
+      color: #f44336;
+      margin-bottom: 16px;
+    }
+  }
+  
+  .error-code {
+    font-size: 72px;
+    font-weight: 700;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.54);
+  }
+  
+  .error-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 16px 0;
+  }
+  
+  .error-message {
+    font-size: 16px;
+    opacity: 0.7;
+    margin-bottom: 32px;
+    line-height: 1.5;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    button {
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .error-code {
+    color: rgba(255, 255, 255, 0.54);
+  }
+}

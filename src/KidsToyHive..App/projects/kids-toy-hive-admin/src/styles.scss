@@ -1,6 +1,10 @@
 /* Copyright (c) Quinntyne Brown. All Rights Reserved. */
 /* Licensed under the MIT License. See License.txt in the project root for license information. */
 
+// Include Material theming from the prebuilt theme
+// The prebuilt theme handles all Material component styling
+// We'll override/customize specific parts as needed
+
 /* Global styles */
 html, body {
   height: 100%;
@@ -12,3 +16,81 @@ html, body {
   box-sizing: border-box;
 }
 
+// Smooth theme transition
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Light theme specific styles
+body,
+.light-theme {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+// Dark theme specific styles
+.dark-theme {
+  background-color: #303030;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+// Custom CSS variables for theme colors
+:root {
+  --primary-color: #3f51b5;
+  --accent-color: #ff4081;
+  --warn-color: #f44336;
+  --background-color: #fafafa;
+  --surface-color: #ffffff;
+  --text-primary: rgba(0, 0, 0, 0.87);
+  --text-secondary: rgba(0, 0, 0, 0.6);
+}
+
+.dark-theme {
+  --primary-color: #7986cb;
+  --accent-color: #ff4081;
+  --warn-color: #f44336;
+  --background-color: #303030;
+  --surface-color: #424242;
+  --text-primary: rgba(255, 255, 255, 0.87);
+  --text-secondary: rgba(255, 255, 255, 0.6);
+}
+
+// Accessibility improvements
+.mat-mdc-snack-bar-container.error-snackbar {
+  --mdc-snackbar-container-color: #f44336;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+.mat-mdc-snack-bar-container.success-snackbar {
+  --mdc-snackbar-container-color: #4caf50;
+  --mdc-snackbar-supporting-text-color: white;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  
+  &:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.dark-theme {
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}

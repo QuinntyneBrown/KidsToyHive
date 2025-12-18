@@ -1,0 +1,75 @@
+/* Copyright (c) Quinntyne Brown. All Rights Reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+.breadcrumb {
+  padding: 12px 0;
+  
+  // Hide on mobile to save space
+  @media (max-width: 767.98px) {
+    display: none;
+  }
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 14px;
+  
+  .home-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    opacity: 0.7;
+  }
+  
+  .breadcrumb-link {
+    color: inherit;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    
+    &:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+  }
+  
+  .breadcrumb-current {
+    font-weight: 500;
+    opacity: 0.87;
+  }
+  
+  .separator {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    opacity: 0.5;
+  }
+  
+  &.active {
+    .breadcrumb-current {
+      cursor: default;
+    }
+  }
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .breadcrumb-link {
+    &:hover {
+      color: #90caf9;
+    }
+  }
+}
