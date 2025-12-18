@@ -114,12 +114,21 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   /**
-   * Truncate long breadcrumb labels
+   * Truncate long breadcrumb labels at word boundaries
    */
   private truncateLabel(label: string, maxLength: number = 30): string {
     if (label.length <= maxLength) {
       return label;
     }
-    return label.substring(0, maxLength - 3) + '...';
+    
+    // Find last space before maxLength
+    const truncated = label.substring(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(' ');
+    
+    if (lastSpace > maxLength / 2) {
+      return truncated.substring(0, lastSpace) + '...';
+    }
+    
+    return truncated.substring(0, maxLength - 3) + '...';
   }
 }

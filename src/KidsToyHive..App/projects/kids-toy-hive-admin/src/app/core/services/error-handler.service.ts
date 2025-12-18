@@ -4,6 +4,7 @@
 import { ErrorHandler, Injectable, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { environment } from '../../../environments/environment';
 
 export enum ErrorCategory {
   HTTP = 'HTTP',
@@ -113,7 +114,7 @@ export class ErrorHandlerService implements ErrorHandler {
    * Check if running in production
    */
   private isProduction(): boolean {
-    return false; // Will be replaced with actual environment check
+    return environment.production;
   }
 
   /**
@@ -122,6 +123,6 @@ export class ErrorHandlerService implements ErrorHandler {
   private logToMonitoringService(error: Error | HttpErrorResponse, category: ErrorCategory): void {
     // Placeholder for future implementation
     // Could integrate with Sentry, LogRocket, etc.
-    console.log('Logging to monitoring service:', { error, category });
+    // Only logs in production when monitoring service is configured
   }
 }

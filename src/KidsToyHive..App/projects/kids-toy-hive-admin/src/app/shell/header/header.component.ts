@@ -82,8 +82,8 @@ export class HeaderComponent {
    * Show help
    */
   onHelp(): void {
-    // Placeholder for help functionality
-    console.log('Help clicked');
+    // TODO: Implement help functionality
+    // Could navigate to help page or open help dialog
   }
 
   /**
