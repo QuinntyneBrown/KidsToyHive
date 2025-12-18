@@ -1,55 +1,9 @@
 /* Copyright (c) Quinntyne Brown. All Rights Reserved. */
 /* Licensed under the MIT License. See License.txt in the project root for license information. */
 
-@use '@angular/material' as mat;
-
-// Include the common styles for Angular Material
-@include mat.core();
-
-// Define custom color palettes
-$kids-toy-hive-primary: mat.define-palette(mat.$indigo-palette);
-$kids-toy-hive-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$kids-toy-hive-warn: mat.define-palette(mat.$red-palette);
-
-// Create the light theme
-$kids-toy-hive-light-theme: mat.define-light-theme((
-  color: (
-    primary: $kids-toy-hive-primary,
-    accent: $kids-toy-hive-accent,
-    warn: $kids-toy-hive-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
-
-// Create the dark theme
-$kids-toy-hive-dark-theme: mat.define-dark-theme((
-  color: (
-    primary: $kids-toy-hive-primary,
-    accent: $kids-toy-hive-accent,
-    warn: $kids-toy-hive-warn,
-  ),
-  typography: mat.define-typography-config(),
-  density: 0,
-));
-
-// Apply the light theme by default
-@include mat.all-component-themes($kids-toy-hive-light-theme);
-
-// Apply dark theme when dark-theme class is present
-.dark-theme {
-  @include mat.all-component-colors($kids-toy-hive-dark-theme);
-  
-  // Dark theme specific styles
-  background-color: #303030;
-  color: rgba(255, 255, 255, 0.87);
-}
-
-// Light theme specific styles
-.light-theme {
-  background-color: #fafafa;
-  color: rgba(0, 0, 0, 0.87);
-}
+// Include Material theming from the prebuilt theme
+// The prebuilt theme handles all Material component styling
+// We'll override/customize specific parts as needed
 
 /* Global styles */
 html, body {
@@ -65,6 +19,19 @@ html, body {
 // Smooth theme transition
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// Light theme specific styles
+body,
+.light-theme {
+  background-color: #fafafa;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+// Dark theme specific styles
+.dark-theme {
+  background-color: #303030;
+  color: rgba(255, 255, 255, 0.87);
 }
 
 // Custom CSS variables for theme colors
@@ -127,5 +94,6 @@ body {
     }
   }
 }
+
 
 
