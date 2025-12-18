@@ -1,0 +1,92 @@
+<!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
+<!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
+
+<div class="dashboard-container">
+  <div class="header">
+    <h1>KidsToyHive Admin Dashboard</h1>
+    <button mat-raised-button color="warn" (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </div>
+
+  <div class="content">
+    <mat-card class="welcome-card" *ngIf="currentUser$ | async as user">
+      <mat-card-header>
+        <mat-card-title>Welcome, {{ user.name }}!</mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Roles:</strong> {{ user.roles?.join(', ') || 'No roles assigned' }}</p>
+        <p><strong>User ID:</strong> {{ user.id }}</p>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="features-grid">
+      <mat-card class="feature-card" *hasPermission="Permission.ManageUsers">
+        <mat-card-header>
+          <mat-icon>people</mat-icon>
+          <mat-card-title>Manage Users</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Create, edit, and manage user accounts</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">Go to Users</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="feature-card" *hasPermission="Permission.ManageProducts">
+        <mat-card-header>
+          <mat-icon>toys</mat-icon>
+          <mat-card-title>Manage Products</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Add, update, and organize toy products</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">Go to Products</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="feature-card" *hasPermission="Permission.ManageOrders">
+        <mat-card-header>
+          <mat-icon>shopping_cart</mat-icon>
+          <mat-card-title>Manage Orders</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>View and process customer orders</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">Go to Orders</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="feature-card" *hasPermission="Permission.ViewReports">
+        <mat-card-header>
+          <mat-icon>bar_chart</mat-icon>
+          <mat-card-title>View Reports</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Access analytics and business reports</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">Go to Reports</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card class="feature-card" *hasPermission="Permission.ManageSettings">
+        <mat-card-header>
+          <mat-icon>settings</mat-icon>
+          <mat-card-title>Settings</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Configure application settings</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary">Go to Settings</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

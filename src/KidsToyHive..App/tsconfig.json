@@ -18,5 +18,16 @@
     "paths": {
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ],
+  "references": [
+    {
+      "path": "./kids-toy-hive-admin/tsconfig.app.json"
+    },
+    {
+      "path": "./kids-toy-hive-admin/tsconfig.spec.json"
+    }
+  ]
 }
