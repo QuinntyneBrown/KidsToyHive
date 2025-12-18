@@ -186,7 +186,7 @@ export abstract class BaseMasterDetailComponent<T extends BaseEntity> implements
     
     const operation: Observable<T> = this.isCreating
       ? this.service.create(entity)
-      : this.service.update(this.selectedItem!.id!, entity);
+      : this.service.update(this.selectedItem?.id ?? '', entity);
     
     operation
       .pipe(takeUntil(this.destroy$))
