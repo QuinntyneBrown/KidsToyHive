@@ -8,5 +8,27 @@ export enum Permission {
   ManageOrders = 'ManageOrders',
   ViewReports = 'ViewReports',
   ManageSettings = 'ManageSettings',
-  DeleteRecords = 'DeleteRecords'
+  DeleteRecords = 'DeleteRecords',
+  // Management
+  ManageBookings = 'ManageBookings',
+  ManageBrands = 'ManageBrands',
+  ManageContacts = 'ManageContacts',
+  ManageCustomers = 'ManageCustomers',
+  ManageDrivers = 'ManageDrivers',
+  ManageLocations = 'ManageLocations',
+  ManageWarehouses = 'ManageWarehouses',
+  // Products
+  ManageProductCategories = 'ManageProductCategories',
+  ManageTaxes = 'ManageTaxes',
+  // Communication
+  ManageEmailTemplates = 'ManageEmailTemplates',
+  ManageSurveys = 'ManageSurveys',
+  ManageQuestions = 'ManageQuestions',
+  ManageVideos = 'ManageVideos',
+  // Orders
+  ManageCardLayouts = 'ManageCardLayouts',
+  // Administration
+  ManageTenants = 'ManageTenants',
+  ManageRoles = 'ManageRoles',
+  ManageProfiles = 'ManageProfiles'
 }

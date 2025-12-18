@@ -3,3 +3,8 @@
 
 export * from './auth.service';
 export * from './permission.service';
+export * from './layout.service';
+export * from './theme.service';
+export * from './navigation.service';
+export * from './loading.service';
+export * from './error-handler.service';
