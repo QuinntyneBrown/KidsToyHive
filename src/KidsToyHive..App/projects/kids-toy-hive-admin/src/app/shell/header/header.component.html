@@ -1,0 +1,76 @@
+<!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
+<!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
+
+<mat-toolbar class="header" color="primary">
+  <!-- Menu Toggle Button -->
+  <button
+    mat-icon-button
+    (click)="onMenuToggle()"
+    aria-label="Toggle menu"
+    matTooltip="Toggle menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Logo -->
+  <div class="logo" (click)="onLogoClick()">
+    <mat-icon class="logo-icon">toys</mat-icon>
+    <span class="logo-text">KidsToyHive</span>
+  </div>
+
+  <span class="spacer"></span>
+
+  <!-- Notifications (placeholder for future) -->
+  <button
+    mat-icon-button
+    aria-label="Notifications"
+    matTooltip="Notifications">
+    <mat-icon [matBadge]="3" matBadgeColor="warn" matBadgeSize="small">notifications</mat-icon>
+  </button>
+
+  <!-- Theme Toggle -->
+  <button
+    mat-icon-button
+    (click)="onThemeToggle()"
+    [attr.aria-label]="isDarkTheme() ? 'Switch to light mode' : 'Switch to dark mode'"
+    [matTooltip]="isDarkTheme() ? 'Light mode' : 'Dark mode'">
+    <mat-icon>{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+
+  <!-- User Menu -->
+  <button
+    mat-button
+    [matMenuTriggerFor]="userMenu"
+    class="user-menu-button"
+    *ngIf="currentUser$ | async as user">
+    <div class="user-avatar">{{ getUserInitials(user.name) }}</div>
+    <span class="user-name">{{ user.name }}</span>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+
+  <mat-menu #userMenu="matMenu" class="user-menu">
+    <div class="user-info" mat-menu-item disabled *ngIf="currentUser$ | async as user">
+      <div class="user-details">
+        <div class="name">{{ user.name }}</div>
+        <div class="email">{{ user.email }}</div>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="onProfile()">
+      <mat-icon>account_circle</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-menu-item (click)="onSettings()">
+      <mat-icon>settings</mat-icon>
+      <span>Settings</span>
+    </button>
+    <button mat-menu-item (click)="onHelp()">
+      <mat-icon>help</mat-icon>
+      <span>Help</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="onLogout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

@@ -1,0 +1,75 @@
+/* Copyright (c) Quinntyne Brown. All Rights Reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.global-loading-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.sidenav-container {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.sidenav {
+  width: 280px;
+  box-shadow: 3px 0 6px rgba(0, 0, 0, 0.1);
+  
+  &.mat-drawer-side {
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+  }
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+  padding: 24px;
+  
+  @media (max-width: 767.98px) {
+    padding: 16px;
+  }
+}
+
+// Smooth sidebar transition
+.sidenav,
+.sidenav-content {
+  transition: margin 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+              width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+              transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+// Dark theme support
+:host-context(.dark-theme) {
+  .sidenav {
+    background-color: #303030;
+    color: rgba(255, 255, 255, 0.87);
+    
+    &.mat-drawer-side {
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+  }
+}

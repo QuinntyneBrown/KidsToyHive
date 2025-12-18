@@ -1,0 +1,97 @@
+/* Copyright (c) Quinntyne Brown. All Rights Reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  
+  &:hover {
+    opacity: 0.9;
+  }
+  
+  .logo-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+    font-weight: 500;
+    
+    @media (max-width: 767.98px) {
+      display: none;
+    }
+  }
+}
+
+.spacer {
+  flex: 1;
+}
+
+.user-menu-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 8px;
+  
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .user-name {
+    @media (max-width: 767.98px) {
+      display: none;
+    }
+  }
+}
+
+::ng-deep .user-menu {
+  .user-info {
+    pointer-events: none;
+    
+    .user-details {
+      padding: 8px 0;
+      
+      .name {
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+      
+      .email {
+        font-size: 12px;
+        opacity: 0.7;
+      }
+    }
+  }
+  
+  button {
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
