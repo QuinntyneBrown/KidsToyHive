@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/@angular/cdk/fesm2022/_css-pixel-value-chunk.mjs", "../../../../../../node_modules/@angular/cdk/fesm2022/coercion.mjs"],
+  "sourcesContent": ["function coerceCssPixelValue(value) {\n  if (value == null) {\n    return '';\n  }\n  return typeof value === 'string' ? value : `${value}px`;\n}\n\nexport { coerceCssPixelValue };\n\n", "export { _isNumberValue, coerceElement, coerceNumberProperty } from './_element-chunk.mjs';\nexport { coerceArray } from './_array-chunk.mjs';\nexport { coerceCssPixelValue } from './_css-pixel-value-chunk.mjs';\nimport '@angular/core';\n\nfunction coerceBooleanProperty(value) {\n  return value != null && `${value}` !== 'false';\n}\n\nfunction coerceStringArray(value, separator = /\\s+/) {\n  const result = [];\n  if (value != null) {\n    const sourceValues = Array.isArray(value) ? value : `${value}`.split(separator);\n    for (const sourceValue of sourceValues) {\n      const trimmedString = `${sourceValue}`.trim();\n      if (trimmedString) {\n        result.push(trimmedString);\n      }\n    }\n  }\n  return result;\n}\n\nexport { coerceBooleanProperty, coerceStringArray };\n\n"],
+  "mappings": ";AAAA,SAAS,oBAAoB,OAAO;AAClC,MAAI,SAAS,MAAM;AACjB,WAAO;AAAA,EACT;AACA,SAAO,OAAO,UAAU,WAAW,QAAQ,GAAG,KAAK;AACrD;;;ACAA,SAAS,sBAAsB,OAAO;AACpC,SAAO,SAAS,QAAQ,GAAG,KAAK,OAAO;AACzC;",
+  "names": []
+}

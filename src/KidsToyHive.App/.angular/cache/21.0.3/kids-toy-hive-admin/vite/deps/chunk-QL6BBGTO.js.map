@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/@angular/cdk/fesm2022/_test-environment-chunk.mjs"],
+  "sourcesContent": ["function _isTestEnvironment() {\n  return (typeof __karma__ !== 'undefined' && !!__karma__ || typeof jasmine !== 'undefined' && !!jasmine || typeof jest !== 'undefined' && !!jest || typeof Mocha !== 'undefined' && !!Mocha\n  );\n}\n\nexport { _isTestEnvironment };\n\n"],
+  "mappings": ";AAAA,SAAS,qBAAqB;AAC5B,SAAQ,OAAO,cAAc,eAAe,CAAC,CAAC,aAAa,OAAO,YAAY,eAAe,CAAC,CAAC,WAAW,OAAO,SAAS,eAAe,CAAC,CAAC,QAAQ,OAAO,UAAU,eAAe,CAAC,CAAC;AAEvL;",
+  "names": []
+}

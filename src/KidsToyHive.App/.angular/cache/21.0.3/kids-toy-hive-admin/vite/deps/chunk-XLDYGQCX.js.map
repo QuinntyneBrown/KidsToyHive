@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/@angular/material/fesm2022/_animation-chunk.mjs"],
+  "sourcesContent": ["import { MediaMatcher } from '@angular/cdk/layout';\nimport { InjectionToken, inject, ANIMATION_MODULE_TYPE } from '@angular/core';\n\nconst MATERIAL_ANIMATIONS = new InjectionToken('MATERIAL_ANIMATIONS');\nlet reducedMotion = null;\nfunction _getAnimationsState() {\n  if (inject(MATERIAL_ANIMATIONS, {\n    optional: true\n  })?.animationsDisabled || inject(ANIMATION_MODULE_TYPE, {\n    optional: true\n  }) === 'NoopAnimations') {\n    return 'di-disabled';\n  }\n  reducedMotion ??= inject(MediaMatcher).matchMedia('(prefers-reduced-motion)').matches;\n  return reducedMotion ? 'reduced-motion' : 'enabled';\n}\nfunction _animationsDisabled() {\n  return _getAnimationsState() !== 'enabled';\n}\n\nexport { MATERIAL_ANIMATIONS, _animationsDisabled, _getAnimationsState };\n\n"],
+  "mappings": ";;;;;;;;;;AAGA,IAAM,sBAAsB,IAAI,eAAe,qBAAqB;AACpE,IAAI,gBAAgB;AACpB,SAAS,sBAAsB;AAC7B,MAAI,OAAO,qBAAqB;AAAA,IAC9B,UAAU;AAAA,EACZ,CAAC,GAAG,sBAAsB,OAAO,uBAAuB;AAAA,IACtD,UAAU;AAAA,EACZ,CAAC,MAAM,kBAAkB;AACvB,WAAO;AAAA,EACT;AACA,oBAAkB,OAAO,YAAY,EAAE,WAAW,0BAA0B,EAAE;AAC9E,SAAO,gBAAgB,mBAAmB;AAC5C;AACA,SAAS,sBAAsB;AAC7B,SAAO,oBAAoB,MAAM;AACnC;",
+  "names": []
+}

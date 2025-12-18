@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../../node_modules/@angular/cdk/fesm2022/_element-chunk.mjs"],
+  "sourcesContent": ["import { ElementRef } from '@angular/core';\n\nfunction coerceNumberProperty(value, fallbackValue = 0) {\n  if (_isNumberValue(value)) {\n    return Number(value);\n  }\n  return arguments.length === 2 ? fallbackValue : 0;\n}\nfunction _isNumberValue(value) {\n  return !isNaN(parseFloat(value)) && !isNaN(Number(value));\n}\n\nfunction coerceElement(elementOrRef) {\n  return elementOrRef instanceof ElementRef ? elementOrRef.nativeElement : elementOrRef;\n}\n\nexport { _isNumberValue, coerceElement, coerceNumberProperty };\n\n"],
+  "mappings": ";;;;;AAEA,SAAS,qBAAqB,OAAO,gBAAgB,GAAG;AACtD,MAAI,eAAe,KAAK,GAAG;AACzB,WAAO,OAAO,KAAK;AAAA,EACrB;AACA,SAAO,UAAU,WAAW,IAAI,gBAAgB;AAClD;AACA,SAAS,eAAe,OAAO;AAC7B,SAAO,CAAC,MAAM,WAAW,KAAK,CAAC,KAAK,CAAC,MAAM,OAAO,KAAK,CAAC;AAC1D;AAEA,SAAS,cAAc,cAAc;AACnC,SAAO,wBAAwB,aAAa,aAAa,gBAAgB;AAC3E;",
+  "names": []
+}

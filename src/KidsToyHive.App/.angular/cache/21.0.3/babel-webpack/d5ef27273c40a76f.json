@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { isObservable, of } from 'rxjs';\nfunction coerceObservable(data) {\n  if (!isObservable(data)) {\n    return of(data);\n  }\n  return data;\n}\nexport { coerceObservable };\n//# sourceMappingURL=coercion-private.mjs.map","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}
