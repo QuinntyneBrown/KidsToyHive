@@ -1,0 +1,263 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+.brands-container {
+  height: calc(100vh - 64px); // Adjust based on header height
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-container {
+  flex: 1;
+  height: 100%;
+}
+
+/* List Panel Styles */
+.list-panel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  @media (min-width: 768px) {
+    max-width: 400px;
+  }
+}
+
+.search-container {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background: white;
+}
+
+.search-field {
+  width: 100%;
+  margin: 0;
+}
+
+.item-count {
+  padding: 8px 16px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  background: #fafafa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.items-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 0;
+}
+
+.list-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  min-height: 72px !important;
+  height: auto !important;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  &.selected {
+    background-color: rgba(63, 81, 181, 0.12);
+    border-left: 4px solid #3f51b5;
+    
+    &:hover {
+      background-color: rgba(63, 81, 181, 0.16);
+    }
+  }
+}
+
+.list-item-content {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.list-item-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+  margin-bottom: 4px;
+}
+
+.brand-name {
+  flex: 1;
+}
+
+.inactive-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.list-item-secondary {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.list-item-tertiary {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.small-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}
+
+.create-fab {
+  position: fixed !important;
+  bottom: 24px;
+  left: calc(min(400px, 100vw) - 80px);
+  z-index: 10;
+  
+  @media (max-width: 767px) {
+    left: auto;
+    right: 24px;
+  }
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  
+  .loading-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    color: rgba(0, 0, 0, 0.38);
+    animation: spin 2s linear infinite;
+  }
+  
+  p {
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: rgba(0, 0, 0, 0.26);
+    margin-bottom: 16px;
+  }
+  
+  h3 {
+    margin: 0 0 8px 0;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Detail Drawer */
+.detail-drawer {
+  width: calc(100vw - 400px);
+  max-width: 800px;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  
+  @media (max-width: 767px) {
+    width: 100vw;
+  }
+}
+
+.detail-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-toolbar {
+  flex-shrink: 0;
+}
+
+.form-title {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.detail-form {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.checkbox-field {
+  margin: 8px 0;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* Drawer Animation */
+mat-drawer.mat-drawer-opened {
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
