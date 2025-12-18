@@ -1,0 +1,157 @@
+// Copyright (c) Quinntyne Brown. All Rights Reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+.master-detail-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-container {
+  flex: 1;
+  height: 100%;
+}
+
+/* List Panel Styles */
+.list-panel {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  @media (min-width: 768px) {
+    max-width: 400px;
+  }
+}
+
+.search-container {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  background: white;
+}
+
+.search-field {
+  width: 100%;
+  margin: 0;
+}
+
+.item-count {
+  padding: 8px 16px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  background: #fafafa;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.items-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: 0;
+}
+
+.list-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  &.selected {
+    background-color: rgba(63, 81, 181, 0.12);
+    border-left: 4px solid #3f51b5;
+    
+    &:hover {
+      background-color: rgba(63, 81, 181, 0.16);
+    }
+  }
+}
+
+.create-fab {
+  position: fixed !important;
+  bottom: 24px;
+  left: calc(min(400px, 100vw) - 80px);
+  z-index: 10;
+  
+  @media (max-width: 767px) {
+    left: auto;
+    right: 24px;
+  }
+}
+
+/* Loading State */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  
+  p {
+    margin-top: 16px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+  
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: rgba(0, 0, 0, 0.26);
+    margin-bottom: 16px;
+  }
+  
+  h3 {
+    margin: 0 0 8px 0;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Detail Drawer */
+.detail-drawer {
+  width: calc(100vw - 400px);
+  max-width: 800px;
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+  
+  @media (max-width: 767px) {
+    width: 100vw;
+  }
+}
+
+.detail-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+mat-drawer.mat-drawer-opened {
+  animation: slideIn 0.3s ease-out;
+}

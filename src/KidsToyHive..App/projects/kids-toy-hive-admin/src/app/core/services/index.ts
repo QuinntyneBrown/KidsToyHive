@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 export * from './auth.service';
+export * from './base-http.service';
 export * from './permission.service';
 export * from './layout.service';
 export * from './theme.service';

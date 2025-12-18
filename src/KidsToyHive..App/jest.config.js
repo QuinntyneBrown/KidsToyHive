@@ -14,6 +14,16 @@ module.exports = {
   moduleFileExtensions: ['ts', 'js', 'html'],
   collectCoverage: true,
   coverageReporters: ['html', 'text'],
-  testEnvironment: 'jsdom'
+  coveragePathIgnorePatterns: [
+    '/node_modules/',
+    '/test/',
+    '.*\\.spec\\.ts$'
+  ],
+  testEnvironment: 'jsdom',
+  moduleNameMapper: {
+    '^@app/(.*)$': '<rootDir>/projects/kids-toy-hive-admin/src/app/$1',
+    '^@core/(.*)$': '<rootDir>/projects/kids-toy-hive-admin/src/app/core/$1',
+    '^@environments/(.*)$': '<rootDir>/projects/kids-toy-hive-admin/src/environments/$1'
+  }
 };
 

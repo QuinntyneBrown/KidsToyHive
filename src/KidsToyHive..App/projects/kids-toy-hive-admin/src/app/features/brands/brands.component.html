@@ -1,0 +1,177 @@
+<!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
+<!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
+
+<div class="brands-container">
+  <mat-drawer-container class="drawer-container" autosize>
+    <!-- List Panel (Master) -->
+    <mat-drawer-content class="list-panel">
+      <!-- Search Bar -->
+      <div class="search-container">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search Brands</mat-label>
+          <input matInput [formControl]="searchControl" placeholder="Type to search...">
+          <mat-icon matPrefix>search</mat-icon>
+          @if (searchControl.value) {
+            <button matSuffix mat-icon-button (click)="searchControl.setValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+      </div>
+      
+      <!-- Item Count -->
+      <div class="item-count">{{ getCountMessage() }}</div>
+      
+      <!-- Loading State -->
+      @if (loading$ | async) {
+        <div class="loading-container">
+          <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+          <p>Loading brands...</p>
+        </div>
+      }
+      
+      <!-- Empty State -->
+      @else if (isEmpty()) {
+        <div class="empty-state">
+          <mat-icon>inventory_2</mat-icon>
+          <h3>No Brands Found</h3>
+          <p>Get started by creating your first brand</p>
+        </div>
+      }
+      
+      <!-- Items List -->
+      @else {
+        <mat-nav-list class="items-list">
+          @for (brand of filteredItems$ | async; track brand.id) {
+            <mat-list-item 
+              class="list-item"
+              [class.selected]="isSelected(brand)"
+              (click)="selectItem(brand)"
+              (dblclick)="selectItem(brand)">
+              <div class="list-item-content">
+                <div class="list-item-primary">
+                  <span class="brand-name">{{ getPrimaryText(brand) }}</span>
+                  @if (!brand.isActive) {
+                    <mat-icon class="inactive-icon" matTooltip="Inactive">block</mat-icon>
+                  }
+                </div>
+                @if (getSecondaryText(brand)) {
+                  <div class="list-item-secondary">{{ getSecondaryText(brand) }}</div>
+                }
+                @if (getTertiaryText(brand)) {
+                  <div class="list-item-tertiary">
+                    <mat-icon class="small-icon">language</mat-icon>
+                    {{ getTertiaryText(brand) }}
+                  </div>
+                }
+              </div>
+            </mat-list-item>
+          }
+        </mat-nav-list>
+      }
+      
+      <!-- Create Button (FAB) -->
+      <button 
+        mat-fab 
+        color="primary" 
+        class="create-fab"
+        (click)="openCreateDialog()"
+        matTooltip="Create new brand"
+        aria-label="Create new brand">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-drawer-content>
+    
+    <!-- Detail Panel (Detail) -->
+    <mat-drawer 
+      #drawer 
+      mode="side" 
+      position="end" 
+      class="detail-drawer">
+      <div class="detail-content">
+        <!-- Form Header -->
+        <mat-toolbar color="primary" class="form-toolbar">
+          <span class="form-title">
+            {{ isCreating ? 'New Brand' : selectedItem?.name }}
+          </span>
+          <span class="spacer"></span>
+          @if (!isCreating && selectedItem) {
+            <button 
+              mat-icon-button 
+              (click)="delete()"
+              matTooltip="Delete brand"
+              aria-label="Delete brand">
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
+        </mat-toolbar>
+        
+        <!-- Form Content -->
+        <form [formGroup]="itemForm" class="detail-form">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Brand Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter brand name" required>
+            @if (itemForm.get('name')?.hasError('required')) {
+              <mat-error>Brand name is required</mat-error>
+            }
+            @if (itemForm.get('name')?.hasError('maxlength')) {
+              <mat-error>Brand name must be less than 100 characters</mat-error>
+            }
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Description</mat-label>
+            <textarea 
+              matInput 
+              formControlName="description" 
+              placeholder="Enter brand description"
+              rows="4"></textarea>
+            @if (itemForm.get('description')?.hasError('maxlength')) {
+              <mat-error>Description must be less than 500 characters</mat-error>
+            }
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Logo URL</mat-label>
+            <input matInput formControlName="logoUrl" placeholder="https://example.com/logo.png">
+            <mat-icon matPrefix>image</mat-icon>
+            @if (itemForm.get('logoUrl')?.hasError('maxlength')) {
+              <mat-error>Logo URL must be less than 500 characters</mat-error>
+            }
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Website URL</mat-label>
+            <input matInput formControlName="websiteUrl" placeholder="https://example.com">
+            <mat-icon matPrefix>language</mat-icon>
+            @if (itemForm.get('websiteUrl')?.hasError('maxlength')) {
+              <mat-error>Website URL must be less than 500 characters</mat-error>
+            }
+          </mat-form-field>
+          
+          <div class="checkbox-field">
+            <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+          </div>
+          
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button 
+              mat-button 
+              type="button"
+              (click)="cancel()">
+              Cancel
+            </button>
+            <button 
+              mat-raised-button 
+              color="primary"
+              type="button"
+              [disabled]="!canSave()"
+              (click)="save()">
+              {{ isSaving ? 'Saving...' : 'Save' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>

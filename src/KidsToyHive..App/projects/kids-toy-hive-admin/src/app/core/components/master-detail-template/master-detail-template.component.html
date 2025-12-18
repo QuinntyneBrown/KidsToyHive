@@ -1,0 +1,84 @@
+<!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
+<!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
+
+<div class="master-detail-container">
+  <mat-drawer-container class="drawer-container" autosize>
+    <!-- List Panel (Master) -->
+    <mat-drawer-content class="list-panel">
+      <!-- Search Bar -->
+      <div class="search-container">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search {{ entityName }}s</mat-label>
+          <input matInput [formControl]="searchControl" placeholder="Type to search...">
+          <mat-icon matPrefix>search</mat-icon>
+          @if (searchControl.value) {
+            <button matSuffix mat-icon-button (click)="searchControl.setValue('')">
+              <mat-icon>clear</mat-icon>
+            </button>
+          }
+        </mat-form-field>
+      </div>
+      
+      <!-- Item Count -->
+      <div class="item-count">{{ countMessage }}</div>
+      
+      <!-- Loading State -->
+      @if (loading) {
+        <div class="loading-container">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Loading {{ entityName }}s...</p>
+        </div>
+      }
+      
+      <!-- Empty State -->
+      @else if (isEmpty) {
+        <div class="empty-state">
+          @if (emptyStateTemplate) {
+            <ng-container *ngTemplateOutlet="emptyStateTemplate"></ng-container>
+          } @else {
+            <mat-icon>inbox</mat-icon>
+            <h3>No {{ entityName }}s Found</h3>
+            <p>Get started by creating your first {{ entityName.toLowerCase() }}</p>
+          }
+        </div>
+      }
+      
+      <!-- Items List -->
+      @else {
+        <mat-nav-list class="items-list">
+          @for (item of items; track item) {
+            <mat-list-item 
+              class="list-item"
+              [class.selected]="isSelected(item)"
+              (click)="onItemClick(item)"
+              (dblclick)="onItemClick(item)">
+              <ng-container *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-container>
+            </mat-list-item>
+          }
+        </mat-nav-list>
+      }
+      
+      <!-- Create Button (FAB) -->
+      <button 
+        mat-fab 
+        color="primary" 
+        class="create-fab"
+        (click)="onCreateClick()"
+        [attr.aria-label]="'Create new ' + entityName.toLowerCase()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-drawer-content>
+    
+    <!-- Detail Panel (Detail) -->
+    <mat-drawer 
+      #drawer 
+      mode="side" 
+      position="end" 
+      class="detail-drawer"
+      [@slideIn]>
+      <div class="detail-content">
+        <ng-container *ngTemplateOutlet="detailFormTemplate"></ng-container>
+      </div>
+    </mat-drawer>
+  </mat-drawer-container>
+</div>
