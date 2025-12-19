@@ -1,23 +1,20 @@
-
-<h2>Your Order</h2>
-<h3>{{ (yourOrderService.product$ | async)?.name }}</h3>
-<img [src]='yourOrderService.productImageUrl$ | async' />
-
-<div class='booking-date' *ngIf='(yourOrderService.bookingDate$ | async) !== null'>    
-    <span>{{ yourOrderService.bookingDate$.value | date : 'fullDate' }}</span>
-</div>
-
-<div class='line-item' *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
-    <span>Sub Total:</span>
-    <span class='line-item-amount'>$ {{ price }}.00</span>
-</div>
-
-<div class='line-item' *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
-    <span>Tax:</span>
-    <span class='line-item-amount'>${{ (price * .13) | number : '1.2-2' }}</span>
-</div>
-
-<div class='line-item line-item-total' *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
-    <span>Total:</span>
-    <span class='line-item-amount'>${{ (price + (price * .13)) | number : '1.2-2'  }}</span>
+<div class="your-order">
+    <h2 class="your-order__title">Your Order</h2>
+    <h3 class="your-order__product">{{ (yourOrderService.product$ | async)?.name }}</h3>
+    <img class="your-order__image" [src]='yourOrderService.productImageUrl$ | async' />
+    <div class="your-order__booking-date" *ngIf='(yourOrderService.bookingDate$ | async) !== null'>
+        <span>{{ yourOrderService.bookingDate$.value | date : 'fullDate' }}</span>
+    </div>
+    <div class="your-order__line-item" *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
+        <span>Sub Total:</span>
+        <span class="your-order__line-item-amount">$ {{ price }}.00</span>
+    </div>
+    <div class="your-order__line-item" *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
+        <span>Tax:</span>
+        <span class="your-order__line-item-amount">${{ (price * .13) | number : '1.2-2' }}</span>
+    </div>
+    <div class="your-order__line-item your-order__line-item--total" *ngIf='(yourOrderService.bookingTimeSlot$ | async) !== null'>
+        <span>Total:</span>
+        <span class="your-order__line-item-amount">${{ (price + (price * .13)) | number : '1.2-2'  }}</span>
+    </div>
 </div>

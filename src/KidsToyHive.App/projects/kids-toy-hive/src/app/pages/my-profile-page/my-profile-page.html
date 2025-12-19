@@ -1,5 +1,7 @@
-<h1>My Account</h1>
-
-<h2>Recent Bookings</h2>
-<kth-my-booking *ngFor='let booking of (bookings$ | async)' [booking]='booking'>
-</kth-my-booking>
+<div class="profile">
+	<h1 class="profile__title">My Account</h1>
+	<h2 class="profile__subtitle">Recent Bookings</h2>
+	<div class="profile__bookings">
+		<kth-my-booking *ngFor='let booking of (bookings$ | async)' [booking]='booking'></kth-my-booking>
+	</div>
+</div>

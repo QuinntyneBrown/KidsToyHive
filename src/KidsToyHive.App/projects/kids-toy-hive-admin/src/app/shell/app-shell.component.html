@@ -1,35 +1,35 @@
 <!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
 <!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
 
-<div class="app-shell">
+<div class="app-app-shell">
   <!-- Global loading indicator -->
   <mat-progress-bar
     *ngIf="isLoading$ | async"
     mode="indeterminate"
-    class="global-loading-bar">
+    class="app-app-shell__global-loading-bar">
   </mat-progress-bar>
 
   <!-- Header -->
   <app-header (menuToggle)="toggleSidebar()"></app-header>
 
   <!-- Sidebar + Content Container -->
-  <mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-container class="app-app-shell__sidenav-container">
     <!-- Sidebar -->
     <mat-sidenav
       #sidenav
       [mode]="sidebarMode()"
       [opened]="sidebarOpened()"
-      class="sidenav"
+      class="app-app-shell__sidenav"
       [fixedInViewport]="true"
       [fixedTopGap]="64">
       <app-sidebar (navigate)="closeSidebar()"></app-sidebar>
     </mat-sidenav>
 
     <!-- Main Content -->
-    <mat-sidenav-content class="sidenav-content">
-      <div class="content-wrapper">
+    <mat-sidenav-content class="app-app-shell__sidenav-content">
+      <div class="app-app-shell__content-wrapper">
         <app-breadcrumb></app-breadcrumb>
-        <div class="content">
+        <div class="app-app-shell__content">
           <router-outlet></router-outlet>
         </div>
       </div>

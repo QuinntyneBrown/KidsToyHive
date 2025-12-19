@@ -1,13 +1,13 @@
 <!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
 <!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
 
-<div class="brands-container">
-  <mat-drawer-container class="drawer-container" autosize>
+<div class="brands">
+  <mat-drawer-container class="brands__drawer-container" autosize>
     <!-- List Panel (Master) -->
-    <mat-drawer-content class="list-panel">
+    <mat-drawer-content class="brands__list-panel">
       <!-- Search Bar -->
-      <div class="search-container">
-        <mat-form-field appearance="outline" class="search-field">
+      <div class="brands__search-container">
+        <mat-form-field appearance="outline" class="brands__search-field">
           <mat-label>Search Brands</mat-label>
           <input matInput [formControl]="searchControl" placeholder="Type to search...">
           <mat-icon matPrefix>search</mat-icon>
@@ -20,19 +20,19 @@
       </div>
       
       <!-- Item Count -->
-      <div class="item-count">{{ getCountMessage() }}</div>
+      <div class="brands__item-count">{{ getCountMessage() }}</div>
       
       <!-- Loading State -->
       @if (loading$ | async) {
-        <div class="loading-container">
-          <mat-icon class="loading-icon">hourglass_empty</mat-icon>
+        <div class="brands__loading-container">
+          <mat-icon class="brands__loading-icon">hourglass_empty</mat-icon>
           <p>Loading brands...</p>
         </div>
       }
       
       <!-- Empty State -->
       @else if (isEmpty()) {
-        <div class="empty-state">
+        <div class="brands__empty-state">
           <mat-icon>inventory_2</mat-icon>
           <h3>No Brands Found</h3>
           <p>Get started by creating your first brand</p>
@@ -41,26 +41,26 @@
       
       <!-- Items List -->
       @else {
-        <mat-nav-list class="items-list">
+        <mat-nav-list class="brands__items-list">
           @for (brand of filteredItems$ | async; track brand.id) {
             <mat-list-item 
-              class="list-item"
-              [class.selected]="isSelected(brand)"
+              class="brands__list-item"
+              [class.brands__list-item--selected]="isSelected(brand)"
               (click)="selectItem(brand)"
               (dblclick)="selectItem(brand)">
-              <div class="list-item-content">
-                <div class="list-item-primary">
-                  <span class="brand-name">{{ getPrimaryText(brand) }}</span>
+              <div class="brands__list-item-content">
+                <div class="brands__list-item-primary">
+                  <span class="brands__brand-name">{{ getPrimaryText(brand) }}</span>
                   @if (!brand.isActive) {
-                    <mat-icon class="inactive-icon" matTooltip="Inactive">block</mat-icon>
+                    <mat-icon class="brands__inactive-icon" matTooltip="Inactive">block</mat-icon>
                   }
                 </div>
                 @if (getSecondaryText(brand)) {
-                  <div class="list-item-secondary">{{ getSecondaryText(brand) }}</div>
+                  <div class="brands__list-item-secondary">{{ getSecondaryText(brand) }}</div>
                 }
                 @if (getTertiaryText(brand)) {
-                  <div class="list-item-tertiary">
-                    <mat-icon class="small-icon">language</mat-icon>
+                  <div class="brands__list-item-tertiary">
+                    <mat-icon class="brands__small-icon">language</mat-icon>
                     {{ getTertiaryText(brand) }}
                   </div>
                 }
@@ -74,7 +74,7 @@
       <button 
         mat-fab 
         color="primary" 
-        class="create-fab"
+        class="brands__create-fab"
         (click)="openCreateDialog()"
         matTooltip="Create new brand"
         aria-label="Create new brand">
@@ -87,11 +87,11 @@
       #drawer 
       mode="side" 
       position="end" 
-      class="detail-drawer">
-      <div class="detail-content">
+      class="brands__detail-drawer">
+      <div class="brands__detail-content">
         <!-- Form Header -->
-        <mat-toolbar color="primary" class="form-toolbar">
-          <span class="form-title">
+        <mat-toolbar color="primary" class="brands__form-toolbar">
+          <span class="brands__form-title">
             {{ isCreating ? 'New Brand' : selectedItem?.name }}
           </span>
           <span class="spacer"></span>

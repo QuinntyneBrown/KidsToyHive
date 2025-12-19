@@ -1,62 +1,60 @@
-:host {
+div {
+kth-button {
+p {
+.how-it-works {
     display: grid;
     min-height: 410px;
     margin: 0px 0px 35px;
     background-image: url('https://kidstoyhive.azurewebsites.net/api/digitalassets/serve/file/Hero2.jpg');
-    background-size: cover; 
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     grid-template-columns: 3fr 2fr;
-    
-}   
-
-section {
-    text-align: center;
-}
-h1 {
-    margin: 0;
-    padding:0;
-    font-size: 1.15em;
-}
-
-div {
-    display: grid;
-    grid-template-rows: 1fr 100px;
-    grid-column: 2;
-    background-color: rgba(255,255,255,0.6);
-    margin:0;
-    padding:0;
-    width: 100%;
     align-items: center;
     justify-items: center;
 }
 
-kth-button {
+.how-it-works__section {
+    text-align: center;
     background-color: rgba(255,255,255,0.6);
-    margin:0 auto;
-    grid-row: 2;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-rows: 1fr 100px;
+    grid-column: 2;
 }
 
-p {
+.how-it-works__title {
+    margin: 0;
+    padding: 0;
+    font-size: 1.15em;
+}
+
+.how-it-works__desc {
     margin: 0 auto;
     font-weight: 600;
     font-size: 0.9em;
     color: rgb(104,41,0);
 }
 
+.how-it-works__cta {
+    background-color: rgba(255,255,255,0.6);
+    margin: 0 auto;
+    grid-row: 2;
+}
+
 @media screen and (min-width: 768px) {
-    p {
+    .how-it-works__desc {
         margin: 0 auto;
         font-weight: 600;
         font-size: 24px;
         color: rgb(104,41,0);
     }
-
-    div {
+    .how-it-works__section {
         grid-template-rows: 1fr 140px;
     }
-
-    h1 {
+    .how-it-works__title {
         font-size: 2.5em;
     }
 }
