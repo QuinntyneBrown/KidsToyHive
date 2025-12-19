@@ -1,8 +1,8 @@
-:host {
+.your-order {
     display: block;
 }
 
-img {
+.your-order__image {
     max-height: 200px;
     margin: 0 auto;
     display: block;
@@ -11,16 +11,16 @@ img {
     text-align: center;
 }
 
-h3 {
+.your-order__product {
     text-align: center;
 }
 
-.booking-date {
+.your-order__booking-date {
     line-height: 1.5;
     font-weight: 600;
 }
 
-.line-item {
+.your-order__line-item {
     display: grid;
     grid-template-columns: 2fr 1fr;
     line-height: 1.5em;
@@ -28,10 +28,10 @@ h3 {
     padding: 0;
 }
 
-.line-item-amount {
+.your-order__line-item-amount {
     text-align: right;
 }
 
-.line-item-total {
+.your-order__line-item--total {
     font-weight: 600;
 }

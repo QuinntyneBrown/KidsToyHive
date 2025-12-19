@@ -1,19 +1,19 @@
 <!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
 <!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
 
-<div class="not-found-container">
-  <mat-card class="not-found-card">
+<div class="not-found">
+  <mat-card class="not-found__card">
     <mat-card-content>
-      <div class="error-icon">
+      <div class="not-found__icon">
         <mat-icon>error_outline</mat-icon>
       </div>
-      <h1 class="error-code">404</h1>
-      <h2 class="error-title">Page Not Found</h2>
-      <p class="error-message">
+      <h1 class="not-found__code">404</h1>
+      <h2 class="not-found__title">Page Not Found</h2>
+      <p class="not-found__message">
         The page you are looking for might have been removed, had its name changed,
         or is temporarily unavailable.
       </p>
-      <div class="actions">
+      <div class="not-found__actions">
         <button mat-raised-button color="primary" (click)="onGoHome()">
           <mat-icon>home</mat-icon>
           Go to Dashboard

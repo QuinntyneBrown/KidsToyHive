@@ -1,16 +1,16 @@
 <!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
 <!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
 
-<div class="login-container">
-  <mat-card class="login-card">
+<div class="login">
+  <mat-card class="login__card">
     <mat-card-header>
       <mat-card-title>KidsToyHive Admin</mat-card-title>
       <mat-card-subtitle>Sign in to your account</mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" (keydown.enter)="onSubmit()" class="login__form">
+        <mat-form-field appearance="outline" class="login__form-field">
           <mat-label>Email</mat-label>
           <input
             matInput
@@ -29,7 +29,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="full-width">
+        <mat-form-field appearance="outline" class="login__form-field">
           <mat-label>Password</mat-label>
           <input
             matInput
@@ -57,8 +57,8 @@
           </mat-error>
         </mat-form-field>
 
-        <div class="forgot-password-container">
-          <button type="button" class="forgot-password-link" (click)="onForgotPassword()">
+        <div class="login__forgot-password">
+          <button type="button" class="login__forgot-password-link" (click)="onForgotPassword()">
             Forgot password?
           </button>
         </div>
@@ -67,11 +67,11 @@
           mat-raised-button
           color="primary"
           type="submit"
-          class="login-button"
+          class="login__button"
           [disabled]="isLoading || loginForm.invalid"
         >
           <span *ngIf="!isLoading">Sign In</span>
-          <mat-spinner *ngIf="isLoading" diameter="20" class="button-spinner"></mat-spinner>
+          <mat-spinner *ngIf="isLoading" diameter="20" class="login__button-spinner"></mat-spinner>
         </button>
       </form>
     </mat-card-content>

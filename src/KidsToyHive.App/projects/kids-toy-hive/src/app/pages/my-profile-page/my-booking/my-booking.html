@@ -1,3 +1,5 @@
-<h1> {{ booking.bookingDetails[0].product.name }}</h1>
-<p> {{ booking.date | date: 'fullDate' }}</p>
-<img src='{{ baseUrl }}{{booking.bookingDetails[0].product.productImages[0].url}}' />
+<div class="my-booking">
+	<h1 class="my-booking__title">{{ booking.bookingDetails[0].product.name }}</h1>
+	<p class="my-booking__date">{{ booking.date | date: 'fullDate' }}</p>
+	<img class="my-booking__image" src='{{ baseUrl }}{{booking.bookingDetails[0].product.productImages[0].url}}' />
+</div>

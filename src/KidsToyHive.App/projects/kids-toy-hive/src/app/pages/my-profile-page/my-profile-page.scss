@@ -1,16 +1,20 @@
-:host {
+.profile {
     display: block;
     margin: 20px;
 }
 
-h1 {
+.profile__title {
     padding: 0;
     margin: 0;
     font-size: 2em;
     line-height: 1em;
 }
-h2 {
-    margin: 0;
-    padding: 0;
+
+.profile__subtitle {
     margin: 40px 0px 0px 0px;
+    padding: 0;
+}
+
+.profile__bookings {
+    margin-top: 20px;
 }

@@ -1,7 +1,7 @@
 <!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
 <!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
 
-<mat-toolbar class="header" color="primary">
+<mat-toolbar class="app-header" color="primary">
   <!-- Menu Toggle Button -->
   <button
     mat-icon-button
@@ -12,12 +12,12 @@
   </button>
 
   <!-- Logo -->
-  <div class="logo" (click)="onLogoClick()">
-    <mat-icon class="logo-icon">toys</mat-icon>
-    <span class="logo-text">KidsToyHive</span>
+  <div class="app-header__logo" (click)="onLogoClick()">
+    <mat-icon class="app-header__logo-icon">toys</mat-icon>
+    <span class="app-header__logo-text">KidsToyHive</span>
   </div>
 
-  <span class="spacer"></span>
+  <span class="app-header__spacer"></span>
 
   <!-- Notifications (placeholder for future) -->
   <button
@@ -40,18 +40,18 @@
   <button
     mat-button
     [matMenuTriggerFor]="userMenu"
-    class="user-menu-button"
+    class="app-header__user-menu-button"
     *ngIf="currentUser$ | async as user">
-    <div class="user-avatar">{{ getUserInitials(user.name) }}</div>
-    <span class="user-name">{{ user.name }}</span>
+    <div class="app-header__user-avatar">{{ getUserInitials(user.name) }}</div>
+    <span class="app-header__user-name">{{ user.name }}</span>
     <mat-icon>arrow_drop_down</mat-icon>
   </button>
 
-  <mat-menu #userMenu="matMenu" class="user-menu">
-    <div class="user-info" mat-menu-item disabled *ngIf="currentUser$ | async as user">
-      <div class="user-details">
-        <div class="name">{{ user.name }}</div>
-        <div class="email">{{ user.email }}</div>
+  <mat-menu #userMenu="matMenu" class="app-header__user-menu">
+    <div class="app-header__user-info" mat-menu-item disabled *ngIf="currentUser$ | async as user">
+      <div class="app-header__user-details">
+        <div class="app-header__user-details-name">{{ user.name }}</div>
+        <div class="app-header__user-details-email">{{ user.email }}</div>
       </div>
     </div>
     <mat-divider></mat-divider>

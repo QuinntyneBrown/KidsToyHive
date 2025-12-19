@@ -1,12 +1,12 @@
-<ul>
-    <li><a [routerLink]="['step/1']" routerLinkActive="active-link"><span *ngIf='!isMobile'>Create </span>Account</a></li>
-    <li><a [routerLink]="['step/2']" routerLinkActive="active-link"><span *ngIf='!isMobile'>Create </span>Booking</a></li>
-    <li><a [routerLink]="['step/3']" routerLinkActive="active-link">Checkout</a></li>    
+<ul class="order-page__steps">
+    <li class="order-page__step"><a class="order-page__step-link" [routerLink]="['step/1']" routerLinkActive="order-page__step-link--active"><span *ngIf='!isMobile'>Create </span>Account</a></li>
+    <li class="order-page__step"><a class="order-page__step-link" [routerLink]="['step/2']" routerLinkActive="order-page__step-link--active"><span *ngIf='!isMobile'>Create </span>Booking</a></li>
+    <li class="order-page__step"><a class="order-page__step-link" [routerLink]="['step/3']" routerLinkActive="order-page__step-link--active">Checkout</a></li>    
 </ul>
 
-<div class='grid'>
-    <div>
+<div class='order-page__grid'>
+    <div class="order-page__content">
         <router-outlet></router-outlet>
     </div>    
-    <kth-your-order *ngIf='!isMobile'></kth-your-order>
+    <kth-your-order class="order-page__your-order" *ngIf='!isMobile'></kth-your-order>
 </div>

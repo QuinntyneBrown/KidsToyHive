@@ -1,7 +1,8 @@
 /* Copyright (c) Quinntyne Brown. All Rights Reserved. */
 /* Licensed under the MIT License. See License.txt in the project root for license information. */
 
-.not-found-container {
+// BEM: .not-found
+.not-found {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,11 +10,11 @@
   padding: 24px;
 }
 
-.not-found-card {
+  .not-found__card {
   max-width: 600px;
   text-align: center;
   
-  .error-icon {
+    .not-found__icon {
     mat-icon {
       font-size: 80px;
       width: 80px;
@@ -23,27 +24,27 @@
     }
   }
   
-  .error-code {
+    .not-found__code {
     font-size: 72px;
     font-weight: 700;
     margin: 0;
     color: rgba(0, 0, 0, 0.54);
   }
   
-  .error-title {
+    .not-found__title {
     font-size: 24px;
     font-weight: 500;
     margin: 16px 0;
   }
   
-  .error-message {
+    .not-found__message {
     font-size: 16px;
     opacity: 0.7;
     margin-bottom: 32px;
     line-height: 1.5;
   }
   
-  .actions {
+    .not-found__actions {
     display: flex;
     gap: 16px;
     justify-content: center;

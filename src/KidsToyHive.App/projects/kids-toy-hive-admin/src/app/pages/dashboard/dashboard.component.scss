@@ -1,7 +1,8 @@
 /* Copyright (c) Quinntyne Brown. All Rights Reserved. */
 /* Licensed under the MIT License. See License.txt in the project root for license information. */
 
-.dashboard-container {
+// BEM: .dashboard
+.dashboard {
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -9,6 +10,9 @@
 .welcome-section {
   margin-bottom: 32px;
   
+  .dashboard__welcome-section {
+  }
+
   .dashboard-title {
     font-size: 32px;
     font-weight: 500;
@@ -22,7 +26,7 @@
   }
 }
 
-.error-card {
+  .dashboard__error-card {
   margin-bottom: 24px;
   
   .error-content {
@@ -46,7 +50,7 @@
 }
 
 // Metrics Grid
-.metrics-grid {
+  .dashboard__metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 24px;
@@ -84,19 +88,19 @@
       color: white;
     }
     
-    &.bookings {
+    &.dashboard__metric-icon--bookings {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
     
-    &.customers {
+    &.dashboard__metric-icon--customers {
       background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     }
     
-    &.orders {
+    &.dashboard__metric-icon--orders {
       background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     }
     
-    &.revenue {
+    &.dashboard__metric-icon--revenue {
       background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
     }
   }
@@ -132,7 +136,7 @@
 }
 
 // Quick Actions
-.quick-actions-card {
+  .dashboard__quick-actions-card {
   margin-bottom: 32px;
   
   .quick-actions {

@@ -1,10 +1,10 @@
-<kth-hamburger-button (click)='menuClick.emit()'></kth-hamburger-button>
-
-<img [src]='imageUrl' (click)='logoClick.emit()' />
-
-<ul *ngIf='!hideNavigation'>
-    <li><a [routerLink]="['/home']" routerLinkActive="active-link">Home</a></li>
-    <li><a [routerLink]="['/toys']" routerLinkActive="active-link">Toys</a></li>
-    <li><a [routerLink]="['/about']" routerLinkActive="active-link">About</a></li>
-    <li><a [routerLink]="['/legal']" routerLinkActive="active-link">Legal</a></li>
-</ul>
+<div class="header">
+    <kth-hamburger-button class="header__hamburger" (click)='menuClick.emit()'></kth-hamburger-button>
+    <img class="header__logo" [src]='imageUrl' (click)='logoClick.emit()' />
+    <ul class="header__nav" *ngIf='!hideNavigation'>
+        <li class="header__nav-item"><a class="header__nav-link" [routerLink]="['/home']" routerLinkActive="header__nav-link--active">Home</a></li>
+        <li class="header__nav-item"><a class="header__nav-link" [routerLink]="['/toys']" routerLinkActive="header__nav-link--active">Toys</a></li>
+        <li class="header__nav-item"><a class="header__nav-link" [routerLink]="['/about']" routerLinkActive="header__nav-link--active">About</a></li>
+        <li class="header__nav-item"><a class="header__nav-link" [routerLink]="['/legal']" routerLinkActive="header__nav-link--active">Legal</a></li>
+    </ul>
+</div>

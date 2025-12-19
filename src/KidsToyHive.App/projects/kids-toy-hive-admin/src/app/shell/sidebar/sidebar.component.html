@@ -1,7 +1,7 @@
 <!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
 <!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
 
-<div class="sidebar">
+<div class="app-sidebar">
   <!-- Dashboard Link (always visible) -->
   <mat-nav-list>
     <a
@@ -18,10 +18,10 @@
   <mat-divider></mat-divider>
 
   <!-- Navigation Groups -->
-  <mat-accordion class="navigation-accordion" multi>
+  <mat-accordion class="app-sidebar__navigation-accordion" multi>
     <mat-expansion-panel
       *ngFor="let group of navigationGroups"
-      class="navigation-group">
+      class="app-sidebar__navigation-group">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ group.label }}
@@ -43,11 +43,11 @@
   </mat-accordion>
 
   <!-- Footer -->
-  <div class="sidebar-footer">
+  <div class="app-sidebar__footer">
     <mat-divider></mat-divider>
-    <div class="footer-content">
-      <div class="version">Version 1.0.0</div>
-      <div class="copyright">© 2024 KidsToyHive</div>
+    <div class="app-sidebar__footer-content">
+      <div class="app-sidebar__footer-version">Version 1.0.0</div>
+      <div class="app-sidebar__footer-copyright">© 2024 KidsToyHive</div>
     </div>
   </div>
 </div>

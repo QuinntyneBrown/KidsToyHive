@@ -1,17 +1,17 @@
 <!-- Copyright (c) Quinntyne Brown. All Rights Reserved. -->
 <!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
 
-<div class="dashboard-container">
+<div class="dashboard">
   <!-- Welcome Section -->
-  <div class="welcome-section" *ngIf="currentUser$ | async as user">
-    <h1 class="dashboard-title">Welcome back, {{ user.name }}!</h1>
-    <p class="dashboard-subtitle">Here's what's happening with your business today.</p>
+  <div class="dashboard__welcome-section" *ngIf="currentUser$ | async as user">
+    <h1 class="dashboard__title">Welcome back, {{ user.name }}!</h1>
+    <p class="dashboard__subtitle">Here's what's happening with your business today.</p>
   </div>
 
   <!-- Error State -->
-  <mat-card *ngIf="hasError()" class="error-card">
+  <mat-card *ngIf="hasError()" class="dashboard__error-card">
     <mat-card-content>
-      <div class="error-content">
+      <div class="dashboard__error-content">
         <mat-icon color="warn">error</mat-icon>
         <p>{{ errorMessage() }}</p>
         <button mat-raised-button color="primary" (click)="onRetry()">
@@ -23,22 +23,22 @@
   </mat-card>
 
   <!-- Metrics Cards -->
-  <div class="metrics-grid">
+  <div class="dashboard__metrics-grid">
     <!-- Total Bookings -->
-    <mat-card class="metric-card">
+    <mat-card class="dashboard__metric-card">
       <mat-card-content>
-        <div class="metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
-          <div class="metric-icon bookings">
+        <div class="dashboard__metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
+          <div class="dashboard__metric-icon dashboard__metric-icon--bookings">
             <mat-icon>event</mat-icon>
           </div>
-          <div class="metric-details">
-            <div class="metric-value">{{ metrics()?.totalBookings || 0 }}</div>
-            <div class="metric-label">Total Bookings</div>
-            <div class="metric-period">This month</div>
+          <div class="dashboard__metric-details">
+            <div class="dashboard__metric-value">{{ metrics()?.totalBookings || 0 }}</div>
+            <div class="dashboard__metric-label">Total Bookings</div>
+            <div class="dashboard__metric-period">This month</div>
           </div>
         </div>
         <ng-template #loadingSkeleton>
-          <div class="skeleton-loader">
+          <div class="dashboard__skeleton-loader">
             <mat-spinner diameter="40"></mat-spinner>
           </div>
         </ng-template>
@@ -46,48 +46,48 @@
     </mat-card>
 
     <!-- Active Customers -->
-    <mat-card class="metric-card">
+    <mat-card class="dashboard__metric-card">
       <mat-card-content>
-        <div class="metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
-          <div class="metric-icon customers">
+        <div class="dashboard__metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
+          <div class="dashboard__metric-icon dashboard__metric-icon--customers">
             <mat-icon>people</mat-icon>
           </div>
-          <div class="metric-details">
-            <div class="metric-value">{{ metrics()?.activeCustomers || 0 }}</div>
-            <div class="metric-label">Active Customers</div>
-            <div class="metric-period">Current</div>
+          <div class="dashboard__metric-details">
+            <div class="dashboard__metric-value">{{ metrics()?.activeCustomers || 0 }}</div>
+            <div class="dashboard__metric-label">Active Customers</div>
+            <div class="dashboard__metric-period">Current</div>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
 
     <!-- Pending Orders -->
-    <mat-card class="metric-card">
+    <mat-card class="dashboard__metric-card">
       <mat-card-content>
-        <div class="metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
-          <div class="metric-icon orders">
+        <div class="dashboard__metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
+          <div class="dashboard__metric-icon dashboard__metric-icon--orders">
             <mat-icon>shopping_cart</mat-icon>
           </div>
-          <div class="metric-details">
-            <div class="metric-value">{{ metrics()?.pendingOrders || 0 }}</div>
-            <div class="metric-label">Pending Orders</div>
-            <div class="metric-period">To process</div>
+          <div class="dashboard__metric-details">
+            <div class="dashboard__metric-value">{{ metrics()?.pendingOrders || 0 }}</div>
+            <div class="dashboard__metric-label">Pending Orders</div>
+            <div class="dashboard__metric-period">To process</div>
           </div>
         </div>
       </mat-card-content>
     </mat-card>
 
     <!-- Revenue -->
-    <mat-card class="metric-card">
+    <mat-card class="dashboard__metric-card">
       <mat-card-content>
-        <div class="metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
-          <div class="metric-icon revenue">
+        <div class="dashboard__metric-content" *ngIf="!isLoadingMetrics() && metrics(); else loadingSkeleton">
+          <div class="dashboard__metric-icon dashboard__metric-icon--revenue">
             <mat-icon>attach_money</mat-icon>
           </div>
-          <div class="metric-details">
-            <div class="metric-value">{{ formatCurrency(metrics()?.revenue || 0) }}</div>
-            <div class="metric-label">Revenue</div>
-            <div class="metric-period">This month</div>
+          <div class="dashboard__metric-details">
+            <div class="dashboard__metric-value">{{ formatCurrency(metrics()?.revenue || 0) }}</div>
+            <div class="dashboard__metric-label">Revenue</div>
+            <div class="dashboard__metric-period">This month</div>
           </div>
         </div>
       </mat-card-content>
@@ -95,7 +95,7 @@
   </div>
 
   <!-- Quick Actions -->
-  <mat-card class="quick-actions-card">
+  <mat-card class="dashboard__quick-actions-card">
     <mat-card-header>
       <mat-card-title>Quick Actions</mat-card-title>
     </mat-card-header>

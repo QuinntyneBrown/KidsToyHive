@@ -1,42 +1,51 @@
-:host {
+.toy {
     display: grid;
     border: none;
     text-align: center;
-    letter-spacing: 0.5px;    
+    letter-spacing: 0.5px;
 }
-.curr-symbol {
-    font-size: 0.5em;
-    position: relative;
-    top:-0.5em;
-    margin:0px 2px;
+
+.toy__image {
+    margin: 0 auto;
+    max-height: 300px;
 }
-h1 {
+
+.toy__title {
     font-size: 2em;
     line-height: 1.25em;
     padding: 10px 0px;
     margin: 0;
     font-weight: 600;
 }
-img {
-    margin: 0 auto;
-    max-height: 300px;
-}
-.toy-price, .toy-price-period {    
-    line-height: 1em;
-    font-weight: 100;
-    padding:5px 0;
-}
-.toy-price {
-    font-size: 2em;
-    margin: 0 10px 0 0; 
+
+.toy__price-group {
+    display: inline-block;
+    margin: 0 10px 0 0;
 }
 
-.toy-price-period {
+.toy__curr-symbol {
+    font-size: 0.5em;
+    position: relative;
+    top: -0.5em;
+    margin: 0px 2px;
+}
+
+.toy__price {
+    font-size: 2em;
+    line-height: 1em;
+    font-weight: 100;
+    padding: 5px 0;
+}
+
+.toy__price-period {
     font-size: 1.15em;
     color: rgb(233, 165, 50);
     text-transform: uppercase;
+    line-height: 1em;
+    font-weight: 100;
+    padding: 5px 0;
 }
 
-kth-button {
+.toy__cta {
     margin: 20px auto 0px;
 }
